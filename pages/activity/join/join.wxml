@@ -1,0 +1,44 @@
+  <view>
+    <view>{{game.name}}</view>
+  </view>
+  <view>
+    <view>
+      <view>球局编号：</view>
+      <text>{{game.id}}</text>
+    </view>
+    <view>
+      <view>发起人：</view>
+      <text>{{game.organizer.nickName}}</text>
+      <text>教练</text>
+    </view>
+    <view>
+      <view>打球时间：</view>
+      <text>{{game.startTime}}</text>~<text>{{game.endTime}}</text>
+    </view>
+    <view>
+      <view>球场：</view>
+      <text>{{game.court.name}}</text>
+    </view>
+  </view>
+  <view>
+    <text>参与情况：</text>
+    <view>{{game.totalNum}}缺{{game.totalNum - game.vacancyNum}}</view>
+  </view>
+  <view>
+    <text>温馨提示：确认加入球局后，发起人会尽快确认并回复，请注意查收消息哦~</text>
+  </view>
+  <view>
+    <checkbox>我同意并遵守《网球吧协议》</checkbox>
+  </view>
+  <view>
+    <button bindtap="addGame" data-id="{{game.id}}">确认加入</button>
+  </view>
+
+  
+
+
+
+
+
+
+

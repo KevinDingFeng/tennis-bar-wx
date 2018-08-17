@@ -1,0 +1,35 @@
+<view >
+  <view>
+    <form bindsubmit="querySubmit" >
+      <view >
+        <input type="text" name="courtName" placeholder="请输入球场名称"></input>
+      </view>
+      <view >
+        <button formType="submit">搜索</button>
+      </view>
+    </form>
+  </view>
+  <view>
+    <block wx:for="{{courts.content}}" wx:for-item="court" wx:key="**this">
+      <view bindtap="selectCourt" data-id="{{court.id}}">
+        <view>
+          <view>*球场名称</view>
+          <view>{{court.name}}</view>
+        </view>
+        <view>
+          <view>*球场地址</view>
+          <view>{{court.address}}</view>
+        </view>
+        <view>
+          <view>*电话</view>
+          <view>{{court.telephone}}</view>
+        </view>
+      </view>
+      <view>
+        <view bindtap="openLocation" data-latitude="{{court.latitude}}" data-longitude="{{court.longitude}}">
+          <view>定位</view>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

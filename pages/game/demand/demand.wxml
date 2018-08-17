@@ -1,0 +1,57 @@
+
+<view id="addgame">
+    <text>参与要求</text>
+    <form bindsubmit="formSubmit" bindreset="formReset">
+         <view class="section">
+            <view class="section__title">球龄:</view>
+            <view class='form-group'>
+              <input type="text" class="input-text" name="playAge" placeholder="请选择球龄" />
+            </view>    
+        </view>
+        <view class="section section_gap">
+            <view class="section__title">球技等级:</view>
+            <view class='form-group'>
+              <input type="text" class="input-text" name="skillLevel" placeholder="请选择等级要求"></input>
+            </view>    
+        </view>
+        <view class="section section_gap">
+            <view class="section__title">*打球人数:</view>
+            <view class='form-group'>
+              <input type="text" class="input-text" name="totalNum" placeholder="请选择打球人数"></input>
+            </view>    
+        </view>
+        <view class="section section_gap">
+            <view class="section__title">*性别:</view>
+            <view class='form-group'>
+                <radio-group name="limitGender">
+                  <label><radio value="false" checked='checked' />不限</label>
+                  <label><radio value="true"/>限定</label>
+                </radio-group>
+            </view>    
+        </view>
+        <view class="section section_gap">
+            <view class="section__title">预留位置:</view>
+            <view class='form-group'>
+              <input type="text" class="input-text" name="holderNum" value="0"></input>
+            </view>    
+        </view>
+        <view class="section section_gap">
+            <view class="section__title">报名截止时间:</view>
+            <view class='form-group'>
+              <input type="text" class="input-text" name="deadlineTime" value=""></input>
+            </view>    
+        </view>
+        <view class="section section_gap">
+            <view class="section__title">备注:</view>
+            <view class='form-group'>
+              <input type="text" class="input-text" name="remark" value="其他补充"></input>
+            </view>    
+        </view>
+        <view class="section btn-area">
+          <button bindtap="previousStep">上一步</button>
+          <button >预览</button>
+          <button formType="submit">发布</button>
+        </view>
+    </form>
+
+</view>

@@ -1,0 +1,58 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/activity/activity",
+    "pages/my/my",
+    "pages/my/mygame/mygame",
+    "pages/logs/logs",
+    "pages/game/game",
+    "pages/game/court/court",
+    "pages/game/demand/demand",
+    "pages/activity/apply/apply",
+    "pages/activity/join/join"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#3cc51f",
+    "borderStyle": "black",
+    "backgroundColor": "#000",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "球局",
+        "iconPath":"images/tabBar/ball_w.png",
+        "selectedIconPath":"images/tabBar/ball_x.png"
+      },
+      {
+        "pagePath": "pages/activity/activity",
+        "text": "球友",
+        "iconPath": "images/tabBar/firend_w.png",
+        "selectedIconPath": "images/tabBar/firend_x.png"
+      },
+      {
+        "pagePath": "pages/game/game",
+        "text": "发布",
+        "iconPath": "images/tabBar/release_w.png",
+        "selectedIconPath": "images/tabBar/release_x.png"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "我的",
+        "iconPath": "images/tabBar/my_w.png",
+        "selectedIconPath": "images/tabBar/my_x.png"
+    }
+    ]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "connectSocket": 10000,
+    "uploadFile": 10000,
+    "downloadFile": 10000
+  }
+}

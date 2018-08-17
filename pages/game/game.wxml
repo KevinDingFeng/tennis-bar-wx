@@ -1,0 +1,41 @@
+<view id="addgame">
+    <text>基本信息</text>
+    <form bindsubmit="formSubmit" bindreset="formReset">
+         <view class="section">
+            <view class="section__title">*球局名称:</view>
+            <view class='form-group'>
+              <input type="text" class="input-text" name="name" placeholder="请输入球局名称" />
+            </view>    
+        </view>
+        <view class="section section_gap">
+            <view class="section__title">*打球时间:</view>
+            <view class='form-group'>
+              <input type="text" class="input-text" name="startTime" placeholder="开始时间"></input>
+              至
+              <input type="text" class="input-text" name="endTime" placeholder="结束时间"></input>
+            </view>    
+        </view>
+        <view class="section section_gap">
+            <view class="section__title">*球局类型:</view>
+            <view class='form-group'>
+                <radio-group name="gameType">
+                  <label><radio value="Entertainment" checked='checked'/>娱乐局</label>
+                  <label><radio value="Teaching"/>教学</label>
+                </radio-group>
+            </view>    
+        </view>
+        <view class="section section_gap">
+            <view class="section__title">是否公开:</view>
+            <view class='form-group'>
+                <radio-group name="isPublic">
+                  <label><radio value="true" checked='checked' />公开</label>
+                  <label><radio value="false"/>私有</label>
+                </radio-group>
+            </view>    
+        </view>
+        <view class="section btn-area">
+            <button formType="submit">下一步</button>
+        </view>
+    </form>
+
+</view>

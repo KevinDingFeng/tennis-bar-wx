@@ -1,0 +1,63 @@
+
+  <view>
+    <view>{{game.name}}</view>
+    <block wx:if="{{game.gameType == 'Entertainment' }}">
+      娱乐局
+    </block>
+    <block wx:else>
+      教学局
+    </block>
+  </view>
+  <view>
+    <text>基本信息</text>
+    <view>
+      <view>球局编号：</view>
+      <text>{{game.id}}</text>
+    </view>
+    <view>
+      <view>发起人：</view>
+      <text>{{game.organizer.nickName}}</text>
+      <text>教练</text>
+    </view>
+    <view>
+      <view>打球时间：</view>
+      <text>{{game.startTime}}</text>~<text>{{game.endTime}}</text>
+    </view>
+    <view>
+      <view>球场：</view>
+      <text>{{game.court.name}}</text>
+    </view>
+    <view>
+      <view>地址：</view>
+      <text>{{game.court.address}}</text>
+    </view>
+    <view>
+      <view>电话：</view>
+      <text>{{game.court.telephone}}</text>
+    </view>
+  </view>
+  <view>
+    <text>参与情况：</text>
+    <view>{{game.totalNum}}缺{{game.totalNum - game.vacancyNum}}</view>
+  </view>
+  <view>
+    <text>参与要求</text>
+    <view>球龄：{{game.playAge}}</view>
+    <view>球技：{{game.skillLevel}}</view>
+    <view>打球人数：{{game.totalNum}}</view>
+    <view>报名截止时间：{{game.deadlineTime}}</view>
+    <view>备注：{{game.remark}}</view>
+  </view>
+  <view>
+    <button>邀请好友加入</button>
+    <button bindtap="joinGame" data-game="{{game}}">我要加入</button>
+  </view>
+
+  
+
+
+
+
+
+
+

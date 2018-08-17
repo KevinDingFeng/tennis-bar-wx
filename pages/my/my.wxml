@@ -1,0 +1,28 @@
+<view>
+  <view>
+    <view>微信昵称</view>
+  </view>
+  <view>
+    <view>基本信息</view>
+  </view>
+  <view>
+    <view>自我评价</view>
+  </view>
+  <view bindtap="myGame">
+    <view>我的球局</view>
+  </view>
+  <view>
+    <view>加入确认</view>
+  </view>
+  <view>
+    <view>加入申请</view>
+  </view>
+  <view>
+    <view>我的消息</view>
+  </view>
+
+
+
+
+
+</view>
