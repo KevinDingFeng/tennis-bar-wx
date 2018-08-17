@@ -1,39 +1,18 @@
-// pages/my/mygame/mygame.js
+// pages/my/joinconfirm/joinconfirm.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    // tab切换
-    currentTab: 0,
-    joinGame:'',
-    releaseGame:''
-
+  
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let that = this;
-    wx.request({
-      url: "http://localhost:6677/join/query?organizerId="+2,
-      method:"GET",
-      header:{
-        "content-Type":"application/json"
-      },
-      success:function(res){
-        if(res.data.code=="200"){
-          console.log(res.data.data.releaseGame);
-          that.setData({
-            joinGame:res.data.data.joinGame,
-            releaseGame:res.data.data.releaseGame
-          })
-        }
-      }
-
-    })
+  
   },
 
   /**
@@ -83,19 +62,5 @@ Page({
    */
   onShareAppMessage: function () {
   
-  },
-
-  /**
-  * 点击tab切换
-  */
-  swichNav: function (e) {
-    let that = this;
-    if (this.data.currentTab === e.target.dataset.current) {
-      return false;
-    } else {
-      that.setData({
-        currentTab: e.target.dataset.current
-      })
-    }
   }
 })

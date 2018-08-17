@@ -4,6 +4,8 @@
     "pages/activity/activity",
     "pages/my/my",
     "pages/my/mygame/mygame",
+    "pages/my/joinconfirm/joinconfirm",
+    "pages/my/joinapply/joinapply",
     "pages/logs/logs",
     "pages/game/game",
     "pages/game/court/court",

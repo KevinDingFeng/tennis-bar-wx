@@ -52,7 +52,7 @@ Page({
       success:function(res){
         if(res.data.code == "200"){
           that.setData({
-            courts:res.data.data
+            courts:res.data.data.page
           })
         }
       }

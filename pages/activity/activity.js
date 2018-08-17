@@ -26,7 +26,7 @@ Page({
         console.log(res.data);
         if(res.data.code="200"){
           that.setData({
-            games: res.data.data
+            games: res.data.data.page
           })
         }
       }

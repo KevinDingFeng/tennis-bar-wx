@@ -3,11 +3,61 @@
     <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">我发起的球局</view>
 </view>
  
-<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:31px;width:100%">
+<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:1000px;width:100%">
     <swiper-item>
-      <view>我参与的球局</view>
+      <view>
+        <block wx:if="{{joinGame.length > 0}}">
+          <block wx:for="{{joinGame}}" wx:key="**this" wx:for-item="jgame">
+            <view>
+              <view>
+                <view>{{jgame.game.name}}</view>
+                <view wx:if="{{jgame.game.gameStatus =='Completed'}}">已结束</view>
+                <view wx:elif="{{jgame.game.gameStatus =='Canceled'}}">已取消</view>
+                <view wx:else>即将开始</view>
+              </view>
+              <view>
+                <view>发起人：</view>
+                <view>{{jgame.game.organizer.nickName}}</view>
+                <view>{{jgame.game.startTime}} ~ {{jgame.game.endTime}}</view>
+              </view>
+              <view>
+                <view>球场：</view>
+                <view>{{jgame.game.court.name}}</view>
+              </view>
+            </view>
+          </block>
+        </block>
+        <block wx:else>
+          暂无数据
+        </block>
+      </view>
     </swiper-item>
     <swiper-item>
-      <view>我发起的球局</view>
+      <view>
+        <block wx:if="{{releaseGame.length > 0}}">
+          <block wx:for="{{releaseGame}}" wx:key="**this" wx:for-item="rgame">
+            <view>
+              <view>
+                <view>{{rgame.name}}</view>
+                <view wx:if="{{rgame.gameStatus =='Completed'}}">已结束</view>
+                <view wx:elif="{{rgame.gameStatus =='Canceled'}}">已取消</view>
+                <view wx:else>即将开始</view>
+              </view>
+              <view>
+                <view>发起人：</view>
+                <view>{{rgame.organizer.nickName}}</view>
+                <view>{{rgame.startTime}} ~ {{rgame.endTime}}</view>
+              </view>
+              <view>
+                <view>球场：</view>
+                <view>{{rgame.court.name}}</view>
+              </view>
+            </view>
+          </block>
+        </block>
+        <block wx:else>
+          暂无数据
+        </block>
+      </view>
     </swiper-item>
 </swiper>
