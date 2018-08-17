@@ -28,6 +28,79 @@
     </view>
     <!-- banner -->
     <view class='index_banner'>
-        <image src="../"></image>
+        <image src="../../images/index/banner.png"></image>
+    </view>
+    <!-- 三栏搜索 -->
+    <view class='index_search'>
+        <view class="nav">
+            <view class="nav-son {{shownavindex == 1? 'active' : ''}}" bindtap="listqy" data-nav="1">
+                <view class="content">{{qy_text}}</view>
+                <view class="icon"></view>
+            </view>
+            <view class="nav-son borders {{shownavindex == 2? 'active' : ''}}" bindtap="list" data-nav="2">
+                <view class="content">{{nz_text}}</view>
+                <view class="icon"></view>
+            </view>
+            <view class="nav-son {{shownavindex == 3? 'active' : ''}}" bindtap="listpx" data-nav="3">
+                <view class="content">{{px_text}}</view>
+                <view class="icon"></view>
+            </view>
+        </view>
+        <!-- 下拉内容 -->
+        <view class="quyu {{qyopen ? 'slidown' : 'slidup'}} {{qyshow ? 'disappear':''}}">
+            <!-- 商区 -->
+            <view class="qy quyu-left">
+                <view class="{{select1 == index ? 'current' : ''}}" wx:for="{{cityleft}}" bindtap="selectleft" data-city='{{index}}'>
+                    {{index}}
+                </view>
+            </view>
+            <view class="qy quyu-center">
+                <view class="{{select2 == index ? 'current2' : ''}}" wx:for="{{citycenter}}" bindtap="selectcenter" data-city='{{index}}'>
+                    {{index}}
+                </view>
+            </view>
+            <view class="qy quyu-right">
+                <view wx:for="{{cityright}}">
+                    {{item}}
+                </view>
+            </view>
+        </view>
+        <!-- 智能排序 -->
+        <view class="temp temp1 {{nzopen ? 'slidown' : 'slidup'}} {{nzshow ? 'disappear':''}}">
+            <view wx:for="{{content}}">
+                {{item}}
+            </view>
+        </view>
+        <!-- 打球时间 -->
+        <view class="temp temp2 {{pxopen ? 'slidown' : 'slidup'}} {{pxshow ? 'disappear':''}}">
+            <view class="{{childopen ? 'children_show' : 'children_hide'}}">
+                <view class="section">
+                    <view class="section__title">日期选择器</view>
+                    <picker mode="date" value="{{date}}" bindchange="bindDateChange">
+                        <view class="picker">
+                            {{px_time}}
+                        </view>
+                    </picker>
+                </view>
+                <view class='check_time'>
+                    <view class='time_name'>选择时间</view>
+                    <view class='time_type' wx:for="{{content}}">
+                        {{item}}
+                    </view>
+                </view>
+            </view>
+        </view>
+        <!-- 遮盖层 -->
+        <view class="fullbg {{isfull ?'fullopacity':''}}" bindtap="hidebg"></view>
+    </view>
+    <!-- 球局信息 -->
+    <view class='palce_xx'>
+        <view class='palce_list'>
+            <view class='list_top'>
+                <view class="palce_name">球局名称球局名称</view>
+                <view class='palce_num'>5缺2</view>
+            </view>
+
+        </view>
     </view>
 </view>
