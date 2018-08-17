@@ -100,7 +100,68 @@
                 <view class="palce_name">球局名称球局名称</view>
                 <view class='palce_num'>5缺2</view>
             </view>
-
+            <view class='list_center'>
+                <view class="palce_peo">发起人：张三</view>
+                <view class='palce_time'>2018.08.15  11:26~16:30</view>
+            </view>
+            <view class='list_bottom'>
+                <view class="palce_dz">球场：北京朝阳区大屯路奥林匹克网球场</view>
+                <view class='palce_dh'>
+                    <image src='../../images/index/dw.png'></image>
+                    <text>导航</text>
+                </view>
+            </view>
+        </view>
+        <view class='palce_list'>
+            <view class='list_top'>
+                <view class="palce_name">球局名称球局名称</view>
+                <view class='palce_num'>5缺2</view>
+            </view>
+            <view class='list_center'>
+                <view class="palce_peo">发起人：张三</view>
+                <view class='palce_time'>2018.08.15  11:26~16:30</view>
+            </view>
+            <view class='list_bottom'>
+                <view class="palce_dz">球场：北京朝阳区大屯路奥林匹克网球场</view>
+                <view class='palce_dh'>
+                    <image src='../../images/index/dw.png'></image>
+                    <text>导航</text>
+                </view>
+            </view>
+        </view>
+        <view class='palce_list'>
+            <view class='list_top'>
+                <view class="palce_name">球局名称球局名称</view>
+                <view class='palce_num'>5缺2</view>
+            </view>
+            <view class='list_center'>
+                <view class="palce_peo">发起人：张三</view>
+                <view class='palce_time'>2018.08.15  11:26~16:30</view>
+            </view>
+            <view class='list_bottom'>
+                <view class="palce_dz">球场：北京朝阳区大屯路奥林匹克网球场</view>
+                <view class='palce_dh'>
+                    <image src='../../images/index/dw.png'></image>
+                    <text>导航</text>
+                </view>
+            </view>
+        </view>
+        <view class='palce_list'>
+            <view class='list_top'>
+                <view class="palce_name">球局名称球局名称</view>
+                <view class='palce_num'>5缺2</view>
+            </view>
+            <view class='list_center'>
+                <view class="palce_peo">发起人：张三</view>
+                <view class='palce_time'>2018.08.15  11:26~16:30</view>
+            </view>
+            <view class='list_bottom'>
+                <view class="palce_dz">球场：北京朝阳区大屯路奥林匹克网球场</view>
+                <view class='palce_dh'>
+                    <image src='../../images/index/dw.png'></image>
+                    <text>导航</text>
+                </view>
+            </view>
         </view>
     </view>
 </view>
