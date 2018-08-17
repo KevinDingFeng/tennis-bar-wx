@@ -1,5 +1,6 @@
 //index.js
 //获取应用实例
+var cityData = require('../../utils/city.js');
 const app = getApp()
 
 Page({
@@ -9,7 +10,28 @@ Page({
         hasUserInfo: false,
         canIUse: wx.canIUse('button.open-type.getUserInfo'),
         inputShowed: false,
-        inputVal: ""
+        inputVal: "",//三栏导航系列
+        qy_text:"全部商区",
+        nz_text:"智能排序",
+        px_text:"打球时间",
+        px_time:"请选择日期",
+        content: [],
+        nv: [],//智能排序
+        px: [],//打球时间
+        qyopen: false,
+        qyshow: true,//商区显示隐藏
+        nzopen: false,
+        pxopen: false,
+        nzshow: false,//智能筛选x显示 隐藏
+        pxshow: false,//打球时间显示隐藏
+        childopen:false,
+        isfull: false,
+        cityleft: cityData.getCity(),
+        citycenter: {},
+        cityright: {},
+        select1: '',
+        select2: '',
+        shownavindex: ''
     },
     showInput: function () {
         this.setData({
@@ -39,48 +61,122 @@ Page({
         })
     },
     onLoad: function () {
-        //避免重复授权
-        /*
-        wx.login({
-          success: function (res) {
-            var code = res.code;
-            wx.getUserInfo({
-              success: function (res) {
-                console.log(res.userInfo);
-    
-                console.log(code);
-                var iv = res.iv;
-                var encryptedData = res.encryptedData;
-                var signature = res.signature;
-                var rawData = res.rawData;
-                wx.request({
-                  //上传用户信息和登录用的code，获取token
-                  url: "https://tennis.dazonghetong.com/auth/token",
-                  data: {
-                    code: code,
-                    signature: signature,
-                    rawData: rawData,
-                    encryptedData: encryptedData,
-                    iv: iv
-                  },
-                  success: function (res) {
-                    if(res.data.code && res.data.code == "200"){
-                      //授权成功
-                      //从后台获取的token，前端自己保存到全局变量中，备用；
-                      //以后每次使用request都把该变量存入header变量
-                      console.log("token : " + res.data.data);
-                      app.globalData.tennisToken = res.data.data;
-                    }
-                  }
-                })
-              },
-              fail: function () {
-              _this.authSetting();
-              }
+        this.setData({
+            nv: ['默认排序', '离我最近', '价格最低', '价格最高'],
+            px:['上午场','下午场','夜场']
+        })
+    },
+    listqy: function (e) {
+        if (this.data.qyopen) {
+            this.setData({
+                qyopen: false,
+                nzopen: false,
+                pxopen: false,
+                nzshow: true,
+                pxshow: true,
+                qyshow: true,//商区显示隐藏
+                isfull: false,
+                shownavindex: 0
             })
-            }
-          })
-        */
+        } else {
+            this.setData({
+                qyopen: true,
+                pxopen: false,
+                nzopen: false,
+                nzshow: true,
+                pxshow: true,
+                qyshow: false,
+                isfull: true,
+                shownavindex: e.currentTarget.dataset.nav
+            })
+        }
+    },
+    list: function (e) {
+        if (this.data.nzopen) {
+            this.setData({
+                nzopen: false,
+                pxopen: false,
+                qyopen: false,
+                nzshow: true,//智能筛选x显示 隐藏
+                pxshow: true,
+                qyshow: true,
+                isfull: false,
+                shownavindex: 0
+            })
+        } else {
+            this.setData({
+                content: this.data.nv,
+                nzopen: true,
+                pxopen: false,
+                qyopen: false,
+                nzshow: false,
+                pxshow: true,
+                qyshow: true,
+                isfull: true,
+                shownavindex: e.currentTarget.dataset.nav
+            })
+        }
+    },
+    listpx: function (e) {
+        if (this.data.pxopen) {
+            this.setData({
+                nzopen: false,
+                pxopen: false,
+                qyopen: false,
+                nzshow: true,
+                pxshow: true,//打球时间显示隐藏
+                qyshow: true,
+                childopen:false,
+                isfull: false,
+                shownavindex: 0
+            })
+        } else {
+            this.setData({
+                content: this.data.px,
+                nzopen: false,
+                pxopen: true,
+                qyopen: false,
+                nzshow: true,
+                pxshow: false,
+                qyshow: true,
+                childopen: true,
+                isfull: true,
+                shownavindex: e.currentTarget.dataset.nav
+            })
+        }
+        console.log(e.target)
+    },
+    selectleft: function (e) {
+        this.setData({
+            cityright: {},
+            citycenter: this.data.cityleft[e.currentTarget.dataset.city],
+            select1: e.target.dataset.city,
+            select2: ''
+        });
+    },
+    selectcenter: function (e) {
+        this.setData({
+            cityright: this.data.citycenter[e.currentTarget.dataset.city],
+            select2: e.target.dataset.city
+        });
+    },
+    hidebg: function (e) {
+        this.setData({
+            qyopen: false,
+            nzopen: false,
+            pxopen: false,
+            nzshow: true,
+            pxshow: true,
+            qyshow: true,
+            isfull: false,
+            shownavindex: 0
+        })
+    },
+    bindDateChange: function (e) {//时间选择
+        console.log('picker发送选择改变，携带值为', e.detail.value)
+        this.setData({
+            px_time: e.detail.value
+        })
     },
     getUserInfo: function (e) {
         console.log(e)
