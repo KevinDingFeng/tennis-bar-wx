@@ -1,2 +1,75 @@
-<!--pages/friendxx/friendxx.wxml-->
-<text>pages/friendxx/friendxx.wxml</text>
+<view class="container">
+    <view class='firend_xx'>
+        <view class='firend_top'>
+            <view class='firend_img'>
+                <image src="../../images/index/banner.png"></image>
+            </view>
+            <label class='firend_nickname'>微信昵称</label>
+        </view>
+        <view class='firend_center'>
+            <view class='cen_left'>
+                <text>已参与</text>
+                <view>
+                    <text class='col_g'>N </text>场
+                </view>
+            </view>
+            <view class='cen_left'>
+                <text>已发起</text>
+                <view>
+                    <text class='col_g'>N </text>场
+                </view>
+            </view>
+            <view class='cen_end'>
+                <text>与我共同打球</text>
+                <view>
+                    <text class='col_g'>N </text>场
+                </view>
+            </view>
+        </view>
+        <view class='firend_bottom'>
+            <view class='cen_left'>
+                <text>已参与</text>
+                <view>
+                    <text class='col_g'>N </text>场
+                </view>
+            </view>
+            <view class='cen_left'>
+                <text>已发起</text>
+                <view>
+                    <text class='col_g'>N </text>场
+                </view>
+            </view>
+            <view class='cen_end'>
+                <text>与我共同打球</text>
+                <view>
+                    <text class='col_g'>N </text>场
+                </view>
+            </view>
+        </view>
+    </view>
+    <!-- ta参与的球局 -->
+    <view class='ball_join'>
+        <view class='join_zu'></view>
+        <text class='join_text'>TA最新参与的球局</text>
+    </view>
+     <!-- 球局信息 -->
+    <view class='palce_xx'>
+        <view class='palce_list'  wx:for="{{games.content}}" wx:for-item="game" wx:key="**this" bindtap="applyJoinGame" data-game="{{game}}">
+            <view class='list_top'>
+                <view class="palce_name">{{game.name}}</view>
+                <view class='palce_num'>{{game.totalNum}}缺{{game.totalNum - game.vacancyNum}}</view>
+            </view>
+            <view class='list_center'>
+                <view class="palce_peo">发起人：{{game.organizer.nickName}}</view>
+                <view class='palce_time'>{{game.startTime}}-{{game.endTime}}</view>
+            </view>
+            <view class='list_bottom'>
+                <view class="palce_dz">球场：{{game.court.name}}</view>
+                <view class='palce_dh' bindtap="openLocation" data-latitude="{{game.court.latitude}}" data-longitude="{{game.court.longitude}}">
+                    <image src='../../images/index/dw.png'></image>
+                    <text>导航</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

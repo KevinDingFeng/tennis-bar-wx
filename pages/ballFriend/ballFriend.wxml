@@ -27,7 +27,7 @@
     </view>
     <!-- 球友列表 -->
     <view class='friend_list'>
-        <view class='list_xx'>
+        <view class='list_xx' bindtap='friend_xx'>
             <!-- 微信头像 -->
             <view class='peo_img'>
                 <image src="../../images/index/banner.png"></image>

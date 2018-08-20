@@ -83,5 +83,10 @@ Page({
      */
     onShareAppMessage: function () {
 
+    },
+    friend_xx:function(){
+        wx.navigateTo({
+            url: '../friendxx/friendxx'
+        })
     }
 })
