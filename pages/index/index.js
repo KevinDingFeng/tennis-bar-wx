@@ -16,8 +16,8 @@ Page({
         px_text:"打球时间",
         px_time:"请选择日期",
         content: [],
-        nv: [],//智能排序
-        px: [],//打球时间
+        nv: ['默认排序', '离我最近', '价格最低', '价格最高'],//智能排序
+        px: ['上午场', '下午场', '夜场'],//打球时间
         qyopen: false,
         qyshow: true,//商区显示隐藏
         nzopen: false,
@@ -31,7 +31,8 @@ Page({
         cityright: {},
         select1: '',
         select2: '',
-        shownavindex: ''
+        shownavindex: '',
+        games: ''
     },
     showInput: function () {
         this.setData({
@@ -60,10 +61,25 @@ Page({
             url: '../logs/logs'
         })
     },
-    onLoad: function () {
-        this.setData({
-            nv: ['默认排序', '离我最近', '价格最低', '价格最高'],
-            px:['上午场','下午场','夜场']
+    onLoad: function (options) {
+        let that = this;
+        wx.setNavigationBarTitle({
+            title: '球局',
+        })
+        wx.request({
+            url: 'http://localhost:6677/game',
+            method: "GET",
+            header: {
+                "content-Type": "application/json"
+            },
+            success: function (res) {
+                console.log(res.data);
+                if (res.data.code = "200") {
+                    that.setData({
+                        games: res.data.data.page
+                    })
+                }
+            }
         })
     },
     listqy: function (e) {
@@ -197,6 +213,21 @@ Page({
                 console.log(res);
             }
         })
-
+    },
+    // 查看球场地址详情
+    openLocation: function (event) {
+        let latitude = event.currentTarget.dataset.latitude;
+        let longitude = event.currentTarget.dataset.longitude;
+        wx.openLocation({
+            latitude: latitude,
+            longitude: longitude,
+        })
+    },
+    // 申请加入球局
+    applyJoinGame: function (event) {
+        let game = event.currentTarget.dataset.game;
+        wx.navigateTo({
+            url: './apply/apply?game=' + JSON.stringify(game),
+        })
     }
 })

@@ -1,0 +1,69 @@
+/* pages/ballFriend/ballFriend.wxss */
+page{
+    background-color: #F5F5F5;
+}
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: #aaa;
+}
+
+.usermotto {
+  margin-top: 200px;
+}
+/* 搜索 */
+.page__bd{
+    width: 100%;
+}
+.searchbar-result{
+    margin-top: 0;
+    font-size: 14px;
+}
+.searchbar-result:before{
+    display: none;
+}
+.weui-cell{
+    padding: 12px 15px 12px 35px;
+}
+/* 球友列表 */
+.friend_list{
+    width: 100%;
+}
+.list_xx{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 14rpx 28rpx;
+    background-color: #fff;
+    margin-bottom: 18rpx;
+}
+.peo_img{
+    height: 91rpx;
+}
+.peo_img>image{
+    width: 91rpx;
+	height: 91rpx;
+    border: solid 1px #e4e4e4;
+    border-radius: 50%;
+}
+.peo_nickname{
+    margin-left: 20rpx;
+    padding-top: 22rpx;
+    font-size: 28rpx;
+    width: 60%;
+}
+.peo-cc{
+    font-size: 28rpx;
+    padding-top: 22rpx;
+    width: 25%;
+    text-align: right;
+}

@@ -1,4 +1,7 @@
 /**index.wxss**/
+page{
+    background-color: #F5F5F5;
+}
 .userinfo {
   display: flex;
   flex-direction: column;
@@ -295,6 +298,6 @@ picker{
     width: 60rpx;
 	height: 60rpx;
     position: absolute;
-    top:153rpx;
+    top:155rpx;
     right:67rpx;
 }

@@ -1,5 +1,7 @@
 {
   "pages":[
+    "pages/friendxx/friendxx",
+    "pages/ballFriend/ballFriend",
     "pages/index/index",
     "pages/activity/activity",
     "pages/my/my",
@@ -32,7 +34,7 @@
         "selectedIconPath":"images/tabBar/ball_x.png"
       },
       {
-        "pagePath": "pages/activity/activity",
+        "pagePath": "pages/ballFriend/ballFriend",
         "text": "球友",
         "iconPath": "images/tabBar/firend_w.png",
         "selectedIconPath": "images/tabBar/firend_x.png"
