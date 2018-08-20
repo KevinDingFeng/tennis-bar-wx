@@ -1,19 +1,19 @@
 {
   "pages":[
-    "pages/friendxx/friendxx",
-    "pages/ballFriend/ballFriend",
     "pages/index/index",
-    "pages/activity/activity",
+    "pages/activity/join/join",
+    "pages/activity/apply/apply",
     "pages/my/my",
+    "pages/ballFriend/ballFriend",
+    "pages/friendxx/friendxx",
+    "pages/activity/activity",
     "pages/my/mygame/mygame",
     "pages/my/joinconfirm/joinconfirm",
     "pages/my/joinapply/joinapply",
     "pages/logs/logs",
     "pages/game/game",
     "pages/game/court/court",
-    "pages/game/demand/demand",
-    "pages/activity/apply/apply",
-    "pages/activity/join/join"
+    "pages/game/demand/demand"
   ],
   "window":{
     "backgroundTextStyle":"light",

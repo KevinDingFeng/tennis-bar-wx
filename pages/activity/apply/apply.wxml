@@ -1,63 +1,84 @@
-
-  <view>
-    <view>{{game.name}}</view>
-    <block wx:if="{{game.gameType == 'Entertainment' }}">
-      娱乐局
-    </block>
-    <block wx:else>
-      教学局
-    </block>
-  </view>
-  <view>
-    <text>基本信息</text>
-    <view>
-      <view>球局编号：</view>
-      <text>{{game.id}}</text>
+<view class='container'>
+    <view class='ball_name'>
+        <text class='game_name'>球局名称{{game.name}}</text>
+        <view class='col_g f_wei' wx:if="{{game.gameType == 'Entertainment' }}">
+            娱乐局
+        </view>
+        <view class='col_g f_wei' wx:else>
+            教学局
+        </view>
     </view>
-    <view>
-      <view>发起人：</view>
-      <text>{{game.organizer.nickName}}</text>
-      <text>教练</text>
+    <view class='ball_xx'>
+        <view class='xx_title f_wei'>基本信息</view>
+        <view class='xx_id'>
+            <view class='id_name'>球局编号</view>
+            <view>{{game.id}}</view>
+        </view>
+        <view class='xx_id'>
+            <view class='id_name'>发起人</view>
+            <view>{{game.organizer.nickName}}</view>
+        </view>
+        <view class='xx_id'>
+            <view class='id_name'>打球时间</view>
+            <view>{{game.startTime}}-{{game.endTime}}</view>
+        </view>
+        <view class='xx_id'>
+            <view class='id_name'>球场</view>
+            <view >{{game.court.name}}</view>
+        </view>
+        <view class='xx_id'>
+            <view class='id_name'>地址</view>
+            <view class='dz_name'>{{game.court.address}}</view>
+        </view>
+         <view class='xx_id'>
+            <view class='id_name'>电话</view>
+            <view class='dz_name'>{{game.court.telephone}}</view>
+        </view>
+        <view class='img_show'>
+            <image src="../../../images/tabBar/ball_x.png"></image>
+            <image src="../../../images/tabBar/ball_x.png"></image>
+            <image src="../../../images/tabBar/ball_x.png"></image>
+        </view>
     </view>
-    <view>
-      <view>打球时间：</view>
-      <text>{{game.startTime}}</text>~<text>{{game.endTime}}</text>
+    <view class='ball_join'>
+        <view class='join_title'>
+            <text class='game_name'>球局名称{{game.name}}</text>
+            <view class='col_g f_wei' >
+                {{game.totalNum}}缺{{game.totalNum - game.vacancyNum}}
+            </view>
+        </view>
+        <view class='wx_peo'>
+            <view class='peo_xx'>
+                <image src='../../../images/tabBar/ball_x.png'></image>
+                <view>微信昵称</view>
+            </view>
+        </view>
     </view>
-    <view>
-      <view>球场：</view>
-      <text>{{game.court.name}}</text>
+    <view class='ball_bottom'>
+        <view class='xx_title f_wei'>参与要求</view>
+        <view class='ball_require'>
+            <view class='require'>
+                <text>球龄</text>
+                <view class='col_g'>{{game.playAge}}</view>
+            </view>
+            <view class='require'>
+                <text>球技等级</text>
+                <view class='col_g'>{{game.skillLevel}}</view>
+            </view>
+            <view class='require'>
+                <text>打球人数</text>
+                <view class='col_g'>{{game.totalNum}}</view>
+            </view>
+            <view class='require no_bor'>
+                <text>性别</text>
+                <view class='col_g'>{{game.totalNum}}</view>
+            </view>
+        </view>
     </view>
-    <view>
-      <view>地址：</view>
-      <text>{{game.court.address}}</text>
+    <view class='registration_time'>报名截止时间：{{game.deadlineTime}}</view>
+    <view class='remark'>备注：{{game.remark}}</view>
+    <view class='join_btn'>
+        <button class='join_firend'>邀请好友加入</button>
+        <button class='join_me' bindtap="joinGame" data-game="{{game}}">我要加入</button>
     </view>
-    <view>
-      <view>电话：</view>
-      <text>{{game.court.telephone}}</text>
-    </view>
-  </view>
-  <view>
-    <text>参与情况：</text>
-    <view>{{game.totalNum}}缺{{game.totalNum - game.vacancyNum}}</view>
-  </view>
-  <view>
-    <text>参与要求</text>
-    <view>球龄：{{game.playAge}}</view>
-    <view>球技：{{game.skillLevel}}</view>
-    <view>打球人数：{{game.totalNum}}</view>
-    <view>报名截止时间：{{game.deadlineTime}}</view>
-    <view>备注：{{game.remark}}</view>
-  </view>
-  <view>
-    <button>邀请好友加入</button>
-    <button bindtap="joinGame" data-game="{{game}}">我要加入</button>
-  </view>
-
-  
-
-
-
-
-
-
-
+</view>

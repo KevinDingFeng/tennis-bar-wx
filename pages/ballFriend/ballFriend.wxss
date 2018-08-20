@@ -23,6 +23,8 @@ page{
 /* 搜索 */
 .page__bd{
     width: 100%;
+    position: fixed;
+    z-index: 9999;
 }
 .searchbar-result{
     margin-top: 0;
@@ -37,6 +39,7 @@ page{
 /* 球友列表 */
 .friend_list{
     width: 100%;
+    margin-top: 97rpx;
 }
 .list_xx{
     display: flex;

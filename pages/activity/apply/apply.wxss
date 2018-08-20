@@ -1,1 +1,154 @@
 /* pages/activity/apply/apply.wxss */
+
+page {
+    background-color: #f5f5f5;
+}
+
+.ball_name {
+    width: 94%;
+    margin-top: 19rpx;
+    display: flex;
+    flex-direction: row;
+    background-color: #fff;
+    font-size: 24rpx;
+    padding: 30rpx 23rpx;
+    border-bottom: 1px solid #ddd;
+}
+
+.game_name {
+    width: 85%;
+}
+
+.ball_xx {
+    width: 94%;
+    margin-top: 18rpx;
+    background-color: #fff;
+    padding: 30rpx 23rpx;
+    font-size: 24rpx;
+    border-bottom: 1px solid #ddd;
+}
+
+.xx_title {
+    color: #222;
+}
+
+.xx_id {
+    margin-top: 25rpx;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.id_name {
+    width: 30%;
+    text-align: left;
+}
+
+.dz_name {
+}
+
+.img_show {
+    padding: 27rpx 0;
+    padding-bottom: 0;
+}
+
+.img_show>image {
+    width: 217rpx;
+    height: 154rpx;
+    border: 1px solid #ddd;
+}
+
+.img_show>image:nth-child(2) {
+    margin: 0 23rpx;
+}
+
+.ball_join {
+    width: 94%;
+    margin-top: 19rpx;
+    background-color: #fff;
+    padding: 27rpx 21rpx;
+    font-size: 24rpx;
+    border-bottom: 1px solid #ddd;
+}
+
+.join_title {
+    width: 105%;
+    display: flex;
+    flex-direction: row;
+}
+
+.join_peo {
+    padding-top: 5rpx;
+}
+
+.wx_peo {
+    display: flex;
+    flex-direction: row;
+}
+
+.peo_xx {
+    text-align: center;
+    margin-top: 25rpx;
+}
+
+.peo_xx>image {
+    width: 125rpx;
+    height: 97rpx;
+}
+
+.ball_bottom {
+    width: 94%;
+    margin-top: 18rpx;
+    background-color: #fff;
+    font-size: 24rpx;
+    padding: 30rpx 23rpx;
+    border-bottom: 1px solid #ddd;
+}
+.ball_require{
+    display: flex;
+    flex-direction: row;
+    margin-top: 29rpx;
+}
+.require{
+    text-align: center;
+    border-right: 1px solid #ddd;
+    width: 30%;
+}
+.require>view{
+    margin-top: 25rpx;
+}
+.no_bor{
+    border: none;
+}
+.registration_time{
+    width: 94%;
+    margin-top: 36rpx;
+    margin-bottom: 24rpx;
+    font-size: 20rpx;
+    color: #424242;
+}
+.remark{
+    width: 94%;
+    font-size: 20rpx;
+    color: #424242;
+}
+.join_btn{
+    width: 94%;
+    display: flex;
+    flex-direction: row;
+    margin-top: 51rpx;
+    margin-bottom: 65rpx;
+}
+.join_firend{
+    background-color: #efa719;
+    color: #fff;
+    margin: 0;
+    width: 47%;
+}
+.join_me{
+    background-color: #56a41f;
+    color: #fff;
+    margin-left: 20rpx;
+    margin-right: 0;
+    width: 50%;
+}

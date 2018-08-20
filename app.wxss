@@ -1,6 +1,8 @@
 /**app.wxss**/
 @import 'weui.wxss';
-
+page{
+    background-color: #F5F5F5;
+}
 .container {
     height: 100%;
     display: flex;
@@ -8,4 +10,10 @@
     align-items: center;
     justify-content: space-between;
     box-sizing: border-box;
+}
+.col_g{
+    color: #56a41f;
+}
+.f_wei{
+    font-weight: 700;
 }

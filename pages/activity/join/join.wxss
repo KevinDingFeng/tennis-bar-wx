@@ -1,1 +1,80 @@
 /* pages/activity/join/join.wxss */
+
+.farm {
+    width: 94%;
+    margin-top: 19rpx;
+    background-color: #fff;
+    padding: 35rpx 23rpx;
+    font-size: 24rpx;
+}
+
+.game_name {
+    font-weight: 700;
+}
+
+.xx_id {
+    margin-top: 25rpx;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.id_name {
+    width: 30%;
+    text-align: left;
+}
+
+.wx_peo {
+    display: flex;
+    flex-direction: row;
+}
+
+.peo_xx {
+    text-align: center;
+    margin-top: 25rpx;
+}
+
+.peo_xx>image {
+    width: 125rpx;
+    height: 97rpx;
+}
+
+.ts_xx {
+    width: 94%;
+    font-size: 20rpx;
+    color: #424242;
+    margin-top: 36rpx;
+}
+
+.ts_xx>view {
+    margin-top: 10rpx;
+    margin-left: 20rpx;
+}
+
+.check-xy {
+    width: 94%;
+    font-size: 20rpx;
+    margin-top: 350rpx;
+    display: flex;
+    flex-direction: row;
+}
+
+.check-xy>checkbox {
+    zoom: 60%;
+}
+
+.check-xy>text {
+    margin-left: 10rpx;
+}
+
+.btn_sure {
+    width: 102%;
+    position: fixed;
+    bottom: 0rpx;
+    margin-top: 31rpx;
+}
+
+.btn_sure>button {
+    background-color: #56a41f;
+    color: #fff;
+}
