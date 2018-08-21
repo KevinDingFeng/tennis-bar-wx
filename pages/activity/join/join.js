@@ -16,7 +16,6 @@ Page({
       title: '我要加入球局',
     })
     let game = JSON.parse(options.game);
-    console.log(game);
     let that = this;
     that.setData({
       game : game
@@ -54,8 +53,19 @@ Page({
       },
       success:function(res){
         if (res.data.code == "200") {
-          wx.switchTab({
-            url: '/pages/activity/activity',
+          wx.showToast({
+            title: '',
+            icon:"success",
+            success:function(){
+              wx.switchTab({
+                url: '/pages/index/index',
+              })
+            }
+          })
+        }else{
+          wx.showToast({
+            icon:"none",
+            title: res.data.data,
           })
         }
       }
