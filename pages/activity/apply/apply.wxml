@@ -1,6 +1,6 @@
 <view class='container'>
     <view class='ball_name'>
-        <text class='game_name'>球局名称{{game.name}}</text>
+        <text class='game_name'>{{game.name}}</text>
         <view class='col_g f_wei' wx:if="{{game.gameType == 'Entertainment' }}">
             娱乐局
         </view>
@@ -59,11 +59,11 @@
         <view class='ball_require'>
             <view class='require'>
                 <text>球龄</text>
-                <view class='col_g'>{{game.playAge}}</view>
+                <view class='col_g'>{{ages[game.playAge]}}</view>
             </view>
             <view class='require'>
                 <text>球技等级</text>
-                <view class='col_g'>{{game.skillLevel}}</view>
+                <view class='col_g'>{{levels[game.skillLevel]}}</view>
             </view>
             <view class='require'>
                 <text>打球人数</text>

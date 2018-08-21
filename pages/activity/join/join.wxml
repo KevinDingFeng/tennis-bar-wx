@@ -1,6 +1,6 @@
 <view class='container'>
     <view class='farm'>
-        <text class='game_name'>球局名称{{game.name}}</text>
+        <text class='game_name'>{{game.name}}</text>
         <view class='xx_id'>
             <view class='id_name'>球局编号</view>
             <view>{{game.id}}</view>
