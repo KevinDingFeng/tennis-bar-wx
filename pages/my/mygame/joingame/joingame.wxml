@@ -8,7 +8,6 @@
     <include src="../common.wxml" />
     <view class='join_btn'>
         <button class='join_firend'>邀请好友加入</button>
-        <button class='join_me' bindtap="joinGame" data-game="{{game}}">我要加入</button>
     </view>
   </swiper-item>
 

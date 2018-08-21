@@ -156,7 +156,7 @@
     background-color: #efa719;
     color: #fff;
     margin: 0;
-    width: 47%;
+    width: 97%;
 }
 .join_me{
     background-color: #56a41f;
