@@ -43,5 +43,24 @@ Page({
     wx.navigateTo({
       url: './mygame/mygame',
     })
+  },
+
+  /**
+   * 加入确认 
+   */
+  joinconfirm:function(){
+    wx.navigateTo({
+      url: './joinconfirm/joinconfirm',
+    })
+  },
+
+  /**
+   * 加入申请
+   */
+  joinapply:function(){
+    wx.navigateTo({
+      url: './joinapply/joinapply',
+    })
   }
+
 })

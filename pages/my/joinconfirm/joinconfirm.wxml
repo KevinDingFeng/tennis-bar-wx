@@ -1,2 +1,17 @@
-<!--pages/my/joinconfirm/joinconfirm.wxml-->
-<text>pages/my/joinconfirm/joinconfirm.wxml</text>
+<view class="swiper-tab">
+    <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">全部</view>
+    <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">待确认</view>
+    <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">已确认</view>
+</view>
+ 
+<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:1000px;width:100%">
+  <swiper-item>
+    全部
+  </swiper-item>
+  <swiper-item>
+    待确认
+  </swiper-item>
+  <swiper-item>
+    已确认
+  </swiper-item>
+</swiper>

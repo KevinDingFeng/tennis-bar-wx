@@ -227,7 +227,7 @@ Page({
     applyJoinGame: function (event) {
         let game = event.currentTarget.dataset.game;
         wx.navigateTo({
-            url: './apply/apply?game=' + JSON.stringify(game),
+            url: '../activity/apply/apply?game=' + JSON.stringify(game),
         })
     }
 })

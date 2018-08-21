@@ -1,0 +1,86 @@
+
+    <view>
+      <text>基本信息</text>
+      <view>
+        <view>{{game.name}}</view>
+        <view wx:if="{{game.gameStatus =='Completed'}}">已结束</view>
+        <view wx:elif="{{game.gameStatus =='Canceled'}}">已取消</view>
+        <view wx:else>即将开始</view>
+      </view>
+      <view>
+        <view>球局编号：</view>
+        <text>{{game.id}}</text>
+      </view>
+      <view>
+        <view>球局名称：</view>
+        <text>{{game.name}}</text>
+      </view>
+      <view>
+        <view>球局类型：</view>
+        <text>
+          <block wx:if="{{game.gameType == 'Entertainment' }}">
+            娱乐局
+          </block>
+          <block wx:else>
+            教学局
+          </block>
+        </text>
+      </view>
+      <view>
+        <view>打球时间：</view>
+        <text>{{game.startTime}}</text>~<text>{{game.endTime}}</text>
+      </view>
+      <view>
+        <view>是否公开：</view>
+        <text>
+          <block wx:if="{{game.isPublic}}">
+            公开
+          </block>
+          <block wx:else>
+            不公开
+          </block>
+        </text>
+      </view>
+      <view>
+        <view>球场：</view>
+        <text>{{game.court.name}}</text>
+      </view>
+      <view>
+        <view>地址：</view>
+        <text>{{game.court.address}}</text>
+      </view>
+      <view>
+        <view>电话：</view>
+        <text>{{game.court.telephone}}</text>
+      </view>
+    </view>
+
+    <view>
+      <text>参与要求</text>
+      <view>球龄：{{game.playAge}}</view>
+      <view>球技：{{game.skillLevel}}</view>
+      <view>打球人数：{{game.totalNum}}</view>
+      <view>
+      性别：
+        <block wx:if="{{game.limitGender}}">{{game.femaleNum}}女{{game.maleNum}}男
+        </block>
+        <block wx:else>不限
+        </block>
+      </view>
+      <view>
+      预留位置：{{game.holderNum}}
+      </view>
+      <view>报名截止时间：{{game.deadlineTime}}</view>
+      <view>备注：{{game.remark}}</view>
+    </view>
+
+
+
+  
+
+
+
+
+
+
+

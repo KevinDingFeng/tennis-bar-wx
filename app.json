@@ -8,6 +8,8 @@
     "pages/friendxx/friendxx",
     "pages/activity/activity",
     "pages/my/mygame/mygame",
+    "pages/my/mygame/joingame/joingame",
+    "pages/my/mygame/releasegame/releasegame",
     "pages/my/joinconfirm/joinconfirm",
     "pages/my/joinapply/joinapply",
     "pages/logs/logs",

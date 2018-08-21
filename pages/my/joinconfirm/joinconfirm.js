@@ -5,14 +5,17 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    wx.setNavigationBarTitle({
+      title: '加入确认',
+    })
+    
   },
 
   /**
@@ -62,5 +65,37 @@ Page({
    */
   onShareAppMessage: function () {
   
-  }
+  },
+
+  /**
+   * 获取 确认列表
+   */
+  getApplyConfirmGames:function(){
+    let wxUserInfoId = 2;
+    // 获取加入确认列表
+    wx.request({
+      url: 'http://localhost:6677/join/confirms' + wxUserInfoId,
+      method: "GET",
+      header: {
+        "content-Type": "application/json"
+      },
+      success:function(res){
+        
+      }
+    })
+  },
+
+  /**
+  * 点击tab切换
+  */
+  swichNav: function (e) {
+    let that = this;
+    if (this.data.currentTab === e.target.dataset.current) {
+      return false;
+    } else {
+      that.setData({
+        currentTab: e.target.dataset.current
+      })
+    }
+  },
 })

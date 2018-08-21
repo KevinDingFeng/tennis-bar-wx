@@ -42,10 +42,9 @@ Page({
   querySubmit:function(e){
     let that = this;
     let courtName = e.detail.value.courtName;
-    console.log(courtName);
     wx.request({
       url: "http://localhost:6677/game/courts?courtName="+courtName,
-      method:"POST",
+      method:"GET",
       header:{
         "content-type": "application/x-www-form-urlencodedn"
       },

@@ -8,7 +8,7 @@
       <view>
         <block wx:if="{{joinGame.length > 0}}">
           <block wx:for="{{joinGame}}" wx:key="**this" wx:for-item="jgame">
-            <view>
+            <view bindtap="joinGameDetail" data-game="{{jgame.game}}">
               <view>
                 <view>{{jgame.game.name}}</view>
                 <view wx:if="{{jgame.game.gameStatus =='Completed'}}">已结束</view>
@@ -25,6 +25,9 @@
                 <view>{{jgame.game.court.name}}</view>
               </view>
             </view>
+            <view>
+              定位
+            </view>
           </block>
         </block>
         <block wx:else>
@@ -36,7 +39,7 @@
       <view>
         <block wx:if="{{releaseGame.length > 0}}">
           <block wx:for="{{releaseGame}}" wx:key="**this" wx:for-item="rgame">
-            <view>
+            <view bindtap="releaseGameDetail" data-game="{{rgame}}">
               <view>
                 <view>{{rgame.name}}</view>
                 <view wx:if="{{rgame.gameStatus =='Completed'}}">已结束</view>
@@ -52,6 +55,9 @@
                 <view>球场：</view>
                 <view>{{rgame.court.name}}</view>
               </view>
+            </view>
+            <view>
+            无
             </view>
           </block>
         </block>

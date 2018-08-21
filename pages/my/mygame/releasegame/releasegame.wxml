@@ -1,0 +1,25 @@
+<view class="swiper-tab">
+    <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">球局信息</view>
+    <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">评价</view>
+</view>
+ 
+<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:1000px;width:100%">
+  <swiper-item>
+    <include src="../common.wxml" />
+    <button>邀请好友加入</button>
+    <button bindtap="cancelGame" data-id="{{game.id}}">取消球局</button>
+  </swiper-item>
+
+  <swiper-item>
+    <view>无</view>
+  </swiper-item>
+</swiper>
+
+  
+
+
+
+
+
+
+

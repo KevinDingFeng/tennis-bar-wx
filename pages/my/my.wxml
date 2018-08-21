@@ -18,17 +18,17 @@
             <text class='list_name'>自我评价</text>
             <image src="/images/my/my_right.png"></image>
         </view>
-        <view class='my_xx'>
+        <view class='my_xx' bindtap='myGame'>
             <image src="/images/my/myball_ju.png"></image>
             <text class='list_name'>我的球局</text>
             <image src="/images/my/my_right.png"></image>
         </view>
-        <view class='my_xx'>
+        <view class='my_xx' bindtap='joinconfirm'>
             <image src="/images/my/join_sure.png"></image>
             <text class='list_name'>加入确认</text>
             <image src="/images/my/my_right.png"></image>
         </view>
-         <view class='my_xx'>
+         <view class='my_xx' bindtap='joinapply'>
             <image src="/images/my/join_sq.png"></image>
             <text class='list_name'>加入申请</text>
             <image src="/images/my/my_right.png"></image>
