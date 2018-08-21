@@ -1,36 +1,39 @@
-// pages/my/joinapply/joinapply.js
-var sliderWidth = 115; // 需要设置slider的宽度，用于计算中间位置
+// pages/my/myXX/myXX.js
 Page({
+
     /**
      * 页面的初始数据
      */
     data: {
-        tabs: ["全部", "待确认", "已确认"],
-        activeIndex: 1,
-        sliderOffset: 0,
-        sliderLeft: 0
+        array: ['20岁以下', '20-30岁', '30-40岁', '45-55岁',"55岁以上"],
+        array_sex: ['男', '女'],
+        array_language: ['中文', '英文'],
     },
-
+    bindPickerChange: function (e) {//年龄
+        console.log('picker发送选择改变，携带值为', e.detail.value)
+        this.setData({
+            index: e.detail.value
+        })
+    },
+    bindPickerChange_sex: function (e) {//性别
+        console.log('picker发送选择改变，携带值为', e.detail.value)
+        this.setData({
+            index_sex: e.detail.value
+        })
+    },
+    bindPickerChange_language: function (e) {//语言
+        console.log('picker发送选择改变，携带值为', e.detail.value)
+        this.setData({
+            index_language: e.detail.value
+        })
+    },
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function () {
-        var that = this;
-        wx.getSystemInfo({
-            success: function (res) {
-                that.setData({
-                    sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
-                    sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
-                });
-            }
-        });
+    onLoad: function (options) {
+
     },
-    tabClick: function (e) {
-        this.setData({
-            sliderOffset: e.currentTarget.offsetLeft,
-            activeIndex: e.currentTarget.id
-        });
-    },
+
     /**
      * 生命周期函数--监听页面初次渲染完成
      */

@@ -1,17 +1,76 @@
-<view class="swiper-tab">
-    <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" data-status="All" bindtap="swichNav">全部</view>
-    <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" data-status="Agree" bindtap="swichNav">已同意</view>
-    <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" data-status="Refuse" bindtap="swichNav">已拒绝</view>
+<view class='container'>
+    <view class="page">
+        <view class="page__bd">
+            <view class="weui-tab">
+                <view class="weui-navbar">
+                    <block wx:for="{{tabs}}" wx:key="*this">
+                        <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+                            <view class="weui-navbar__title">{{item}}</view>
+                        </view>
+                    </block>
+                    <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+                </view>
+                <view class="weui-tab__panel">
+                    <!-- 全部 -->
+                    <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+                        <!-- 确认中 -->
+                        <view class='list_xx'>
+                            <view class='list_top'>
+                                <view class='palce_name'>
+                                    球局名称球局名称球局名称
+                                </view>
+                                <i class="sanj1"></i>
+                                <view class='palce_num1'>确认中</view>
+                            </view>
+                            <view class='list_center'>
+                                <view class="palce_peo">发起人：张三</view>
+                                <view class='palce_time'>2018.08.15 11:26~16:30</view>
+                            </view>
+                            <view class='list_bottom'>
+                                <view class="palce_dz">球场：球场名称球场名称球场名称球场名称球场名称</view>
+                            </view>
+                        </view>
+                    </view>
+                    <!-- 已同意 -->
+                    <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
+                        <view class='list_xx'>
+                            <view class='list_top'>
+                                <view class='palce_name'>
+                                    球局名称球局名称球局名称
+                                </view>
+                                <i class="sanj"></i>
+                                <view class='palce_num'>已同意</view>
+                            </view>
+                            <view class='list_center'>
+                                <view class="palce_peo">发起人：张三</view>
+                                <view class='palce_time'>2018.08.15 11:26~16:30</view>
+                            </view>
+                            <view class='list_bottom'>
+                                <view class="palce_dz">球场：球场名称球场名称球场名称球场名称球场名称</view>
+                            </view>
+                        </view>
+                    </view>
+                    <!-- 已拒绝 -->
+                    <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
+                        <view class='list_xx'>
+                            <view class='list_top'>
+                                <view class='palce_name'>
+                                    球局名称球局名称球局名称
+                                </view>
+                                <i class="sanj3"></i>
+                                <view class='palce_num3'>已拒绝</view>
+                            </view>
+                            <view class='list_center'>
+                                <view class="palce_peo">发起人：张三</view>
+                                <view class='palce_time'>2018.08.15 11:26~16:30</view>
+                            </view>
+                            <view class='list_bottom'>
+                                <view class="palce_dz">球场：球场名称球场名称球场名称球场名称球场名称</view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
 </view>
- 
-<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:1000px;width:100%">
-  <swiper-item>
-    全部
-  </swiper-item>
-  <swiper-item>
-    已同意
-  </swiper-item>
-  <swiper-item>
-    已拒绝
-  </swiper-item>
-</swiper>

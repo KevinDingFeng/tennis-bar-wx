@@ -1,0 +1,85 @@
+/* pages/my/myXX/myXX.wxss */
+.user_xx{
+    width: 100%;
+    margin-top: 17rpx;
+    background-color: #fff;
+}
+.user_jbxx{
+    display: flex;
+    flex-direction: row;
+    padding: 36rpx 24rpx;
+    font-size: 28rpx;
+    border-bottom: 1px solid #ddd;
+}
+.user_name{
+    width: 90%;
+    text-align: right;
+    color: #959595;
+}
+.user_age{
+    width: 85%;
+    text-align: right;
+    color: #959595;
+}
+.user_sex{
+    width: 89%;
+    text-align: right;
+    color: #959595;
+}
+.user_type{
+    width: 80%;
+}
+.type_1{
+    border-radius: 20rpx;
+	border: solid 1px #56a41f; 
+    padding: 11rpx 25rpx;
+    margin-top: -11rpx;
+}
+.user_work{
+    width: 94%;
+    margin-top: 17rpx;
+    background-color: #fff;
+    padding: 26rpx 23rpx;
+    font-size: 28rpx;
+    border-bottom: 1px solid #ddd;
+}
+.work_xx{
+    margin-top: 22rpx;
+    width: 100%;
+    height: 100rpx;
+}
+.user_phone{
+    width: 94%;
+    margin-top: 17rpx;
+    background-color: #fff;
+    padding: 26rpx 23rpx;
+    font-size: 28rpx;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    flex-direction: row;
+}
+.phone_name{
+    line-height: 73rpx;
+}
+.phone_num{
+    text-align: right;
+    width: 53%;
+    line-height: 73rpx;
+}
+.phone_sty{
+    background-color: #56a41f;
+	border-radius: 10rpx;
+    margin-left: 24rpx;
+    padding: 16rpx 40rpx;
+    color: #fff;
+}
+.btn_cu{
+    width: 102%;
+    position: fixed;
+    bottom: 0;
+}
+.btn_cu>button{
+    background-color: #56a41f;
+    color: #fff;
+    text-align: center;
+}

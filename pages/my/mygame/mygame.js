@@ -97,21 +97,5 @@ Page({
         currentTab: e.target.dataset.current
       })
     }
-  },
-
-  joinGameDetail: function (e) {
-    let game = e.currentTarget.dataset.game;
-    wx.navigateTo({
-      url: './joingame/joingame?game='+JSON.stringify(game),
-    })
-  },
-
-  releaseGameDetail:function(e){
-    let game = e.currentTarget.dataset.game;
-    wx.navigateTo({
-      url: './releasegame/releasegame?game='+JSON.stringify(game),
-    })
   }
-
-
 })
