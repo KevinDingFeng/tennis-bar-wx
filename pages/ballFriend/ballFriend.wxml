@@ -27,32 +27,30 @@
     </view>
     <!-- 球友列表 -->
     <view class='friend_list'>
-        <view class='list_xx' bindtap='friend_xx'>
+        <view class='list_xx' bindtap='friend_xx' wx:for="{{ballFriend}}" wx:for-item="bfItem" wx:key="bfKey" data-ballfriend="{{bfItem.id}}">
+            <block wx:if="{{wxUserInfoId == bfItem.oneWxUserId}}">
             <!-- 微信头像 -->
             <view class='peo_img'>
-                <image src="../../images/index/banner.png"></image>
+                <image  src="{{bfItem.anotherWxUser.avatarUrl ? bfItem.anotherWxUser.avatarUrl : '../../images/index/banner.png'}}"></image>
             </view>
             <!-- 昵称 -->
             <view class='peo_nickname'>
-                <text>微信昵称</text>
+                <text>{{bfItem.anotherWxUser.nickName}}</text>
             </view>
-            <!-- 参与场次 -->
-            <view class='peo-cc'>
-                <text>参与 N 场</text>
-            </view>
-        </view>
-        <view class='list_xx'>
+            </block>
+            <block wx:if="{{wxUserInfoId == bfItem.anotherWxUserId}}">
             <!-- 微信头像 -->
             <view class='peo_img'>
-                <image src="../../images/index/banner.png"></image>
+                <image  src="{{bfItem.oneWxUserId.avatarUrl ? bfItem.oneWxUserId.avatarUrl : '../../images/index/banner.png'}}"></image>
             </view>
             <!-- 昵称 -->
             <view class='peo_nickname'>
-                <text>微信昵称</text>
+                <text>{{bfItem.oneWxUser.nickName}}</text>
             </view>
+            </block>
             <!-- 参与场次 -->
             <view class='peo-cc'>
-                <text>参与 N 场</text>
+                <text>参与 {{bfItem.totalTimes}} 场</text>
             </view>
         </view>
     </view>

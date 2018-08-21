@@ -1,48 +1,56 @@
 <view class="container">
     <view class='firend_xx'>
         <view class='firend_top'>
-            <view class='firend_img'>
-                <image src="../../images/index/banner.png"></image>
-            </view>
-            <label class='firend_nickname'>微信昵称</label>
+            <block wx:if="{{familiarity.oneWxUserId == wxUserInfoId}}">
+              <view class='firend_img'>
+                  <image src="{{familiarity.anotherWxUser.avatarUrl ? familiarity.anotherWxUser.avatarUrl : '../../images/index/banner.png'}}"></image>
+              </view>
+              <label class='firend_nickname'>{{familiarity.anotherWxUser.nickName}}</label>
+            </block>
+            <block wx:else>
+              <view class='firend_img'>
+                  <image src="{{familiarity.oneWxUserId.avatarUrl ? familiarity.oneWxUserId.avatarUrl : '../../images/index/banner.png'}}"></image>
+              </view>
+              <label class='firend_nickname'>{{familiarity.oneWxUserId.nickName}}</label>
+            </block>
         </view>
         <view class='firend_center'>
             <view class='cen_left'>
                 <text>已参与</text>
                 <view>
-                    <text class='col_g'>N </text>场
+                    <text class='col_g'>{{data ? data.applyTimes : 0}} </text>场
                 </view>
             </view>
             <view class='cen_left'>
                 <text>已发起</text>
                 <view>
-                    <text class='col_g'>N </text>场
+                    <text class='col_g'>{{data ? data.organizeTimes : 0}} </text>场
                 </view>
             </view>
             <view class='cen_end'>
                 <text>与我共同打球</text>
                 <view>
-                    <text class='col_g'>N </text>场
+                    <text class='col_g'>{{familiarity.totalTimes}} </text>场
                 </view>
             </view>
         </view>
         <view class='firend_bottom'>
             <view class='cen_left'>
-                <text>已参与</text>
+                <text>打球频率</text>
                 <view>
-                    <text class='col_g'>N </text>场
+                    <text class='col_g'>{{evaluation? evaluation.playFrequency : '未填写'}} </text>
                 </view>
             </view>
             <view class='cen_left'>
-                <text>已发起</text>
+                <text>球龄</text>
                 <view>
-                    <text class='col_g'>N </text>场
+                    <text class='col_g'>{{evaluation? evaluation.playAge : '未填写'}} </text>
                 </view>
             </view>
             <view class='cen_end'>
-                <text>与我共同打球</text>
+                <text>球技等级</text>
                 <view>
-                    <text class='col_g'>N </text>场
+                    <text class='col_g'>{{evaluation? evaluation.skillLevel : '未填写'}} </text>
                 </view>
             </view>
         </view>
@@ -54,7 +62,7 @@
     </view>
      <!-- 球局信息 -->
     <view class='palce_xx'>
-        <view class='palce_list'  wx:for="{{games.content}}" wx:for-item="game" wx:key="**this" bindtap="applyJoinGame" data-game="{{game}}">
+        <view class='palce_list'  wx:for="{{list}}" wx:for-item="game" wx:key="**this" bindtap="applyJoinGame" data-game="{{game}}">
             <view class='list_top'>
                 <view class="palce_name">{{game.name}}</view>
                 <view class='palce_num'>{{game.totalNum}}缺{{game.totalNum - game.vacancyNum}}</view>

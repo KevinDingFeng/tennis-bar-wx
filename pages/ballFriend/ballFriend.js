@@ -5,8 +5,11 @@ Page({
      * 页面的初始数据
      */
     data: {
-        inputShowed: false,
-        inputVal: ""
+      inputShowed: false,
+      inputVal: "",
+      ballFriend: "",
+      pageNum: "",
+      wxUserInfoId: ""
     },
     showInput: function () {
         this.setData({
@@ -33,7 +36,30 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+      let that = this;
+      wx.setNavigationBarTitle({
+        title: '球友',
+      })
+      wx.request({
+        url: 'http://localhost:6677/api/wx_user_familiarity',
+        method: "GET",
+        header: {
+          "content-Type": "application/json"
+        },
+        success: function (res) {
+          //console.log(res.data);
+          if (res.data.code = "200") {
+            
+            that.setData({
+              ballFriend: res.data.data.list,
+              pageNum: res.data.data.pageNum,
+              inputVal: res.data.data.keyword,
+              wxUserInfoId: res.data.data.wxUserInfoId
+            })
 
+          }
+        }
+      })
     },
 
     /**
@@ -84,9 +110,9 @@ Page({
     onShareAppMessage: function () {
 
     },
-    friend_xx:function(){
-        wx.navigateTo({
-            url: '../friendxx/friendxx'
-        })
+    friend_xx:function(e){
+      wx.navigateTo({
+        url: '../friendxx/friendxx?id=' + e.currentTarget.dataset.ballfriend
+      })
     }
 })

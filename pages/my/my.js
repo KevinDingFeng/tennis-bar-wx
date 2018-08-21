@@ -12,7 +12,27 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+    	let that = this;
+        wx.setNavigationBarTitle({
+          title: '我的',
+        })
+        wx.request({
+          url: 'http://localhost:6677/api/wx_user_info',
+          method: "GET",
+          header: {
+            "content-Type": "application/json"
+          },
+          success: function (res) {
+            console.log(res.data);
+            if (res.data.code = "200") {
 
+              that.setData({
+                userInfo: res.data.data
+              })
+
+            }
+          }
+        })
     },
 
     /**

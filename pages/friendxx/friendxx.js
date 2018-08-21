@@ -5,32 +5,44 @@ Page({
      * 页面的初始数据
      */
     data: {
-        games: ''
+      
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        let that = this;
-        wx.setNavigationBarTitle({
-            title: '球局',
-        })
-        wx.request({
-            url: 'http://localhost:6677/game',
-            method: "GET",
-            header: {
-                "content-Type": "application/json"
-            },
-            success: function (res) {
-                console.log(res.data);
-                if (res.data.code = "200") {
-                    that.setData({
-                        games: res.data.data.page
-                    })
-                }
+      // console.log(options);
+      let that = this;
+      wx.setNavigationBarTitle({
+        title: '球友详情',
+      })
+      wx.request({
+        url: 'http://localhost:6677/api/wx_user_familiarity/' + options.id,
+        method: "GET",
+        header: {
+          "content-Type": "application/json"
+        },
+        success: function (res) {
+          console.log(res.data);
+          if (res.data.code = "200") {
+
+            that.setData({
+              familiarity: res.data.data.familiarity,
+              data: res.data.data.data,
+              evaluation: res.data.data.evaluation,
+              wxUserInfoId: res.data.data.wxUserInfoId
+
+            })
+            if (res.data.data.list){
+              that.setData({
+                list: res.data.data.list
+              })
             }
-        })
+            console.log(that.data.evaluation.skillLevel);
+          }
+        }
+      })
     },
 
     /**
