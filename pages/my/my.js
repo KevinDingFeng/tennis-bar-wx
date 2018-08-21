@@ -44,6 +44,17 @@ Page({
             url: './mygame/mygame',
         })
     },
+    joinapply: function () {
+      wx.navigateTo({
+        url: './joinapply/joinapply',
+      })
+    },
+    joinconfirm:function(){
+      wx.navigateTo({
+        url: './joinconfirm/joinconfirm',
+      })
+    },
+
     // 跳转基本信息
     my_xx: function () {
         wx.navigateTo({
