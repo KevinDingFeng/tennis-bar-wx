@@ -165,9 +165,11 @@ page{
     background: rgb(1, 1, 1);
     transition: all 2s;
     opacity: 0;
+    display: none;
 }
 .fullopacity{
     opacity: .5;
+    display: block;
 }
 .nav-son.active .content{
     color: #61beff;

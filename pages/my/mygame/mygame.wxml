@@ -28,7 +28,7 @@
         </navigator>
     </view>
 </view>
-<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:1000px;width:100%">
+<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:1000px;width:100%;margin-top:76rpx;">
     <swiper-item>
         <view wx:if="{{joinGame.length > 0}}">
             <view class='list_xx' wx:for="{{joinGame}}" wx:key="**this" wx:for-item="jgame">

@@ -1,86 +1,84 @@
-
-    <view>
-      <text>基本信息</text>
-      <view>
-        <view>{{game.name}}</view>
-        <view wx:if="{{game.gameStatus =='Completed'}}">已结束</view>
-        <view wx:elif="{{game.gameStatus =='Canceled'}}">已取消</view>
-        <view wx:else>即将开始</view>
-      </view>
-      <view>
-        <view>球局编号：</view>
-        <text>{{game.id}}</text>
-      </view>
-      <view>
-        <view>球局名称：</view>
-        <text>{{game.name}}</text>
-      </view>
-      <view>
-        <view>球局类型：</view>
-        <text>
-          <block wx:if="{{game.gameType == 'Entertainment' }}">
-            娱乐局
-          </block>
-          <block wx:else>
-            教学局
-          </block>
-        </text>
-      </view>
-      <view>
-        <view>打球时间：</view>
-        <text>{{game.startTime}}</text>~<text>{{game.endTime}}</text>
-      </view>
-      <view>
-        <view>是否公开：</view>
-        <text>
-          <block wx:if="{{game.isPublic}}">
-            公开
-          </block>
-          <block wx:else>
-            不公开
-          </block>
-        </text>
-      </view>
-      <view>
-        <view>球场：</view>
-        <text>{{game.court.name}}</text>
-      </view>
-      <view>
-        <view>地址：</view>
-        <text>{{game.court.address}}</text>
-      </view>
-      <view>
-        <view>电话：</view>
-        <text>{{game.court.telephone}}</text>
-      </view>
+<view class='container'>
+    <view class='ball_name'>
+        <text class='game_name'>球局名称{{game.name}}</text>
+        <view class='col_g f_wei'  wx:if="{{game.gameStatus =='Completed'}}">已结束</view>
+        <view class='col_g f_wei' wx:elif="{{game.gameStatus =='Canceled'}}">已取消</view>
+        <view class='col_g f_wei' wx:else>即将开始</view>
     </view>
-
-    <view>
-      <text>参与要求</text>
-      <view>球龄：{{game.playAge}}</view>
-      <view>球技：{{game.skillLevel}}</view>
-      <view>打球人数：{{game.totalNum}}</view>
-      <view>
-      性别：
-        <block wx:if="{{game.limitGender}}">{{game.femaleNum}}女{{game.maleNum}}男
-        </block>
-        <block wx:else>不限
-        </block>
-      </view>
-      <view>
-      预留位置：{{game.holderNum}}
-      </view>
-      <view>报名截止时间：{{game.deadlineTime}}</view>
-      <view>备注：{{game.remark}}</view>
+    <view class='ball_xx'>
+        <view class='xx_title f_wei'>基本信息</view>
+        <view class='xx_id'>
+            <view class='id_name'>球局编号</view>
+            <view>{{game.id}}</view>
+        </view>
+        <view class='xx_id'>
+            <view class='id_name'>打球时间</view>
+            <view>{{game.startTime}}-{{game.endTime}}</view>
+        </view>
+        <view class='xx_id'>
+            <view class='id_name'>球局类型</view>
+            <view  wx:if="{{game.gameType == 'Entertainment' }}">娱乐局</view>
+            <view wx:else>教学局</view>
+        </view>
+         <view class='xx_id'>
+            <view class='id_name'>是否公开</view>
+            <view  wx:if="{{game.isPublic}}">公开</view>
+            <view wx:else>不公开</view>
+        </view>
+        <view class='xx_id'>
+            <view class='id_name'>球场</view>
+            <view >{{game.court.name}}</view>
+        </view>
+        <view class='xx_id'>
+            <view class='id_name'>地址</view>
+            <view class='dz_name'>{{game.court.address}}</view>
+        </view>
+         <view class='xx_id'>
+            <view class='id_name'>电话</view>
+            <view class='dz_name'>{{game.court.telephone}}</view>
+        </view>
+        <view class='img_show'>
+            <image src="../../../../images/tabBar/ball_x.png"></image>
+            <image src="../../../../images/tabBar/ball_x.png"></image>
+            <image src="../../../../images/tabBar/ball_x.png"></image>
+        </view>
     </view>
-
-
-
-  
-
-
-
-
-
-
-
+    <view class='ball_join'>
+        <view class='join_title'>
+            <text class='game_name'>球局名称{{game.name}}</text>
+            <view class='col_g f_wei' >
+                {{game.totalNum}}缺{{game.totalNum - game.vacancyNum}}
+            </view>
+        </view>
+        <view class='wx_peo'>
+            <view class='peo_xx'>
+                <image src='../../../../images/tabBar/ball_x.png'></image>
+                <view>微信昵称</view>
+            </view>
+        </view>
+    </view>
+    <view class='ball_bottom'>
+        <view class='xx_title f_wei'>参与要求</view>
+        <view class='ball_require'>
+            <view class='require'>
+                <text>球龄</text>
+                <view class='col_g'>{{game.playAge}}</view>
+            </view>
+            <view class='require'>
+                <text>球技等级</text>
+                <view class='col_g'>{{game.skillLevel}}</view>
+            </view>
+            <view class='require'>
+                <text>打球人数</text>
+                <view class='col_g'>{{game.totalNum}}</view>
+            </view>
+            <view class='require no_bor'>
+                <text>性别</text>
+                <view class='col_g' wx:if="{{game.limitGender}}">{{game.femaleNum}}女{{game.maleNum}}男</view>
+                <view class='col_g'wx:else>不限</view>
+            </view>
+        </view>
+    </view>
+    <view class='registration_time'>报名截止时间：{{game.deadlineTime}}</view>
+    <view class='remark'>备注：{{game.remark}}</view>
+</view>

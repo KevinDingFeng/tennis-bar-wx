@@ -6,7 +6,10 @@
 <swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:1000px;width:100%">
   <swiper-item>
     <include src="../common.wxml" />
-    <button>邀请好友加入</button>
+    <view class='join_btn'>
+        <button class='join_firend'>邀请好友加入</button>
+        <button class='join_me' bindtap="joinGame" data-game="{{game}}">我要加入</button>
+    </view>
   </swiper-item>
 
   <swiper-item>
