@@ -1,63 +1,90 @@
 <view class="swiper-tab">
-    <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">我参与的球局</view>
+    <view class="swiper-tab-list ma_right {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">我参与的球局</view>
     <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">我发起的球局</view>
 </view>
- 
+<!-- 搜索 -->
+<view class="page__bd">
+    <view class="weui-search-bar">
+        <view class="weui-search-bar__form">
+            <view class="weui-search-bar__box">
+                <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                <input type="text" class="weui-search-bar__input" placeholder="球局名称/发起人/球场名称" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+                <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+                    <icon type="clear" size="14"></icon>
+                </view>
+            </view>
+            <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+                <icon class="weui-icon-search" type="search" size="14"></icon>
+                <view class="weui-search-bar__text">球局名称/发起人/球场名称</view>
+            </label>
+        </view>
+        <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+    </view>
+    <view class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0}}">
+        <navigator url="" class="weui-cell" hover-class="weui-cell_active">
+            <view class="weui-cell__bd">
+                <view>搜索内容</view>
+            </view>
+        </navigator>
+    </view>
+</view>
 <swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:1000px;width:100%">
     <swiper-item>
-      <view>
-        <block wx:if="{{joinGame.length > 0}}">
-          <block wx:for="{{joinGame}}" wx:key="**this" wx:for-item="jgame">
-            <view>
-              <view>
-                <view>{{jgame.game.name}}</view>
-                <view wx:if="{{jgame.game.gameStatus =='Completed'}}">已结束</view>
-                <view wx:elif="{{jgame.game.gameStatus =='Canceled'}}">已取消</view>
-                <view wx:else>即将开始</view>
-              </view>
-              <view>
-                <view>发起人：</view>
-                <view>{{jgame.game.organizer.nickName}}</view>
-                <view>{{jgame.game.startTime}} ~ {{jgame.game.endTime}}</view>
-              </view>
-              <view>
-                <view>球场：</view>
-                <view>{{jgame.game.court.name}}</view>
-              </view>
+        <view wx:if="{{joinGame.length > 0}}">
+            <view class='list_xx' wx:for="{{joinGame}}" wx:key="**this" wx:for-item="jgame">
+                <view class='list_top'>
+                    <view class='palce_name f_wei'>{{jgame.game.name}}</view>
+                    <i class="sanj"></i>
+                    <view class='palce_num'>
+                        <view wx:if="{{jgame.game.gameStatus =='Completed'}}">已结束</view>
+                        <view wx:elif="{{jgame.game.gameStatus =='Canceled'}}">已取消</view>
+                        <view wx:else>即将开始</view>
+                    </view>
+                </view>
+                <view class='list_center'>
+                    <view class="palce_peo">发起人：{{jgame.game.organizer.nickName}}</view>
+                    <view class='palce_time'>{{jgame.game.startTime}} ~ {{jgame.game.endTime}}</view>
+                </view>
+                <view class='list_bottom'>
+                    <view class="palce_dz">球场：{{jgame.game.court.name}}</view>
+                    <view class='palce_dh' bindtap="openLocation" data-latitude="{{game.court.latitude}}" data-longitude="{{game.court.longitude}}">
+                        <image src='../../../images/index/dw.png'></image>
+                        <text>导航</text>
+                    </view>
+                </view>
             </view>
-          </block>
-        </block>
-        <block wx:else>
-          暂无数据
-        </block>
-      </view>
+        </view>
+        <view wx:else>
+            暂无数据
+        </view>
     </swiper-item>
     <swiper-item>
-      <view>
-        <block wx:if="{{releaseGame.length > 0}}">
-          <block wx:for="{{releaseGame}}" wx:key="**this" wx:for-item="rgame">
-            <view>
-              <view>
-                <view>{{rgame.name}}</view>
-                <view wx:if="{{rgame.gameStatus =='Completed'}}">已结束</view>
-                <view wx:elif="{{rgame.gameStatus =='Canceled'}}">已取消</view>
-                <view wx:else>即将开始</view>
-              </view>
-              <view>
-                <view>发起人：</view>
-                <view>{{rgame.organizer.nickName}}</view>
-                <view>{{rgame.startTime}} ~ {{rgame.endTime}}</view>
-              </view>
-              <view>
-                <view>球场：</view>
-                <view>{{rgame.court.name}}</view>
-              </view>
+        <view wx:if="{{joinGame.length > 0}}">
+            <view class='list_xx' wx:for="{{joinGame}}" wx:key="**this" wx:for-item="jgame">
+                <view class='list_top'>
+                    <view class='palce_name f_wei'>{{jgame.game.name}}</view>
+                    <i class="sanj"></i>
+                    <view class='palce_num'>
+                        <view wx:if="{{jgame.game.gameStatus =='Completed'}}">已结束</view>
+                        <view wx:elif="{{jgame.game.gameStatus =='Canceled'}}">已取消</view>
+                        <view wx:else>即将开始</view>
+                    </view>
+                </view>
+                <view class='list_center'>
+                    <view class="palce_peo">发起人：{{jgame.game.organizer.nickName}}</view>
+                    <view class='palce_time'>{{jgame.game.startTime}} ~ {{jgame.game.endTime}}</view>
+                </view>
+                <view class='list_bottom'>
+                    <view class="palce_dz">球场：{{jgame.game.court.name}}</view>
+                    <view class='palce_dh' bindtap="openLocation" data-latitude="{{game.court.latitude}}" data-longitude="{{game.court.longitude}}">
+                        <image src='../../../images/index/dw.png'></image>
+                        <text>导航</text>
+                    </view>
+                </view>
             </view>
-          </block>
-        </block>
-        <block wx:else>
-          暂无数据
-        </block>
-      </view>
+        </view>
+        <view wx:else>
+            暂无数据
+        </view>
     </swiper-item>
 </swiper>

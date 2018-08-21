@@ -1,13 +1,14 @@
 {
   "pages":[
+    "pages/my/mygame/mygame",
+    "pages/my/my",
+    "pages/my/myXX/myXX",
     "pages/index/index",
     "pages/activity/join/join",
     "pages/activity/apply/apply",
-    "pages/my/my",
     "pages/ballFriend/ballFriend",
     "pages/friendxx/friendxx",
     "pages/activity/activity",
-    "pages/my/mygame/mygame",
     "pages/my/mygame/joingame/joingame",
     "pages/my/mygame/releasegame/releasegame",
     "pages/my/joinconfirm/joinconfirm",
@@ -19,9 +20,9 @@
   ],
   "window":{
     "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#56a41f",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle":"white"
   },
   "tabBar": {
     "color": "#7A7E83",
