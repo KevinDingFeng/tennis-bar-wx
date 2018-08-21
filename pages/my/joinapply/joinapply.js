@@ -1,21 +1,27 @@
 // pages/my/joinapply/joinapply.js
 var sliderWidth = 115; // 需要设置slider的宽度，用于计算中间位置
+var init_status ="Agree";
 Page({
     /**
      * 页面的初始数据
      */
     data: {
         tabs: ["全部", "已同意", "已拒绝"],
+        params:["All","Agree","Refuse"],
         activeIndex: 1,
         sliderOffset: 0,
-        sliderLeft: 0
+        sliderLeft: 0,
+        applys:''
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function () {
-        var that = this;
+        let that = this;
+        wx.setNavigationBarTitle({
+          title: '加入申请',
+        })
         wx.getSystemInfo({
             success: function (res) {
                 that.setData({
@@ -24,8 +30,20 @@ Page({
                 });
             }
         });
+      // 获取加入申请列表
+      this.getApplyJoinmGames(2, init_status);
     },
+
     tabClick: function (e) {
+        let status = e.currentTarget.dataset.status;
+        let that = this;
+        if (wx.getStorageSync(status)) {
+          that.setData({
+            applys: wx.getStorageSync(status)
+          })
+        } else {
+          that.getApplyJoinmGames(2, status);
+        }
         this.setData({
             sliderOffset: e.currentTarget.offsetLeft,
             activeIndex: e.currentTarget.id
@@ -45,19 +63,6 @@ Page({
 
     },
 
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function () {
-
-    },
 
     /**
      * 页面相关事件处理函数--监听用户下拉动作
@@ -74,9 +79,30 @@ Page({
     },
 
     /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function () {
+      * 获取 加入申请列表
+      */
+    getApplyJoinmGames: function (wxUserInfoId, status) {
+      let that = this;
+      // 获取加入申请列表
+      wx.request({
+        url: 'http://localhost:6677/join/applys',
+        method: "POST",
+        data: {
+          "wxUserInfoId": wxUserInfoId,
+          "status": status
+        },
+        header: {
+          "content-Type": "application/json"
+        },
+        success: function (res) {
+          if (res.data.code == "200") {
+            that.setData({
+              applys: res.data.data.applys
+            })
+            wx.setStorageSync(status, res.data.data.applys);
+          }
+        }
+      })
+    },
 
-    }
 })
