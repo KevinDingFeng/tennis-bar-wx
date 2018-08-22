@@ -1,21 +1,26 @@
-// pages/my/joinapply/joinapply.js
+// pages/my/joinconfirm/joinconfirm.js
 var sliderWidth = 115; // 需要设置slider的宽度，用于计算中间位置
+var init_status = "WaitingConfirm";
 Page({
     /**
      * 页面的初始数据
      */
     data: {
         tabs: ["全部", "待确认", "已确认"],
-        params: ["All", "Agree", "Refuse"],
+        params: ["All", "WaitingConfirm", "Agree"],
         activeIndex: 1,
         sliderOffset: 0,
-        sliderLeft: 0
+        sliderLeft: 0,
+        confirms:''
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function () {
+        wx.setNavigationBarTitle({
+          title: '加入确认',
+        })
         var that = this;
         wx.getSystemInfo({
             success: function (res) {
@@ -25,12 +30,23 @@ Page({
                 });
             }
         });
+        // 获取加入申请确认列表
+        that.getConfirmJoinGames(1,init_status);
     },
     tabClick: function (e) {
-        this.setData({
-            sliderOffset: e.currentTarget.offsetLeft,
-            activeIndex: e.currentTarget.id
-        });
+      let status = e.currentTarget.dataset.status;
+      let that = this;
+      if (wx.getStorageSync(status)) {
+        that.setData({
+          confirms: wx.getStorageSync(status)
+        })
+      } else {
+        that.getConfirmJoinGames(1, status);
+      }
+      this.setData({
+        sliderOffset: e.currentTarget.offsetLeft,
+        activeIndex: e.currentTarget.id
+      });
     },
     /**
      * 生命周期函数--监听页面初次渲染完成
@@ -78,6 +94,36 @@ Page({
      * 用户点击右上角分享
      */
     onShareAppMessage: function () {
+
+    },
+
+    /**
+     * 发布者获取 球局申请列表
+     */
+    getConfirmJoinGames: function (organizerId,status){
+      let that = this;
+      // 获取加入申请列表
+      wx.request({
+        url: 'http://localhost:6677/join/confirms',
+        method: "POST",
+        data: {
+          "organizerId": organizerId,
+          "status": status
+        },
+        header: {
+          "content-Type": "application/json"
+        },
+        success: function (res) {
+          if (res.data.code == "200") {
+            console.log(res.data.data.confirms);
+            that.setData({
+              confirms: res.data.data.confirms
+            })
+            wx.setStorageSync(status, res.data.data.confirms);
+          }
+        }
+      })
+
 
     }
 })

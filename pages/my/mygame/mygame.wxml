@@ -1,6 +1,7 @@
 <view class="swiper-tab">
     <view class="swiper-tab-list ma_right {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">我参与的球局</view>
-    <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">我发起的球局</view>
+    <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" 
+bindtap="swichNav">我发起的球局</view>
 </view>
 <!-- 搜索 -->
 <view class="page__bd">
@@ -59,23 +60,23 @@
         </view>
     </swiper-item>
     <swiper-item>
-        <view wx:if="{{joinGame.length > 0}}">
-            <view class='list_xx' wx:for="{{joinGame}}" wx:key="**this" wx:for-item="jgame">
+        <view wx:if="{{releaseGame.length > 0}}">
+            <view class='list_xx' wx:for="{{releaseGame}}" wx:key="**this" wx:for-item="game">
                 <view class='list_top'>
-                    <view class='palce_name f_wei'>{{jgame.game.name}}</view>
+                    <view class='palce_name f_wei'>{{game.name}}</view>
                     <i class="sanj"></i>
                     <view class='palce_num'>
-                        <view wx:if="{{jgame.game.gameStatus =='Completed'}}">已结束</view>
-                        <view wx:elif="{{jgame.game.gameStatus =='Canceled'}}">已取消</view>
+                        <view wx:if="{{game.gameStatus =='Completed'}}">已结束</view>
+                        <view wx:elif="{{game.gameStatus =='Canceled'}}">已取消</view>
                         <view wx:else>即将开始</view>
                     </view>
                 </view>
                 <view class='list_center'>
-                    <view class="palce_peo">发起人：{{jgame.game.organizer.nickName}}</view>
-                    <view class='palce_time'>{{jgame.game.startTime}} ~ {{jgame.game.endTime}}</view>
+                    <view class="palce_peo">发起人：{{game.organizer.nickName}}</view>
+                    <view class='palce_time'>{{game.startTime}} ~ {{game.endTime}}</view>
                 </view>
                 <view class='list_bottom'>
-                    <view class="palce_dz">球场：{{jgame.game.court.name}}</view>
+                    <view class="palce_dz">球场：{{game.court.name}}</view>
                     <view class='palce_dh' bindtap="openLocation" data-latitude="{{game.court.latitude}}" data-longitude="{{game.court.longitude}}">
                         <image src='../../../images/index/dw.png'></image>
                         <text>导航</text>

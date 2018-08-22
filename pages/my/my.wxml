@@ -2,9 +2,9 @@
     <view class='firend_xx'>
         <view class='firend_top'>
             <view class='firend_img'>
-                <image src="../../images/index/banner.png"></image>
+                <image src="{{userInfo.avatarUrl? userInfo.avatarUrl: '../../images/index/banner.png'}}"></image>
             </view>
-            <label class='firend_nickname'>微信昵称</label>
+            <label class='firend_nickname'>{{userInfo.nickName}}</label>
         </view>
     </view>
     <view class='my_list'>
