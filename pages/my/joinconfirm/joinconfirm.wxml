@@ -13,44 +13,69 @@
                 <view class="weui-tab__panel">
                     <!-- 全部 -->
                     <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+                      <block wx:if="{{confirms.content.length > 0}}">
+                        <block wx:for="{{confirms.content}}" wx:key="**this" wx:for-item="confirm">
+                          <view class='list_xx'>
+                            <view class='list_top'>
+                                <view class='palce_name'>{{confirm.game.name}}</view>
+                                <i class="sanj"></i>
+                                <view class='palce_num'>
+                                  <block wx:if="{{confirm.applyJoinGameStatus =='WaitingConfirm' }}">待确认</block>
+                                  <block wx:if="{{confirm.applyJoinGameStatus =='Agree' }}">已确认</block>
+                                </view>
+                            </view>
+                            <view class='list_center'>
+                                <view class="palce_peo">发起人：{{confirm.game.organizer.nickName}}</view>
+                                <view class='palce_time'>{{confirm.game.startTime}}-{{confirm.game.endTime}}</view>
+                            </view>
+                            <view class='list_bottom'>
+                                <view class="palce_dz">球场：{{confirm.game.court.name}}</view>
+                            </view>
+                          </view>
+                        </block>
+                      </block>
                     </view>
                     <!-- 已同意 -->
                     <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
-                        <view class='list_xx'>
+                      <block wx:if="{{confirms.content.length > 0}}">
+                        <block wx:for="{{confirms.content}}" wx:key="**this" wx:for-item="confirm">
+                          <view class='list_xx'>
                             <view class='list_top'>
-                                <view class='palce_name'>
-                                    球局名称球局名称球局名称
-                                </view>
+                                <view class='palce_name'>{{confirm.game.name}}</view>
                                 <i class="sanj"></i>
                                 <view class='palce_num'>待确认</view>
                             </view>
                             <view class='list_center'>
-                                <view class="palce_peo">发起人：张三</view>
-                                <view class='palce_time'>2018.08.15 11:26~16:30</view>
+                                <view class="palce_peo">发起人：{{confirm.game.organizer.nickName}}</view>
+                                <view class='palce_time'>{{confirm.game.startTime}}-{{confirm.game.endTime}}</view>
                             </view>
                             <view class='list_bottom'>
-                                <view class="palce_dz">球场：球场名称球场名称球场名称球场名称球场名称</view>
+                                <view class="palce_dz">球场：{{confirm.game.court.name}}</view>
                             </view>
-                        </view>
+                          </view>
+                        </block>
+                      </block>
                     </view>
                     <!-- 已拒绝 -->
                     <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
-                        <view class='list_xx'>
+                      <block wx:if="{{confirms.content.length > 0}}">
+                        <block wx:for="{{confirms.content}}" wx:key="**this" wx:for-item="confirm">
+                          <view class='list_xx'>
                             <view class='list_top'>
-                                <view class='palce_name'>
-                                    球局名称球局名称球局名称
-                                </view>
+                                <view class='palce_name'>{{confirm.game.name}}</view>
                                 <i class="sanj1"></i>
                                 <view class='palce_num1'>已确认</view>
                             </view>
                             <view class='list_center'>
-                                <view class="palce_peo">发起人：张三</view>
-                                <view class='palce_time'>2018.08.15 11:26~16:30</view>
+                                <view class="palce_peo">发起人：{{confirm.game.organizer.nickName}}</view>
+                                <view class='palce_time'>{{confirm.game.startTime}}-{{confirm.game.endTime}}</view>
                             </view>
                             <view class='list_bottom'>
-                                <view class="palce_dz">球场：球场名称球场名称球场名称球场名称球场名称</view>
+                                <view class="palce_dz">球场：{{confirm.game.court.name}}</view>
                             </view>
-                        </view>
+                          </view>
+                        </block>
+                      </block>
                     </view>
                 </view>
             </view>
