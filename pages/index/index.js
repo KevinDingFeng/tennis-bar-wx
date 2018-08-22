@@ -194,26 +194,26 @@ Page({
             px_time: e.detail.value
         })
     },
-    getUserInfo: function (e) {
-        console.log(e)
-        app.globalData.userInfo = e.detail.userInfo
-        this.setData({
-            userInfo: e.detail.userInfo,
-            hasUserInfo: true
-        })
-        wx.request({
-            url: "https://tennis.dazonghetong.com/api/wx_user_info",//根据全局变量token获取后台储存的微信用户信息
-            header: {
-                'tennisToken': app.globalData.tennisToken
-            },
-            data: {
+    // getUserInfo: function (e) {
+    //     console.log(e)
+    //     app.globalData.userInfo = e.detail.userInfo
+    //     this.setData({
+    //         userInfo: e.detail.userInfo,
+    //         hasUserInfo: true
+    //     })
+    //     wx.request({
+    //         url: "https://tennis.dazonghetong.com/api/wx_user_info",//根据全局变量token获取后台储存的微信用户信息
+    //         header: {
+    //             'tennisToken': app.globalData.tennisToken
+    //         },
+    //         data: {
 
-            },
-            success: function (res) {
-                console.log(res);
-            }
-        })
-    },
+    //         },
+    //         success: function (res) {
+    //             console.log(res);
+    //         }
+    //     })
+    // },
     // 查看球场地址详情
     openLocation: function (event) {
         let latitude = event.currentTarget.dataset.latitude;

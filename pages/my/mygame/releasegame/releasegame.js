@@ -37,23 +37,38 @@ Page({
   onShow: function () {
   
   },
-
+  
   /**
    * 发布人 取消球局
    */
   cancelGame:function(e){
     let id = e.currentTarget.dataset.id;
-    wx.request({
-      url: '',
-      method:"POST",
-      data:{
-
-      },
-      header: {
-        "content-type": "application/x-www-form-urlencodedn"
+    wx.showModal({
+      title: '取消球局',
+      content: '是否取消球局',
+      success:function(res){
+        if(res.confirm){
+          wx.request({
+            url: 'http://localhost:6677/game/cancel',
+            method: "POST",
+            data: { "id": id },
+            header: {
+              "content-type": "application/json"
+            },
+            success: function (res) {
+              if (res.data.code == "200") {
+                wx.navigateBack({})
+              }else{
+                wx.showToast({
+                  title: res.data.data,
+                  icon:'none',
+                })
+              }
+            }
+          })
+        }
       },
     })
-
-
-  }
+  },
+  
 })

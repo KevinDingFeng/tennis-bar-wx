@@ -77,14 +77,16 @@ Page({
         url: "http://localhost:6677/join/query?organizerId=" + userId + "&type=" + types,
         method: "GET",
         header: {
-          "content-Type": "application/json"
+          "content-Type": "application/json",
+          "page":0,
+          "pageSize":10
         },
         success: function (res) {
           if (res.data.code == "200") {
             that.setData({
               games: res.data.data.page,
             })
-            wx.setStorageSync(types, res.data.data.page);
+            // wx.setStorageSync(types, res.data.data.page);
           }
         }
       })
@@ -99,13 +101,13 @@ Page({
         if (this.data.currentTab === e.target.dataset.current) {
             return false;
         } else {
-          if(wx.getStorageSync(types)){
-            that.setData({
-              games: wx.getStorageSync(types)
-            })
-          }else{
+          // if(wx.getStorageSync(types)){
+          //   that.setData({
+          //     games: wx.getStorageSync(types)
+          //   })
+          // }else{
             this.getMyGames(2,types);
-          }
+          // }
           that.setData({
               currentTab: e.target.dataset.current
           })
