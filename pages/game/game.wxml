@@ -1,41 +1,108 @@
-<view id="addgame">
-    <text>基本信息</text>
-    <form bindsubmit="formSubmit" bindreset="formReset">
-         <view class="section">
-            <view class="section__title">*球局名称:</view>
-            <view class='form-group'>
-              <input type="text" class="input-text" name="name" placeholder="请输入球局名称" />
-            </view>    
+<view class='container'>
+    <view class='fb_ball'>
+        <view class='jb_xx'>
+            <view class='xx_g'></view>
+            <view>基本信息</view>
         </view>
-        <view class="section section_gap">
-            <view class="section__title">*打球时间:</view>
-            <view class='form-group'>
-              <input type="text" class="input-text" name="startTime" placeholder="开始时间"></input>
-              至
-              <input type="text" class="input-text" name="endTime" placeholder="结束时间"></input>
-            </view>    
+        <view class='ball_xx'>
+            <view>* 球局信息</view>
+            <input class='ball_name' placeholder='10字以内'></input>
         </view>
-        <view class="section section_gap">
-            <view class="section__title">*球局类型:</view>
-            <view class='form-group'>
-                <radio-group name="gameType">
-                  <label><radio value="Entertainment" checked='checked'/>娱乐局</label>
-                  <label><radio value="Teaching"/>教学</label>
-                </radio-group>
-            </view>    
+        <view class='ball_xx bor_top'>
+            <view>* 球场</view>
+            <text class='ball_cc' bindtap='ball_cc'>请输入球场名称/球场地址关键字</text>
         </view>
-        <view class="section section_gap">
-            <view class="section__title">是否公开:</view>
-            <view class='form-group'>
-                <radio-group name="isPublic">
-                  <label><radio value="true" checked='checked' />公开</label>
-                  <label><radio value="false"/>私有</label>
-                </radio-group>
-            </view>    
+        <view class='ball_xx mar_top'>
+            <view>* 打球开始时间</view>
+            <view class='start_time'>
+                <picker mode="multiSelector" bindchange="changeDateTime1" bindcolumnchange="changeDateTimeColumn1" value="{{dateTime1}}" range="{{dateTimeArray1}}" >
+                    <view wx:if="{{!cc}}"  class="tui-picker-detail">
+                        {{dateTimeArray1[0][dateTime1[0]]}}-{{dateTimeArray1[1][dateTime1[1]]}}-{{dateTimeArray1[2][dateTime1[2]]}} {{dateTimeArray1[3][dateTime1[3]]}}:{{dateTimeArray1[4][dateTime1[4]]}}
+                    </view>
+                    <view wx:else  class="tui-picker-detail">
+                        请选择开始时间
+                    </view>
+                </picker>
+            </view>
         </view>
-        <view class="section btn-area">
-            <button formType="submit">下一步</button>
+        <view class='ball_xx  bor_top'>
+            <view>* 打球结束时间</view>
+            <view class='end_time'>
+                <picker mode="multiSelector" bindchange="changeDateTime2" bindcolumnchange="changeDateTimeColumn2" value="{{dateTime2}}" range="{{dateTimeArray2}}">
+                    <view wx:if="{{!cc1}}"  class="tui-picker-detail">
+                        {{dateTimeArray2[0][dateTime2[0]]}}-{{dateTimeArray2[1][dateTime2[1]]}}-{{dateTimeArray2[2][dateTime1[2]]}} {{dateTimeArray2[3][dateTime2[3]]}}:{{dateTimeArray2[4][dateTime2[4]]}}
+                    </view>
+                    <view wx:else  class="tui-picker-detail">
+                        请选择结束时间
+                    </view>
+                </picker>
+            </view>
         </view>
-    </form>
-
+         <view class='ball_type mar_top'>
+            <view class='type_name'>* 球局类型</view>
+            <view class="type_sty mar_ri {{istype == true ? 'active' : 'no_active' }}">娱乐局</view>
+            <view class="type_sty {{istype != true ? 'active' : 'no_active' }}">教学</view>
+        </view>
+        <view class='ball_type mar_top'>
+            <view class='type_name ' >* 是否公开</view>
+            <view class="type_sty mar_ri  {{isopen == true ? 'active' : 'no_active' }}">公开</view>
+            <view class="type_sty {{isopen != true ? 'active' : 'no_active' }}">不公开</view>
+        </view>
+        <view class='btn_xia'> 
+            <button class="weui-btn" type="primary">下一步</button>
+        </view>
+        <!-- 遮盖层 -->
+        <view class="fullbg {{isfull ?'fullopacity':''}}" bindtap="hidebg"></view>
+        <!-- 场地 -->
+        <view class="c_di {{isfull ?'ds_b':''}}">
+            <view class='ball_g'>搜索球馆</view>
+            <icon class='icon_search' type="search" size="12"></icon>
+            <input class='ball_inp' placeholder='球场名称'></input>
+            <view class='Venue'>
+                <view class='ball_venue'>
+                    <view>1.球馆名称</view>
+                    <view class='ball_guan'>
+                        <view class='guan_name'>
+                            网球馆地址网球馆地址网球馆地址网球馆地址网球网球馆地址
+                        </view>
+                        <view class='palce_dh'>
+                            <image src='../../images/index/dw.png'></image>
+                            <text>导航</text>
+                        </view>
+                    </view>
+                    <view class='palce_phone'>010-98989898</view>
+                </view>
+                <view class='ball_venue'>
+                    <view>2.球馆名称</view>
+                    <view class='ball_guan'>
+                        <view class='guan_name'>
+                            网球馆地址网球馆地址网球馆地址网球馆地址网球网球馆地址
+                        </view>
+                        <view class='palce_dh'>
+                            <image src='../../images/index/dw.png' ></image>
+                            <text>导航</text>
+                        </view>
+                    </view>
+                    <view class='palce_phone'>010-98989898</view>
+                </view>
+                <view class='ball_venue'>
+                    <view>3.球馆名称</view>
+                    <view class='ball_guan'>
+                        <view class='guan_name'>
+                            网球馆地址网球馆地址网球馆地址网球馆地址网球网球馆地址
+                        </view>
+                        <view class='palce_dh'>
+                            <image src='../../images/index/dw.png'></image>
+                            <text>导航</text>
+                        </view>
+                    </view>
+                    <view class='palce_phone'>010-98989898</view>
+                </view>
+            </view>
+            <view class='Venue_bottom'>
+                <view>没找到想要的网球馆？</view>
+                <view>联系客服   010-101012020</view>
+            </view>
+        </view>
+    </view>
 </view>

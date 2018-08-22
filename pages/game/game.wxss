@@ -1,27 +1,193 @@
-#addgame{
-    background: #f5f5f5;
+.fb_ball{
+    width: 100%;
+    margin-top: 30rpx;
+    padding: 0 22rpx;
+    position: relative;
 }
-.section__title{
-    float: left;
-    width:30%;
+
+.jb_xx{
+    display: flex;
+    flex-direction: row;
+    font-size: 30rpx;
+    padding: 0 22rpx;
+    margin-bottom: 21rpx;
 }
-.form-group{
-    float: right;
-    width: 70%;
+.xx_g{
+    width: 5rpx;
+	height: 38rpx;
+	background-color: #56a41f;
+    margin-right: 14rpx;
 }
-.section{
-    clear: both;
-    width:90%;
-    margin: 2rem auto;
-}
-.input-text{
+.ball_xx{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    font-size: 28rpx;
     border: 1px solid #ddd;
+    background-color: #fff;
+    padding: 22rpx 22rpx;
 }
-.button{
-    border: 1px solid #1aad19;
-    border-radius: 2px;
+.ball_name{
+    margin-left: 41%;
+    margin-top: -3rpx;
 }
-.picker{
-    padding: 13px;
-    background-color: #FFFFFF;
+.bor_top{
+    border-top: none;
+}
+.mar_top{
+    margin-top: 18rpx;
+}
+.ball_cc{
+    font-size: 28rpx;
+    margin-left: 29%;
+    color: #959595;
+}
+.start_time{
+    width: 67%;
+    text-align: right;
+    font-size: 28rpx;
+    color: #959595;
+}
+.end_time{
+    width: 67%;
+    text-align: right;
+    font-size: 28rpx;
+    color: #959595;
+}
+.type_sty{
+    width: 163rpx;
+    border-radius: 10px;
+	border: solid 1px #959595;
+    padding: 21rpx 0;
+    text-align: center;
+}
+.mar_ri{
+    margin-right: 21rpx;
+}
+.active{
+    background-color: #56a41f;
+    color: #fff;
+}
+.no_active{
+    background-color: #fff;
+    color: #000;
+}
+.ball_type{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    font-size: 28rpx;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    padding: 12rpx 22rpx;
+}
+.type_name{
+    margin-top: 20rpx;
+    margin-right: 218rpx;
+}
+.btn_xia{
+    width: 94%;
+    margin: 0 20rpx;
+    margin-top: 68rpx;
+}
+/* 遮盖层 */
+.fullbg{
+    position: fixed;
+    top:0;
+    z-index: 99;
+    width: 100%;
+    height: 100%;
+    background: rgb(1, 1, 1);
+    transition: all 2s;
+    opacity: 0;
+    display: none;
+}
+.fullopacity{
+    opacity: .5;
+    display: block;
+}
+.c_di{
+    width: 100%;
+    background-color: #fff;
+    position: absolute;
+    top: 17%;
+    padding-top: 28rpx;
+    display: none;
+    z-index: 999;
+}
+.ds_b{
+    transform:  translateY(10%);
+    display: block;
+}
+.ball_g{
+    font-size: 28rpx;
+    color: #56a41f;
+    font-weight: 700;
+    text-align: center;
+}
+.ball_inp{
+    width: 80%;
+    border-radius: 10rpx;
+	border: solid 1px #e4e4e4; 
+    margin: 0 22rpx;
+    margin-top: 22rpx;
+    padding-left: 50rpx;
+    font-size: 24rpx;
+    position: relative;
+}
+.icon_search{
+    position: absolute;
+    top:109rpx;
+    left:36rpx;
+}
+.Venue{
+    margin: 28rpx 0;
+    padding: 0 21rpx;
+    padding-bottom: 20rpx;
+    height: 600rpx;
+    overflow: auto;
+}
+.ball_venue{
+    font-size: 24rpx;
+    
+}
+.ball_guan{
+    margin-left: 19rpx;
+    margin-top: 23rpx;
+    display: flex;
+    flex-direction: row;
+}
+.guan_name{
+    width: 73%;
+}
+.palce_dh{
+    display: inline-block;
+    font-size: 20rpx;
+    color: #56a41f;
+    width: 20%;
+    text-align: right;
+    position: relative;
+}
+.palce_dh>image{
+    width: 60rpx;
+	height: 60rpx;
+    position: absolute;
+    margin-top:-19rpx;
+    right:35rpx;
+}
+.palce_phone{
+    margin-top: 10rpx;
+    margin-left: 19rpx;
+    margin-bottom: 30rpx;
+}
+.Venue_bottom{
+    padding-top: 20rpx;
+    height: 100rpx;
+    background-color: #fff;
+    width: 100%;
+    color: #efa719;
+    font-size: 20rpx;
+    text-align: center;
+    position: fixed;
+    bottom: -50rpx;
 }
