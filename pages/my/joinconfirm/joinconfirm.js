@@ -6,6 +6,7 @@ Page({
      */
     data: {
         tabs: ["全部", "待确认", "已确认"],
+        params: ["All", "Agree", "Refuse"],
         activeIndex: 1,
         sliderOffset: 0,
         sliderLeft: 0
