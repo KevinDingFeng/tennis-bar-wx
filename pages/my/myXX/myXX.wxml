@@ -2,7 +2,7 @@
     <view class='user_xx'>
         <view class='user_jbxx'>
             <view>昵称</view>
-            <view class='user_name'>昵称</view>
+            <view class='user_name'>{{wxUserInfo.nickName}}</view>
         </view>
         <view class='user_jbxx'>
             <view>* 年龄段</view>
@@ -23,7 +23,7 @@
         <view class='user_jbxx'>
             <view class='user_type'>身份</view>
             <view class='type_1'>
-                教练
+                {{wxUserInfo.position}}
             </view>
         </view>
         <view class='user_jbxx'>
@@ -37,12 +37,18 @@
     </view>
     <view class='user_work'>
         <view>职业</view>
-        <textarea class='work_xx' placeholder="您的职业，20字以内"></textarea>
+        <textarea class='work_xx' placeholder="{{wxUserInfo.occupation?'':'您的职业，20字以内'}}">{{wxUserInfo.occupation?wxUserInfo.occupation:""}}</textarea>
     </view>
     <view class='user_phone'>
         <view class='phone_name'>手机号</view>
-        <view class='phone_num'>18010101020</view>
-        <view class='phone_sty'>修改手机号</view>
+        <block wx:if="{{sysUser.cellphone}}">
+        <view class='phone_num'>{{sysUser.cellphone}}</view>
+        <view class='phone_sty' bindtap='updatePhone' data-phone="{{sysUser.cellphone}}">修改手机号</view>
+        </block>
+        <block wx:else>
+        <view class='phone_num'></view>
+        <view class='phone_sty' bindtap='updatePhone'>绑定手机号</view>
+        </block>
     </view>
     <view class='btn_cu'>
         <button>保存</button>

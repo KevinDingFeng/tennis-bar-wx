@@ -31,7 +31,27 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+      let that = this;
+      
+      wx.request({
+        url: 'http://localhost:6677/api/sys_user/detail',
+        method: "GET",
+        header: {
+          "content-Type": "application/json"
+        },
+        success: function (res) {
+          console.log(res.data);
+          if (res.data.code = "200") {
 
+            that.setData({
+              wxUserInfo: res.data.data.wxUserInfo,
+              sysUser: res.data.data.sysUser,
+              ageRangeList: res.data.data.ageRangeList
+            })
+
+          }
+        }
+      })
     },
 
     /**
@@ -81,5 +101,12 @@ Page({
      */
     onShareAppMessage: function () {
 
-    }
+    },
+  updatePhone: function(e){
+    var p = e.currentTarget.dataset.phone;
+
+    wx.navigateTo({
+      url: './phone/phone' + (p?'?phone=' + p:''),
+    })
+  }
 })

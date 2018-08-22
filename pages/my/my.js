@@ -64,6 +64,14 @@ Page({
             url: './mygame/mygame',
         })
     },
+    /**
+     * 基本信息
+     */
+  baseMsg: function () {
+    wx.navigateTo({
+      url: './myXX/myXX',
+    })
+  },
     joinapply: function () {
       wx.navigateTo({
         url: './joinapply/joinapply',

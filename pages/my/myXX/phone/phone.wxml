@@ -2,7 +2,7 @@
     <view class="phone_xx">
         <view class='phone_top'>
             <view class='phone_img'>
-                <image src="../../../images/index/banner.png"></image>
+                <image src="../../../../images/index/banner.png"></image>
             </view>
             <label class='phone_nickname'>微信昵称</label>
         </view>
@@ -10,7 +10,7 @@
     <view class='phone_code'>
         <view class='phone_num'>
             <view class='phone_name'>手机号</view>
-            <input placeholder='请输入新手机号'></input>
+            <input placeholder='{{phone?"":"请输入新手机号"}}'>{{phone?phone:''}}</input>
         </view>
         <view class='phone_num'>
             <view class='code_name'>验证码</view>

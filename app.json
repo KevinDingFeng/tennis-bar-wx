@@ -1,9 +1,11 @@
 {
   "pages":[
+    "pages/index/index",
     "pages/my/mygame/mygame",
     "pages/my/my",
     "pages/my/myXX/myXX",
-    "pages/index/index",
+    "pages/my/myXX/phone/phone",
+
     "pages/activity/join/join",
     "pages/activity/apply/apply",
     "pages/ballFriend/ballFriend",
