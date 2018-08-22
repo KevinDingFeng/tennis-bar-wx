@@ -1,7 +1,6 @@
 // pages/game/game.js
 var dateTimePicker = require('../../utils/dateTimePicker.js');
 Page({
-
     /**
      * 页面的初始数据
      */
@@ -21,9 +20,85 @@ Page({
         end_time: null,
         isopen:true,
         istype: false,
-        isfull:false
+        isfull:false,
+        isfirst:false,
+        issex:false,
+        array: ['3年以下', '3-5年', '30-40岁', '5-10年', "10年以上"],
+        array_ji: ['不限', '入门','中级','专业'],
+        array_peo: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20'],
+        show: false,//控制下拉列表的显示隐藏，false隐藏、true显示
+        selectData: [], //['1个', '2个', '3个', '4个', '5个', '6个'],下拉列表的数据
+        index: 0,//选择的下拉列表下标
+        show_nan: false,//控制下拉列表的显示隐藏，false隐藏、true显示
+        index_nan: 0,//选择的下拉列表下标
+        show_yul: false,//控制下拉列表的显示隐藏，false隐藏、true显示
+        index_peo: 0,//选择的下拉列表下标
     },
-
+    // 点击下拉显示框
+    selectTap() {
+        this.setData({
+            show: !this.data.show,
+            selectData: ['1个', '2个', '3个', '4个', '5个', '6个'],
+        });
+    },
+    selectTap_nan() {
+        this.setData({
+            show_nan: !this.data.show_nan,
+            selectData: ['1个', '2个', '3个', '4个', '5个', '6个'],
+        });
+    },
+    selectTap_peo() {
+        this.setData({
+            show_peo: !this.data.show_peo,
+            selectData: ['1个', '2个', '3个', '4个', '5个', '6个'],
+        });
+    },
+    // 点击下拉列表
+    optionTap_nan(e) {
+        let Index = e.currentTarget.dataset.index;//获取点击的下拉列表的下标
+        this.setData({
+            index_nan: Index,
+            show_nan: !this.data.show_nan,
+        });
+    },
+    optionTap_peo(e) {
+        let Index = e.currentTarget.dataset.index;//获取点击的下拉列表的下标
+        this.setData({
+            index_peo: Index,
+            show_peo: !this.data.show_peo,
+        });
+    },
+    optionTap(e) {
+        let Index = e.currentTarget.dataset.index;//获取点击的下拉列表的下标
+        this.setData({
+            index: Index,
+            show: !this.data.show,
+        });
+    },
+   
+    next_bu(){//下一步
+        this.setData({
+            isfirst: false,
+        });
+    },
+    bindPickerChange: function (e) {//球龄
+        console.log('picker发送选择改变，携带值为', e.detail.value)
+        this.setData({
+            index: e.detail.value
+        })
+    },
+    bindPickerChange_ji: function (e) {//球技等级
+        console.log('picker发送选择改变，携带值为', e.detail.value)
+        this.setData({
+            index_ji: e.detail.value
+        })
+    },
+    bindPickerChange_peo: function (e) {//打球人数
+        console.log('picker发送选择改变，携带值为', e.detail.value)
+        this.setData({
+            index_peo: e.detail.value
+        })
+    },
     /**
      * 生命周期函数--监听页面加载
      */

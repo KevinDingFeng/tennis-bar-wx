@@ -1,5 +1,5 @@
 <view class='container'>
-    <view class='fb_ball'>
+    <view class="fb_ball {{isfirst == true ? 'ds_b' : 'ds_n' }}">
         <view class='jb_xx'>
             <view class='xx_g'></view>
             <view>基本信息</view>
@@ -12,14 +12,27 @@
             <view>* 球场</view>
             <text class='ball_cc' bindtap='ball_cc'>请输入球场名称/球场地址关键字</text>
         </view>
+        <view class='ball_sure'>
+            <view>已选球场：球馆名称</view>
+            <view class='sure_dz'>
+                地址：
+                <text class='dz_zn'>网球馆地址网球馆地址网球馆地址网球馆地址网球馆1111111111111</text>
+            </view>
+            <view class='sure_dz'>电话：010-98989898</view>
+            <view class='dz_img'>
+                <image src="../../images/index/banner.png"></image>
+                <image src="../../images/index/banner.png"></image>
+                <image src="../../images/index/banner.png"></image>
+            </view>
+        </view>
         <view class='ball_xx mar_top'>
             <view>* 打球开始时间</view>
             <view class='start_time'>
-                <picker mode="multiSelector" bindchange="changeDateTime1" bindcolumnchange="changeDateTimeColumn1" value="{{dateTime1}}" range="{{dateTimeArray1}}" >
-                    <view wx:if="{{!cc}}"  class="tui-picker-detail">
+                <picker mode="multiSelector" bindchange="changeDateTime1" bindcolumnchange="changeDateTimeColumn1" value="{{dateTime1}}" range="{{dateTimeArray1}}">
+                    <view wx:if="{{!cc}}" class="tui-picker-detail">
                         {{dateTimeArray1[0][dateTime1[0]]}}-{{dateTimeArray1[1][dateTime1[1]]}}-{{dateTimeArray1[2][dateTime1[2]]}} {{dateTimeArray1[3][dateTime1[3]]}}:{{dateTimeArray1[4][dateTime1[4]]}}
                     </view>
-                    <view wx:else  class="tui-picker-detail">
+                    <view wx:else class="tui-picker-detail">
                         请选择开始时间
                     </view>
                 </picker>
@@ -29,27 +42,28 @@
             <view>* 打球结束时间</view>
             <view class='end_time'>
                 <picker mode="multiSelector" bindchange="changeDateTime2" bindcolumnchange="changeDateTimeColumn2" value="{{dateTime2}}" range="{{dateTimeArray2}}">
-                    <view wx:if="{{!cc1}}"  class="tui-picker-detail">
+                    <view wx:if="{{!cc1}}" class="tui-picker-detail">
                         {{dateTimeArray2[0][dateTime2[0]]}}-{{dateTimeArray2[1][dateTime2[1]]}}-{{dateTimeArray2[2][dateTime1[2]]}} {{dateTimeArray2[3][dateTime2[3]]}}:{{dateTimeArray2[4][dateTime2[4]]}}
                     </view>
-                    <view wx:else  class="tui-picker-detail">
+                    <view wx:else class="tui-picker-detail">
                         请选择结束时间
                     </view>
                 </picker>
             </view>
         </view>
-         <view class='ball_type mar_top'>
+        <view class='ball_type mar_top'>
             <view class='type_name'>* 球局类型</view>
             <view class="type_sty mar_ri {{istype == true ? 'active' : 'no_active' }}">娱乐局</view>
             <view class="type_sty {{istype != true ? 'active' : 'no_active' }}">教学</view>
         </view>
         <view class='ball_type mar_top'>
-            <view class='type_name ' >* 是否公开</view>
+            <view class='type_name '>* 是否公开</view>
             <view class="type_sty mar_ri  {{isopen == true ? 'active' : 'no_active' }}">公开</view>
             <view class="type_sty {{isopen != true ? 'active' : 'no_active' }}">不公开</view>
+            <view class="text_ds  {{isopen != true ? 'ds_b' : 'ds_n' }}">私有，仅自己或分享的好友可见</view>
         </view>
-        <view class='btn_xia'> 
-            <button class="weui-btn" type="primary">下一步</button>
+        <view class='btn_xia mar_bt'>
+            <button class="weui-btn" type="primary" bindtap='next_bu'>下一步</button>
         </view>
         <!-- 遮盖层 -->
         <view class="fullbg {{isfull ?'fullopacity':''}}" bindtap="hidebg"></view>
@@ -79,7 +93,7 @@
                             网球馆地址网球馆地址网球馆地址网球馆地址网球网球馆地址
                         </view>
                         <view class='palce_dh'>
-                            <image src='../../images/index/dw.png' ></image>
+                            <image src='../../images/index/dw.png'></image>
                             <text>导航</text>
                         </view>
                     </view>
@@ -101,8 +115,100 @@
             </view>
             <view class='Venue_bottom'>
                 <view>没找到想要的网球馆？</view>
-                <view>联系客服   010-101012020</view>
+                <view>联系客服 010-101012020</view>
             </view>
         </view>
+    </view>
+    <!-- 第二步 -->
+    <view class="next_two {{isfirst != true ? 'ds_b' : 'ds_n' }}">
+        <view class='jb_xx'>
+            <view class='xx_g'></view>
+            <view>参与要求</view>
+        </view>
+    </view>
+    <view class='ball_ji'>
+        <view class='user_jbxx'>
+            <view>球龄</view>
+            <view class='user_age'>
+                <picker mode="selector" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                    <text>{{array[index]?array[index]:'请选择球龄要求 >'}}</text>
+                </picker>
+            </view>
+        </view>
+        <view class='user_jbxx'>
+            <view>* 球技等级</view>
+            <view class='user_ji'>
+                <picker mode="selector" bindchange="bindPickerChange_ji" value="{{index_ji}}" range="{{array_ji}}">
+                    <text>{{array_ji[index_ji]?array_ji[index_ji]:'请选择等级要求 >'}}</text>
+                </picker>
+            </view>
+        </view>
+        <view class='user_jbxx'>
+            <view>* 打球人数</view>
+            <view class='user_ji'>
+                <picker mode="selector" bindchange="bindPickerChange_peo" value="{{index_peo}}" range="{{array_peo}}">
+                    <text>{{array_peo[index_peo]?array_peo[index_peo]:'请选择打球人数 >'}}</text>
+                </picker>
+            </view>
+        </view>
+    </view>
+    <view class='user_sex mar_top'>
+        <view class='type_sex'>* 性别</view>
+        <view class="type_sty mar_ri {{issex == true ? 'active' : 'no_active' }} mar_bt">不限</view>
+        <view class="type_sty {{issex != true ? 'active' : 'no_active' }}  mar_bt">限定</view>
+        <view class="sex_num   {{issex != true ? 'ds_b' : 'ds_n' }}">
+            <view class='select_box' style="margin-top:{{(scale<0.55)? '32rpx':'20rpx'}};">
+                <view class='select' catchtap='selectTap'>
+                    <input class='select_text' value="{{selectData[index]}}"></input>
+                    <image class='select_img {{show&&"select_img_rotate"}}' src='../../images/gobottom.png'></image>
+                </view>
+                <view class='option_box' style='height:{{show?(selectData.length>5?300:selectData.length*60):0}}rpx;'>
+                    <text class='option' style='{{index==selectData.length-1&&"border:0;"}}' wx:for='{{selectData}}' wx:key='this' data-index='{{index}}' catchtap='optionTap'>{{item}}</text>
+                </view>
+            </view>
+            <view class='mar_top1'>女</view>
+            <view class='select_box' style="margin-top:{{(scale<0.55)? '32rpx':'20rpx'}};">
+                <view class='select' catchtap='selectTap_nan'>
+                    <input class='select_text' value="{{selectData[index_nan]}}"></input>
+                    <image class='select_img {{show_nan&&"select_img_rotate"}}' src='../../images/gobottom.png'></image>
+                </view>
+                <view class='option_box' style='height:{{show_nan?(selectData.length>5?300:selectData.length*60):0}}rpx;'>
+                    <text class='option' style='{{index_nan==selectData.length-1&&"border:0;"}}' wx:for='{{selectData}}' wx:key='this' data-index='{{index}}' catchtap='optionTap_nan'>{{item}}</text>
+                </view>
+            </view>
+            <view class='mar_top1'>男</view>
+        </view>
+    </view>
+    <view class='user_sex mar_top'>
+        <view class='type_sex'>预留位置</view>
+        <view class='select_box' style="margin-top:{{(scale<0.55)? '32rpx':'-8rpx'}};width:35%">
+            <view class='select' catchtap='selectTap_peo'>
+                <input class='select_text' value="{{selectData[index_peo]}}"></input>
+                <image class='select_img {{show_peo&&"select_img_rotate"}}' src='../../images/gobottom.png'></image>
+            </view>
+            <view class='option_box' style='height:{{show_peo?(selectData.length>5?300:selectData.length*60):0}}rpx;'>
+                <text class='option' style='{{index_peo==selectData.length-1&&"border:0;"}}' wx:for='{{selectData}}' wx:key='this' data-index='{{index}}' catchtap='optionTap_peo'>{{item}}</text>
+            </view>
+        </view>
+        <view class='mar_top1' style='margin-top:20rpx;'>人</view>
+    </view>
+    <view class='ball_xx mar_top' style='width:94%'>
+        <view>报名截止时间</view>
+        <view class='start_time'>
+            <picker mode="multiSelector" bindchange="changeDateTime1" bindcolumnchange="changeDateTimeColumn1" value="{{dateTime1}}" range="{{dateTimeArray1}}">
+                <view class="tui-picker-detail">
+                    {{dateTimeArray1[0][dateTime1[0]]}}-{{dateTimeArray1[1][dateTime1[1]]}}-{{dateTimeArray1[2][dateTime1[2]]}} {{dateTimeArray1[3][dateTime1[3]]}}:{{dateTimeArray1[4][dateTime1[4]]}}
+                </view>
+            </picker>
+        </view>
+    </view>
+    <view class='fb_remark mar_top'>
+        <view>备注</view>
+        <textarea placeholder='其他补充说明，控制在30字以内'></textarea>
+    </view>
+    <view class="s_btn">
+        <button class="weui-btn" type="default" bindtap=''>上一步</button>
+        <button class="weui-btn" type="warn" bindtap=''>预览</button>
+        <button class="weui-btn" type="primary" bindtap=''>发布</button>
     </view>
 </view>
