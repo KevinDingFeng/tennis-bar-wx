@@ -1,0 +1,10 @@
+<view class='container'>
+    <view class='news_xx'>
+        <view class='f_wei'>消息标题</view>
+        <view class='news_center'>
+            消息内容消息内容消息内容消息内容消息内容消息内容消息内容消
+            息内容消息内容消息内容消息内容消息内容消息内容消息...
+        </view>
+        <view class='news_bottom'>2018.08.15  11:26:30</view>
+    </view>
+</view>
