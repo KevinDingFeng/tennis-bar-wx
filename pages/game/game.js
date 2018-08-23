@@ -21,7 +21,7 @@ Page({
         isopen:true,
         istype: false,
         isfull:false,
-        isfirst:false,
+        isfirst:"1",
         issex:false,
         array: ['3年以下', '3-5年', '30-40岁', '5-10年', "10年以上"],
         array_ji: ['不限', '入门','中级','专业'],
@@ -75,10 +75,19 @@ Page({
             show: !this.data.show,
         });
     },
-   
+    go_history() {//上一步
+       this.setData({
+           isfirst: "1",
+       });
+   },
+   yul_show(){//点击预览
+       this.setData({
+           isfirst: "3",
+       });
+   },
     next_bu(){//下一步
         this.setData({
-            isfirst: false,
+            isfirst: "2",
         });
     },
     bindPickerChange: function (e) {//球龄

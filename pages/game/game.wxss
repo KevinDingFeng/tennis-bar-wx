@@ -28,7 +28,7 @@
     padding: 22rpx 22rpx;
 }
 .ball_name{
-    margin-left: 41%;
+    margin-left: 31%;
     margin-top: -3rpx;
 }
 .bor_top{
@@ -39,8 +39,8 @@
 }
 .ball_cc{
     font-size: 28rpx;
-    margin-left: 29%;
     color: #959595;
+    width: 89%;
 }
 .start_time{
     width: 67%;
@@ -357,7 +357,7 @@
     height: 128rpx;
 }
 .s_btn{
-    width: 100%;
+    width: 94%;
     margin: 48rpx 22rpx;
     display: flex;
     flex-direction: row;
@@ -371,4 +371,92 @@
 }
 .weui-btn:first-child {
     margin-top:15px;
+}
+/* 预览 */
+.next_san{
+    width: 100%;
+}
+.yul_name {
+    width: 94%;
+    margin-top: 19rpx;
+    display: flex;
+    flex-direction: row;
+    background-color: #fff;
+    font-size: 24rpx;
+    padding: 30rpx 23rpx;
+    border-bottom: 1px solid #ddd;
+}
+
+.game_name {
+    width: 85%;
+}
+
+.yul_xx {
+    width: 94%;
+    margin-top: 18rpx;
+    background-color: #fff;
+    padding: 30rpx 23rpx;
+    font-size: 24rpx;
+    border-bottom: 1px solid #ddd;
+}
+.xx_id {
+    margin-top: 25rpx;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.id_name {
+    width: 30%;
+    text-align: left;
+}
+
+.img_show {
+    padding: 27rpx 0;
+    padding-bottom: 0;
+}
+
+.img_show>image {
+    width: 217rpx;
+    height: 154rpx;
+    border: 1px solid #ddd;
+}
+
+.img_show>image:nth-child(2) {
+    margin: 0 23rpx;
+}
+.registration_time{
+    width: 100%;
+    margin-top: 36rpx;
+    margin-bottom: 24rpx;
+    font-size: 20rpx;
+    color: #424242;
+    margin-left: 23rpx;
+}
+.remark{
+    width: 100%;
+    font-size: 20rpx;
+    color: #424242;
+    margin-left: 23rpx;
+}
+.join_btn{
+    width: 94%;
+    display: flex;
+    flex-direction: row;
+    margin: 0 23rpx;
+    margin-top: 51rpx;
+    margin-bottom: 65rpx;
+}
+.join_firend{
+    background-color: #efa719;
+    color: #fff;
+    margin: 0;
+    width: 47%;
+}
+.join_me{
+    background-color: #56a41f;
+    color: #fff;
+    margin-left: 20rpx;
+    margin-right: 0;
+    width: 50%;
 }

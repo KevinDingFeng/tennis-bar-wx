@@ -1,16 +1,16 @@
 <view class='container'>
-    <view class="fb_ball {{isfirst == true ? 'ds_b' : 'ds_n' }}">
+    <view class="fb_ball {{isfirst == '1' ? 'ds_b' : 'ds_n' }}">
         <view class='jb_xx'>
             <view class='xx_g'></view>
             <view>基本信息</view>
         </view>
         <view class='ball_xx'>
-            <view>* 球局信息</view>
-            <input class='ball_name' placeholder='10字以内'></input>
+            <view style='width20%;'>* 球局信息</view>
+            <input class='ball_name' placeholder='10字以内' placeholder-style='text-align:right'></input>
         </view>
         <view class='ball_xx bor_top'>
-            <view>* 球场</view>
-            <text class='ball_cc' bindtap='ball_cc'>请输入球场名称/球场地址关键字</text>
+            <view style='width20%;'>* 球场</view>
+            <input class='ball_cc' bindtap='ball_cc' placeholder='请输入球场名称/球场地址关键字' placeholder-style='text-align:right'></input>
         </view>
         <view class='ball_sure'>
             <view>已选球场：球馆名称</view>
@@ -120,95 +120,168 @@
         </view>
     </view>
     <!-- 第二步 -->
-    <view class="next_two {{isfirst != true ? 'ds_b' : 'ds_n' }}">
+    <view class="next_two {{isfirst == '2' ? 'ds_b' : 'ds_n' }}">
         <view class='jb_xx'>
             <view class='xx_g'></view>
             <view>参与要求</view>
         </view>
-    </view>
-    <view class='ball_ji'>
-        <view class='user_jbxx'>
-            <view>球龄</view>
-            <view class='user_age'>
-                <picker mode="selector" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
-                    <text>{{array[index]?array[index]:'请选择球龄要求 >'}}</text>
+        <view class='ball_ji'>
+            <view class='user_jbxx'>
+                <view>球龄</view>
+                <view class='user_age'>
+                    <picker mode="selector" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                        <text>{{array[index]?array[index]:'请选择球龄要求 >'}}</text>
+                    </picker>
+                </view>
+            </view>
+            <view class='user_jbxx'>
+                <view>* 球技等级</view>
+                <view class='user_ji'>
+                    <picker mode="selector" bindchange="bindPickerChange_ji" value="{{index_ji}}" range="{{array_ji}}">
+                        <text>{{array_ji[index_ji]?array_ji[index_ji]:'请选择等级要求 >'}}</text>
+                    </picker>
+                </view>
+            </view>
+            <view class='user_jbxx'>
+                <view>* 打球人数</view>
+                <view class='user_ji'>
+                    <picker mode="selector" bindchange="bindPickerChange_peo" value="{{index_peo}}" range="{{array_peo}}">
+                        <text>{{array_peo[index_peo]?array_peo[index_peo]:'请选择打球人数 >'}}</text>
+                    </picker>
+                </view>
+            </view>
+        </view>
+        <view class='user_sex mar_top'>
+            <view class='type_sex'>* 性别</view>
+            <view class="type_sty mar_ri {{issex == true ? 'active' : 'no_active' }} mar_bt">不限</view>
+            <view class="type_sty {{issex != true ? 'active' : 'no_active' }}  mar_bt">限定</view>
+            <view class="sex_num   {{issex != true ? 'ds_b' : 'ds_n' }}">
+                <view class='select_box' style="margin-top:{{(scale<0.55)? '32rpx':'20rpx'}};">
+                    <view class='select' catchtap='selectTap'>
+                        <input class='select_text' value="{{selectData[index]}}"></input>
+                        <image class='select_img {{show&&"select_img_rotate"}}' src='../../images/gobottom.png'></image>
+                    </view>
+                    <view class='option_box' style='height:{{show?(selectData.length>5?300:selectData.length*60):0}}rpx;'>
+                        <text class='option' style='{{index==selectData.length-1&&"border:0;"}}' wx:for='{{selectData}}' wx:key='this' data-index='{{index}}' catchtap='optionTap'>{{item}}</text>
+                    </view>
+                </view>
+                <view class='mar_top1'>女</view>
+                <view class='select_box' style="margin-top:{{(scale<0.55)? '32rpx':'20rpx'}};">
+                    <view class='select' catchtap='selectTap_nan'>
+                        <input class='select_text' value="{{selectData[index_nan]}}"></input>
+                        <image class='select_img {{show_nan&&"select_img_rotate"}}' src='../../images/gobottom.png'></image>
+                    </view>
+                    <view class='option_box' style='height:{{show_nan?(selectData.length>5?300:selectData.length*60):0}}rpx;'>
+                        <text class='option' style='{{index_nan==selectData.length-1&&"border:0;"}}' wx:for='{{selectData}}' wx:key='this' data-index='{{index}}' catchtap='optionTap_nan'>{{item}}</text>
+                    </view>
+                </view>
+                <view class='mar_top1'>男</view>
+            </view>
+        </view>
+        <view class='user_sex mar_top'>
+            <view class='type_sex'>预留位置</view>
+            <view class='select_box' style="margin-top:{{(scale<0.55)? '32rpx':'-8rpx'}};width:35%">
+                <view class='select' catchtap='selectTap_peo'>
+                    <input class='select_text' value="{{selectData[index_peo]}}"></input>
+                    <image class='select_img {{show_peo&&"select_img_rotate"}}' src='../../images/gobottom.png'></image>
+                </view>
+                <view class='option_box' style='height:{{show_peo?(selectData.length>5?300:selectData.length*60):0}}rpx;'>
+                    <text class='option' style='{{index_peo==selectData.length-1&&"border:0;"}}' wx:for='{{selectData}}' wx:key='this' data-index='{{index}}' catchtap='optionTap_peo'>{{item}}</text>
+                </view>
+            </view>
+            <view class='mar_top1' style='margin-top:20rpx;'>人</view>
+        </view>
+        <view class='ball_xx mar_top' style='width:94%'>
+            <view>报名截止时间</view>
+            <view class='start_time'>
+                <picker mode="multiSelector" bindchange="changeDateTime1" bindcolumnchange="changeDateTimeColumn1" value="{{dateTime1}}" range="{{dateTimeArray1}}">
+                    <view class="tui-picker-detail">
+                        {{dateTimeArray1[0][dateTime1[0]]}}-{{dateTimeArray1[1][dateTime1[1]]}}-{{dateTimeArray1[2][dateTime1[2]]}} {{dateTimeArray1[3][dateTime1[3]]}}:{{dateTimeArray1[4][dateTime1[4]]}}
+                    </view>
                 </picker>
             </view>
         </view>
-        <view class='user_jbxx'>
-            <view>* 球技等级</view>
-            <view class='user_ji'>
-                <picker mode="selector" bindchange="bindPickerChange_ji" value="{{index_ji}}" range="{{array_ji}}">
-                    <text>{{array_ji[index_ji]?array_ji[index_ji]:'请选择等级要求 >'}}</text>
-                </picker>
-            </view>
+        <view class='fb_remark mar_top'>
+            <view>备注</view>
+            <textarea placeholder='其他补充说明，控制在30字以内'></textarea>
         </view>
-        <view class='user_jbxx'>
-            <view>* 打球人数</view>
-            <view class='user_ji'>
-                <picker mode="selector" bindchange="bindPickerChange_peo" value="{{index_peo}}" range="{{array_peo}}">
-                    <text>{{array_peo[index_peo]?array_peo[index_peo]:'请选择打球人数 >'}}</text>
-                </picker>
-            </view>
+        <view class="s_btn">
+            <button class="weui-btn" type="default" bindtap='go_history'>上一步</button>
+            <button class="weui-btn bg_c" type="warn" bindtap='yul_show'>预览</button>
+            <button class="weui-btn" type="primary" bindtap=''>发布</button>
         </view>
     </view>
-    <view class='user_sex mar_top'>
-        <view class='type_sex'>* 性别</view>
-        <view class="type_sty mar_ri {{issex == true ? 'active' : 'no_active' }} mar_bt">不限</view>
-        <view class="type_sty {{issex != true ? 'active' : 'no_active' }}  mar_bt">限定</view>
-        <view class="sex_num   {{issex != true ? 'ds_b' : 'ds_n' }}">
-            <view class='select_box' style="margin-top:{{(scale<0.55)? '32rpx':'20rpx'}};">
-                <view class='select' catchtap='selectTap'>
-                    <input class='select_text' value="{{selectData[index]}}"></input>
-                    <image class='select_img {{show&&"select_img_rotate"}}' src='../../images/gobottom.png'></image>
-                </view>
-                <view class='option_box' style='height:{{show?(selectData.length>5?300:selectData.length*60):0}}rpx;'>
-                    <text class='option' style='{{index==selectData.length-1&&"border:0;"}}' wx:for='{{selectData}}' wx:key='this' data-index='{{index}}' catchtap='optionTap'>{{item}}</text>
-                </view>
+    <!-- 预览 -->
+    <view class="next_san {{isfirst == '3' ? 'ds_b' : 'ds_n' }}">
+        <view class='yul_name'>
+            <text class='game_name'>{{game.name}}</text>
+            <view class='col_g f_wei' wx:if="{{game.gameType == 'Entertainment' }}">
+                娱乐局
             </view>
-            <view class='mar_top1'>女</view>
-            <view class='select_box' style="margin-top:{{(scale<0.55)? '32rpx':'20rpx'}};">
-                <view class='select' catchtap='selectTap_nan'>
-                    <input class='select_text' value="{{selectData[index_nan]}}"></input>
-                    <image class='select_img {{show_nan&&"select_img_rotate"}}' src='../../images/gobottom.png'></image>
-                </view>
-                <view class='option_box' style='height:{{show_nan?(selectData.length>5?300:selectData.length*60):0}}rpx;'>
-                    <text class='option' style='{{index_nan==selectData.length-1&&"border:0;"}}' wx:for='{{selectData}}' wx:key='this' data-index='{{index}}' catchtap='optionTap_nan'>{{item}}</text>
-                </view>
-            </view>
-            <view class='mar_top1'>男</view>
-        </view>
-    </view>
-    <view class='user_sex mar_top'>
-        <view class='type_sex'>预留位置</view>
-        <view class='select_box' style="margin-top:{{(scale<0.55)? '32rpx':'-8rpx'}};width:35%">
-            <view class='select' catchtap='selectTap_peo'>
-                <input class='select_text' value="{{selectData[index_peo]}}"></input>
-                <image class='select_img {{show_peo&&"select_img_rotate"}}' src='../../images/gobottom.png'></image>
-            </view>
-            <view class='option_box' style='height:{{show_peo?(selectData.length>5?300:selectData.length*60):0}}rpx;'>
-                <text class='option' style='{{index_peo==selectData.length-1&&"border:0;"}}' wx:for='{{selectData}}' wx:key='this' data-index='{{index}}' catchtap='optionTap_peo'>{{item}}</text>
+            <view class='col_g f_wei' wx:else>
+                教学局
             </view>
         </view>
-        <view class='mar_top1' style='margin-top:20rpx;'>人</view>
-    </view>
-    <view class='ball_xx mar_top' style='width:94%'>
-        <view>报名截止时间</view>
-        <view class='start_time'>
-            <picker mode="multiSelector" bindchange="changeDateTime1" bindcolumnchange="changeDateTimeColumn1" value="{{dateTime1}}" range="{{dateTimeArray1}}">
-                <view class="tui-picker-detail">
-                    {{dateTimeArray1[0][dateTime1[0]]}}-{{dateTimeArray1[1][dateTime1[1]]}}-{{dateTimeArray1[2][dateTime1[2]]}} {{dateTimeArray1[3][dateTime1[3]]}}:{{dateTimeArray1[4][dateTime1[4]]}}
-                </view>
-            </picker>
+        <view class='yul_xx'>
+            <view class='xx_title f_wei'>基本信息</view>
+            <view class='xx_id'>
+                <view class='id_name'>球局编号</view>
+                <view>{{game.id}}</view>
+            </view>
+            <view class='xx_id'>
+                <view class='id_name'>发起人</view>
+                <view>{{game.organizer.nickName}}</view>
+            </view>
+            <view class='xx_id'>
+                <view class='id_name'>打球时间</view>
+                <view>{{game.startTime}}-{{game.endTime}}</view>
+            </view>
+            <view class='xx_id'>
+                <view class='id_name'>球场</view>
+                <view>{{game.court.name}}</view>
+            </view>
+            <view class='xx_id'>
+                <view class='id_name'>地址</view>
+                <view class='dz_name'>{{game.court.address}}</view>
+            </view>
+            <view class='xx_id'>
+                <view class='id_name'>电话</view>
+                <view class='dz_name'>{{game.court.telephone}}</view>
+            </view>
+            <view class='img_show'>
+                <image src="../../../images/tabBar/ball_x.png"></image>
+                <image src="../../../images/tabBar/ball_x.png"></image>
+                <image src="../../../images/tabBar/ball_x.png"></image>
+            </view>
         </view>
-    </view>
-    <view class='fb_remark mar_top'>
-        <view>备注</view>
-        <textarea placeholder='其他补充说明，控制在30字以内'></textarea>
-    </view>
-    <view class="s_btn">
-        <button class="weui-btn" type="default" bindtap=''>上一步</button>
-        <button class="weui-btn" type="warn" bindtap=''>预览</button>
-        <button class="weui-btn" type="primary" bindtap=''>发布</button>
+        <view class='yul_xx'>
+            <view class='xx_title f_wei'>参与要求</view>
+            <view class='xx_id'>
+                <view class='id_name'>球龄</view>
+                <view></view>
+            </view>
+            <view class='xx_id'>
+                <view class='id_name'>球技等级</view>
+                <view></view>
+            </view>
+            <view class='xx_id'>
+                <view class='id_name'>打球人数</view>
+                <view></view>
+            </view>
+            <view class='xx_id'>
+                <view class='id_name'>性别</view>
+                <view></view>
+            </view>
+            <view class='xx_id'>
+                <view class='id_name'>预留位置</view>
+                <view></view>
+            </view>
+        </view>
+        <view class='registration_time'>报名截止时间：{{game.deadlineTime}}</view>
+        <view class='remark'>备注：{{game.remark}}</view>
+        <view class='join_btn'>
+            <button class='join_firend' bindtap='next_bu'>返回</button>
+            <button class='join_me' bindtap="joinGame" data-game="">发布球局</button>
+        </view>
     </view>
 </view>
