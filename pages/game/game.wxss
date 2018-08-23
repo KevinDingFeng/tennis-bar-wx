@@ -302,13 +302,12 @@
 }
 
 .select_img {
-    width: 52rpx;
-    height: 26rpx;
+    width: 25rpx;
+    height: 15rpx;
     display: block;
     transition: transform 0.3s;
     margin-right: 29rpx;
     margin-top: 5rpx;
-    background-color: #000;
 }
 
 .select_img_rotate {
