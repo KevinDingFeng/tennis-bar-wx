@@ -149,7 +149,6 @@
     margin-top: 51rpx;
     margin-bottom: 65rpx;
     padding: 0 34rpx;
-    position: fixed;
     bottom: 0;
 }
 .join_firend{
@@ -164,4 +163,8 @@
     margin-left: 20rpx;
     margin-right: 0;
     width: 44%;
+}
+.weui-tab__content{
+    width:100%;
+    overflow: hidden;
 }
