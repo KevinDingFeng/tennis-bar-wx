@@ -41,7 +41,7 @@ Page({
     openAlert: function () {
         wx.showModal({
             title:"找教练判定级别",
-            content: '想找教练帮自己看看什么级别？\r\n请联系客服：010-989898，我们会为您推荐教练，推荐后您最终是否方便过去全由您自己做主哦~~',
+            content: '想找教练帮自己看看什么级别？\r\n请联系客服：010-989898，\r\n我们会为您推荐教练，推荐后您最终是否方便过去\r\n全由您自己做主哦~~',
             showCancel: false,
             success: function (res) {
                 if (res.confirm) {

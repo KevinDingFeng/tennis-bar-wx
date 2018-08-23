@@ -42,7 +42,7 @@
     font-size: 28rpx!important;
 }
 .phone_name{
-    width: 100%;
+    width: 36%;
 }
 .code_name{
     width: 30%;

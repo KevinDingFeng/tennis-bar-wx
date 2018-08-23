@@ -1,0 +1,116 @@
+<view class='container'>
+    <view class='ball_xx'>
+        <view class='xx_id'>
+            <view class='xx_title f_wei'>基本信息</view>
+            <view class='xx_type'>已同意</view>
+        </view>
+        <view class='xx_id'>
+            <view class='id_name'>申请人</view>
+            <view>微信昵称</view>
+        </view>
+        <view class='xx_id'>
+            <view class='id_name'>性别</view>
+            <view>女</view>
+        </view>
+        <view class='xx_id'>
+            <view class='id_name'>球龄</view>
+            <view>3年以下</view>
+        </view>
+        <view class='xx_id'>
+            <view class='id_name'>球技等级</view>
+            <view>入门</view>
+        </view>
+        <view class='xx_id'>
+            <view class='id_name'>语言</view>
+            <view>中文</view>
+        </view>
+        <view class='xx_id'>
+            <view class='id_name'>地址</view>
+            <view class='dz_name'>{{game.court.address}}</view>
+        </view>
+        <view class='xx_id'>
+            <view class='id_name'>申请时间</view>
+            <view class='dz_name f_wei'>2018.08.17 14:45:30</view>
+        </view>
+    </view>
+    <view class='ball_xx'>
+        <view class='xx_id'>
+            <view class='xx_title f_wei'>球局信息</view>
+        </view>
+        <view class='xx_id'>
+            <view class='id_name'>参与球局</view>
+            <view>球局编号</view>
+        </view>
+        <view class='xx_id'>
+            <view class='id_name'>球局名称</view>
+            <view>慈云寺下午4点</view>
+        </view>
+        <view class='xx_id'>
+            <view class='id_name'>发起人</view>
+            <view>张三</view>
+            <view>教练</view>
+        </view>
+        <view class='xx_id'>
+            <view class='id_name'>打球时间</view>
+            <view class='dz_name f_wei'>2018.08.17 14:45~17:30</view>
+        </view>
+        <view class='xx_id'>
+            <view class='id_name'>球场</view>
+            <view>球场名称</view>
+        </view>
+        <view class='xx_id'>
+            <view class='id_name' style='width:57%;'>地址</view>
+            <view>球场地址球场地址球场地址球场地址球场地址球场地址球场地址球场地址球场地址球场地址</view>
+        </view>
+        <view class='xx_id'>
+            <view class='id_name'>电话</view>
+            <view>010-98989878</view>
+        </view>
+    </view>
+    <view class='ball_xx'>
+        <view class='xx_id'>
+            <view class='xx_title f_wei'>参与情况</view>
+            <view class='xx_type f_wei'>5缺2</view>
+        </view>
+        <view class='cy_xx'>
+            <view class='xx_1'>
+                <image src='../../../../images/index/banner.png'></image>
+                <view>微信昵称</view>
+            </view>
+            <view class='xx_1'>
+                <image src='../../../../images/index/banner.png'></image>
+                <view>微信昵称</view>
+            </view>
+            <view class='xx_1'>
+                <image src='../../../../images/index/banner.png'></image>
+                <view>微信昵称</view>
+            </view>
+            <view class='xx_1'>
+                <image src='../../../../images/index/d_join.png'></image>
+                <view class='dz_name'>待加入</view>
+            </view>
+            <view class='xx_1'>
+                <image src='../../../../images/index/d_join.png'></image>
+                <view class='dz_name'>待加入</view>
+            </view>
+        </view>
+    </view>
+    <view class='bot_btn'>
+        <button class="weui-btn bg_c btn_j" type="primary" bindtap="showDialogBtn">拒绝</button>
+        <button class="weui-btn btn_sure" type="primary">同意</button>
+    </view>
+    <!--弹窗-->
+    <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+    <view class="modal-dialog" wx:if="{{showModal}}">
+        <view class="modal-title f_wei">拒绝原因</view>
+        <view class="modal-content">
+            <view class="modal-input">
+                <textarea class='text_sty' placeholder='补充拒绝原因，控制在30字以内'></textarea>
+            </view>
+        </view>
+        <view class="modal-footer">
+            <view class="btn-cancel col_56" bindtap="onCancel" data-status="cancel">取消</view>
+            <view class="btn-confirm col_56" bindtap="onConfirm" data-status="confirm">确定</view>
+        </view>
+    </view>
+</view>
