@@ -22,3 +22,9 @@ page{
 .ds_b{
     display: block;
 }
+.bg_c{
+    background-color: #EFA719!important;
+}
+.col_56{
+    color: #56a41f;
+}

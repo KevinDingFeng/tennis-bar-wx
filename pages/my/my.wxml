@@ -13,7 +13,7 @@
             <text class='list_name'>基本信息</text>
             <image src="/images/my/my_right.png"></image>
         </view>
-        <view class='my_xx'>
+        <view class='my_xx' bindtap='my_grade'>
             <image src="/images/my/my_assess.png"></image>
             <text class='list_name'>自我评价</text>
             <image src="/images/my/my_right.png"></image>
