@@ -1,0 +1,84 @@
+/* pages/application/application.wxss */
+.ball_name {
+    width: 94%;
+    margin-top: 19rpx;
+    display: flex;
+    flex-direction: row;
+    background-color: #fff;
+    font-size: 24rpx;
+    padding: 30rpx 23rpx;
+    border-bottom: 1px solid #ddd;
+}
+
+.game_name {
+    width: 85%;
+}
+
+.ball_xx {
+    width: 94%;
+    margin-top: 18rpx;
+    background-color: #fff;
+    padding: 30rpx 23rpx;
+    font-size: 24rpx;
+    border-bottom: 1px solid #ddd;
+    padding-top: 0;
+}
+
+.xx_title {
+    color: #222;
+}
+
+.xx_type {
+    width: 82%;
+    color: #efa719;
+    text-align: right;
+}
+
+.xx_id {
+    margin-top: 25rpx;
+    display: flex;
+    flex-direction: row;
+}
+
+.id_name {
+    width: 30%;
+    text-align: left;
+}
+
+.dz_name {
+    color: #56a41f;
+}
+
+.cy_xx {
+    margin-top: 25rpx;
+    display: flex;
+    flex-direction: row;
+}
+
+.xx_1 {
+    text-align: center;
+    margin-right: 21rpx;
+}
+
+.xx_1>image {
+    width: 125rpx;
+    height: 97rpx;
+}
+
+.bot_btn {
+    width: 94%;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20rpx;
+}
+
+.bot_btn>button {
+    width: 90%;
+}
+
+.weui-btn:first-child {
+    margin-top: 15px;
+}
+.two_dz{
+    width: 69%;
+}
