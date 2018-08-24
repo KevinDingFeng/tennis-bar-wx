@@ -86,7 +86,7 @@ Page({
             that.setData({
               games: res.data.data.page,
             })
-            // wx.setStorageSync(types, res.data.data.page);
+            wx.setStorageSync(types, res.data.data.page);
           }
         }
       })
@@ -101,13 +101,13 @@ Page({
         if (this.data.currentTab === e.target.dataset.current) {
             return false;
         } else {
-          // if(wx.getStorageSync(types)){
-          //   that.setData({
-          //     games: wx.getStorageSync(types)
-          //   })
-          // }else{
+          if(wx.getStorageSync(types)){
+            that.setData({
+              games: wx.getStorageSync(types)
+            })
+          }else{
             this.getMyGames(2,types);
-          // }
+          }
           that.setData({
               currentTab: e.target.dataset.current
           })

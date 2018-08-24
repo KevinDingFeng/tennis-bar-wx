@@ -123,7 +123,14 @@ Page({
           }
         }
       })
+    },
 
+    //详情
+    viewDetail:function(e){
+      let info = e.currentTarget.dataset.info;
+      wx.navigateTo({
+        url: './joinundetermined/joinundetermined?info=' + JSON.stringify(info),
+      })
 
-    }
+    }  
 })
