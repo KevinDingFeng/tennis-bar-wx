@@ -16,7 +16,9 @@
                         <button class='join_firend'>邀请好友加入</button>
                     </view>
                 </view>
-                <view class="weui-tab__content" hidden="{{activeIndex != 1}}">选项二的评价</view>
+                <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
+                    <include src="../rater.wxml" />
+                </view>
             </view>
         </view>
     </view>

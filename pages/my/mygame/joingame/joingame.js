@@ -19,9 +19,40 @@ Page({
             "Entry": "入门(0~1.0)",
             "Medium": "中级(1.5~3.5)",
             "Professional": "专业(4.0~7.0)"
-        }
+        },
+        flag: 0,//评价星级
+        info: "",
     },
-
+    changeColor1: function () {
+        var that = this;
+        that.setData({
+            flag: 1
+        });
+    },
+    changeColor2: function () {
+        var that = this;
+        that.setData({
+            flag: 2
+        });
+    },
+    changeColor3: function () {
+        var that = this;
+        that.setData({
+            flag: 3
+        });
+    },
+    changeColor4: function () {
+        var that = this;
+        that.setData({
+            flag: 4
+        });
+    },
+    changeColor5: function () {
+        var that = this;
+        that.setData({
+            flag: 5
+        });
+    },
     /**
      * 生命周期函数--监听页面加载
      */

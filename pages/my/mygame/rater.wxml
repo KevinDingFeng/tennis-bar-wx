@@ -1,0 +1,29 @@
+<view class='container'>
+    <view class='assess'>
+        <view class='assess_name'>评价</view>
+        <view class='assess_xx'>
+            <view class='xx_name'>球局和谐度</view>
+            <view class="comment1-description">
+                <view class="star-pos" style="display:flex;flex-direction:row;">
+                    <view class="stars  {{flag>=1? 'on': ''}}" bindtap="changeColor1"></view>
+                    <view class="stars  {{flag>=2? 'on': ''}}" bindtap="changeColor2"></view>
+                    <view class="stars  {{flag>=3? 'on': ''}}" bindtap="changeColor3"></view>
+                    <view class="stars  {{flag>=4? 'on': ''}}" bindtap="changeColor4"></view>
+                    <view class="stars  {{flag>=5? 'on': ''}}" bindtap="changeColor5"></view>
+                </view>
+            </view>
+        </view>
+        <view class='environment_xx'>
+            <view class='environment_name'>球场环境</view>
+            <view class="comment1-description">
+                <view class="star-pos" style="display:flex;flex-direction:row;">
+                    <view class="stars  {{flag>=1? 'on': ''}}" bindtap="changeColor1"></view>
+                    <view class="stars  {{flag>=2? 'on': ''}}" bindtap="changeColor2"></view>
+                    <view class="stars  {{flag>=3? 'on': ''}}" bindtap="changeColor3"></view>
+                    <view class="stars  {{flag>=4? 'on': ''}}" bindtap="changeColor4"></view>
+                    <view class="stars  {{flag>=5? 'on': ''}}" bindtap="changeColor5"></view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

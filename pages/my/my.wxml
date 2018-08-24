@@ -33,7 +33,7 @@
             <text class='list_name'>加入申请</text>
             <image src="/images/my/my_right.png"></image>
         </view>
-         <view class='my_xx'>
+         <view class='my_xx' bindtap='my_news'>
             <image src="/images/my/my_xiaox.png"></image>
             <text class='list_name'>我的消息</text>
             <image src="/images/my/my_right.png"></image>

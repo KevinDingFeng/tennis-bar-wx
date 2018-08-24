@@ -82,3 +82,10 @@
 .two_dz{
     width: 69%;
 }
+.as_img>image{
+    width: 221rpx;
+	height: 154rpx;
+}
+.as_img>image:nth-child(2){
+    margin: 0 23rpx;
+}

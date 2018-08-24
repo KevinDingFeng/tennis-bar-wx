@@ -32,6 +32,11 @@
             <view class='id_name'>电话</view>
             <view>010-98989878</view>
         </view>
+        <view class='xx_id as_img'>
+            <image src='../../../../images/index/banner.png'></image>
+            <image src='../../../../images/index/banner.png'></image>
+            <image src='../../../../images/index/banner.png'></image>
+        </view>
     </view>
     <view class='ball_xx'>
         <view class='xx_id'>
