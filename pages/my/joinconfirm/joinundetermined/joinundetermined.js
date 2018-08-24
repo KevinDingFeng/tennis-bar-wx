@@ -5,7 +5,21 @@ Page({
      * 页面的初始数据
      */
     data: {
-
+      apply:'',
+      personInfo:'',
+      position: {"Common":"普通","Coach":"教练"},
+      languages:{"Chinese":"中文","English":"英文"},
+      ages: {
+        "LessThree": "3年以下",
+        "LessFive": "3~5年",
+        "LessTen": "5~10年",
+        "MoreTen": "10年以上"
+      },
+      levels: {
+        "Entry": "入门(0~1.0)",
+        "Medium": "中级(1.5~3.5)",
+        "Professional": "专业(4.0~7.0)"
+      }
     },
     showDialogBtn: function () {
 
@@ -47,7 +61,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+      wx.setNavigationBarTitle({
+        title: '确认详情',
+      })
+      let info = options.info;
+      let that = this;
+      that.setData({
+        apply: JSON.parse(info)
+      })
+      that.getPersonInfo(this.data.apply.wxUserInfoId);
     },
 
     /**
@@ -98,4 +120,54 @@ Page({
     onShareAppMessage: function () {
 
     },
+
+    getPersonInfo:function(id){
+      let that =this ;
+      wx.request({
+        url: 'http://localhost:6677/api/wx_user_evaluation?userId='+ id,
+        method:"GET",
+        header: {
+          "content-Type": "application/json"
+        },
+        success:function(res){
+          if(res.data.code =="200"){
+            that.setData({
+              personInfo:res.data.data.info
+            })
+          }
+        }
+      })
+    },
+
+    /**
+     * 同意 申请
+     */
+    confirmJoin:function(e){
+      let id = e.currentTarget.dataset.id;
+      let types = e.currentTarget.dataset.type;
+      wx.showModal({
+        title: '同意',
+        content: '是否同意申请',
+        success:function(res){
+          wx.request({
+            url: 'http://localhost:6677/join/update',
+            data:{"id":id,"type":types},
+            method:"POST",
+            header:{
+              "content-type": "application/json"
+            },
+            success:function(res){
+              if (res.data.code == "200") {
+                wx.navigateBack({})
+              } else {
+                wx.showToast({
+                  title: res.data.data,
+                  icon: 'none',
+                })
+              }
+            }
+          })
+        }
+      })
+    }
 })
