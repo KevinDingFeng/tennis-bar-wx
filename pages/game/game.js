@@ -5,6 +5,10 @@ Page({
      * 页面的初始数据
      */
     data: {
+        //球场
+        courts:'',
+        //选择的球场
+        selectedCourt:'',
         time: '',
         dateTimeArray: null,
         dateTime: null,
@@ -194,11 +198,48 @@ Page({
     },
 
 
-
-
-
-
-
-
-
+    //搜索球场
+    getCourts:function(e){
+      let courtName = e.detail.value;
+      let that = this;
+      if(courtName){
+        wx.request({
+          url: 'http://localhost:6677/game/courts?courtName=' + courtName,
+          method:'GET',
+          header:{
+            "content-type": "application/x-www-form-urlencodedn"
+          },
+          success:function(res){
+            if(res.data.code == '200'){
+              that.setData({
+                courts:res.data.data.page
+              })
+            }
+          }
+        })
+      }else{
+        that.setData({
+          courts:null,
+          selectedCourt:null
+        })
+      }
+    },
+    //打开地图
+    openMap:function(e){
+      let latitude = event.currentTarget.dataset.latitude;
+      let longitude = event.currentTarget.dataset.longitude;
+      wx.openLocation({
+        latitude: latitude,
+        longitude: longitude,
+      })
+    },
+    //选择球场
+    selectCourt:function(e){
+      let court = e.currentTarget.dataset.court;
+      this.setData({
+        isfull: false,
+        selectedCourt:court,
+        courtName:court.name
+      })
+    }
 })

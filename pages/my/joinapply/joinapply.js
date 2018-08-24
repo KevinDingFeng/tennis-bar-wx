@@ -37,13 +37,13 @@ Page({
     tabClick: function (e) {
         let status = e.currentTarget.dataset.status;
         let that = this;
-        if (wx.getStorageSync(status)) {
+        // if (wx.getStorageSync(status)) {
           that.setData({
             applys: wx.getStorageSync(status)
           })
-        } else {
+        // } else {
           that.getApplyJoinmGames(2, status);
-        }
+        // }
         this.setData({
             sliderOffset: e.currentTarget.offsetLeft,
             activeIndex: e.currentTarget.id
@@ -99,7 +99,7 @@ Page({
             that.setData({
               applys: res.data.data.applys
             })
-            wx.setStorageSync(status, res.data.data.applys);
+            // wx.setStorageSync(status, res.data.data.applys);
           }
         }
       })
