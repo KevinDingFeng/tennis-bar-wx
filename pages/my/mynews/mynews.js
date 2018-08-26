@@ -12,7 +12,25 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    let that = this;
+    wx.request({
+      url: 'http://localhost:6677/api/message/list',
+      method: "GET",
+      header: {
+        "content-Type": "application/json"
+      },
+      success: function (res) {
+        //console.log(res.data);
+        if (res.data.code = "200") {
+          if (res.data.data){
+            that.setData({
+              messages: res.data.data
+            })
+          }
+
+        }
+      }
+    })
   },
 
   /**
