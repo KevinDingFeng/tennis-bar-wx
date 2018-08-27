@@ -5,6 +5,24 @@ Page({
      * 页面的初始数据
      */
     data: {
+        //微信用户信息
+        wxUserInfo:'',
+        ages: ["LessThree", "LessFive", "LessTen","MoreTen"],
+        playAges: { "LessThree": "3年以下", "LessFive": "3~5年", "LessTen": "5~10年", "MoreTen": "10年以上"},
+        level: ["Entry", "Medium","Professional"],
+        skillLevels: { "Entry": "入门(0~1.0)", "Medium": "中级(1.5~3.5)", "Professional": "专业(4.0~7.0)"},
+        // 球局数据
+        name:'',
+        start_time: null,
+        end_time: null,
+        playAge:null,       //球龄
+        skillLevel:null,    //球技
+        totalNum:0,         //总人数 
+        maleNum:0,          //男性人数
+        femaleNum:0,        //女性人数
+        holderNum:0,        //预留人数
+        deadlineTime:null,  //报名截止日期
+        remark:null,        //备注
         //球场
         courts:'',
         //选择的球场
@@ -16,19 +34,20 @@ Page({
         dateTime1: null, //kssj
         dateTimeArray2: null, //endsj
         dateTime2: null, //endsj
+        dateTimeArray3: null, //deadsj
+        dateTime3: null, //deadsj
         startYear: 2000,
         endYear: 2050,
         cc: true,
-        cc1: true,
-        stat_time:null,
-        end_time: null,
-        isopen:true,
-        istype: false,
+        cc1:true,
+        cc2:true,
+        isopen:true, //是否公开
+        istype: true, //球局类型
         isfull:false,
         isfirst:"1",
-        issex:false,
-        array: ['3年以下', '3-5年', '30-40岁', '5-10年', "10年以上"],
-        array_ji: ['不限', '入门','中级','专业'],
+        issex:true,
+        array: ['3年以下', '3-5年', '5-10年', "10年以上"],
+        array_ji: ['入门(0~1.0)', '中级(1.5~3.5)','专业(4.0~7.0)'],
         array_peo: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20'],
         show: false,//控制下拉列表的显示隐藏，false隐藏、true显示
         selectData: [], //['1个', '2个', '3个', '4个', '5个', '6个'],下拉列表的数据
@@ -37,24 +56,25 @@ Page({
         index_nan: 0,//选择的下拉列表下标
         show_yul: false,//控制下拉列表的显示隐藏，false隐藏、true显示
         index_peo: 0,//选择的下拉列表下标
+        index_total:0
     },
     // 点击下拉显示框
     selectTap() {
         this.setData({
             show: !this.data.show,
-            selectData: ['1个', '2个', '3个', '4个', '5个', '6个'],
+            selectData: ['1', '2', '3', '4', '5', '6'],
         });
     },
     selectTap_nan() {
         this.setData({
             show_nan: !this.data.show_nan,
-            selectData: ['1个', '2个', '3个', '4个', '5个', '6个'],
+            selectData: ['1', '2', '3', '4', '5', '6'],
         });
     },
     selectTap_peo() {
         this.setData({
             show_peo: !this.data.show_peo,
-            selectData: ['1个', '2个', '3个', '4个', '5个', '6个'],
+            selectData: ['1', '2', '3', '4', '5', '6'],
         });
     },
     // 点击下拉列表
@@ -84,11 +104,11 @@ Page({
            isfirst: "1",
        });
    },
-   yul_show(){//点击预览
-       this.setData({
-           isfirst: "3",
-       });
-   },
+    yul_show(){//点击预览
+        this.setData({
+            isfirst: "3",
+        });
+    },
     next_bu(){//下一步
         this.setData({
             isfirst: "2",
@@ -97,25 +117,31 @@ Page({
     bindPickerChange: function (e) {//球龄
         console.log('picker发送选择改变，携带值为', e.detail.value)
         this.setData({
-            index: e.detail.value
+            index: e.detail.value,
+            playAge:this.data.ages[e.detail.value]
         })
     },
     bindPickerChange_ji: function (e) {//球技等级
         console.log('picker发送选择改变，携带值为', e.detail.value)
         this.setData({
-            index_ji: e.detail.value
+            index_ji: e.detail.value,
+            skillLevel:this.data.level[e.detail.value]
         })
     },
     bindPickerChange_peo: function (e) {//打球人数
         console.log('picker发送选择改变，携带值为', e.detail.value)
         this.setData({
-            index_peo: e.detail.value
+            index_total : e.detail.value,
+            totalNum : this.data.array_peo[e.detail.value]   
         })
     },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
+        //获取微信用户信息
+        this.getWxUserInfo();
+
         // 获取完整的年月日 时分秒，以及默认显示的数组
         var obj = dateTimePicker.dateTimePicker(this.data.startYear, this.data.endYear);
         var obj1 = dateTimePicker.dateTimePicker(this.data.startYear, this.data.endYear);
@@ -129,7 +155,9 @@ Page({
             dateTimeArray1: obj1.dateTimeArray,
             dateTime1: obj1.dateTime,
             dateTimeArray2: obj1.dateTimeArray,
-            dateTime2: obj1.dateTime
+            dateTime2: obj1.dateTime,
+            dateTimeArray3: obj1.dateTimeArray,
+            dateTime3: obj1.dateTime
         });
     },
     changeDateTime1(e) {
@@ -140,29 +168,52 @@ Page({
         this.setData({ dateTime2: e.detail.value });
         this.setData({ cc1: false });
     },
+    changeDateTime3(e) {
+      this.setData({ dateTime3: e.detail.value });
+      this.setData({ cc2: false });
+    },
+    changeDateTimeColumn1(e) {
+      var arr = this.data.dateTime1;
+      var dateArr = this.data.dateTimeArray1;
+      arr[e.detail.column] = e.detail.value;
+      dateArr[2] = dateTimePicker.getMonthDay(dateArr[0][arr[0]], dateArr[1][arr[1]]);
+      this.setData({
+        dateTimeArray1: dateArr,
+        dateTime1: arr,
+      });
+      let dateTimeArray1 = this.data.dateTimeArray1;
+      let dateTime1 = this.data.dateTime1;
+      let startTime = dateTimeArray1[0][dateTime1[0]] + "-" + dateTimeArray1[1][dateTime1[1]] + "-" + dateTimeArray1[2][dateTime1[2]] + " " + dateTimeArray1[3][dateTime1[3]] + ":" + dateTimeArray1[4][dateTime1[4]];
+      this.setData({ start_time: startTime })
+    },
     changeDateTimeColumn2(e) {
-
         var arr = this.data.dateTime2, dateArr = this.data.dateTimeArray2;
-
         arr[e.detail.column] = e.detail.value;
         dateArr[2] = dateTimePicker.getMonthDay(dateArr[0][arr[0]], dateArr[1][arr[1]]);
-
         this.setData({
             dateTimeArray2: dateArr,
             dateTime2: arr
         });
+        let dateTime1 = this.data.dateTime1;
+        let dateTimeArray2 = this.data.dateTimeArray2;
+        let dateTime2 = this.data.dateTime2;
+        let endTime = dateTimeArray2[0][dateTime2[0]]+"-"+dateTimeArray2[1][dateTime2[1]]+"-"+ dateTimeArray2[2][dateTime1[2]] + " " + dateTimeArray2[3][dateTime2[3]] + ":" + dateTimeArray2[4][dateTime2[4]];
+        this.setData({ end_time: endTime })
     },
-    changeDateTimeColumn1(e) {
-        var arr = this.data.dateTime1;
-        var dateArr = this.data.dateTimeArray1;
-        arr[e.detail.column] = e.detail.value;
-        dateArr[2] = dateTimePicker.getMonthDay(dateArr[0][arr[0]], dateArr[1][arr[1]]);
-
-        this.setData({
-            dateTimeArray1: dateArr,
-            dateTime1: arr,
-        });
+    changeDateTimeColumn3(e) {
+      var arr = this.data.dateTime3, dateArr = this.data.dateTimeArray3;
+      arr[e.detail.column] = e.detail.value;
+      dateArr[2] = dateTimePicker.getMonthDay(dateArr[0][arr[0]], dateArr[1][arr[1]]);
+      this.setData({
+        dateTimeArray3: dateArr,
+        dateTime3: arr
+      });
+      let dateTimeArray3 = this.data.dateTimeArray3;
+      let dateTime3 = this.data.dateTime3;
+      let deadlineTime = dateTimeArray3[0][dateTime3[0]] + "-" + dateTimeArray3[1][dateTime3[1]] + "-" + dateTimeArray3[2][dateTime3[2]] + " " + dateTimeArray3[3][dateTime3[3]] + ":" + dateTimeArray3[4][dateTime3[4]];
+      this.setData({ deadlineTime: deadlineTime })
     },
+    
     ball_cc(){//场地
         this.setData({
             isfull: true,
@@ -189,11 +240,52 @@ Page({
         })
     },
 
-    formSubmit: function(e) {
-        let formData = e.detail.value;
-        console.log(JSON.stringify(formData));
-        wx.navigateTo({
-            url: './court/court?game=' + JSON.stringify(formData),
+    //球局数据
+    //球局名称
+    gameName:function(e){
+      this.setData({
+        name:e.detail.value
+      })
+    },
+    //备注
+    remark:function(e){
+      this.setData({
+        remark:e.detail.value
+      })
+    },
+
+    addGame: function(e) {
+        let formData = {};
+        formData.organizerId = this.data.wxUserInfo.id;
+        formData.name = this.data.name;
+        formData.startTime = this.data.start_time;
+        formData.endTime = this.data.end_time;
+        formData.gameType = this.data.istype ? 'Entertainment' :'Teaching';
+        formData.isPublic = this.data.isPublic;
+        formData.courtId = this.data.selectedCourt.id;
+        formData.playAge = this.data.playAge;
+        formData.skillLevel = this.data.skillLevel;
+        formData.limitGender = this.data.issex;
+        formData.holderNum = this.data.holderNum;
+        formData.totalNum = this.data.totalNum;
+        formData.deadlineTime = this.data.deadlineTime;
+        formData.remark = this.data.remark;
+
+        console.log(formData.toString);
+        wx.request({
+          url: 'http://localhost:6677/game/create',
+          data: formData,
+          method: 'POST',
+          header: {
+            "content-type": "application/json"
+          },
+          success: function (res) {
+            if (res.data.code == "200") {
+              wx.switchTab({
+                url: '../index/index',
+              })
+            }
+          }
         })
     },
 
@@ -240,6 +332,25 @@ Page({
         isfull: false,
         selectedCourt:court,
         courtName:court.name
+      })
+    },
+    //获取微信用户信息
+    getWxUserInfo:function(){
+      let that = this;
+      wx.request({
+        url: 'http://localhost:6677/api/wx_user_info',
+        method:"GET",
+        header:{
+          "content-type": "application/json"
+        },
+        success:function(res){
+          if(res.data.code =="200"){
+            console.log(res);
+            that.setData({
+              wxUserInfo:res.data.data
+            })
+          }
+        }
       })
     }
 })
