@@ -105,4 +105,12 @@ Page({
       })
     },
 
+    //申请详情
+    gameDetail:function(e){
+      let data = e.currentTarget.dataset.apply;
+      wx.navigateTo({
+        url: '../../application/application?data='+JSON.stringify(data),
+      })
+    }  
+
 })

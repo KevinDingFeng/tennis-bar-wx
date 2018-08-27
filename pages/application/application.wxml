@@ -1,36 +1,33 @@
 <view class='container'>
     <view class='ball_xx'>
         <view class='xx_id'>
-            <view class='xx_title f_wei'>球局信息</view>
+            <view class='xx_title f_wei'>{{apply.game.name}}</view>
+            <view>{{status[apply.applyJoinGameStatus]}}</view>
         </view>
         <view class='xx_id'>
             <view class='id_name'>参与球局</view>
-            <view>球局编号</view>
-        </view>
-        <view class='xx_id'>
-            <view class='id_name'>球局名称</view>
-            <view>慈云寺下午4点</view>
+            <view>{{apply.game.id}}</view>
         </view>
         <view class='xx_id'>
             <view class='id_name'>发起人</view>
-            <view>张三</view>
+            <view>{{}}</view>
             <view>教练</view>
         </view>
         <view class='xx_id'>
             <view class='id_name'>打球时间</view>
-            <view class='dz_name f_wei'>2018.08.17 14:45~17:30</view>
+            <view class='dz_name f_wei'>{{apply.game.startTime}}~{{apply.game.endTime}}</view>
         </view>
         <view class='xx_id'>
             <view class='id_name'>球场</view>
-            <view>球场名称</view>
+            <view>{{apply.game.court.name}}</view>
         </view>
         <view class='xx_id two_sty' >
             <view class='id_name'>地址</view>
-            <view class='two_dz'>球场地址球场地址球场地址球场地址球场地址球场地址球场地址球场地址球场地址球场地址</view>
+            <view class='two_dz'>{{apply.game.court.address}}</view>
         </view>
         <view class='xx_id'>
             <view class='id_name'>电话</view>
-            <view>010-98989878</view>
+            <view>{{apply.game.court.telephone}}</view>
         </view>
         <view class='xx_id as_img'>
             <image src='../../../../images/index/banner.png'></image>
@@ -41,7 +38,7 @@
     <view class='ball_xx'>
         <view class='xx_id'>
             <view class='xx_title f_wei'>参与情况</view>
-            <view class='xx_type f_wei'>5缺2</view>
+            <view class='xx_type f_wei'>{{apply.game.totalNum}}缺{{apply.game.vacancyNum}}</view>
         </view>
         <view class='cy_xx'>
             <view class='xx_1'>
@@ -72,22 +69,28 @@
         </view>
         <view class='xx_id'>
             <view class='id_name'>加入申请时间</view>
-            <view>球局编号</view>
+            <view>{{apply.creation}}</view>
         </view>
+        <block wx:if="{{apply.applyJoinGameStatus != 'WaitingConfirm'}}">
         <view class='xx_id'>
             <view class='id_name'>加入确认时间</view>
-            <view>慈云寺下午4点</view>
+            <view>{{apply.confirmTime}}</view>
         </view>
+        </block>
+        <block wx:if="{{apply.applyJoinGameStatus == 'Refuse'}}">
         <view class='xx_id'>
             <view class='id_name'>确认结果</view>
             <view class='f_wei'>拒绝</view>
         </view>
         <view class='xx_id'>
             <view class='id_name'>拒绝原因</view>
-            <view>球技等级有点低，抱歉~~</view>
+            <view>{{apply.remark}}</view>
         </view>
+        </block>
     </view>
+    <block wx:if="{{apply.applyJoinGameStatus == 'Agree'}}">
     <view class='bot_btn'>
-        <button class="weui-btn btn_sure" type="primary">退出不参与</button>
+        <button class="weui-btn btn_sure" type="primary" bindtap="quitGame" data-id="{{apply.id}}">退出不参与</button>
     </view>
+    </block>
 </view>

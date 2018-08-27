@@ -15,7 +15,7 @@
                     <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
                       <block wx:if="{{applys.content.length > 0}}">
                         <block wx:for="{{applys.content}}" wx:key="**this" wx:for-item="apply">
-                          <view class='list_xx'>
+                          <view class='list_xx' bindtap='gameDetail' data-apply='{{apply}}'>
                             <view class='list_top'>
                                 <view class='palce_name'>
                                     {{apply.game.name}}
@@ -42,7 +42,7 @@
                     <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
                       <block wx:if="{{applys.content.length > 0}}">
                         <block wx:for="{{applys.content}}" wx:key="**this" wx:for-item="apply">
-                          <view class='list_xx'>
+                          <view class='list_xx' bindtap='gameDetail' data-apply='{{apply}}'>
                             <view class='list_top'>
                                 <view class='palce_name'>
                                     {{apply.game.name}}
@@ -65,7 +65,7 @@
                     <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
                       <block wx:if="{{applys.content.length > 0}}">
                         <block wx:for="{{applys.content}}" wx:key="**this" wx:for-item="apply">
-                          <view class='list_xx'>
+                          <view class='list_xx' bindtap='gameDetail' data-apply='{{apply}}'>
                             <view class='list_top'>
                                 <view class='palce_name'>
                                     {{apply.game.name}}

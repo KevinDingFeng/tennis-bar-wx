@@ -161,13 +161,43 @@ Page({
                 wx.navigateBack({})
               } else {
                 wx.showToast({
-                  title: res.data.data,
-                  icon: 'none',
+                  title: res.data.data.message,
+                  icon: 'none'
                 })
               }
             }
           })
         }
       })
+    },
+
+    //拒绝
+    refuse:function(e){
+      let applyId = this.data.apply.id;
+      let reason = e.detail.value.remark;
+      wx.request({
+        url: 'http://localhost:6677/join/update',
+        data:{
+          "id":applyId,
+          "reason":reason,
+          "type":"refuse"
+        },
+        method:"POST",
+        header:{
+          "content-type":"application/json"
+        },
+        success:function(res){
+          if(res.data.code == "200"){
+            wx.navigateBack({
+            })
+          }else{
+            wx.showToast({
+              title: res.data.data.message,
+              icon:'none'
+            })
+          }
+        }
+      })
+      this.hideModal();
     }
 })
