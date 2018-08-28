@@ -2,9 +2,12 @@
 //获取应用实例
 var cityData = require('../../utils/city.js');
 const app = getApp()
+var pageIndex = 0;
+var pageSize = 20;
 
 Page({
     data: {
+        keyword:'',
         motto: 'Hello World',
         userInfo: {},
         hasUserInfo: false,
@@ -34,6 +37,8 @@ Page({
         shownavindex: '',
         games: ''
     },
+    /**
+     * 
     showInput: function () {
         this.setData({
             inputShowed: true
@@ -50,37 +55,22 @@ Page({
             inputVal: ""
         });
     },
+     * 
+     */
     inputTyping: function (e) {
-        this.setData({
-            inputVal: e.detail.value
-        });
-    },
-    //事件处理函数
-    bindViewTap: function () {
-        wx.navigateTo({
-            url: '../logs/logs'
-        })
+        let keyword = e.detail.value;
+        this.setData({keyword:keyword})
+        // this.setData({
+        //     inputVal: e.detail.value
+        // });
     },
     onLoad: function (options) {
-        let that = this;
         wx.setNavigationBarTitle({
             title: '球局',
         })
-        wx.request({
-            url: 'http://localhost:6677/game',
-            method: "GET",
-            header: {
-                "content-Type": "application/json"
-            },
-            success: function (res) {
-                console.log(res.data);
-                if (res.data.code = "200") {
-                    that.setData({
-                        games: res.data.data.page
-                    })
-                }
-            }
-        })
+    },
+    onShow: function(){
+      this.queryGame();
     },
     listqy: function (e) {
         if (this.data.qyopen) {
@@ -214,6 +204,36 @@ Page({
     //         }
     //     })
     // },
+
+    //搜索
+    search:function(){
+      this.queryGame();
+    },
+    //查询球局数据
+    queryGame:function(){
+      let that = this;
+      wx.request({
+        url: 'http://localhost:6677/game',
+        method: "GET",
+        data:{
+          "keyword": this.data.keyword ,
+          "page":  pageIndex,
+          "value":  pageSize
+        },
+        header: {
+          "content-Type": "application/json"
+        },
+        success: function (res) {
+          console.log(res.data);
+          if (res.data.code = "200") {
+            that.setData({
+              games: res.data.data.page
+            })
+          }
+        }
+      })
+    },
+
     // 查看球场地址详情
     openLocation: function (event) {
         let latitude = event.currentTarget.dataset.latitude;

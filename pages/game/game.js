@@ -272,8 +272,6 @@ Page({
         formData.totalNum = this.data.totalNum == 0 ? this.data.array_peo[this.data.index_total]:this.data.totalNum;
         formData.deadlineTime = this.data.deadlineTime;
         formData.remark = this.data.remark;
-
-        console.log(formData.toString);
         wx.request({
           url: 'http://localhost:6677/game/create',
           data: formData,
@@ -352,7 +350,6 @@ Page({
         },
         success:function(res){
           if(res.data.code =="200"){
-            console.log(res);
             that.setData({
               wxUserInfo:res.data.data
             })
