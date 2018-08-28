@@ -1,3 +1,4 @@
 {
-  "enablePullDownRefresh": false
+  "enablePullDownRefresh": false,
+  "navigationBarTitleText": "发起球局信息"
 }

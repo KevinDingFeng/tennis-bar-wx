@@ -2,9 +2,9 @@
     <view class="phone_xx">
         <view class='phone_top'>
             <view class='phone_img'>
-                <image src="../../../../images/index/banner.png"></image>
+                <image src="{{wxUserInfo.avatarUrl? wxUserInfo.avatarUrl: '../../../../images/index/banner.png'}}"></image>
             </view>
-            <label class='phone_nickname'>微信昵称</label>
+            <label class='phone_nickname'>{{wxUserInfo.nickName}}</label>
         </view>
     </view>
     <view class='phone_code'>

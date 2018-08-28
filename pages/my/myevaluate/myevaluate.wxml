@@ -3,24 +3,24 @@
         <view class='user_jbxx'>
             <view>* 打球频率</view>
             <view class='user_age'>
-                <picker mode="selector" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
-                    <text>{{array[index]?array[index]:'请选择打球频率 >'}}</text>
+                <picker mode="selector" bindchange="bindPickerChange" value="{{index}}" range="{{playFrequencyTextArr}}">
+                    <text>{{playFrequencyMap[selfEvaluation.playFrequency]?playFrequencyMap[selfEvaluation.playFrequency]:'请选择打球频率 >'}}</text>
                 </picker>
             </view>
         </view>
         <view class='user_jbxx'>
             <view>* 球龄</view>
             <view class='user_sex'>
-                <picker mode="selector" bindchange="bindPickerChange_age" value="{{index_age}}" range="{{array_age}}">
-                    <text>{{array_age[index_age]?array_age[index_age]:'请选择球龄 >'}}</text>
+                <picker mode="selector" bindchange="bindPickerChange_age" value="{{index_age}}" range="{{playAgeTextArr}}">
+                    <text>{{playAgeMap[selfEvaluation.playAge]?playAgeMap[selfEvaluation.playAge]:'请选择球龄 >'}}</text>
                 </picker>
             </view>
         </view>
         <view class='user_jbxx mar_top'>
             <view>* 球技等级</view>
             <view class='user_age'>
-                <picker mode="selector" bindchange="bindPickerChange_ji" value="{{index_ji}}" range="{{array_ji}}">
-                    <text>{{array_ji[index_ji]?array_ji[index_ji]:'请选择等级 >'}}</text>
+                <picker mode="selector" bindchange="bindPickerChange_ji" value="{{index_ji}}" range="{{skillLevelTextArr}}">
+                    <text>{{skillLevelMap[selfEvaluation.skillLevel]?skillLevelMap[selfEvaluation.skillLevel]:'请选择等级 >'}}</text>
                 </picker>
             </view>
         </view>
@@ -30,10 +30,10 @@
         </view>
         <view class='my_remark'>
             <view>备注</view>
-            <textarea placeholder='其他补充说明，控制在30字以内'></textarea>
+            <textarea placeholder='{{selfEvaluation.remark?"":"其他补充说明，控制在30字以内"}}' bindblur="modifyRemark">{{selfEvaluation.remark?selfEvaluation.remark:""}}</textarea>
         </view>
         <view class='bot_btn'>
-            <button class="weui-btn" type="primary">保存</button>
+            <button class="weui-btn" type="primary" bindtap='save'>保存</button>
         </view>
     </view>
     <!-- 球技评判标准 -->

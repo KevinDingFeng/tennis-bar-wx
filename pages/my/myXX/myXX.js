@@ -182,6 +182,16 @@ Page({
       url: './phone/phone' + (p?'?phone=' + p:''),
     })
   },
+  modifyOccupation: function(e){
+    var v = e.detail.value;
+    if(v){
+      var wxUserInfo = this.data.wxUserInfo;
+      wxUserInfo.occupation = v;
+      this.setData({
+        wxUserInfo: wxUserInfo
+      });
+    }
+  },
   save: function(){
     var info = this.data.wxUserInfo;
     var id = info.id;
