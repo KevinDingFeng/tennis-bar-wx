@@ -8,6 +8,9 @@ var pageSize = 20;
 Page({
     data: {
         keyword:'',
+        // code: {"level1": "100", "level2": "101", "level3": "10101"},
+        // code: { "level1": "100", "level2": "101", "level3": "" },
+        code: { "level1": "100", "level2": "", "level3": "" },
         motto: 'Hello World',
         userInfo: {},
         hasUserInfo: false,
@@ -217,6 +220,7 @@ Page({
         method: "GET",
         data:{
           "keyword": this.data.keyword ,
+          "code": JSON.stringify(this.data.code),
           "page":  pageIndex,
           "value":  pageSize
         },

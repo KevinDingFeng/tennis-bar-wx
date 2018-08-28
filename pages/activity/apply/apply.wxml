@@ -71,7 +71,14 @@
             </view>
             <view class='require no_bor'>
                 <text>性别</text>
-                <view class='col_g'>{{game.totalNum}}</view>
+                <view class='col_g'>
+                  <block wx:if="{{game.limitGender}}">
+                    {{game.maleNum}}男{{game.femaleNum}}女
+                  </block>
+                  <block wx:else>
+                    不限
+                  </block>
+                </view>
             </view>
         </view>
     </view>
