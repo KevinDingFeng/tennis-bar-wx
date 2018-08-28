@@ -56,7 +56,9 @@ Page({
         index_nan: 0,//选择的下拉列表下标
         show_yul: false,//控制下拉列表的显示隐藏，false隐藏、true显示
         index_peo: 0,//选择的下拉列表下标
-        index_total:0
+
+        index_total:0, //球龄
+        index_ji:0    //球技
     },
     // 点击下拉显示框
     selectTap() {
@@ -263,11 +265,11 @@ Page({
         formData.gameType = this.data.istype ? 'Entertainment' :'Teaching';
         formData.isPublic = this.data.isPublic;
         formData.courtId = this.data.selectedCourt.id;
-        formData.playAge = this.data.playAge;
-        formData.skillLevel = this.data.skillLevel;
-        formData.limitGender = this.data.issex;
+        formData.playAge = this.data.playAge==null ? this.data.ages[this.data.index]:this.data.playAge;
+        formData.skillLevel = this.data.skillLevel==null ? this.data.level[this.data.index_ji]:this.data.skillLevel;
+        formData.limitGender = !this.data.issex;
         formData.holderNum = this.data.holderNum;
-        formData.totalNum = this.data.totalNum;
+        formData.totalNum = this.data.totalNum == 0 ? this.data.array_peo[this.data.index_total]:this.data.totalNum;
         formData.deadlineTime = this.data.deadlineTime;
         formData.remark = this.data.remark;
 
@@ -283,6 +285,11 @@ Page({
             if (res.data.code == "200") {
               wx.switchTab({
                 url: '../index/index',
+              })
+            }else{
+              wx.showToast({
+                title: res.data.data.errMsg,
+                icon:'none'
               })
             }
           }
