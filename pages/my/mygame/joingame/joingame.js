@@ -22,6 +22,16 @@ Page({
         },
         flag: 0,//评价星级
         info: "",
+        items: [
+            { name: 'USA', value: '到场' },
+            { name: 'BRA', value: '到场' },
+            { name: 'JPN', value: '到场' },
+            { name: 'ENG', value: '到场' },
+            { name: 'TUR', value: '到场' },
+        ]
+    },
+    checkboxChange: function (e) {
+        console.log('checkbox发生change事件，携带value值为：', e.detail.value)
     },
     changeColor1: function () {
         var that = this;
