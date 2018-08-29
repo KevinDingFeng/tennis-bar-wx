@@ -39,22 +39,23 @@
             </view>
         </view>
         <view class='pj_img'>
-            
+            <checkbox-group bindchange="checkboxChange">
             <view  wx:for="{{joinWxUser}}" wx:for-item="wxItem" wx:key="wxKey" >
-                <image src="{{wxItem.avatarUrl? wxItem.avatarUrl: '../../../../images/index/banner.png'}}"></image>
-                <view class='pj_name'>{{wxUserInfo.nickName}}</view>
+                <image src="{{wxItem.wxUserInfo.avatarUrl? wxItem.avatarUrl: '../../../../images/index/banner.png'}}"></image>
+                <view class='pj_name'>{{wxItem.wxUserInfo.nickName}}</view>
                 <view class='pj_check'>
-                    <checkbox-group bindchange="checkboxChange">
-                        <label class="checkbox"  class='checkbox_sty'>
-                            <checkbox value="" checked="{{wxItem.presented?checked:''}}"/>到场
-                        </label>
-                    </checkbox-group>
+                  <label class="checkbox"  class='checkbox_sty'>
+                    <block wx:if="{{wxItem.presented}}">
+                      <checkbox value="{{wxItem.id}}" checked="checked"/>到场
+                    </block>
+                    <block wx:else>
+                      <checkbox value="{{wxItem.id}}"/>到场
+                    </block>                      
+                  </label>
                 </view>
             </view>
+            </checkbox-group>
         </view>
-        <block wx:if="{{game.gameStatus =='WaitingJoin'}}">
-          
-        </block>
         <!-- 提交 -->
         <block wx:if="{{!comment.id}}">
           <view class='btn_cu' bindtap='save'>

@@ -171,6 +171,7 @@ Page({
     if (info.id){
       data.id = id;
     }
+    data.wxUserIds = this.data.wxUserIds;
     wx.request({
       url: 'http://localhost:6677/api/comment/update',
       method: "POST",
@@ -186,6 +187,11 @@ Page({
         }
       }
     })
+  },
+  checkboxChange: function(e){
+    this.setData({
+      wxUserIds: e.detail.value
+    });
   }
 
 })
