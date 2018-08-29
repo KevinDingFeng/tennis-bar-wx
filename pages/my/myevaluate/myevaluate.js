@@ -5,28 +5,34 @@ Page({
      * 页面的初始数据
      */
     data: {
-        array: ['3次以下/周', '3次以上/周', '10次以下/月', '10次以上/周'],
-        array_age: ['3年以下', '3-5年', '5-10年', '10年以上'],
-        array_ji: ['入门(0~1.0)', '中级(1.5~3.5)', '专业(4.0~7.0)'],
-        isfirst:true,
+        isfirst:true
     },
     bindPickerChange: function (e) {//打球频率
-        console.log('picker发送选择改变，携带值为', e.detail.value)
-        this.setData({
-            index: e.detail.value
-        })
+      var ar = this.data.playFrequencyNameArr[e.detail.value];
+      var selfEvaluation = this.data.selfEvaluation;
+      selfEvaluation.playFrequency = ar;
+      this.setData({
+        index: e.detail.value,
+        selfEvaluation: selfEvaluation
+      })
     },
     bindPickerChange_age: function (e) {//球龄
-        console.log('picker发送选择改变，携带值为', e.detail.value)
-        this.setData({
-            index_age: e.detail.value
-        })
+      var ar = this.data.playAgeNameArr[e.detail.value];
+      var selfEvaluation = this.data.selfEvaluation;
+      selfEvaluation.playAge = ar;
+      this.setData({
+        index_age: e.detail.value,
+        selfEvaluation: selfEvaluation
+      })
     },
     bindPickerChange_ji: function (e) {//等级
-        console.log('picker发送选择改变，携带值为', e.detail.value)
-        this.setData({
-            index_ji: e.detail.value
-        })
+      var ar = this.data.skillLevelNameArr[e.detail.value];
+      var selfEvaluation = this.data.selfEvaluation;
+      selfEvaluation.skillLevel = ar;
+      this.setData({
+        index_ji: e.detail.value,
+        selfEvaluation: selfEvaluation
+      })
     },
     grade:function(){
         this.setData({
@@ -50,11 +56,95 @@ Page({
             }
         });
     },
+  //根据传入的额值，找到对应的坐标
+  getArrIndex: function (n, arr) {
+    return arr.indexOf(n);
+  },
+  //循环传入的 map ，并执行回调方法，把分离的 name 和 text 数组返回。针对操作 java 对应的枚举类型
+  loopMap: function (m, cb) {
+    var nameArr = new Array();
+    var textArr = new Array();
+    var i = 0;
+    for (var k in m) {
+      nameArr[i] = k;
+      textArr[i] = m[k];
+      i++;
+    }
+    cb(nameArr, textArr);
+  },
+  setPlayFrequencyList: function(){
+    if (this.data.playFrequencyMap) {
+      var m = this.data.playFrequencyMap;
+      var that = this;
+      var cb = function (nameArr, textArr) {
+        var i = that.getArrIndex(that.data.selfEvaluation.playFrequency, nameArr);
+        that.setData({
+          index: i,
+          playFrequencyTextArr: textArr,
+          playFrequencyNameArr: nameArr
+        });
+      }
+      this.loopMap(m, cb);
+    }
+  },
+  setPlayAgeList: function(){
+    if (this.data.playAgeMap) {
+      var m = this.data.playAgeMap;
+      var that = this;
+      var cb = function (nameArr, textArr) {
+        var i = that.getArrIndex(that.data.selfEvaluation.playAge, nameArr);
+        that.setData({
+          index_age: i,
+          playAgeTextArr: textArr,
+          playAgeNameArr: nameArr
+        });
+      }
+      this.loopMap(m, cb);
+    }
+  },
+  setSkillLevelList: function(){
+    if (this.data.skillLevelMap) {
+      var m = this.data.skillLevelMap;
+      var that = this;
+      var cb = function (nameArr, textArr) {
+        var i = that.getArrIndex(that.data.selfEvaluation.skillLevel, nameArr);
+        that.setData({
+          index_ji: i,
+          skillLevelTextArr: textArr,
+          skillLevelNameArr: nameArr
+        });
+      }
+      this.loopMap(m, cb);
+    }
+  },
+
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
+      let that = this;
+      wx.request({
+        url: 'http://localhost:6677/api/wx_user_evaluation/detail',
+        method: "GET",
+        header: {
+          "content-Type": "application/json"
+        },
+        success: function (res) {
+          console.log(res.data);
+          if (res.data.code = "200") {
 
+            that.setData({
+              selfEvaluation: res.data.data.selfEvaluation,
+              playFrequencyMap: res.data.data.playFrequencyMap,
+              playAgeMap: res.data.data.playAgeMap,
+              skillLevelMap: res.data.data.skillLevelMap
+            })
+            that.setPlayFrequencyList();
+            that.setPlayAgeList();
+            that.setSkillLevelList();
+          }
+        }
+      })
     },
 
     /**
@@ -104,5 +194,36 @@ Page({
      */
     onShareAppMessage: function() {
 
-    }
+    },
+  save: function () {
+    var info = this.data.selfEvaluation;
+    var id = info.id;
+    var playFrequency = info.playFrequency;
+    var playAge = info.playAge;
+    var skillLevel = info.skillLevel;
+    var remark = info.remark ? info.remark : '';
+    wx.request({
+      url: 'http://localhost:6677/api/wx_user_evaluation/update',
+      method: "POST",
+      header: {
+        "content-Type": "application/x-www-form-urlencoded"
+      },
+      data: {
+        "id": id,
+        "playFrequency": playFrequency,
+        "playAge": playAge,
+        "skillLevel": skillLevel,
+        "remark": remark
+      },
+      success: function (res) {
+        console.log(res.data);
+        if (res.data.code = "200") {
+          //保存成功，返回上一页
+          wx.switchTab({
+            url: '../my'
+          })
+        }
+      }
+    })
+  }
 })

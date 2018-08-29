@@ -2,9 +2,23 @@
 //获取应用实例
 var cityData = require('../../utils/city.js');
 const app = getApp()
+var pageIndex = 0;
+var pageSize = 20;
 
 Page({
     data: {
+        //搜索条件
+        keyword:'',
+        //商区 商圈码
+        code:null,
+        // code: {"level1": "100", "level2": "101", "level3": "10101"},
+        // code: { "level1": "100", "level2": "101", "level3": "" },
+        // code: { "level1": "100", "level2": "", "level3": "" },
+        //智能排序
+        //打球时间
+        // date: '',
+        date:'2018-08-31',  //日期
+        time:'afternoon',  //时间
         motto: 'Hello World',
         userInfo: {},
         hasUserInfo: false,
@@ -16,7 +30,7 @@ Page({
         px_text:"打球时间",
         px_time:"请选择日期",
         content: [],
-        nv: ['默认排序', '离我最近', '价格最低', '价格最高'],//智能排序
+        nv: ['默认排序', '熟人优先', '距离最近', '时间最近'],//智能排序
         px: ['上午场', '下午场', '夜场'],//打球时间
         qyopen: false,
         qyshow: true,//商区显示隐藏
@@ -34,6 +48,8 @@ Page({
         shownavindex: '',
         games: ''
     },
+    /**
+     * 
     showInput: function () {
         this.setData({
             inputShowed: true
@@ -50,37 +66,22 @@ Page({
             inputVal: ""
         });
     },
+     * 
+     */
     inputTyping: function (e) {
-        this.setData({
-            inputVal: e.detail.value
-        });
-    },
-    //事件处理函数
-    bindViewTap: function () {
-        wx.navigateTo({
-            url: '../logs/logs'
-        })
+        let keyword = e.detail.value;
+        this.setData({keyword:keyword})
+        // this.setData({
+        //     inputVal: e.detail.value
+        // });
     },
     onLoad: function (options) {
-        let that = this;
         wx.setNavigationBarTitle({
             title: '球局',
         })
-        wx.request({
-            url: 'http://localhost:6677/game',
-            method: "GET",
-            header: {
-                "content-Type": "application/json"
-            },
-            success: function (res) {
-                console.log(res.data);
-                if (res.data.code = "200") {
-                    that.setData({
-                        games: res.data.data.page
-                    })
-                }
-            }
-        })
+    },
+    onShow: function(){
+      this.queryGame();
     },
     listqy: function (e) {
         if (this.data.qyopen) {
@@ -214,6 +215,39 @@ Page({
     //         }
     //     })
     // },
+
+    //搜索
+    search:function(){
+      this.queryGame();
+    },
+    //查询球局数据
+    queryGame:function(){
+      let that = this;
+      wx.request({
+        url: 'http://localhost:6677/game',
+        method: "GET",
+        data:{
+          "keyword": this.data.keyword ,
+          "code": JSON.stringify(this.data.code),
+          "date":this.data.date,
+          "timeType":this.data.time,
+          "page":  pageIndex,
+          "value":  pageSize
+        },
+        header: {
+          "content-Type": "application/json"
+        },
+        success: function (res) {
+          console.log(res.data);
+          if (res.data.code = "200") {
+            that.setData({
+              games: res.data.data.page
+            })
+          }
+        }
+      })
+    },
+
     // 查看球场地址详情
     openLocation: function (event) {
         let latitude = event.currentTarget.dataset.latitude;

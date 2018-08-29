@@ -76,7 +76,7 @@
     <view class='ball_xx'>
         <view class='xx_id'>
             <view class='xx_title f_wei'>参与情况</view>
-            <view class='xx_type f_wei'>{{apply.game.total}}缺{{apply.game.vacancyNum}}</view>
+            <view class='xx_type f_wei'>{{apply.game.totalNum}}缺{{apply.game.vacancyNum}}</view>
         </view>
         <view class='cy_xx'>
             <view class='xx_1'>
@@ -109,14 +109,17 @@
     <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
     <view class="modal-dialog" wx:if="{{showModal}}">
         <view class="modal-title f_wei">拒绝原因</view>
-        <view class="modal-content">
+        <form bindsubmit="refuse">
+          <view class="modal-content">
             <view class="modal-input">
-                <textarea class='text_sty' placeholder='补充拒绝原因，控制在30字以内'></textarea>
+                <textarea name="remark" class='text_sty' placeholder='补充拒绝原因，控制在30字以内'></textarea>
             </view>
-        </view>
-        <view class="modal-footer">
+          </view>
+          <view class="modal-footer">
             <view class="btn-cancel col_56" bindtap="onCancel" data-status="cancel">取消</view>
-            <view class="btn-confirm col_56" bindtap="onConfirm" data-status="confirm">确定</view>
-        </view>
+            <button class="btn-confirm col_56" formType="submit">确定</button>
+            <!-- <view  bindtap="onConfirm" data-status="confirm" >确定</view> -->
+          </view>
+        </form>
     </view>
 </view>

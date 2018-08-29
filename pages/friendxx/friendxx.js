@@ -5,7 +5,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-      
+     
     },
 
     /**
@@ -31,7 +31,10 @@ Page({
               familiarity: res.data.data.familiarity,
               data: res.data.data.data,
               evaluation: res.data.data.evaluation,
-              wxUserInfoId: res.data.data.wxUserInfoId
+              wxUserInfoId: res.data.data.wxUserInfoId,
+              playAges:res.data.data.playAges,
+              playFrequencies: res.data.data.playFrequencies,
+              skillLevels: res.data.data.skillLevels
 
             })
             if (res.data.data.list){

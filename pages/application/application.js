@@ -5,14 +5,21 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    apply:'',
+    status: {"agree":"已同意", "refuse":"已拒绝"},
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    wx.setNavigationBarTitle({
+      title: '申请详情',
+    })
+    let data =JSON.parse(options.data);
+    this.setData({
+      apply:data
+    })
   },
 
   /**
@@ -29,38 +36,28 @@ Page({
   
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
+  //退出球局
+  quitGame:function(e){
+    let applyId = e.currentTarget.dataset.id;
+    let that = this;
+    // 获取加入申请列表
+    wx.request({
+      url: 'http://localhost:6677/join/quit',
+      method: "POST",
+      data: {
+        "applyId": applyId
+      },
+      header: {
+        "content-Type": "application/json"
+      },
+      success: function (res) {
+        if (res.data.code == "200") {
+          console.log(res);
+        }
+      }
+    })
   }
+  
+
+  
 })

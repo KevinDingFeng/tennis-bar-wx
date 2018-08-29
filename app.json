@@ -1,12 +1,12 @@
 {
   "pages":[
+    "pages/index/index",
     "pages/application/application",
     "pages/my/joinconfirm/joinundetermined/joinundetermined",
     "pages/my/myevaluate/myevaluate",
     "pages/game/demand/demand",
     "pages/activity/apply/apply",
     "pages/activity/join/join",
-    "pages/index/index",
     "pages/my/mygame/joingame/joingame",
     "pages/my/mygame/releasegame/releasegame",
     "pages/my/joinconfirm/joinconfirm",

@@ -1,10 +1,10 @@
 <view class='container'>
-    <view class='news_xx'>
-        <view class='f_wei'>消息标题</view>
+    
+    <view class='news_xx' wx:for="{{messages}}" wx:for-item="message" wx:key="msgKey">
+        <view class='f_wei'>{{message.title}}</view>
         <view class='news_center'>
-            消息内容消息内容消息内容消息内容消息内容消息内容消息内容消
-            息内容消息内容消息内容消息内容消息内容消息内容消息...
+            {{message.content}}
         </view>
-        <view class='news_bottom'>2018.08.15  11:26:30</view>
+        <view class='news_bottom'>{{message.creation}}</view>
     </view>
 </view>

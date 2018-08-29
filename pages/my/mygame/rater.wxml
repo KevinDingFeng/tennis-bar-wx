@@ -25,5 +25,8 @@
                 </view>
             </view>
         </view>
+        <block wx:if="{{game.gameStatus =='WaitingJoin'}}">
+          
+        </block>
     </view>
 </view>

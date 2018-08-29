@@ -38,19 +38,19 @@
             <view class='cen_left'>
                 <text>打球频率</text>
                 <view>
-                    <text class='col_g'>{{evaluation? evaluation.playFrequency : '未填写'}} </text>
+                    <text class='col_g'>{{evaluation? playFrequencies[evaluation.playFrequency] : '未填写'}} </text>
                 </view>
             </view>
             <view class='cen_left'>
                 <text>球龄</text>
                 <view>
-                    <text class='col_g'>{{evaluation? evaluation.playAge : '未填写'}} </text>
+                    <text class='col_g'>{{evaluation? playAges[evaluation.playAge] : '未填写'}} </text>
                 </view>
             </view>
             <view class='cen_end'>
                 <text>球技等级</text>
                 <view>
-                    <text class='col_g'>{{evaluation? evaluation.skillLevel : '未填写'}} </text>
+                    <text class='col_g'>{{evaluation? skillLevels[evaluation.skillLevel] : '未填写'}} </text>
                 </view>
             </view>
         </view>
