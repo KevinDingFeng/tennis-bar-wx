@@ -37,9 +37,6 @@ Page({
      */
     onLoad: function (options) {
       let that = this;
-      wx.setNavigationBarTitle({
-        title: '球友',
-      })
       wx.request({
         url: 'http://localhost:6677/api/wx_user_familiarity',
         method: "GET",
@@ -114,5 +111,32 @@ Page({
       wx.navigateTo({
         url: '../friendxx/friendxx?id=' + e.currentTarget.dataset.ballfriend
       })
-    }
+    },
+  search: function(){
+    var keyword = this.data.inputVal;
+    let that = this;
+    wx.request({
+      url: 'http://localhost:6677/api/wx_user_familiarity',
+      method: "GET",
+      header: {
+        "content-Type": "application/json"
+      },
+      data:{
+        keyword: keyword
+      },
+      success: function (res) {
+        //console.log(res.data);
+        if (res.data.code = "200") {
+
+          that.setData({
+            ballFriend: res.data.data.list,
+            pageNum: res.data.data.pageNum,
+            inputVal: res.data.data.keyword,
+            wxUserInfoId: res.data.data.wxUserInfoId
+          })
+
+        }
+      }
+    })
+  }
 })

@@ -37,7 +37,7 @@
     </view>
     <view class='user_work'>
         <view>职业</view>
-        <textarea class='work_xx' placeholder='{{wxUserInfo.occupation?"":"您的职业，20字以内"}}' bindblur="modifyOccupation">{{wxUserInfo.occupation?wxUserInfo.occupation:""}}</textarea>
+        <textarea class='work_xx' placeholder='{{wxUserInfo.occupation?"":"您的职业，20字以内"}}' bindinput="modifyOccupation">{{wxUserInfo.occupation?wxUserInfo.occupation:""}}</textarea>
     </view>
     <view class='user_phone'>
         <view class='phone_name'>手机号</view>

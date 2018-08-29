@@ -17,17 +17,14 @@
             <view class='environment_name'>球场环境</view>
             <view class="comment1-description">
                 <view class="star-pos" style="display:flex;flex-direction:row;">
-                    <view class="stars  {{comment.courtStar>=1? 'on': ''}}" data-star="1" bindtap="changeCourtStart"></view>
-                    <view class="stars  {{comment.courtStar>=2? 'on': ''}}" data-star="2" bindtap="changeCourtStart"></view>
-                    <view class="stars  {{comment.courtStar>=3? 'on': ''}}" data-star="3" bindtap="changeCourtStart"></view>
-                    <view class="stars  {{comment.courtStar>=4? 'on': ''}}" data-star="4" bindtap="changeCourtStart"></view>
-                    <view class="stars  {{comment.courtStar>=5? 'on': ''}}" data-star="5" bindtap="changeCourtStart"></view>
+                    <view class="stars  {{comment.courtStar>=1? 'on': ''}}" data-star="1" bindtap="changeCourtStar"></view>
+                    <view class="stars  {{comment.courtStar>=2? 'on': ''}}" data-star="2" bindtap="changeCourtStar"></view>
+                    <view class="stars  {{comment.courtStar>=3? 'on': ''}}" data-star="3" bindtap="changeCourtStar"></view>
+                    <view class="stars  {{comment.courtStar>=4? 'on': ''}}" data-star="4" bindtap="changeCourtStar"></view>
+                    <view class="stars  {{comment.courtStar>=5? 'on': ''}}" data-star="5" bindtap="changeCourtStar"></view>
                 </view>
             </view>
         </view>
-        <block wx:if="{{joinWxUser}}">
-          到场情况
-        </block>
         <!-- 提交 -->
         <block wx:if="{{!comment.id}}">
           <view class='btn_cu' bindtap='save'>

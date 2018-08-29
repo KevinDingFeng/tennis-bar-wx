@@ -20,7 +20,7 @@
                     </view>
                 </view>
                 <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
-                  <include src="../rater.wxml" />
+                  <include src="../raterPeo.wxml" />
                 </view>
             </view>
         </view>

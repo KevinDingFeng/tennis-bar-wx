@@ -195,6 +195,16 @@ Page({
     onShareAppMessage: function() {
 
     },
+  modifyRemark: function(e){
+    var v = e.detail.value;
+    if (v) {
+      var selfEvaluation = this.data.selfEvaluation;
+      selfEvaluation.remark = v;
+      this.setData({
+        selfEvaluation: selfEvaluation
+      });
+    }
+  },
   save: function () {
     var info = this.data.selfEvaluation;
     var id = info.id;

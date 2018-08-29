@@ -83,7 +83,38 @@ Page({
                 });
             }
         });
+      var gameId = game.id;
+
+      this.setComment(gameId);
     },
+  setComment(gameId) {
+    let that = this;
+    wx.request({
+      url: 'http://localhost:6677/api/comment/detail',
+      method: "GET",
+      header: {
+        "content-Type": "application/json"
+      },
+      data: {
+        gameId: gameId
+      },
+      success: function (res) {
+        console.log(res.data);
+        if (res.data.code = "200") {
+          if (res.data.data.comment) {
+            that.setData({
+              comment: res.data.data.comment
+            });
+          }
+          if (res.data.data.joinWxUser) {
+            that.setData({
+              joinWxUser: res.data.data.joinWxUser
+            });
+          }
+        }
+      }
+    })
+  },
     tabClick: function (e) {
         this.setData({
             sliderOffset: e.currentTarget.offsetLeft,
@@ -126,5 +157,46 @@ Page({
             })
         }
     },
-
+  changeGameStar: function (e) {
+    var comment = this.data.comment;
+    comment.gameStar = e.currentTarget.dataset.star;
+    this.setData({
+      comment: comment
+    });
+  },
+  changeCourtStar: function (e) {
+    var comment = this.data.comment;
+    comment.courtStar = e.currentTarget.dataset.star;
+    this.setData({
+      comment: comment
+    });
+  },
+  save: function () {
+    let that = this;
+    var info = this.data.comment;
+    var data = {};
+    data.gameStar = info.gameStar;
+    data.courtStar = info.courtStar;
+    data.presentStar = info.presentStar;
+    data.gameId = info.gameId;
+    data.wxUserInfoId = info.wxUserInfoId;
+    if (info.id) {
+      data.id = id;
+    }
+    wx.request({
+      url: 'http://localhost:6677/api/comment/update',
+      method: "POST",
+      header: {
+        "content-Type": "application/x-www-form-urlencoded"
+      },
+      data: data,
+      success: function (res) {
+        console.log(res.data);
+        if (res.data.code = "200") {
+          console.log("保存成功");
+          that.setComment(info.gameId);
+        }
+      }
+    })
+  }
 })

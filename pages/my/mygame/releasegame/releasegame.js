@@ -80,9 +80,16 @@ Page({
       comment: comment
     });
   },
-  changeCourtStart: function(e){
+  changeCourtStar: function(e){
     var comment = this.data.comment;
     comment.courtStar = e.currentTarget.dataset.star;
+    this.setData({
+      comment: comment
+    });
+  },
+  changePresentStar: function(e){
+    var comment = this.data.comment;
+    comment.presentStar = e.currentTarget.dataset.star;
     this.setData({
       comment: comment
     });
