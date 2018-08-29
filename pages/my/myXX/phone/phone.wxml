@@ -10,17 +10,17 @@
     <view class='phone_code'>
         <view class='phone_num'>
             <view class='phone_name'>手机号</view>
-            <input placeholder='{{phone?"":"请输入新手机号"}}'>{{phone?phone:''}}</input>
+            <view class='phone_name'>{{phone}}</view>
         </view>
         <view class='phone_num'>
             <view class='code_name'>验证码</view>
-            <input class='code_num'></input>
+            <input class='code_num' bindinput="inputCode"></input>
             <view class='btn_code'>
-                <button class="weui-btn" type="primary">获取验证码</button>
+                <button class="weui-btn" type="primary" bindtap='sendCode'>获取验证码</button>
             </view>
         </view>
     </view>
     <view class='sure_btn'>
-            <button class="weui-btn" type="primary">获取验证码</button>
+            <button class="weui-btn" type="primary" bindtap='toNext'>下一步</button>
         </view>
 </view>

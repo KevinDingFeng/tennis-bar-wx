@@ -2,25 +2,25 @@
     <view class="phone_xx">
         <view class='phone_top'>
             <view class='phone_img'>
-                <image src="../../../../images/index/banner.png"></image>
+                <image src="{{wxUserInfo.avatarUrl? wxUserInfo.avatarUrl: '../../../../images/index/banner.png'}}"></image>
             </view>
-            <label class='phone_nickname'>微信昵称</label>
+            <label class='phone_nickname'>{{wxUserInfo.nickName}}</label>
         </view>
     </view>
     <view class='phone_code'>
         <view class='phone_num'>
             <view class='phone_name'>手机号</view>
-            <input placeholder='{{phone?"":"请输入新手机号"}}'>{{phone?phone:''}}</input>
+            <input placeholder='请输入新手机号' bindinput="inputPhone"></input>
         </view>
         <view class='phone_num'>
             <view class='code_name'>验证码</view>
-            <input class='code_num'></input>
+            <input class='code_num' bindinput="inputCode"></input>
             <view class='btn_code'>
-                <button class="weui-btn" type="primary">获取验证码</button>
+                <button class="weui-btn" type="primary" bindtap='sendCode'>获取验证码</button>
             </view>
         </view>
     </view>
     <view class='sure_btn'>
-            <button class="weui-btn" type="primary">绑定手机号</button>
+            <button class="weui-btn" type="primary" bindtap='save'>{{subText}}</button>
         </view>
 </view>

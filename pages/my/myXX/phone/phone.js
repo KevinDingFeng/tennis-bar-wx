@@ -84,5 +84,49 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+  sendCode: function(){
+     wx.request({
+      url: 'http://localhost:6677/api/sms_code/send',
+      method: "GET",
+      header: {
+        "content-Type": "application/json"
+      },
+      success: function (res) {
+        if(res.data.code == 200){
+          console.log("发送成功");
+        }
+      }
+    })
+  },
+  inputCode: function(e){
+    this.setData({
+      code: e.detail.value
+    });
+  },
+  toNext: function(){
+    wx.navigateTo({
+      url: '../phoneNext/phoneNext?t=1',
+    })
+    // var c = this.data.code;
+    // //校验码是否正确
+    // wx.request({
+    //   url: 'http://localhost:6677/api/sms_code/check',
+    //   method: "GET",
+    //   header: {
+    //     "content-Type": "application/json"
+    //   },
+    //   data: {
+    //     code: c
+    //   },
+    //   success: function (res) {
+    //     if (res.data.code == 200) {
+    //       console.log("校验通过成功");
+    //       wx.navigateTo({
+    //         url: '../phoneNext/phoneNext?t=1',
+    //       })
+    //     }
+    //   }
+    // })
   }
 })

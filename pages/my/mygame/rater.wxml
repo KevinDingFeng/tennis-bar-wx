@@ -5,11 +5,11 @@
             <view class='xx_name'>球局和谐度</view>
             <view class="comment1-description">
                 <view class="star-pos" style="display:flex;flex-direction:row;">
-                    <view class="stars  {{flag>=1? 'on': ''}}" bindtap="changeColor1"></view>
-                    <view class="stars  {{flag>=2? 'on': ''}}" bindtap="changeColor2"></view>
-                    <view class="stars  {{flag>=3? 'on': ''}}" bindtap="changeColor3"></view>
-                    <view class="stars  {{flag>=4? 'on': ''}}" bindtap="changeColor4"></view>
-                    <view class="stars  {{flag>=5? 'on': ''}}" bindtap="changeColor5"></view>
+                    <view class="stars  {{comment.gameStar>=1? 'on': ''}}" data-star="1" bindtap="changeGameStar"></view>
+                    <view class="stars  {{comment.gameStar>=2? 'on': ''}}" data-star="2" bindtap="changeGameStar"></view>
+                    <view class="stars  {{comment.gameStar>=3? 'on': ''}}" data-star="3" bindtap="changeGameStar"></view>
+                    <view class="stars  {{comment.gameStar>=4? 'on': ''}}" data-star="4" bindtap="changeGameStar"></view>
+                    <view class="stars  {{comment.gameStar>=5? 'on': ''}}" data-star="5" bindtap="changeGameStar"></view>
                 </view>
             </view>
         </view>
@@ -17,16 +17,22 @@
             <view class='environment_name'>球场环境</view>
             <view class="comment1-description">
                 <view class="star-pos" style="display:flex;flex-direction:row;">
-                    <view class="stars  {{flag>=1? 'on': ''}}" bindtap="changeColor1"></view>
-                    <view class="stars  {{flag>=2? 'on': ''}}" bindtap="changeColor2"></view>
-                    <view class="stars  {{flag>=3? 'on': ''}}" bindtap="changeColor3"></view>
-                    <view class="stars  {{flag>=4? 'on': ''}}" bindtap="changeColor4"></view>
-                    <view class="stars  {{flag>=5? 'on': ''}}" bindtap="changeColor5"></view>
+                    <view class="stars  {{comment.courtStar>=1? 'on': ''}}" data-star="1" bindtap="changeCourtStart"></view>
+                    <view class="stars  {{comment.courtStar>=2? 'on': ''}}" data-star="2" bindtap="changeCourtStart"></view>
+                    <view class="stars  {{comment.courtStar>=3? 'on': ''}}" data-star="3" bindtap="changeCourtStart"></view>
+                    <view class="stars  {{comment.courtStar>=4? 'on': ''}}" data-star="4" bindtap="changeCourtStart"></view>
+                    <view class="stars  {{comment.courtStar>=5? 'on': ''}}" data-star="5" bindtap="changeCourtStart"></view>
                 </view>
             </view>
         </view>
-        <block wx:if="{{game.gameStatus =='WaitingJoin'}}">
-          
+        <block wx:if="{{joinWxUser}}">
+          到场情况
+        </block>
+        <!-- 提交 -->
+        <block wx:if="{{!comment.id}}">
+          <view class='btn_cu' bindtap='save'>
+            <button>保存</button>
+          </view>
         </block>
     </view>
 </view>

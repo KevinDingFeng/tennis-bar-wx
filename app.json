@@ -1,6 +1,5 @@
 {
   "pages":[
-  	"pages/my/myXX/phoneNext/phoneNext",
     "pages/index/index",
     "pages/application/application",
     "pages/my/joinconfirm/joinundetermined/joinundetermined",
@@ -18,6 +17,7 @@
     "pages/game/game",
     "pages/my/myXX/myXX",
     "pages/my/myXX/phone/phone",
+  	"pages/my/myXX/phoneNext/phoneNext",
     "pages/ballFriend/ballFriend",
     "pages/friendxx/friendxx",
     "pages/activity/activity",

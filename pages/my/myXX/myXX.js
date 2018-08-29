@@ -177,10 +177,15 @@ Page({
     },
   updatePhone: function(e){
     var p = e.currentTarget.dataset.phone;
-
-    wx.navigateTo({
-      url: './phone/phone' + (p?'?phone=' + p:''),
-    })
+    if(p){
+      wx.navigateTo({
+        url: './phone/phone' + (p ? '?phone=' + p : ''),
+      })
+    }else{
+      wx.navigateTo({
+        url: './phoneNext/phoneNext',
+      })
+    }
   },
   modifyOccupation: function(e){
     var v = e.detail.value;

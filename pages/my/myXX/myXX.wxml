@@ -42,7 +42,7 @@
     <view class='user_phone'>
         <view class='phone_name'>手机号</view>
         <block wx:if="{{wxUserInfo.cellphone}}">
-        <view class='phone_num'>{{sysUser.cellphone}}</view>
+        <view class='phone_num'>{{wxUserInfo.cellphone}}</view>
         <view class='phone_sty' bindtap='updatePhone' data-phone="{{wxUserInfo.cellphone}}">修改手机号</view>
         </block>
         <block wx:else>
