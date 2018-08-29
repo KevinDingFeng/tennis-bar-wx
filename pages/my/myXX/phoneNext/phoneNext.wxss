@@ -1,0 +1,68 @@
+/* pages/my/myXX/phone/phone.wxss */
+.phone_xx{
+    width: 100%;
+    margin-top: 18rpx;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+}
+.phone_top{
+    padding: 23rpx 21rpx;
+    height: 123rpx;
+    position: relative;
+    border-bottom: 1px solid #ddd;
+}
+.phone_img{
+    display: inline-block;
+}
+.phone_top image{
+    width: 120rpx;
+	height: 120rpx;
+    border: solid 1px #e4e4e4;
+    border-radius: 50%; 
+}
+.phone_nickname{
+    position: absolute;
+    top:51rpx;
+    font-size: 28rpx;
+    font-weight: 700;
+    margin-left: 42rpx;
+    line-height: 29px;
+}
+.phone_code{
+    width: 100%;
+    margin-top: 22rpx;
+    background-color: #fff;
+}
+.phone_num{
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid #ddd;
+    padding: 20rpx 20rpx;
+    font-size: 28rpx!important;
+}
+.phone_name{
+    width: 36%;
+}
+.code_name{
+    width: 30%;
+}
+.phone_num>input{
+    margin-top: -5rpx;
+}
+.code_num{
+    width: 38%;
+    border-radius: 15rpx;
+	border: solid 1px #e4e4e4;
+    margin-right: 20rpx;
+}
+.btn_code{
+    margin-top: -10rpx;
+}
+button {
+    font-size: 28rpx!important;
+}
+.sure_btn{
+    width: 100%;
+    margin-top: 64rpx;
+}

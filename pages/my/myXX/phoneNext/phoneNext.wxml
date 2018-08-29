@@ -1,0 +1,26 @@
+<view class='container'> 
+    <view class="phone_xx">
+        <view class='phone_top'>
+            <view class='phone_img'>
+                <image src="../../../../images/index/banner.png"></image>
+            </view>
+            <label class='phone_nickname'>微信昵称</label>
+        </view>
+    </view>
+    <view class='phone_code'>
+        <view class='phone_num'>
+            <view class='phone_name'>手机号</view>
+            <input placeholder='{{phone?"":"请输入新手机号"}}'>{{phone?phone:''}}</input>
+        </view>
+        <view class='phone_num'>
+            <view class='code_name'>验证码</view>
+            <input class='code_num'></input>
+            <view class='btn_code'>
+                <button class="weui-btn" type="primary">获取验证码</button>
+            </view>
+        </view>
+    </view>
+    <view class='sure_btn'>
+            <button class="weui-btn" type="primary">绑定手机号</button>
+        </view>
+</view>
