@@ -38,25 +38,17 @@
             </view>
         </view>
         <view class='pj_img'>
-            <image src='../../../../images/index/banner.png'></image>
-            <image src='../../../../images/index/banner.png'></image>
-            <image src='../../../../images/index/banner.png'></image>
-            <image src='../../../../images/index/banner.png'></image>
-            <image src='../../../../images/index/banner.png'></image>
-        </view>
-        <view  class="pj_name">
-            <text>微信昵称</text>
-            <text>微信昵称</text>
-            <text>微信昵称</text>
-            <text>微信昵称</text>
-            <text>微信昵称</text>
-        </view>
-        <view class='pj_check'>
-            <checkbox-group bindchange="checkboxChange">
-                <label class="checkbox" wx:for="{{items}}" class='checkbox_sty'>
-                    <checkbox value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
-                </label>
-            </checkbox-group>
+            <view>
+                <image src='../../../../images/index/banner.png'></image>
+                <view class='pj_name'>微信昵称</view>
+                <view class='pj_check'>
+                    <checkbox-group bindchange="checkboxChange">
+                        <label class="checkbox"  class='checkbox_sty'>
+                            <checkbox value="" checked=""/>到场
+                        </label>
+                    </checkbox-group>
+                </view>
+            </view>
         </view>
         <block wx:if="{{game.gameStatus =='WaitingJoin'}}">
           

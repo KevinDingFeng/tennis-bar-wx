@@ -233,22 +233,17 @@ page{
     flex-direction: row;
     margin-top: 29rpx;
 }
-.pj_img>image{
+.pj_img image{
     width: 125rpx;
 	height: 97rpx;
     margin-right: 21rpx;
 }
 .pj_name{
+    width: 112rpx;
     font-size: 22rpx;
     color: #222222;
     margin-top: 15rpx;
-    display: flex;
-    flex-direction: row;
-}
-.pj_name>text{
-    width: 125rpx;
     text-align: center;
-    margin-right: 16rpx;
 }
 .checkbox_sty{
     width: 125rpx;
