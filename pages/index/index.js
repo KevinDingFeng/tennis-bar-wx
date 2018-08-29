@@ -15,10 +15,14 @@ Page({
         // code: { "level1": "100", "level2": "101", "level3": "" },
         // code: { "level1": "100", "level2": "", "level3": "" },
         //智能排序
+        orderType:'',
+        // orderType: "familiarity",    //熟悉度
+        // orderType: "distance",      //距离
+        // orderType: "time",          //时间
         //打球时间
         // date: '',
-        date:'2018-08-31',  //日期
-        time:'afternoon',  //时间
+        date:'',  //日期
+        time:'',  //时间
         motto: 'Hello World',
         userInfo: {},
         hasUserInfo: false,
@@ -230,6 +234,7 @@ Page({
           "keyword": this.data.keyword ,
           "code": JSON.stringify(this.data.code),
           "date":this.data.date,
+          "orderType":this.data.orderType,
           "timeType":this.data.time,
           "page":  pageIndex,
           "value":  pageSize
