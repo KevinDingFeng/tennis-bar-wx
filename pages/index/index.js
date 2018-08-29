@@ -7,10 +7,18 @@ var pageSize = 20;
 
 Page({
     data: {
+        //搜索条件
         keyword:'',
+        //商区 商圈码
+        code:null,
         // code: {"level1": "100", "level2": "101", "level3": "10101"},
         // code: { "level1": "100", "level2": "101", "level3": "" },
-        code: { "level1": "100", "level2": "", "level3": "" },
+        // code: { "level1": "100", "level2": "", "level3": "" },
+        //智能排序
+        //打球时间
+        // date: '',
+        date:'2018-08-31',  //日期
+        time:'afternoon',  //时间
         motto: 'Hello World',
         userInfo: {},
         hasUserInfo: false,
@@ -22,7 +30,7 @@ Page({
         px_text:"打球时间",
         px_time:"请选择日期",
         content: [],
-        nv: ['默认排序', '离我最近', '价格最低', '价格最高'],//智能排序
+        nv: ['默认排序', '熟人优先', '距离最近', '时间最近'],//智能排序
         px: ['上午场', '下午场', '夜场'],//打球时间
         qyopen: false,
         qyshow: true,//商区显示隐藏
@@ -221,6 +229,8 @@ Page({
         data:{
           "keyword": this.data.keyword ,
           "code": JSON.stringify(this.data.code),
+          "date":this.data.date,
+          "timeType":this.data.time,
           "page":  pageIndex,
           "value":  pageSize
         },
