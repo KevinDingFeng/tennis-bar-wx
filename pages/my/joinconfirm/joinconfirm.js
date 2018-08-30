@@ -107,7 +107,7 @@ Page({
         url: 'http://localhost:6677/join/confirms',
         method: "POST",
         data: {
-          "organizerId": organizerId,
+          // "organizerId": organizerId,
           "status": status
         },
         header: {
@@ -120,6 +120,11 @@ Page({
               confirms: res.data.data.confirms
             })
             // wx.setStorageSync(status, res.data.data.confirms);
+          } else {
+            wx.showToast({
+              title: res.data.data,
+              icon: 'none'
+            })
           }
         }
       })

@@ -88,7 +88,7 @@ Page({
         url: 'http://localhost:6677/join/applys',
         method: "POST",
         data: {
-          "wxUserInfoId": wxUserInfoId,
+          // "wxUserInfoId": wxUserInfoId,
           "status": status
         },
         header: {
@@ -100,6 +100,11 @@ Page({
               applys: res.data.data.applys
             })
             // wx.setStorageSync(status, res.data.data.applys);
+          }else{
+            wx.showToast({
+              title: res.data.data,
+              icon:'none'
+            })
           }
         }
       })

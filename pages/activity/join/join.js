@@ -43,7 +43,7 @@ Page({
     let id = event.currentTarget.dataset.id;
     let data = new Object();
     data.gameId = id;
-    data.wxUserInfoId = 2;
+    // data.wxUserInfoId = 2;
     wx.request({
       url: "http://localhost:6677/join/create",
       method :"POST",

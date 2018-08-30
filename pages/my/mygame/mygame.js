@@ -74,7 +74,7 @@ Page({
     getMyGames:function(userId,types){
       let that = this;
       wx.request({
-        url: "http://localhost:6677/join/query?organizerId=" + userId + "&type=" + types,
+        url: "http://localhost:6677/join/query?type=" + types,
         method: "GET",
         header: {
           "content-Type": "application/json",
@@ -87,6 +87,11 @@ Page({
               games: res.data.data.page,
             })
             // wx.setStorageSync(types, res.data.data.page);
+          }else{
+            wx.showToast({
+              title: res.data.data,
+              icon:'none'
+            })
           }
         }
       })

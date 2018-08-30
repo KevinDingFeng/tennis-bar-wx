@@ -224,9 +224,14 @@ Page({
         },
         success: function (res) {
           console.log(res.data);
-          if (res.data.code = "200") {
+          if (res.data.code == "200") {
             that.setData({
               games: res.data.data.page
+            })
+          }else{
+            wx.showToast({
+              title: res.data.data.errMsg,
+              icon:'none'
             })
           }
         }
