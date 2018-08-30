@@ -15,8 +15,10 @@ Page({
         // code: { "level1": "100", "level2": "101", "level3": "" },
         // code: { "level1": "100", "level2": "", "level3": "" },
         //智能排序
-        orderType:'',
-        // orderType: "familiarity",    //熟悉度
+        lon_lat:{},
+        // lon_lat: {"longitude": "116.366225", "latitude":"39.935242"},
+        // orderType:'',
+        orderType: "familiarity",    //熟悉度
         // orderType: "distance",      //距离
         // orderType: "time",          //时间
         //打球时间
@@ -224,17 +226,34 @@ Page({
     search:function(){
       this.queryGame();
     },
+    
     //查询球局数据
     queryGame:function(){
       let that = this;
+      let locations = that.data.lon_lat;
+      //获取当前位置经纬度
+      // wx.getLocation({
+      //   type: 'wgs84',
+      //   success: function (res) {
+      //     var latitude = res.latitude;
+      //     var longitude = res.longitude;
+      //     locations.longitude = longitude;
+      //     locations.latitude  = latitude;
+      //     that.setData({
+      //       lon_lat : locations
+      //     })
+      //   }
+      // })
       wx.request({
         url: 'http://localhost:6677/game',
         method: "GET",
         data:{
+          "curUserId":3,
           "keyword": this.data.keyword ,
           "code": JSON.stringify(this.data.code),
           "date":this.data.date,
           "orderType":this.data.orderType,
+          "lon_lat":JSON.stringify(this.data.lon_lat),
           "timeType":this.data.time,
           "page":  pageIndex,
           "value":  pageSize

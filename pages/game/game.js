@@ -258,7 +258,8 @@ Page({
 
     addGame: function(e) {
         let formData = {};
-        formData.organizerId = this.data.wxUserInfo.id;
+        // formData.organizerId = this.data.wxUserInfo.id;
+        formData.organizerId = 3;
         formData.name = this.data.name;
         formData.startTime = this.data.start_time;
         formData.endTime = this.data.end_time;
