@@ -5,11 +5,11 @@
             <view class='xx_name'>球局和谐度</view>
             <view class="comment1-description">
                 <view class="star-pos" style="display:flex;flex-direction:row;">
-                    <view class="stars  {{comment.gameStar>=1? 'on': ''}}" data-star="1" bindtap="changeGameStar"></view>
-                    <view class="stars  {{comment.gameStar>=2? 'on': ''}}" data-star="2" bindtap="changeGameStar"></view>
-                    <view class="stars  {{comment.gameStar>=3? 'on': ''}}" data-star="3" bindtap="changeGameStar"></view>
-                    <view class="stars  {{comment.gameStar>=4? 'on': ''}}" data-star="4" bindtap="changeGameStar"></view>
-                    <view class="stars  {{comment.gameStar>=5? 'on': ''}}" data-star="5" bindtap="changeGameStar"></view>
+                    <view class="stars_cc  {{comment.gameStar>=1? 'on_cc': ''}}" data-star="1" bindtap="changeGameStar"></view>
+                    <view class="stars_cc  {{comment.gameStar>=2? 'on_cc': ''}}" data-star="2" bindtap="changeGameStar"></view>
+                    <view class="stars_cc  {{comment.gameStar>=3? 'on_cc': ''}}" data-star="3" bindtap="changeGameStar"></view>
+                    <view class="stars_cc  {{comment.gameStar>=4? 'on_cc': ''}}" data-star="4" bindtap="changeGameStar"></view>
+                    <view class="stars_cc  {{comment.gameStar>=5? 'on_cc': ''}}" data-star="5" bindtap="changeGameStar"></view>
                 </view>
             </view>
         </view>
@@ -17,11 +17,11 @@
             <view class='environment_name'>球场环境</view>
             <view class="comment1-description">
                 <view class="star-pos" style="display:flex;flex-direction:row;">
-                    <view class="stars  {{comment.courtStar>=1? 'on': ''}}" data-star="1" bindtap="changeCourtStar"></view>
-                    <view class="stars  {{comment.courtStar>=2? 'on': ''}}" data-star="2" bindtap="changeCourtStar"></view>
-                    <view class="stars  {{comment.courtStar>=3? 'on': ''}}" data-star="3" bindtap="changeCourtStar"></view>
-                    <view class="stars  {{comment.courtStar>=4? 'on': ''}}" data-star="4" bindtap="changeCourtStar"></view>
-                    <view class="stars  {{comment.courtStar>=5? 'on': ''}}" data-star="5" bindtap="changeCourtStar"></view>
+                    <view class="stars_cc  {{comment.courtStar>=1? 'on_cc': ''}}" data-star="1" bindtap="changeCourtStar"></view>
+                    <view class="stars_cc  {{comment.courtStar>=2? 'on_cc': ''}}" data-star="2" bindtap="changeCourtStar"></view>
+                    <view class="stars_cc  {{comment.courtStar>=3? 'on_cc': ''}}" data-star="3" bindtap="changeCourtStar"></view>
+                    <view class="stars_cc  {{comment.courtStar>=4? 'on_cc': ''}}" data-star="4" bindtap="changeCourtStar"></view>
+                    <view class="stars_cc  {{comment.courtStar>=5? 'on_cc': ''}}" data-star="5" bindtap="changeCourtStar"></view>
                 </view>
             </view>
         </view>

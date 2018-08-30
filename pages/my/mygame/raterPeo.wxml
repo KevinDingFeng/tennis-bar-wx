@@ -40,20 +40,20 @@
         </view>
         <view class='pj_img'>
             <checkbox-group bindchange="checkboxChange">
-            <view  wx:for="{{joinWxUser}}" wx:for-item="wxItem" wx:key="wxKey" >
-                <image src="{{wxItem.wxUserInfo.avatarUrl? wxItem.avatarUrl: '../../../../images/index/banner.png'}}"></image>
-                <view class='pj_name'>{{wxItem.wxUserInfo.nickName}}</view>
-                <view class='pj_check'>
-                  <label class="checkbox"  class='checkbox_sty'>
-                    <block wx:if="{{wxItem.presented}}">
-                      <checkbox value="{{wxItem.id}}" checked="checked"/>到场
-                    </block>
-                    <block wx:else>
-                      <checkbox value="{{wxItem.id}}"/>到场
-                    </block>                      
-                  </label>
+                <view  class='peo_list' wx:for="{{joinWxUser}}" wx:for-item="wxItem" wx:key="wxKey" >
+                    <image src="{{wxItem.wxUserInfo.avatarUrl? wxItem.avatarUrl: '../../../../images/index/banner.png'}}"></image>
+                    <view class='pj_name'>{{wxItem.wxUserInfo.nickName}}</view>
+                    <view class='pj_check'>
+                    <label class="checkbox"  class='checkbox_sty'>
+                        <block wx:if="{{wxItem.presented}}">
+                        <checkbox value="{{wxItem.id}}" checked="checked"/>到场
+                        </block>
+                        <block wx:else>
+                        <checkbox value="{{wxItem.id}}"/>到场
+                        </block>                      
+                    </label>
+                    </view>
                 </view>
-            </view>
             </checkbox-group>
         </view>
         <!-- 提交 -->

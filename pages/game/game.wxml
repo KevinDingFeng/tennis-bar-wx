@@ -5,12 +5,13 @@
             <view>基本信息</view>
         </view>
         <view class='ball_xx'>
-            <view style='width20%;'>* 球局信息</view>
-            <input class='ball_name' placeholder='10字以内' placeholder-style='text-align:right' bindinput='gameName'></input>
+            <view style='width:25%;margin-top:32rpx;'>* 球局信息</view>
+            <input class='ball_name'  placeholder-style='text-align:right'  placeholder='10字以内'  bindinput='gameName'></input>
         </view>
-        <view class='ball_xx bor_top'>
-            <view style='width20%;'>* 球场</view>
-            <input class='ball_cc' bindtap='ball_cc' value='{{selectedCourt.name}}' placeholder='请输入球场名称/球场地址关键字' placeholder-style='text-align:right'></input>
+        <view class='ball_xx bor_top bor_bottom'>
+            <view style='width:20%;'>* 球场</view>
+            <input class='ball_cc' bindtap='ball_cc' value='{{selectedCourt.name}}' placeholder='请输入球场名称/球场地址关键字'
+            placeholder-style='text-align:right'></input>
         </view>
         <view class='ball_sure'>
           <block wx:if="{{selectedCourt}}">
@@ -27,7 +28,7 @@
             </view>
           </block>
         </view>
-        <view class='ball_xx mar_top'>
+        <view class='ball_xx mar_top '>
             <view>* 打球开始时间</view>
             <view class='start_time'>
                 <picker mode="multiSelector" bindchange="changeDateTime1" bindcolumnchange="changeDateTimeColumn1" value="{{dateTime1}}" range="{{dateTimeArray1}}">

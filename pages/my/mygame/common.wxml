@@ -1,9 +1,11 @@
 <view class='container'>
-    <view class='ball_name'>
-        <text class='game_name'>{{game.name}}</text>
-        <view class='col_g f_wei'  wx:if="{{game.gameStatus =='Completed'}}">已结束</view>
-        <view class='col_g f_wei' wx:elif="{{game.gameStatus =='Canceled'}}">已取消</view>
-        <view class='col_g f_wei' wx:else>即将开始</view>
+    <view class='ball_join'>
+        <view class="join_title">
+            <text class='game_name'>{{game.name}}</text>
+            <view class='col_g f_wei '  wx:if="{{game.gameStatus =='Completed'}}">已结束</view>
+            <view class='col_g f_wei ' wx:elif="{{game.gameStatus =='Canceled'}}">已取消</view>
+            <view class='col_g f_wei ' wx:else>即将开始</view>
+        </view>      
     </view>
     <view class='ball_xx'>
         <view class='xx_title f_wei'>基本信息</view>
