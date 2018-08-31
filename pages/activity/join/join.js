@@ -49,9 +49,7 @@ Page({
       url: "http://localhost:6677/api/join/create",
       method :"POST",
       data:data,
-      header: {
-        "content-type": "application/json"
-      },
+      header: utilJs.hasTokenPostHeader(),
       success:function(res){
         if (res.data.code == "200") {
           wx.showToast({

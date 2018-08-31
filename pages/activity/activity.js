@@ -1,5 +1,7 @@
 // pages/activity/activity.js
 var utilJs = require("../../utils/util.js");
+var pageIndex = 0;
+var pageSize = 20;
 Page({
 
   /**
@@ -20,6 +22,10 @@ Page({
     wx.request({
       url: 'http://localhost:6677/api/game',
       method:"GET",
+      data:{
+        "page": pageIndex,
+        "value": pageSize
+      },
       header: utilJs.hasTokenGetHeader(),
       success:function(res){
         console.log(res.data);

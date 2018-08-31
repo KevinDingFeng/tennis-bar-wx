@@ -1,6 +1,8 @@
 // pages/game/game.js
 var utilJs = require("../../utils/util.js");
 var dateTimePicker = require('../../utils/dateTimePicker.js');
+var pageIndex = 0;
+var pageSize = 20;
 Page({
     /**
      * 页面的初始数据
@@ -303,6 +305,10 @@ Page({
         wx.request({
           url: 'http://localhost:6677/api/game/courts?courtName=' + courtName,
           method:'GET',
+          data: {
+            "page": pageIndex,
+            "value": pageSize
+          },
           header: utilJs.hasTokenGetHeader(),
           success:function(res){
             if(res.data.code == '200'){

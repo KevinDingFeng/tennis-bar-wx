@@ -152,7 +152,7 @@ Page({
             url: 'http://localhost:6677/api/join/update',
             data:{"id":id,"type":types},
             method:"POST",
-            header: utilJs.hasTokenPostHeader()},
+            header: utilJs.hasTokenPostHeader(),
             success:function(res){
               if (res.data.code == "200") {
                 wx.navigateBack({})

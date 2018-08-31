@@ -2,6 +2,8 @@
 var utilJs = require("../../../utils/util.js");
 var sliderWidth = 115; // 需要设置slider的宽度，用于计算中间位置
 var init_status ="Agree";
+var pageIndex = 0;
+var pageSize = 20;
 Page({
     /**
      * 页面的初始数据
@@ -90,11 +92,11 @@ Page({
         method: "POST",
         data: {
           // "wxUserInfoId": wxUserInfoId,
-          "status": status
+          "status": status,
+          "page": pageIndex,
+          "value": pageSize
         },
-        header: {
-          "content-Type": "application/json"
-        },
+        header: utilJs.hasTokenPostHeader,
         success: function (res) {
           if (res.data.code == "200") {
             that.setData({
