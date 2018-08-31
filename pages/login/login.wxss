@@ -1,0 +1,11 @@
+/* pages/login/login.wxss */
+.login_sty{
+    position: relative;
+    width: 100%;
+}
+.login_btn{
+    position: absolute;
+    top:400rpx;
+    left: 23%;
+    width: 60%;
+}
