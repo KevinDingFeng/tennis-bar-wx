@@ -1,4 +1,5 @@
 // pages/my/myXX/phone/phone.js
+var utilJs = require("../../../../utils/util.js");
 Page({
 
   /**
@@ -12,6 +13,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    //t 是用来在 phoneNext 页面标识该请求来自 基础信息页面，还是修改手机号页面，从而分别显示不同的提示文字
     if (options.t) {
       wx.setNavigationBarTitle({
         title: '修改手机号',
@@ -25,9 +27,7 @@ Page({
     wx.request({
       url: 'http://localhost:6677/api/wx_user_info',
       method: "GET",
-      header: {
-        "content-Type": "application/json"
-      },
+      header: utilJs.hasTokenGetHeader(),
       success: function (res) {
         console.log(res.data);
         if (res.data.code = "200") {
@@ -103,9 +103,7 @@ Page({
       wx.request({
         url: 'http://localhost:6677/api/sms_code/send',
         method: "GET",
-        header: {
-          "content-Type": "application/json"
-        },
+        header: utilJs.hasTokenGetHeader(),
         data:{
           cellphone:p
         },
@@ -118,35 +116,33 @@ Page({
     }
   },
   save: function(){
-    console.log("asdfasdf");
-    wx.navigateTo({
-      url: '../myXX'
+    // console.log("asdfasdf");
+    // wx.navigateTo({
+    //   url: '../myXX'
 
-    })
+    // })
     
-    // var p = this.data.phone;
-    // var c = this.data.code;
-    // if(p && c){
-    //   wx.request({
-    //     url: 'http://localhost:6677/api/wx_user_info/update/cellphone',
-    //     method: "POST",
-    //     header: {
-    //       "content-Type": "application/x-www-form-urlencoded"
-    //     },
-    //     data: {
-    //       cellphone: p,
-    //       code: c
-    //     },
-    //     success: function (res) {
-    //       console.log(res.data);
-    //       if (res.data.code = "200") {
-    //         //保存成功，返回基础信息
-    //         wx.switchTab({
-    //           url: '../../my/myXX'
-    //         })
-    //       }
-    //     }
-    //   })
-    // }
+    var p = this.data.phone;
+    var c = this.data.code;
+    if(p && c){
+      wx.request({
+        url: 'http://localhost:6677/api/wx_user_info/update/cellphone',
+        method: "POST",
+        header: utilJs.hasTokenPostHeader(),
+        data: {
+          cellphone: p,
+          code: c
+        },
+        success: function (res) {
+          console.log(res.data);
+          if (res.data.code = "200") {
+            //保存成功，返回基础信息
+            wx.navigateTo({
+              url: '../myXX'
+            })
+          }
+        }
+      })
+    }
   }
 })

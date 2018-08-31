@@ -1,4 +1,5 @@
 // pages/game/demand/demand.js
+var utilJs = require("../../../utils/util.js");
 Page({
 
   /**

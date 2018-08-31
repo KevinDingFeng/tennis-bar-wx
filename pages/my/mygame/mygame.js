@@ -1,4 +1,5 @@
 // pages/my/mygame/mygame.js
+var utilJs = require("../../../utils/util.js");
 var init_type = "join";
 Page({
 

@@ -1,4 +1,5 @@
 // pages/game/game.js
+var utilJs = require("../../utils/util.js");
 var dateTimePicker = require('../../utils/dateTimePicker.js');
 Page({
     /**
@@ -346,9 +347,7 @@ Page({
       wx.request({
         url: 'http://localhost:6677/api/wx_user_info',
         method:"GET",
-        header:{
-          "content-type": "application/json"
-        },
+        header: utilJs.hasTokenGetHeader(),
         success:function(res){
           if(res.data.code =="200"){
             that.setData({

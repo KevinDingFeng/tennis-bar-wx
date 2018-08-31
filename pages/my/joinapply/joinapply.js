@@ -1,4 +1,5 @@
 // pages/my/joinapply/joinapply.js
+var utilJs = require("../../../utils/util.js");
 var sliderWidth = 115; // 需要设置slider的宽度，用于计算中间位置
 var init_status ="Agree";
 Page({

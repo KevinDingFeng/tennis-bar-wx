@@ -13,7 +13,32 @@ const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : '0' + n
 }
+var app = getApp();
+function hasTokenPostHeader(){
+  var header = {
+    "content-Type": "application/x-www-form-urlencoded",
+    "tennisToken": app.globalData.tennisToken
+  };
+  return header;
+}
+function hasTokenGetHeader(){
+  var header = {
+    "content-Type": "application/json",
+    "tennisToken": app.globalData.tennisToken
+  };
+  return header;
+}
+function noTokenGetHeader(){
+  var header = {
+    "content-Type": "application/json"
+  };
+  return header;
+  
+}
 
 module.exports = {
-  formatTime: formatTime
+  formatTime: formatTime,
+  hasTokenPostHeader: hasTokenPostHeader,
+  hasTokenGetHeader: hasTokenGetHeader,
+  noTokenGetHeader: noTokenGetHeader
 }

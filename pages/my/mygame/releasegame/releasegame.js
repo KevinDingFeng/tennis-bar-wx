@@ -1,4 +1,5 @@
 // pages/my/mygame/releasegame/releasegame.js
+var utilJs = require("../../../../utils/util.js");
 Page({
 
     /**
@@ -50,9 +51,7 @@ Page({
     wx.request({
       url: 'http://localhost:6677/api/comment/detail',
       method: "GET",
-      header: {
-        "content-Type": "application/json"
-      },
+      header: utilJs.hasTokenGetHeader(),
       data: {
         gameId: gameId
       },
@@ -175,9 +174,7 @@ Page({
     wx.request({
       url: 'http://localhost:6677/api/comment/update',
       method: "POST",
-      header: {
-        "content-Type": "application/x-www-form-urlencoded"
-      },
+      header: utilJs.hasTokenPostHeader(),
       data: data,
       success: function (res) {
         console.log(res.data);

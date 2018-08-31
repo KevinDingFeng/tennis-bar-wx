@@ -35,6 +35,6 @@ App({
   },
   globalData: {
     userInfo: null,
-    tennisToken: null
+    tennisToken: 'a3sd5f143a5sr4'
   }
 })

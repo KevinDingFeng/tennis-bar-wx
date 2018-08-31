@@ -1,4 +1,5 @@
 // pages/my/myXX/phone/phone.js
+var utilJs = require("../../../../utils/util.js");
 Page({
 
   /**
@@ -23,9 +24,7 @@ Page({
     wx.request({
       url: 'http://localhost:6677/api/wx_user_info',
       method: "GET",
-      header: {
-        "content-Type": "application/json"
-      },
+      header: utilJs.hasTokenGetHeader(),
       success: function (res) {
         console.log(res.data);
         if (res.data.code = "200") {
@@ -89,9 +88,7 @@ Page({
      wx.request({
       url: 'http://localhost:6677/api/sms_code/send',
       method: "GET",
-      header: {
-        "content-Type": "application/json"
-      },
+       header: utilJs.hasTokenGetHeader(),
       success: function (res) {
         if(res.data.code == 200){
           console.log("发送成功");
@@ -104,29 +101,28 @@ Page({
       code: e.detail.value
     });
   },
+  //t 是用来在 phoneNext 页面标识该请求来自 基础信息页面，还是修改手机号页面，从而分别显示不同的提示文字
   toNext: function(){
-    wx.navigateTo({
-      url: '../phoneNext/phoneNext?t=1',
-    })
-    // var c = this.data.code;
-    // //校验码是否正确
-    // wx.request({
-    //   url: 'http://localhost:6677/api/sms_code/check',
-    //   method: "GET",
-    //   header: {
-    //     "content-Type": "application/json"
-    //   },
-    //   data: {
-    //     code: c
-    //   },
-    //   success: function (res) {
-    //     if (res.data.code == 200) {
-    //       console.log("校验通过成功");
-    //       wx.navigateTo({
-    //         url: '../phoneNext/phoneNext?t=1',
-    //       })
-    //     }
-    //   }
+    // wx.navigateTo({
+    //   url: '../phoneNext/phoneNext?t=1',
     // })
+    var c = this.data.code;
+    //校验码是否正确
+    wx.request({
+      url: 'http://localhost:6677/api/sms_code/check',
+      method: "GET",
+      header: utilJs.hasTokenGetHeader(),
+      data: {
+        code: c
+      },
+      success: function (res) {
+        if (res.data.code == 200) {
+          console.log("校验通过成功");
+          wx.navigateTo({
+            url: '../phoneNext/phoneNext?t=1',
+          })
+        }
+      }
+    })
   }
 })

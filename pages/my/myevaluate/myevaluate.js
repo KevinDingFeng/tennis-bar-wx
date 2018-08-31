@@ -1,4 +1,5 @@
 // pages/my/myevaluate/myevaluate.js
+var utilJs = require("../../../utils/util.js");
 Page({
 
     /**
@@ -126,9 +127,7 @@ Page({
       wx.request({
         url: 'http://localhost:6677/api/wx_user_evaluation/detail',
         method: "GET",
-        header: {
-          "content-Type": "application/json"
-        },
+        header: utilJs.hasTokenGetHeader(),
         success: function (res) {
           console.log(res.data);
           if (res.data.code = "200") {
@@ -215,9 +214,7 @@ Page({
     wx.request({
       url: 'http://localhost:6677/api/wx_user_evaluation/update',
       method: "POST",
-      header: {
-        "content-Type": "application/x-www-form-urlencoded"
-      },
+      header: utilJs.hasTokenPostHeader(),
       data: {
         "id": id,
         "playFrequency": playFrequency,

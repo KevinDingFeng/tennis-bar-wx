@@ -1,4 +1,5 @@
 // pages/application/application.js
+var utilJs = require("../../utils/util.js");
 Page({
 
   /**

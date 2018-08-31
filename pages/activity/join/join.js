@@ -1,4 +1,5 @@
 // pages/activity/join/join.js
+var utilJs = require("../../../utils/util.js");
 Page({
 
   /**

@@ -1,4 +1,5 @@
-  // pages/activity/activity.js
+// pages/activity/activity.js
+var utilJs = require("../../utils/util.js");
 Page({
 
   /**

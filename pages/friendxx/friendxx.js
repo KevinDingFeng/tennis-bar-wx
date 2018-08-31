@@ -1,4 +1,7 @@
 // pages/friendxx/friendxx.js
+var utilJs = require("../../utils/util.js");
+var app = getApp();
+
 Page({
 
     /**
@@ -12,7 +15,6 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-      // console.log(options);
       let that = this;
       wx.setNavigationBarTitle({
         title: '球友详情',
@@ -20,9 +22,7 @@ Page({
       wx.request({
         url: 'http://localhost:6677/api/wx_user_familiarity/' + options.id,
         method: "GET",
-        header: {
-          "content-Type": "application/json"
-        },
+        header: utilJs.hasTokenGetHeader(),
         success: function (res) {
           console.log(res.data);
           if (res.data.code = "200") {

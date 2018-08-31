@@ -185,9 +185,7 @@ Page({
     //     })
     //     wx.request({
     //         url: "https://tennis.dazonghetong.com/api/wx_user_info",//根据全局变量token获取后台储存的微信用户信息
-    //         header: {
-    //             'tennisToken': app.globalData.tennisToken
-    //         },
+    //         header: utilJs.hasTokenGetHeader(),
     //         data: {
 
     //         },
