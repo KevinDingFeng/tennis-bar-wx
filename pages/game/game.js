@@ -278,9 +278,7 @@ Page({
           url: 'http://localhost:6677/game/create',
           data: formData,
           method: 'POST',
-          header: {
-            "content-type": "application/json"
-          },
+          header: utilJs.hasTokenPostHeader(),
           success: function (res) {
             if (res.data.code == "200") {
               wx.switchTab({
@@ -305,9 +303,7 @@ Page({
         wx.request({
           url: 'http://localhost:6677/game/courts?courtName=' + courtName,
           method:'GET',
-          header:{
-            "content-type": "application/x-www-form-urlencodedn"
-          },
+          header: utilJs.hasTokenGetHeader(),
           success:function(res){
             if(res.data.code == '200'){
               that.setData({

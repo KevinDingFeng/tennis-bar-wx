@@ -46,9 +46,7 @@ Page({
     wx.request({
       url: "http://localhost:6677/game/courts?courtName="+courtName,
       method:"GET",
-      header:{
-        "content-type": "application/x-www-form-urlencodedn"
-      },
+      header: utilJs.hasTokenPostHeader(),
       success:function(res){
         if(res.data.code == "200"){
           that.setData({

@@ -20,9 +20,7 @@ Page({
     wx.request({
       url: 'http://localhost:6677/game',
       method:"GET",
-      header:{
-        "content-Type":"application/json"
-      },
+      header: utilJs.hasTokenGetHeader(),
       success:function(res){
         console.log(res.data);
         if(res.data.code="200"){

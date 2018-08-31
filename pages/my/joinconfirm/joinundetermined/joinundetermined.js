@@ -152,9 +152,7 @@ Page({
             url: 'http://localhost:6677/join/update',
             data:{"id":id,"type":types},
             method:"POST",
-            header:{
-              "content-type": "application/json"
-            },
+            header: utilJs.hasTokenPostHeader()},
             success:function(res){
               if (res.data.code == "200") {
                 wx.navigateBack({})
@@ -182,9 +180,7 @@ Page({
           "type":"refuse"
         },
         method:"POST",
-        header:{
-          "content-type":"application/json"
-        },
+        header: utilJs.hasTokenPostHeader(),
         success:function(res){
           if(res.data.code == "200"){
             wx.navigateBack({
