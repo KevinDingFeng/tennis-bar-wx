@@ -39,7 +39,7 @@ Page({
     onLoad: function (options) {
       let that = this;
       wx.request({
-        url: getApp().globalData.onlineUrl + '/wx_user_familiarity',
+        url: getApp().globalData.onlineUrl + 'api/wx_user_familiarity',
         method: "GET",
         header: utilJs.hasTokenGetHeader(),
         success: function (res) {
@@ -124,7 +124,7 @@ Page({
       },
       success: function (res) {
         //console.log(res.data);
-        if (res.data.code = "200") {
+        if (res.data.code == "200") {
 
           that.setData({
             ballFriend: res.data.data.list,

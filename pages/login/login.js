@@ -11,21 +11,23 @@ Page({
     onGotUserInfo: function (e) {
         var _this =this;
         if (e.detail.errMsg == "getUserInfo:ok") {
-            if (!app.globalData.userInfo || !wx.getStorageSync('token')) {
+          if (!wx.getStorageSync('tennisToken')) {//!app.globalData.userInfo || 
                 //获取用户数据
                 app.login();
-            }
+              
+            }else{
+              console.log("已经完成授权");
+            app.globalData.tennisToken = wx.getStorageSync('tennisToken')
             wx.switchTab({
-                url: '../index/index',
+              url: '../index/index',
             })
+            }
         }
     },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function () {
-        console.log(app.globalData)
-        console.log(this.data.canIUse)
         if (app.globalData.userInfo) {
             this.setData({
                 userInfo: app.globalData.userInfo,
@@ -52,6 +54,13 @@ Page({
                 }
             })
         }
+      if (wx.getStorageSync('tennisToken')) {
+        console.log("已经完成授权");
+        app.globalData.tennisToken = wx.getStorageSync('tennisToken')
+        wx.switchTab({
+          url: '../index/index',
+        })
+      }
     },
     getUserInfo: function (e) {
         console.log(e)

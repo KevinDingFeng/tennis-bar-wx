@@ -100,7 +100,7 @@ Page({
       },
       success: function (res) {
         console.log(res.data);
-        if (res.data.code = "200") {
+        if (res.data.code == "200") {
           if (res.data.data.comment) {
             that.setData({
               comment: res.data.data.comment
@@ -190,7 +190,7 @@ Page({
       data: data,
       success: function (res) {
         console.log(res.data);
-        if (res.data.code = "200") {
+        if (res.data.code == "200") {
           console.log("保存成功");
           that.setComment(info.gameId);
         }

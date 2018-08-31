@@ -130,7 +130,7 @@ Page({
         header: utilJs.hasTokenGetHeader(),
         success: function (res) {
           console.log(res.data);
-          if (res.data.code = "200") {
+          if (res.data.code == "200") {
 
             that.setData({
               selfEvaluation: res.data.data.selfEvaluation,
@@ -224,7 +224,7 @@ Page({
       },
       success: function (res) {
         console.log(res.data);
-        if (res.data.code = "200") {
+        if (res.data.code == "200") {
           //保存成功，返回上一页
           wx.switchTab({
             url: '../my'

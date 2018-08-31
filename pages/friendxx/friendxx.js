@@ -25,7 +25,7 @@ Page({
         header: utilJs.hasTokenGetHeader(),
         success: function (res) {
           console.log(res.data);
-          if (res.data.code = "200") {
+          if (res.data.code == "200") {
 
             that.setData({
               familiarity: res.data.data.familiarity,

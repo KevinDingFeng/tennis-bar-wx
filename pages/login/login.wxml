@@ -1,6 +1,6 @@
 <!--pages/login/login.wxml-->
 <view class='container'>
     <view class='login_sty'>
-        <button class='login_btn'  type="primary"  open-type="getUserInfo" bindgetuserinfo="onGotUserInfo" >登录</button>
+        <button class='login_btn'  type="primary"  open-type="getUserInfo" bindgetuserinfo="onGotUserInfo" >同意授权网球吧</button>
     </view>
 </view>
