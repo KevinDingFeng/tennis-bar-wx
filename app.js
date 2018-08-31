@@ -109,7 +109,7 @@ App({
   globalData: {
     userInfo: null,
     tennisToken: null,
-    // onlineUrl: "https://tennis.dazonghetong.com/"
-    onlineUrl: "http://localhost:6677/"
+    onlineUrl: "https://tennis.dazonghetong.com/"
+    // onlineUrl: "http://localhost:6677/"
   }
 })
