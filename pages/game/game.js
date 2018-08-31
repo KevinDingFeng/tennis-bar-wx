@@ -277,7 +277,7 @@ Page({
         formData.deadlineTime = this.data.deadlineTime;
         formData.remark = this.data.remark;
         wx.request({
-          url: 'http://localhost:6677/api/game/create',
+          url: getApp().globalData.onlineUrl + 'api/game/create',
           data: formData,
           method: 'POST',
           header: utilJs.hasTokenPostHeader(),
@@ -303,7 +303,7 @@ Page({
       let that = this;
       if(courtName){
         wx.request({
-          url: 'http://localhost:6677/api/game/courts?courtName=' + courtName,
+          url: getApp().globalData.onlineUrl + 'api/game/courts?courtName=' + courtName,
           method:'GET',
           data: {
             "page": pageIndex,
@@ -347,7 +347,7 @@ Page({
     getWxUserInfo:function(){
       let that = this;
       wx.request({
-        url: 'http://localhost:6677/api/wx_user_info',
+        url: getApp().globalData.onlineUrl + 'api/wx_user_info',
         method:"GET",
         header: utilJs.hasTokenGetHeader(),
         success:function(res){

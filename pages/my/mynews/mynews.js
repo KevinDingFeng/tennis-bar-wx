@@ -15,7 +15,7 @@ Page({
   onLoad: function (options) {
     let that = this;
     wx.request({
-      url: 'http://localhost:6677/api/message/list',
+      url: getApp().globalData.onlineUrl + 'api/message/list',
       method: "GET",
       header: utilJs.hasTokenGetHeader(),
       success: function (res) {

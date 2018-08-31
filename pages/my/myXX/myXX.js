@@ -103,7 +103,7 @@ Page({
       let that = this;
       
       wx.request({
-        url: 'http://localhost:6677/api/wx_user_info/detail',
+        url: getApp().globalData.onlineUrl + 'api/wx_user_info/detail',
         method: "GET",
         header: utilJs.hasTokenGetHeader(),
         success: function (res) {
@@ -204,7 +204,7 @@ Page({
     var language = info.languageBase;
     var occupation = info.occupation ? info.occupation : '';
     wx.request({
-      url: 'http://localhost:6677/api/wx_user_info/update',
+      url: getApp().globalData.onlineUrl + 'api/wx_user_info/update',
       method: "POST",
       header: utilJs.hasTokenPostHeader(),
       data: {

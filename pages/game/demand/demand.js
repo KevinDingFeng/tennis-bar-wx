@@ -48,7 +48,7 @@ Page({
     game.deadlineTime = formData.deadlineTime;
     game.remark = formData.remark;
     wx.request({
-      url: 'http://localhost:6677/api/game/create',
+      url: getApp().globalData.onlineUrl + 'api/game/create',
       data: JSON.stringify(game),
       method:'POST',
       header: utilJs.hasTokenPostHeader(),

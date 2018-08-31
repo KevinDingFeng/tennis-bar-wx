@@ -49,7 +49,7 @@ Page({
   setComment(gameId){
     let that = this;
     wx.request({
-      url: 'http://localhost:6677/api/comment/detail',
+      url: getApp().globalData.onlineUrl + 'api/comment/detail',
       method: "GET",
       header: utilJs.hasTokenGetHeader(),
       data: {
@@ -135,7 +135,7 @@ Page({
             success: function(res) {
                 if (res.confirm) {
                     wx.request({
-                        url: 'http://localhost:6677/api/game/cancel',
+                      url: getApp().globalData.onlineUrl + 'api/game/cancel',
                         method: "POST",
                         data: {
                             "id": id
@@ -170,7 +170,7 @@ Page({
     }
     data.wxUserIds = this.data.wxUserIds;
     wx.request({
-      url: 'http://localhost:6677/api/comment/update',
+      url: getApp().globalData.onlineUrl + 'api/comment/update',
       method: "POST",
       header: utilJs.hasTokenPostHeader(),
       data: data,

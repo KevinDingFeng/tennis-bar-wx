@@ -18,7 +18,7 @@ Page({
             title: '我的',
         })
         wx.request({
-            url: 'http://localhost:6677/api/wx_user_info',
+          url: getApp().globalData.onlineUrl + 'api/wx_user_info',
             method: "GET",
           header: utilJs.hasTokenGetHeader(),
             success: function(res) {

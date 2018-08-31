@@ -1,6 +1,7 @@
 //index.js
 //获取应用实例
 var cityData = require('../../utils/city.js');
+var utilJs = require('../../utils/util.js');
 const app = getApp()
 var pageIndex = 0;
 var pageSize = 20;
@@ -184,7 +185,7 @@ Page({
     //         hasUserInfo: true
     //     })
     //     wx.request({
-    //         url: "https://tennis.dazonghetong.com/api/wx_user_info",//根据全局变量token获取后台储存的微信用户信息
+    //         url: getApp().globalData.onlineUrl + 'api/wx_user_info',//根据全局变量token获取后台储存的微信用户信息
     //         header: utilJs.hasTokenGetHeader(),
     //         data: {
 
@@ -204,7 +205,7 @@ Page({
     queryGame:function(){
       let that = this;
       wx.request({
-        url: 'http://localhost:6677/api/game',
+        url: getApp().globalData.onlineUrl + 'api/game',
         method: "GET",
         data:{
           "curUserId":3,

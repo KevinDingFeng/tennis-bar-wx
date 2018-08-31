@@ -22,7 +22,7 @@ Page({
     let that = this;
 
     wx.request({
-      url: 'http://localhost:6677/api/wx_user_info',
+      url: getApp().globalData.onlineUrl + 'api/wx_user_info',
       method: "GET",
       header: utilJs.hasTokenGetHeader(),
       success: function (res) {
@@ -86,7 +86,7 @@ Page({
   },
   sendCode: function(){
      wx.request({
-      url: 'http://localhost:6677/api/sms_code/send',
+       url: getApp().globalData.onlineUrl + 'api/sms_code/send',
       method: "GET",
        header: utilJs.hasTokenGetHeader(),
       success: function (res) {
@@ -109,7 +109,7 @@ Page({
     var c = this.data.code;
     //校验码是否正确
     wx.request({
-      url: 'http://localhost:6677/api/sms_code/check',
+      url: getApp().globalData.onlineUrl + 'api/sms_code/check',
       method: "GET",
       header: utilJs.hasTokenGetHeader(),
       data: {

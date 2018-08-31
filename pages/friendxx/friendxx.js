@@ -20,7 +20,7 @@ Page({
         title: '球友详情',
       })
       wx.request({
-        url: 'http://localhost:6677/api/wx_user_familiarity/' + options.id,
+        url: getApp().globalData.onlineUrl + 'api/wx_user_familiarity/' + options.id,
         method: "GET",
         header: utilJs.hasTokenGetHeader(),
         success: function (res) {

@@ -39,7 +39,7 @@ Page({
     onLoad: function (options) {
       let that = this;
       wx.request({
-        url: 'http://localhost:6677/api/wx_user_familiarity',
+        url: getApp().globalData.onlineUrl + '/wx_user_familiarity',
         method: "GET",
         header: utilJs.hasTokenGetHeader(),
         success: function (res) {
@@ -116,7 +116,7 @@ Page({
     var keyword = this.data.inputVal;
     let that = this;
     wx.request({
-      url: 'http://localhost:6677/api/wx_user_familiarity',
+      url: getApp().globalData.onlineUrl + 'api/wx_user_familiarity',
       method: "GET",
       header: utilJs.hasTokenGetHeader(),
       data:{

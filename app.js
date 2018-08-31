@@ -35,6 +35,8 @@ App({
   },
   globalData: {
     userInfo: null,
-    tennisToken: 'a3sd5f143a5sr4'
+    tennisToken: 'a3sd5f143a5sr4',
+    // onlineUrl: "https://tennis.dazonghetong.com/"
+    onlineUrl: "http://localhost:6677"
   }
 })

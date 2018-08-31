@@ -20,7 +20,7 @@ Page({
       title: '球局',
     })
     wx.request({
-      url: 'http://localhost:6677/api/game',
+      url: getApp().globalData.onlineUrl + 'api/game',
       method:"GET",
       data:{
         "page": pageIndex,

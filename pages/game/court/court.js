@@ -44,7 +44,7 @@ Page({
     let that = this;
     let courtName = e.detail.value.courtName;
     wx.request({
-      url: "http://localhost:6677/api/game/courts?courtName="+courtName,
+      url: getApp().globalData.onlineUrl + 'api/game/courts?courtName='+courtName,
       method:"GET",
       header: utilJs.hasTokenPostHeader(),
       success:function(res){

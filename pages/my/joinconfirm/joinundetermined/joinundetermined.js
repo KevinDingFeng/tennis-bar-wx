@@ -125,7 +125,7 @@ Page({
     getPersonInfo:function(id){
       let that =this ;
       wx.request({
-        url: 'http://localhost:6677/api/wx_user_evaluation?userId='+ id,
+        url: getApp().globalData.onlineUrl + 'api/wx_user_evaluation?userId='+ id,
         method:"GET",
         header: utilJs.hasTokenGetHeader(),
         success:function(res){
@@ -149,7 +149,7 @@ Page({
         content: '是否同意申请',
         success:function(res){
           wx.request({
-            url: 'http://localhost:6677/api/join/update',
+            url: getApp().globalData.onlineUrl + 'api/join/update',
             data:{"id":id,"type":types},
             method:"POST",
             header: utilJs.hasTokenPostHeader(),

@@ -125,7 +125,7 @@ Page({
     onLoad: function(options) {
       let that = this;
       wx.request({
-        url: 'http://localhost:6677/api/wx_user_evaluation/detail',
+        url: getApp().globalData.onlineUrl + 'api/wx_user_evaluation/detail',
         method: "GET",
         header: utilJs.hasTokenGetHeader(),
         success: function (res) {
@@ -212,7 +212,7 @@ Page({
     var skillLevel = info.skillLevel;
     var remark = info.remark ? info.remark : '';
     wx.request({
-      url: 'http://localhost:6677/api/wx_user_evaluation/update',
+      url: getApp().globalData.onlineUrl + 'api/wx_user_evaluation/update',
       method: "POST",
       header: utilJs.hasTokenPostHeader(),
       data: {

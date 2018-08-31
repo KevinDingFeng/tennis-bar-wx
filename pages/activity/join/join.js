@@ -46,7 +46,7 @@ Page({
     data.gameId = id;
     // data.wxUserInfoId = 2;
     wx.request({
-      url: "http://localhost:6677/api/join/create",
+      url: getApp().globalData.onlineUrl + 'api/join/create',
       method :"POST",
       data:data,
       header: utilJs.hasTokenPostHeader(),

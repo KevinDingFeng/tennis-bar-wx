@@ -43,7 +43,7 @@ Page({
     let that = this;
     // 获取加入申请列表
     wx.request({
-      url: 'http://localhost:6677/api/join/quit',
+      url: getApp().globalData.onlineUrl + 'api/join/quit',
       method: "POST",
       data: {
         "applyId": applyId

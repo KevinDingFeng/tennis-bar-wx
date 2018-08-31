@@ -88,7 +88,7 @@ Page({
       let that = this;
       // 获取加入申请列表
       wx.request({
-        url: 'http://localhost:6677/api/join/applys',
+        url: getApp().globalData.onlineUrl + 'api/join/applys',
         method: "POST",
         data: {
           // "wxUserInfoId": wxUserInfoId,
