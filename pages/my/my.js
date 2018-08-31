@@ -1,4 +1,5 @@
 // pages/my/my.js
+var utilJs = require("../../utils/util.js");
 Page({
 
     /**
@@ -19,9 +20,7 @@ Page({
         wx.request({
             url: 'http://localhost:6677/api/wx_user_info',
             method: "GET",
-            header: {
-                "content-Type": "application/json"
-            },
+          header: utilJs.hasTokenGetHeader(),
             success: function(res) {
                 console.log(res.data);
                 if (res.data.code = "200") {

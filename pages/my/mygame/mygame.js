@@ -1,5 +1,8 @@
 // pages/my/mygame/mygame.js
+var utilJs = require("../../../utils/util.js");
 var init_type = "join";
+var pageIndex = 0;
+var pageSize = 20;
 Page({
 
     /**
@@ -74,19 +77,24 @@ Page({
     getMyGames:function(userId,types){
       let that = this;
       wx.request({
-        url: "http://localhost:6677/join/query?organizerId=" + userId + "&type=" + types,
+        url: "http://localhost:6677/api/join/query?type=" + types,
         method: "GET",
-        header: {
-          "content-Type": "application/json",
-          "page":0,
-          "pageSize":10
+        data:{
+          "page": pageIndex,
+          "value": pageSize
         },
+        header: utilJs.hasTokenGetHeader,
         success: function (res) {
           if (res.data.code == "200") {
             that.setData({
               games: res.data.data.page,
             })
             // wx.setStorageSync(types, res.data.data.page);
+          }else{
+            wx.showToast({
+              title: res.data.data,
+              icon:'none'
+            })
           }
         }
       })

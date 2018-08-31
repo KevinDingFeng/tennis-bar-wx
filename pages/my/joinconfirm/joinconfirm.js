@@ -1,6 +1,9 @@
 // pages/my/joinconfirm/joinconfirm.js
+var utilJs = require("../../../utils/util.js");
 var sliderWidth = 115; // 需要设置slider的宽度，用于计算中间位置
 var init_status = "WaitingConfirm";
+var pageIndex = 0;
+var pageSize = 20;
 Page({
     /**
      * 页面的初始数据
@@ -104,15 +107,15 @@ Page({
       let that = this;
       // 获取加入申请列表
       wx.request({
-        url: 'http://localhost:6677/join/confirms',
+        url: 'http://localhost:6677/api/join/confirms',
         method: "POST",
         data: {
-          "organizerId": organizerId,
-          "status": status
+          // "organizerId": organizerId,
+          "status": status,
+          "page": pageIndex,
+          "value": pageSize
         },
-        header: {
-          "content-Type": "application/json"
-        },
+        header: utilJs.hasTokenPostHeader, 
         success: function (res) {
           if (res.data.code == "200") {
             console.log(res.data.data.confirms);
@@ -120,6 +123,11 @@ Page({
               confirms: res.data.data.confirms
             })
             // wx.setStorageSync(status, res.data.data.confirms);
+          } else {
+            wx.showToast({
+              title: res.data.data,
+              icon: 'none'
+            })
           }
         }
       })

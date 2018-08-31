@@ -1,4 +1,5 @@
 // pages/ballFriend/ballFriend.js
+var utilJs = require("../../utils/util.js");
 Page({
 
     /**
@@ -40,12 +41,11 @@ Page({
       wx.request({
         url: 'http://localhost:6677/api/wx_user_familiarity',
         method: "GET",
-        header: {
-          "content-Type": "application/json"
-        },
+        header: utilJs.hasTokenGetHeader(),
         success: function (res) {
-          //console.log(res.data);
-          if (res.data.code = "200") {
+          console.log(res);
+          console.log(res.data);
+          if (res.data.code == "200") {
             
             that.setData({
               ballFriend: res.data.data.list,
@@ -118,9 +118,7 @@ Page({
     wx.request({
       url: 'http://localhost:6677/api/wx_user_familiarity',
       method: "GET",
-      header: {
-        "content-Type": "application/json"
-      },
+      header: utilJs.hasTokenGetHeader(),
       data:{
         keyword: keyword
       },

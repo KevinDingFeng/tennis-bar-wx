@@ -1,3 +1,13 @@
+<wxs module="utils">
+  function formatDate(data) {
+    var _data = data;
+    _data = _data.split(" ")[1];
+    return _data
+  }
+  module.exports = {
+    formatDate: formatDate
+  }
+</wxs>
 <view class='container'>
     <view class='ball_join'>
         <view class="join_title">
@@ -15,7 +25,7 @@
         </view>
         <view class='xx_id'>
             <view class='id_name'>打球时间</view>
-            <view>{{game.startTime}}-{{game.endTime}}</view>
+            <view>{{game.startTime}}-{{utils.formatDate(game.endTime)}}</view>
         </view>
         <view class='xx_id'>
             <view class='id_name'>球局类型</view>

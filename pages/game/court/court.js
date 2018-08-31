@@ -1,4 +1,5 @@
 // pages/game/court/court.js
+var utilJs = require("../../../utils/util.js");
 Page({
 
   /**
@@ -43,11 +44,9 @@ Page({
     let that = this;
     let courtName = e.detail.value.courtName;
     wx.request({
-      url: "http://localhost:6677/game/courts?courtName="+courtName,
+      url: "http://localhost:6677/api/game/courts?courtName="+courtName,
       method:"GET",
-      header:{
-        "content-type": "application/x-www-form-urlencodedn"
-      },
+      header: utilJs.hasTokenPostHeader(),
       success:function(res){
         if(res.data.code == "200"){
           that.setData({

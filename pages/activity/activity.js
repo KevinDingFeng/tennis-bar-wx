@@ -1,4 +1,7 @@
-  // pages/activity/activity.js
+// pages/activity/activity.js
+var utilJs = require("../../utils/util.js");
+var pageIndex = 0;
+var pageSize = 20;
 Page({
 
   /**
@@ -17,11 +20,13 @@ Page({
       title: '球局',
     })
     wx.request({
-      url: 'http://localhost:6677/game',
+      url: 'http://localhost:6677/api/game',
       method:"GET",
-      header:{
-        "content-Type":"application/json"
+      data:{
+        "page": pageIndex,
+        "value": pageSize
       },
+      header: utilJs.hasTokenGetHeader(),
       success:function(res){
         console.log(res.data);
         if(res.data.code="200"){

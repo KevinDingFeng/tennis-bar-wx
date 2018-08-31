@@ -1,4 +1,5 @@
 // pages/my/joinconfirm/joinundetermined/joinundetermined.js
+var utilJs = require("../../../../utils/util.js");
 Page({
 
     /**
@@ -126,9 +127,7 @@ Page({
       wx.request({
         url: 'http://localhost:6677/api/wx_user_evaluation?userId='+ id,
         method:"GET",
-        header: {
-          "content-Type": "application/json"
-        },
+        header: utilJs.hasTokenGetHeader(),
         success:function(res){
           if(res.data.code =="200"){
             that.setData({
@@ -150,12 +149,10 @@ Page({
         content: '是否同意申请',
         success:function(res){
           wx.request({
-            url: 'http://localhost:6677/join/update',
+            url: 'http://localhost:6677/api/join/update',
             data:{"id":id,"type":types},
             method:"POST",
-            header:{
-              "content-type": "application/json"
-            },
+            header: utilJs.hasTokenPostHeader(),
             success:function(res){
               if (res.data.code == "200") {
                 wx.navigateBack({})
@@ -183,9 +180,7 @@ Page({
           "type":"refuse"
         },
         method:"POST",
-        header:{
-          "content-type":"application/json"
-        },
+        header: utilJs.hasTokenPostHeader(),
         success:function(res){
           if(res.data.code == "200"){
             wx.navigateBack({

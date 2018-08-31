@@ -1,4 +1,5 @@
 // pages/application/application.js
+var utilJs = require("../../utils/util.js");
 Page({
 
   /**
@@ -42,14 +43,12 @@ Page({
     let that = this;
     // 获取加入申请列表
     wx.request({
-      url: 'http://localhost:6677/join/quit',
+      url: 'http://localhost:6677/api/join/quit',
       method: "POST",
       data: {
         "applyId": applyId
       },
-      header: {
-        "content-Type": "application/json"
-      },
+      header: utilJs.hasTokenPostHeader,
       success: function (res) {
         if (res.data.code == "200") {
           console.log(res);

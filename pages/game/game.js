@@ -1,5 +1,8 @@
 // pages/game/game.js
+var utilJs = require("../../utils/util.js");
 var dateTimePicker = require('../../utils/dateTimePicker.js');
+var pageIndex = 0;
+var pageSize = 20;
 Page({
     /**
      * 页面的初始数据
@@ -258,7 +261,8 @@ Page({
 
     addGame: function(e) {
         let formData = {};
-        formData.organizerId = this.data.wxUserInfo.id;
+        // formData.organizerId = this.data.wxUserInfo.id;
+        // formData.organizerId = 3;
         formData.name = this.data.name;
         formData.startTime = this.data.start_time;
         formData.endTime = this.data.end_time;
@@ -273,12 +277,10 @@ Page({
         formData.deadlineTime = this.data.deadlineTime;
         formData.remark = this.data.remark;
         wx.request({
-          url: 'http://localhost:6677/game/create',
+          url: 'http://localhost:6677/api/game/create',
           data: formData,
           method: 'POST',
-          header: {
-            "content-type": "application/json"
-          },
+          header: utilJs.hasTokenPostHeader(),
           success: function (res) {
             if (res.data.code == "200") {
               wx.switchTab({
@@ -301,11 +303,13 @@ Page({
       let that = this;
       if(courtName){
         wx.request({
-          url: 'http://localhost:6677/game/courts?courtName=' + courtName,
+          url: 'http://localhost:6677/api/game/courts?courtName=' + courtName,
           method:'GET',
-          header:{
-            "content-type": "application/x-www-form-urlencodedn"
+          data: {
+            "page": pageIndex,
+            "value": pageSize
           },
+          header: utilJs.hasTokenGetHeader(),
           success:function(res){
             if(res.data.code == '200'){
               that.setData({
@@ -345,9 +349,7 @@ Page({
       wx.request({
         url: 'http://localhost:6677/api/wx_user_info',
         method:"GET",
-        header:{
-          "content-type": "application/json"
-        },
+        header: utilJs.hasTokenGetHeader(),
         success:function(res){
           if(res.data.code =="200"){
             that.setData({

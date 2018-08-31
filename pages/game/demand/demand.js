@@ -1,4 +1,5 @@
 // pages/game/demand/demand.js
+var utilJs = require("../../../utils/util.js");
 Page({
 
   /**
@@ -47,12 +48,10 @@ Page({
     game.deadlineTime = formData.deadlineTime;
     game.remark = formData.remark;
     wx.request({
-      url: 'http://localhost:6677/game/create',
+      url: 'http://localhost:6677/api/game/create',
       data: JSON.stringify(game),
       method:'POST',
-      header:{
-        "content-type": "application/json"
-      },
+      header: utilJs.hasTokenPostHeader(),
       success:function(res){
         if(res.data.code == "200"){
           wx.switchTab({

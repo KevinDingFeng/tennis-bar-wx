@@ -10,19 +10,19 @@ Page({
         //搜索条件
         keyword:'',
         //商区 商圈码
-        code:null,
+        code:{},
         // code: {"level1": "100", "level2": "101", "level3": "10101"},
         // code: { "level1": "100", "level2": "101", "level3": "" },
         // code: { "level1": "100", "level2": "", "level3": "" },
         //智能排序
+        lon_lat:{},
+        // lon_lat: {"longitude": "116.366225", "latitude":"39.935242"},
         orderType:'',
-        // orderType: "familiarity",    //熟悉度
-        // orderType: "distance",      //距离
-        // orderType: "time",          //时间
+        orderTypeEnums: ["familiarity", "familiarity", "distance", "time"], //默认 熟悉度  距离  时间
         //打球时间
-        // date: '',
         date:'',  //日期
         time:'',  //时间
+        timeType:["morning","afternoon","night"],
         motto: 'Hello World',
         userInfo: {},
         hasUserInfo: false,
@@ -52,32 +52,9 @@ Page({
         shownavindex: '',
         games: ''
     },
-    /**
-     * 
-    showInput: function () {
-        this.setData({
-            inputShowed: true
-        });
-    },
-    hideInput: function () {
-        this.setData({
-            inputVal: "",
-            inputShowed: false
-        });
-    },
-    clearInput: function () {
-        this.setData({
-            inputVal: ""
-        });
-    },
-     * 
-     */
     inputTyping: function (e) {
         let keyword = e.detail.value;
         this.setData({keyword:keyword})
-        // this.setData({
-        //     inputVal: e.detail.value
-        // });
     },
     onLoad: function (options) {
         wx.setNavigationBarTitle({
@@ -196,7 +173,7 @@ Page({
     bindDateChange: function (e) {//时间选择
         console.log('picker发送选择改变，携带值为', e.detail.value)
         this.setData({
-            px_time: e.detail.value
+            date: e.detail.value
         })
     },
     // getUserInfo: function (e) {
@@ -208,9 +185,7 @@ Page({
     //     })
     //     wx.request({
     //         url: "https://tennis.dazonghetong.com/api/wx_user_info",//根据全局变量token获取后台储存的微信用户信息
-    //         header: {
-    //             'tennisToken': app.globalData.tennisToken
-    //         },
+    //         header: utilJs.hasTokenGetHeader(),
     //         data: {
 
     //         },
@@ -224,32 +199,43 @@ Page({
     search:function(){
       this.queryGame();
     },
+    
     //查询球局数据
     queryGame:function(){
       let that = this;
       wx.request({
-        url: 'http://localhost:6677/game',
+        url: 'http://localhost:6677/api/game',
         method: "GET",
         data:{
+          "curUserId":3,
           "keyword": this.data.keyword ,
           "code": JSON.stringify(this.data.code),
           "date":this.data.date,
           "orderType":this.data.orderType,
+          "lon_lat":JSON.stringify(this.data.lon_lat),
           "timeType":this.data.time,
           "page":  pageIndex,
           "value":  pageSize
         },
-        header: {
-          "content-Type": "application/json"
-        },
+        header: utilJs.hasTokenGetHeader(),
         success: function (res) {
           console.log(res.data);
-          if (res.data.code = "200") {
+          if (res.data.code == "200") {
             that.setData({
               games: res.data.data.page
             })
+          }else{
+            wx.showToast({
+              title: res.data.data.errMsg,
+              icon:'none'
+            })
           }
         }
+      })
+      this.setData({
+        code:{},
+        date:'',
+        time:''
       })
     },
 
@@ -268,5 +254,51 @@ Page({
         wx.navigateTo({
             url: '../activity/apply/apply?game=' + JSON.stringify(game),
         })
-    }
+    },
+
+    // 智能排序
+    intelligentSort:function(event){
+      this.hidebg();
+      let idx = event.currentTarget.dataset.idx;
+      if(idx == 2){
+        this.getLoc();
+      }
+      this.setData({
+        orderType: this.data.orderTypeEnums[idx]
+      })
+      this.queryGame();
+      this.setData({
+        orderType:'',
+        lon_lat:{}
+      })
+    },
+    //获取当前定位
+    getLoc:function(){
+      let that =this;
+      let locations = that.data.lon_lat;
+      //获取当前位置经纬度
+      wx.getLocation({
+        type: 'wgs84',
+        success: function (res) {
+          var latitude = res.latitude;
+          var longitude = res.longitude;
+          locations.longitude = longitude;
+          locations.latitude  = latitude;
+          that.setData({
+            lon_lat : locations
+          })
+        }
+      })
+    },
+    //选择时间 上/下/晚
+    selectTime:function(event){
+      this.hidebg();
+      let idx = event.currentTarget.dataset.idx;
+      this.setData({time:this.data.timeType[idx]})
+    },
+    
+    
+    
+
+
 })

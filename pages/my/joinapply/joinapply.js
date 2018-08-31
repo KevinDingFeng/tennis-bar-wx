@@ -1,6 +1,9 @@
 // pages/my/joinapply/joinapply.js
+var utilJs = require("../../../utils/util.js");
 var sliderWidth = 115; // 需要设置slider的宽度，用于计算中间位置
 var init_status ="Agree";
+var pageIndex = 0;
+var pageSize = 20;
 Page({
     /**
      * 页面的初始数据
@@ -85,21 +88,26 @@ Page({
       let that = this;
       // 获取加入申请列表
       wx.request({
-        url: 'http://localhost:6677/join/applys',
+        url: 'http://localhost:6677/api/join/applys',
         method: "POST",
         data: {
-          "wxUserInfoId": wxUserInfoId,
-          "status": status
+          // "wxUserInfoId": wxUserInfoId,
+          "status": status,
+          "page": pageIndex,
+          "value": pageSize
         },
-        header: {
-          "content-Type": "application/json"
-        },
+        header: utilJs.hasTokenPostHeader,
         success: function (res) {
           if (res.data.code == "200") {
             that.setData({
               applys: res.data.data.applys
             })
             // wx.setStorageSync(status, res.data.data.applys);
+          }else{
+            wx.showToast({
+              title: res.data.data,
+              icon:'none'
+            })
           }
         }
       })

@@ -1,4 +1,13 @@
-
+<wxs module="utils">
+  function formatDate(data) {
+    var _data = data;
+    _data = _data.split(" ")[1];
+    return _data
+  }
+  module.exports = {
+    formatDate: formatDate
+  }
+</wxs>
 <view>
   <block wx:for="{{games.content}}" wx:for-item="game" wx:key="**this">
     <view bindtap="applyJoinGame" data-game="{{game}}" >
@@ -7,7 +16,7 @@
       <view>
         <view>发起:</view>
         <view>{{game.organizer.nickName}}</view>
-        <text>{{game.startTime}}</text>~<text>{{game.endTime}}</text>
+        <text>{{game.startTime}}</text>~<text>{{utils.formatDate(game.endTime)}}</text>
       </view>
       <view>
         <view>球场:</view>
