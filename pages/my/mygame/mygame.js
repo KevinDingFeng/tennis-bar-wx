@@ -75,7 +75,7 @@ Page({
     getMyGames:function(userId,types){
       let that = this;
       wx.request({
-        url: "http://localhost:6677/join/query?type=" + types,
+        url: "http://localhost:6677/api/join/query?type=" + types,
         method: "GET",
         header: {
           "content-Type": "application/json",

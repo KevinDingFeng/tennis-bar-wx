@@ -275,7 +275,7 @@ Page({
         formData.deadlineTime = this.data.deadlineTime;
         formData.remark = this.data.remark;
         wx.request({
-          url: 'http://localhost:6677/game/create',
+          url: 'http://localhost:6677/api/game/create',
           data: formData,
           method: 'POST',
           header: utilJs.hasTokenPostHeader(),
@@ -301,7 +301,7 @@ Page({
       let that = this;
       if(courtName){
         wx.request({
-          url: 'http://localhost:6677/game/courts?courtName=' + courtName,
+          url: 'http://localhost:6677/api/game/courts?courtName=' + courtName,
           method:'GET',
           header: utilJs.hasTokenGetHeader(),
           success:function(res){

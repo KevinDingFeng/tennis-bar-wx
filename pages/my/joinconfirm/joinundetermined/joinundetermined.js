@@ -149,7 +149,7 @@ Page({
         content: '是否同意申请',
         success:function(res){
           wx.request({
-            url: 'http://localhost:6677/join/update',
+            url: 'http://localhost:6677/api/join/update',
             data:{"id":id,"type":types},
             method:"POST",
             header: utilJs.hasTokenPostHeader()},

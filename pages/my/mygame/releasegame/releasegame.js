@@ -135,7 +135,7 @@ Page({
             success: function(res) {
                 if (res.confirm) {
                     wx.request({
-                        url: 'http://localhost:6677/game/cancel',
+                        url: 'http://localhost:6677/api/game/cancel',
                         method: "POST",
                         data: {
                             "id": id

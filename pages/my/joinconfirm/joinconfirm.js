@@ -105,7 +105,7 @@ Page({
       let that = this;
       // 获取加入申请列表
       wx.request({
-        url: 'http://localhost:6677/join/confirms',
+        url: 'http://localhost:6677/api/join/confirms',
         method: "POST",
         data: {
           // "organizerId": organizerId,

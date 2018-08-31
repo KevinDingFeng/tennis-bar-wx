@@ -204,7 +204,7 @@ Page({
     queryGame:function(){
       let that = this;
       wx.request({
-        url: 'http://localhost:6677/game',
+        url: 'http://localhost:6677/api/game',
         method: "GET",
         data:{
           "curUserId":3,

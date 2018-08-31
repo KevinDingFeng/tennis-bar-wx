@@ -18,7 +18,7 @@ Page({
       title: '球局',
     })
     wx.request({
-      url: 'http://localhost:6677/game',
+      url: 'http://localhost:6677/api/game',
       method:"GET",
       header: utilJs.hasTokenGetHeader(),
       success:function(res){
