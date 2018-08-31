@@ -1,3 +1,13 @@
+<wxs module="utils">
+  function formatDate(data) {
+    var _data = data;
+    _data = _data.split(" ")[1];
+    return _data
+  }
+  module.exports = {
+    formatDate: formatDate
+  }
+</wxs>
 <view class='container'>
     <view class="page">
         <view class="page__bd">
@@ -26,7 +36,7 @@
                             </view>
                             <view class='list_center'>
                                 <view class="palce_peo">发起人：{{confirm.game.organizer.nickName}}</view>
-                                <view class='palce_time'>{{confirm.game.startTime}}-{{confirm.game.endTime}}</view>
+                                <view class='palce_time'>{{confirm.game.startTime}}-{{utils.formatDate(confirm.game.endTime)}}</view>
                             </view>
                             <view class='list_bottom'>
                                 <view class="palce_dz">球场：{{confirm.game.court.name}}</view>
@@ -47,7 +57,7 @@
                             </view>
                             <view class='list_center'>
                                 <view class="palce_peo">发起人：{{confirm.game.organizer.nickName}}</view>
-                                <view class='palce_time'>{{confirm.game.startTime}}-{{confirm.game.endTime}}</view>
+                                <view class='palce_time'>{{confirm.game.startTime}}-{{utils.formatDate(confirm.game.endTime)}}</view>
                             </view>
                             <view class='list_bottom'>
                                 <view class="palce_dz">球场：{{confirm.game.court.name}}</view>
@@ -68,7 +78,7 @@
                             </view>
                             <view class='list_center'>
                                 <view class="palce_peo">发起人：{{confirm.game.organizer.nickName}}</view>
-                                <view class='palce_time'>{{confirm.game.startTime}}-{{confirm.game.endTime}}</view>
+                                <view class='palce_time'>{{confirm.game.startTime}}-{{utils.formatDate(confirm.game.endTime)}}</view>
                             </view>
                             <view class='list_bottom'>
                                 <view class="palce_dz">球场：{{confirm.game.court.name}}</view>
