@@ -47,17 +47,17 @@
             <!-- 商区 -->
             <view class="qy quyu-left">
                 <view class="{{select1 == index ? 'current' : ''}}" wx:for="{{cityleft}}" bindtap="selectleft" data-city='{{index}}'>
-                    {{index}}
+                    {{cityleft[index].name}}
                 </view>
             </view>
             <view class="qy quyu-center">
                 <view class="{{select2 == index ? 'current2' : ''}}" wx:for="{{citycenter}}" bindtap="selectcenter" data-city='{{index}}'>
-                    {{index}}
+                    {{citycenter[index].name}}
                 </view>
             </view>
             <view class="qy quyu-right">
-                <view wx:for="{{cityright}}">
-                    {{item}}
+                <view wx:for="{{cityright}}" bindtap='selectright' data-city='{{index}}'>
+                    {{cityright[index].name}}
                 </view>
             </view>
         </view>

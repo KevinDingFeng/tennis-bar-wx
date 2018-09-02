@@ -11,7 +11,10 @@ Page({
         //搜索条件
         keyword:'',
         //商区 商圈码
-        code:{},
+        // code:null,
+        level1:null,
+        level2:null,
+        level3:null,
         // code: {"level1": "100", "level2": "101", "level3": "10101"},
         // code: { "level1": "100", "level2": "101", "level3": "" },
         // code: { "level1": "100", "level2": "", "level3": "" },
@@ -148,16 +151,27 @@ Page({
     selectleft: function (e) {
         this.setData({
             cityright: {},
-            citycenter: this.data.cityleft[e.currentTarget.dataset.city],
+            citycenter: this.data.cityleft[e.currentTarget.dataset.city].city,
             select1: e.target.dataset.city,
-            select2: ''
+            select2: '',
+            level1: this.data.cityleft[e.currentTarget.dataset.city].code,
+            level2:'',
+            level3:''
         });
     },
     selectcenter: function (e) {
         this.setData({
-            cityright: this.data.citycenter[e.currentTarget.dataset.city],
-            select2: e.target.dataset.city
+            cityright: this.data.citycenter[e.currentTarget.dataset.city].district,
+            select2: e.target.dataset.city,
+            level2: this.data.citycenter[e.currentTarget.dataset.city].code,
+            level3:''
         });
+    },
+    selectright:function(e){
+        this.setData({
+            level3: this.data.cityright[e.currentTarget.dataset.city].code,
+        })
+        this.hidebg();
     },
     hidebg: function (e) {
         this.setData({
@@ -177,6 +191,7 @@ Page({
             date: e.detail.value
         })
     },
+
     // getUserInfo: function (e) {
     //     console.log(e)
     //     app.globalData.userInfo = e.detail.userInfo
@@ -204,13 +219,20 @@ Page({
     //查询球局数据
     queryGame:function(){
       let that = this;
+      if(this.data.orderType != ''){
+        this.setData({ level1: null, level2: null, level3: null })
+      }
+      let bcode = null;
+      if(this.data.level1 != null){
+        bcode = { "level1": this.data.level1, "level2": this.data.level2, "level3": this.data.level3 };
+      }
       wx.request({
         url: getApp().globalData.onlineUrl + 'api/game',
         method: "GET",
         data:{
-          "curUserId":3,
+          // "curUserId":3,
           "keyword": this.data.keyword ,
-          "code": JSON.stringify(this.data.code),
+          "code": JSON.stringify(bcode),
           "date":this.data.date,
           "orderType":this.data.orderType,
           "lon_lat":JSON.stringify(this.data.lon_lat),
@@ -234,7 +256,7 @@ Page({
         }
       })
       this.setData({
-        code:{},
+        // code:null,
         date:'',
         time:''
       })
@@ -270,7 +292,7 @@ Page({
       this.queryGame();
       this.setData({
         orderType:'',
-        lon_lat:{}
+        lon_lat:{},
       })
     },
     //获取当前定位
