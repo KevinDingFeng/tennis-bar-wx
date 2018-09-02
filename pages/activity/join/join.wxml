@@ -9,6 +9,7 @@
   }
 </wxs>
 <view class='container'>
+  <block wx:if="{{game}}">
     <view class='farm'>
         <text class='game_name'>{{game.name}}</text>
         <view class='xx_id'>
@@ -48,4 +49,5 @@
     <view class='btn_sure'>
         <button bindtap="addGame" data-id="{{game.id}}">确认加入</button>
     </view>
+  </block>
 </view>

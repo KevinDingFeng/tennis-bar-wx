@@ -9,6 +9,7 @@
   }
 </wxs>
 <view class='container'>
+  <block wx:if="{{apply}}">
     <view class='ball_xx'>
         <view class='xx_id'>
             <view class='xx_title f_wei'>{{apply.game.name}}</view>
@@ -103,4 +104,5 @@
         <button class="weui-btn btn_sure" type="primary" bindtap="quitGame" data-id="{{apply.id}}">退出不参与</button>
     </view>
     </block>
+  </block>
 </view>

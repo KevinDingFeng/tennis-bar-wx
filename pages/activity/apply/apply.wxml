@@ -1,4 +1,4 @@
-<wxs module="utils">
+<wxs module="utils_apply">
   function formatDate(data) {
     var _data = data;
     _data = _data.split(" ")[1];
@@ -9,6 +9,7 @@
   }
 </wxs>
 <view class='container'>
+    <block wx:if="{{game}}">
     <view class='ball_name'>
         <text class='game_name'>{{game.name}}</text>
         <view class='col_g f_wei' wx:if="{{game.gameType == 'Entertainment' }}">
@@ -30,7 +31,7 @@
         </view>
         <view class='xx_id'>
             <view class='id_name'>打球时间</view>
-            <view>{{game.startTime}}-{{utils.formatDate(game.endTime)}}</view>
+            <view>{{game.startTime}}-{{utils_apply.formatDate(game.endTime)}}</view>
         </view>
         <view class='xx_id'>
             <view class='id_name'>球场</view>
@@ -98,4 +99,5 @@
         <button class='join_firend'>邀请好友加入</button>
         <button class='join_me' bindtap="joinGame" data-game="{{game}}">我要加入</button>
     </view>
+  </block>
 </view>

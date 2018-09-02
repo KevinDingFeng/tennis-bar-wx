@@ -280,7 +280,7 @@ Page({
           url: getApp().globalData.onlineUrl + 'api/game/create',
           data: formData,
           method: 'POST',
-          header: utilJs.hasTokenPostHeader(),
+          header: utilJs.hasTokenGetHeader(),
           success: function (res) {
             if (res.data.code == "200") {
               wx.switchTab({
