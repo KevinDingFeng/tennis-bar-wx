@@ -49,7 +49,7 @@ Page({
       url: getApp().globalData.onlineUrl + 'api/join/create',
       method :"POST",
       data:data,
-      header: utilJs.hasTokenPostHeader(),
+      header: utilJs.hasTokenGetHeader(),
       success:function(res){
         if (res.data.code == "200") {
           wx.showToast({

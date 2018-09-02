@@ -1,8 +1,11 @@
-<wxs module="utils">
+<wxs module="util">
   function formatDate(data) {
+    if(data){
     var _data = data;
     _data = _data.split(" ")[1];
-    return _data
+    return _data;
+    }
+    return null;
   }
   module.exports = {
     formatDate: formatDate
@@ -41,8 +44,9 @@ bindtap="swichNav" data-type="release">我发起的球局</view>
 </view>
 <swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:1000px;width:100%;margin-top:112rpx;">
     <swiper-item>
-        <view wx:if="{{games.content.length > 0}}">
+        <block wx:if="{{games.content.length > 0}}">
             <view class='list_xx' wx:for="{{games.content}}" wx:key="**this" wx:for-item="jgame">
+              <block wx:if="{{jgame}}">
                 <view class='list_top' bindtap="joinGameDetail" data-game="{{jgame.game}}">
                     <view class='palce_name f_wei'>{{jgame.game.name}}</view>
                     <i class="sanj"></i>
@@ -54,7 +58,7 @@ bindtap="swichNav" data-type="release">我发起的球局</view>
                 </view>
                 <view class='list_center'>
                     <view class="palce_peo">发起人：{{jgame.game.organizer.nickName}}</view>
-                    <view class='palce_time'>{{jgame.game.startTime}} ~ {{utils.formatDate(jgame.game.endTime)}}</view>
+                    <view class='palce_time'>{{jgame.game.startTime}} ~ {{util.formatDate(jgame.game.endTime)}}</view>
                 </view>
                 <view class='list_bottom'>
                     <view class="palce_dz">球场：{{jgame.game.court.name}}</view>
@@ -63,15 +67,17 @@ bindtap="swichNav" data-type="release">我发起的球局</view>
                         <text>导航</text>
                     </view>
                 </view>
+              </block>
             </view>
-        </view>
-        <view wx:else>
+        </block>
+        <block wx:else>
             暂无数据
-        </view>
+        </block>
     </swiper-item>
     <swiper-item>
-        <view wx:if="{{games.content.length > 0}}">
+        <block wx:if="{{games.content.length > 0}}">
             <view class='list_xx' wx:for="{{games.content}}" wx:key="**this" wx:for-item="game">
+              <block wx:if="{{game}}">
                 <view class='list_top' bindtap="releaseGameDetail" data-game="{{game}}">
                     <view class='palce_name f_wei'>{{game.name}}</view>
                     <i class="sanj"></i>
@@ -83,7 +89,7 @@ bindtap="swichNav" data-type="release">我发起的球局</view>
                 </view>
                 <view class='list_center'>
                     <view class="palce_peo">发起人：{{game.organizer.nickName}}</view>
-                    <view class='palce_time'>{{game.startTime}} ~ {{utils.formatDate(game.endTime)}}</view>
+                    <view class='palce_time'>{{game.startTime}} ~ {{util.formatDate(game.endTime)}}</view>
                 </view>
                 <view class='list_bottom'>
                     <view class="palce_dz">球场：{{game.court.name}}</view>
@@ -92,10 +98,11 @@ bindtap="swichNav" data-type="release">我发起的球局</view>
                         <text>导航</text>
                     </view>
                 </view>
+              </block>
             </view>
-        </view>
-        <view wx:else>
+        </block>
+        <block wx:else>
             暂无数据
-        </view>
+        </block>
     </swiper-item>
 </swiper>

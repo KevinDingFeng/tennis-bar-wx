@@ -41,6 +41,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
+      console.log(getApp().globalData.tennisToken);
       wx.setNavigationBarTitle({
         title: '我的球局',
       })
@@ -83,7 +84,7 @@ Page({
           "page": pageIndex,
           "value": pageSize
         },
-        header: utilJs.hasTokenGetHeader,
+        header: utilJs.hasTokenGetHeader(),
         success: function (res) {
           if (res.data.code == "200") {
             that.setData({

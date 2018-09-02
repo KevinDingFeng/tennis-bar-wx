@@ -152,7 +152,7 @@ Page({
             url: getApp().globalData.onlineUrl + 'api/join/update',
             data:{"id":id,"type":types},
             method:"POST",
-            header: utilJs.hasTokenPostHeader(),
+            header: utilJs.hasTokenGetHeader(),
             success:function(res){
               if (res.data.code == "200") {
                 wx.navigateBack({})
@@ -180,7 +180,7 @@ Page({
           "type":"refuse"
         },
         method:"POST",
-        header: utilJs.hasTokenPostHeader(),
+        header: utilJs.hasTokenGetHeader(),
         success:function(res){
           if(res.data.code == "200"){
             wx.navigateBack({

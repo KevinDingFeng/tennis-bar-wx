@@ -48,7 +48,7 @@ Page({
       data: {
         "applyId": applyId
       },
-      header: utilJs.hasTokenPostHeader,
+      header: utilJs.hasTokenGetHeader(),
       success: function (res) {
         if (res.data.code == "200") {
           console.log(res);

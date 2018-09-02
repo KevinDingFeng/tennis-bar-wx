@@ -140,7 +140,7 @@ Page({
                         data: {
                             "id": id
                         },
-                      header: utilJs.hasTokenPostHeader(),
+                      header: utilJs.hasTokenGetHeader(),
                         success: function(res) {
                             if (res.data.code == "200") {
                                 wx.navigateBack({})
