@@ -1,3 +1,16 @@
+<wxs module="utils">
+  function formatDate(data) {
+    if(data){
+      var _data = data;
+      _data = _data.split(" ")[1];
+      return _data;
+    }
+    return null;
+  }
+  module.exports = {
+    formatDate: formatDate
+  }
+</wxs>
 <view class="page">
     <view class="page__bd">
         <view class="weui-tab">
