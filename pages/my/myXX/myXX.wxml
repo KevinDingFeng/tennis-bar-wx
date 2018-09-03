@@ -27,7 +27,7 @@
             </view>
         </view>
         <view class='user_jbxx'>
-            <view>* 语言</view>
+            <view>语言</view>
             <view class='user_sex'>
                 <picker mode="selector"  bindchange="bindPickerChange_language" value="{{index_language}}" range="{{languageTextArr}}">
                     <text>{{languageMap[wxUserInfo.languageBase]?languageMap[wxUserInfo.languageBase]:'请选择语言 >'}}</text>
