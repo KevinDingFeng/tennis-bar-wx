@@ -95,6 +95,7 @@ Page({
         this.setData({
             index_peo: Index,
             show_peo: !this.data.show_peo,
+            holderNum: this.data.selectData[Index]
         });
     },
     optionTap(e) {
