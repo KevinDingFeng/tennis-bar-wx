@@ -94,9 +94,9 @@
         </view>
     </view>
     <view class='registration_time'>报名截止时间：{{game.deadlineTime}}</view>
-    <view class='remark'>备注：{{game.remark}}</view>
+    <view class='remark'>备注：{{game.remark==null?"":game.remark}}</view>
     <view class='join_btn'>
-        <button class='join_firend'>邀请好友加入</button>
+        <button class='join_firend' open-type='share'>邀请好友加入</button>
         <button class='join_me' bindtap="joinGame" data-game="{{game}}">我要加入</button>
     </view>
   </block>
