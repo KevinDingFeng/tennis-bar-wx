@@ -116,7 +116,7 @@
     width: 100%;
     background-color: #fff;
     position: absolute;
-    top: 17%;
+    top: 13%;
     padding-top: 28rpx;
     display: none;
     z-index: 999;
@@ -194,7 +194,7 @@
     font-size: 20rpx;
     text-align: center;
     position: fixed;
-    bottom: -50rpx;
+    bottom: 0rpx;
 }
 /* 选择球场后 */
 .ball_sure{
