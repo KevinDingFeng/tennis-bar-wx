@@ -36,7 +36,7 @@ Page({
         qy_text:"全部商区",
         nz_text:"智能排序",
         px_text:"打球时间",
-        px_time:"请选择日期",
+        px_time: utilJs.formatDate(new Date()),
         content: [],
         nv: ['默认排序', '熟人优先', '距离最近', '时间最近'],//智能排序
         px: ['上午场', '下午场', '夜场'],//打球时间
@@ -202,25 +202,6 @@ Page({
             date: e.detail.value
         })
     },
-
-    // getUserInfo: function (e) {
-    //     console.log(e)
-    //     app.globalData.userInfo = e.detail.userInfo
-    //     this.setData({
-    //         userInfo: e.detail.userInfo,
-    //         hasUserInfo: true
-    //     })
-    //     wx.request({
-    //         url: getApp().globalData.onlineUrl + 'api/wx_user_info',//根据全局变量token获取后台储存的微信用户信息
-    //         header: utilJs.hasTokenGetHeader(),
-    //         data: {
-
-    //         },
-    //         success: function (res) {
-    //             console.log(res);
-    //         }
-    //     })
-    // },
 
     //搜索
     search:function(){

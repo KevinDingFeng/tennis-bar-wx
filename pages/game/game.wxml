@@ -1,3 +1,13 @@
+<wxs module="utils_apply">
+  function formatDate(data) {
+    var _data = data;
+    _data = _data.split(" ")[1];
+    return _data
+  }
+  module.exports = {
+    formatDate: formatDate
+  }
+</wxs>
 <view class='container'>
     <view class="fb_ball {{isfirst == '1' ? 'ds_b' : 'ds_n' }}">
         <view class='jb_xx'>
@@ -222,7 +232,7 @@
             </view>
             <view class='xx_id'>
                 <view class='id_name'>打球时间</view>
-                <view>{{start_time}}-{{end_time}}</view>
+                <view>{{start_time == null?"":utils.formatDate(startTime)}}-{{end_time==null?"":utils.formatDate(endTime)}}</view>
             </view>
             <view class='xx_id'>
                 <view class='id_name'>球场</view>
@@ -268,8 +278,8 @@
                 <view>{{holderNum}}</view>
             </view>
         </view>
-        <view class='registration_time'>报名截止时间：{{deadlineTime}}</view>
-        <view class='remark'>备注：{{remark}}</view>
+        <view class='registration_time'>报名截止时间：{{deadlineTime == null ?"":deadlineTime}}</view>
+        <view class='remark'>备注：{{remark == null?"":remark}}</view>
         <view class='join_btn'>
             <button class='join_firend' bindtap='next_bu'>返回</button>
             <button class='join_me' bindtap="addGame" >发布球局</button>

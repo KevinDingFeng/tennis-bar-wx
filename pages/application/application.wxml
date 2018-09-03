@@ -85,7 +85,7 @@
         <block wx:if="{{apply.applyJoinGameStatus != 'WaitingConfirm'}}">
         <view class='xx_id'>
             <view class='id_name'>加入确认时间</view>
-            <view>{{apply.confirmTime}}</view>
+            <view>{{apply.confirmTime == null ?"":apply.confirmTime}}</view>
         </view>
         </block>
         <block wx:if="{{apply.applyJoinGameStatus == 'Refuse'}}">
@@ -95,7 +95,7 @@
         </view>
         <view class='xx_id'>
             <view class='id_name'>拒绝原因</view>
-            <view>{{apply.remark}}</view>
+            <view>{{apply.remark==null?"":apply.remark}}</view>
         </view>
         </block>
     </view>
