@@ -29,9 +29,8 @@
 }
 .ball_name{
     margin-top: -3rpx; 
-    margin-left: 20%;
-    padding: 30rpx 0;
-    padding-left: 20%;    
+    padding: 30rpx 0;  
+    text-align: right;
 }
 .bor_top{
     border-top: none;
@@ -423,7 +422,7 @@
 }
 
 .img_show>image {
-    width: 217rpx;
+    width: 216rpx;
     height: 154rpx;
     border: 1px solid #ddd;
 }

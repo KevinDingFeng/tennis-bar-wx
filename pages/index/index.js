@@ -65,6 +65,17 @@ Page({
             title: '球局',
         })
     },
+    showInput: function () {
+        this.setData({
+            inputShowed: true
+        });
+    },
+    hideInput: function () {
+        this.setData({
+            inputVal: "",
+            inputShowed: false
+        });
+    },
     onShow: function(){
       this.queryGame();
     },

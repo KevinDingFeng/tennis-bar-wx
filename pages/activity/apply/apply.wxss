@@ -53,7 +53,7 @@ page {
 }
 
 .img_show>image {
-    width: 217rpx;
+    width: 216rpx;
     height: 154rpx;
     border: 1px solid #ddd;
 }

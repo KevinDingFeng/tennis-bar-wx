@@ -5,7 +5,7 @@
             <view>基本信息</view>
         </view>
         <view class='ball_xx'>
-            <view style='width:25%;margin-top:32rpx;'>* 球局信息</view>
+            <view style='width:50%;margin-top:32rpx;'>* 球局信息</view>
             <input class='ball_name'  placeholder-style='text-align:right'  placeholder='10字以内'  bindinput='gameName'></input>
         </view>
         <view class='ball_xx bor_top bor_bottom'>
