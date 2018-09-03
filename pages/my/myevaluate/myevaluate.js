@@ -206,22 +206,22 @@ Page({
   },
   save: function () {
     var info = this.data.selfEvaluation;
+    var data = {};
     var id = info.id;
-    var playFrequency = info.playFrequency;
-    var playAge = info.playAge;
-    var skillLevel = info.skillLevel;
-    var remark = info.remark ? info.remark : '';
+    if (id) {
+      data.id = id;
+    }
+    data.playFrequency = info.playFrequency;
+    data.playAge = info.playAge;
+    data.skillLevel = info.skillLevel;
+    data.remark = info.remark ? info.remark : '';
+    data.wxUserInfoId = info.wxUserInfoId;
+
     wx.request({
       url: getApp().globalData.onlineUrl + 'api/wx_user_evaluation/update',
       method: "POST",
       header: utilJs.hasTokenPostHeader(),
-      data: {
-        "id": id,
-        "playFrequency": playFrequency,
-        "playAge": playAge,
-        "skillLevel": skillLevel,
-        "remark": remark
-      },
+      data: data,
       success: function (res) {
         console.log(res.data);
         if (res.data.code == "200") {
