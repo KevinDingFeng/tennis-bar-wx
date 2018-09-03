@@ -1,13 +1,4 @@
-<wxs module="utils">
-  function formatDate(data) {
-    var _data = data;
-    _data = _data.split(" ")[1];
-    return _data
-  }
-  module.exports = {
-    formatDate: formatDate
-  }
-</wxs>
+
 <view class='container'>
     <view class='ball_join'>
         <view class="join_title">
