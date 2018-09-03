@@ -173,7 +173,7 @@ Page({
       let applyId = this.data.apply.id;
       let reason = e.detail.value.remark;
       wx.request({
-        url: 'http://localhost:6677/join/update',
+        url: getApp().globalData.onlineUrl + 'api/join/update',
         data:{
           "id":applyId,
           "reason":reason,
