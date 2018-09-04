@@ -26,7 +26,7 @@
                 <view class="weui-tab__content" hidden="{{activeIndex != 0}}" current="{{activeIndex}}">
                     <include src="../common.wxml" />
                     <view class='join_btn'>
-                        <button class='join_firend'>邀请好友加入</button>
+                        <button class='join_firend' open-type='share'>邀请好友加入</button>
                     </view>
                 </view>
                 <view class="weui-tab__content" hidden="{{activeIndex != 1}}">

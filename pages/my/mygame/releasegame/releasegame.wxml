@@ -13,7 +13,7 @@
                 <view class="weui-tab__content" hidden="{{activeIndex != 0}}" current="{{activeIndex}}">
                     <include src="../common.wxml" />
                     <view class='join_btn'>
-                        <button class='join_firend'>邀请好友加入</button>
+                        <button class='join_firend' open-type='share'>邀请好友加入</button>
                         <block wx:if="{{game.gameStatus =='WaitingJoin'}}">
                             <button class='join_me' bindtap="cancelGame" data-id="{{game.id}}">取消球局</button>
                         </block>

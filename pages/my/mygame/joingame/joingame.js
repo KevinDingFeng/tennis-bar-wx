@@ -65,6 +65,11 @@ Page({
             flag: 5
         });
     },
+    onShow:function(){
+      var info = that.data.game;
+      var gameId = info.id;
+      that.setComment(gameId);
+    },
     /**
      * 生命周期函数--监听页面加载
      */
@@ -73,10 +78,15 @@ Page({
             title: '参与球局信息',
         })
         let that = this;
-        let game = JSON.parse(options.game);
-        that.setData({
+        if(options.game){
+          let game = JSON.parse(options.game);
+          that.setData({
             game: game
-        })
+          })
+        }
+        if(options.id){
+          that.getGameInfo(options.id);
+        }
         wx.getSystemInfo({
             success: function (res) {
                 that.setData({
@@ -85,10 +95,24 @@ Page({
                 });
             }
         });
-      var gameId = game.id;
+    },  
 
-      this.setComment(gameId);
-    },
+  //获取球局信息  分享步骤
+  getGameInfo: function (id) {
+    let that = this;
+    wx.request({
+      url: getApp().globalData.onlineUrl + 'api/game/' + id,
+      method: 'GET',
+      header: utilJs.hasTokenGetHeader(),
+      success: function (res) {
+        if (res.data.code == '200') {
+          let info = res.data.data.game;
+          that.setData({ game: info })
+        }
+      }
+    })
+  },
+
   setComment(gameId) {
     let that = this;
     wx.request({
@@ -196,5 +220,13 @@ Page({
         }
       }
     })
+  },
+  onShareAppMessage:function(){
+    return {
+      title:"网球吧",
+      path: "/pages/my/mygame/joingame/joingame?id=" + this.data.game.id
+
+    }
+
   }
 })

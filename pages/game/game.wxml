@@ -43,10 +43,11 @@
             <view class='start_time'>
                 <picker mode="multiSelector" bindchange="changeDateTime1" bindcolumnchange="changeDateTimeColumn1" value="{{dateTime1}}" range="{{dateTimeArray1}}">
                     <view wx:if="{{!cc}}" class="tui-picker-detail">
-                        {{dateTimeArray1[0][dateTime1[0]]}}-{{dateTimeArray1[1][dateTime1[1]]}}-{{dateTimeArray1[2][dateTime1[2]]}} {{dateTimeArray1[3][dateTime1[3]]}}:{{dateTimeArray1[4][dateTime1[4]]}}
+                        {{start_time == null ? '请选择开始时间':start_time}}
+                        <!-- {{dateTimeArray1[0][dateTime1[0]]}}-{{dateTimeArray1[1][dateTime1[1]]}}-{{dateTimeArray1[2][dateTime1[2]]}} {{dateTimeArray1[3][dateTime1[3]]}}:{{dateTimeArray1[4][dateTime1[4]]}} -->
                     </view>
                     <view wx:else class="tui-picker-detail">
-                        请选择开始时间
+                        {{start_time == null ? '请选择开始时间':start_time}}
                     </view>
                 </picker>
             </view>
@@ -56,24 +57,25 @@
             <view class='end_time'>
                 <picker mode="multiSelector" bindchange="changeDateTime2" bindcolumnchange="changeDateTimeColumn2" value="{{dateTime2}}" range="{{dateTimeArray2}}">
                     <view wx:if="{{!cc1}}" class="tui-picker-detail">
-                        {{dateTimeArray2[0][dateTime2[0]]}}-{{dateTimeArray2[1][dateTime2[1]]}}-{{dateTimeArray2[2][dateTime1[2]]}} {{dateTimeArray2[3][dateTime2[3]]}}:{{dateTimeArray2[4][dateTime2[4]]}}
+                        {{end_time == null ? '请选择结束时间':end_time}}
+                        <!-- {{dateTimeArray2[0][dateTime2[0]]}}-{{dateTimeArray2[1][dateTime2[1]]}}-{{dateTimeArray2[2][dateTime1[2]]}} {{dateTimeArray2[3][dateTime2[3]]}}:{{dateTimeArray2[4][dateTime2[4]]}} -->
                     </view>
                     <view wx:else class="tui-picker-detail">
-                        请选择结束时间
+                        {{end_time == null ? '请选择结束时间':end_time}}
                     </view>
                 </picker>
             </view>
         </view>
         <view class='ball_type mar_top'>
             <view class='type_name'>* 球局类型</view>
-            <view class="type_sty mar_ri {{istype == true ? 'active' : 'no_active' }}">娱乐局</view>
-            <view class="type_sty {{istype != true ? 'active' : 'no_active' }}">教学</view>
+            <view class="type_sty mar_ri {{isEntertaining == true ? 'active' : 'no_active' }}" bindtap="selectType" data-entaintype="{{isEntertaining}}">娱乐局</view>
+            <view class="type_sty {{isEntertaining != true ? 'active' : 'no_active' }}" bindtap="selectType" data-entaintype="{{isEntertaining}}">教学</view>
         </view>
         <view class='ball_type mar_top'>
             <view class='type_name '>* 是否公开</view>
-            <view class="type_sty mar_ri  {{isopen == true ? 'active' : 'no_active' }}">公开</view>
-            <view class="type_sty {{isopen != true ? 'active' : 'no_active' }}">不公开</view>
-            <view class="text_ds  {{isopen != true ? 'ds_b' : 'ds_n' }}">私有，仅自己或分享的好友可见</view>
+            <view class="type_sty mar_ri  {{isopen == true ? 'active' : 'no_active' }}" bindtap="selectOpenType" data-opentype="{{isopen}}" >公开</view>
+            <view class="type_sty {{isopen != true ? 'active' : 'no_active' }}" bindtap="selectOpenType" data-opentype="{{isopen}}">不公开</view>
+            <!-- <view class="text_ds  {{isopen != true ? 'ds_b' : 'ds_n' }}">私有，仅自己或分享的好友可见</view> -->
         </view>
         <view class='btn_xia mar_bt'>
             <button class="weui-btn" type="primary" bindtap='next_bu'>下一步</button>
@@ -146,12 +148,12 @@
         </view>
         <view class='user_sex mar_top'>
             <view class='type_sex'>* 性别</view>
-            <view class="type_sty mar_ri {{issex == true ? 'active' : 'no_active' }} mar_bt">不限</view>
-            <view class="type_sty {{issex != true ? 'active' : 'no_active' }}  mar_bt">限定</view>
-            <view class="sex_num   {{issex != true ? 'ds_b' : 'ds_n' }}">
+            <view class="type_sty mar_ri {{nolimitSex == true ? 'active' : 'no_active' }} mar_bt" bindtap="selectSex" data-limittype="{{nolimitSex}}">不限</view>
+            <view class="type_sty {{nolimitSex != true ? 'active' : 'no_active' }}  mar_bt" bindtap="selectSex" data-limittype="{{nolimitSex}}">限定</view>
+            <view class="sex_num   {{nolimitSex != true ? 'ds_b' : 'ds_n' }}" hidden="{{nolimitSex }}">
                 <view class='select_box' style="margin-top:{{(scale<0.55)? '32rpx':'20rpx'}};">
                     <view class='select' catchtap='selectTap'>
-                        <input class='select_text' value="{{selectData[index]}}"></input>
+                        <input class='select_text' value="{{femaleNum}}"></input>
                         <image class='select_img {{show&&"select_img_rotate"}}' src='../../images/gobottom.png'></image>
                     </view>
                     <view class='option_box' style='height:{{show?(selectData.length>5?300:selectData.length*60):0}}rpx;'>
@@ -161,7 +163,7 @@
                 <view class='mar_top1'>女</view>
                 <view class='select_box' style="margin-top:{{(scale<0.55)? '32rpx':'20rpx'}};">
                     <view class='select' catchtap='selectTap_nan'>
-                        <input class='select_text' value="{{selectData[index_nan]}}"></input>
+                        <input class='select_text' value="{{maleNum}}"></input>
                         <image class='select_img {{show_nan&&"select_img_rotate"}}' src='../../images/gobottom.png'></image>
                     </view>
                     <view class='option_box' style='height:{{show_nan?(selectData.length>5?300:selectData.length*60):0}}rpx;'>
@@ -176,7 +178,7 @@
             <view class='type_sex'>预留位置</view>
             <view class='select_box' style="margin-top:{{(scale<0.55)? '32rpx':'-8rpx'}};width:35%">
                 <view class='select' catchtap='selectTap_peo'>
-                    <input class='select_text' value="{{selectData[index_peo]}}"></input>
+                    <input class='select_text' value="{{holderNum}}"></input>
                     <image class='select_img {{show_peo&&"select_img_rotate"}}' src='../../images/gobottom.png'></image>
                 </view>
                 <view class='option_box' style='height:{{show_peo?(selectData.length>5?300:selectData.length*60):0}}rpx;'>
@@ -191,10 +193,11 @@
             <view class='start_time'>
                 <picker mode="multiSelector" bindchange="changeDateTime3" bindcolumnchange="changeDateTimeColumn3" value="{{dateTime3}}" range="{{dateTimeArray3}}">
                     <view wx:if="{{!cc2}}" class="tui-picker-detail">
-                        {{dateTimeArray3[0][dateTime3[0]]}}-{{dateTimeArray3[1][dateTime3[1]]}}-{{dateTimeArray3[2][dateTime3[2]]}} {{dateTimeArray3[3][dateTime3[3]]}}:{{dateTimeArray3[4][dateTime3[4]]}}
+                        {{deadlineTime == null ? '请选择截止时间' : deadlineTime }}
+                        <!-- {{dateTimeArray3[0][dateTime3[0]]}}-{{dateTimeArray3[1][dateTime3[1]]}}-{{dateTimeArray3[2][dateTime3[2]]}} {{dateTimeArray3[3][dateTime3[3]]}}:{{dateTimeArray3[4][dateTime3[4]]}} -->
                     </view>
                     <view wx:else class="tui-picker-detail">
-                        请选择截止时间
+                        {{deadlineTime == null ? '请选择截止时间' : deadlineTime }}
                     </view>
                 </picker>
             </view>
@@ -269,7 +272,7 @@
             <view class='xx_id'>
                 <view class='id_name'>性别</view>
                 <view >
-                  <block wx:if="{{issex}}">不限</block>
+                  <block wx:if="{{nolimitSex}}">不限</block>
                   <block wx:else><text>男：{{maleNum}}</text><text>女：{{femaleNum}} </text></block>
                 </view>
             </view>

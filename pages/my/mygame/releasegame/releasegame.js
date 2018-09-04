@@ -28,24 +28,45 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-       
-        let that = this;
+      let that = this;
+      if(options.game){
         let game = JSON.parse(options.game);
         that.setData({
-            game: game
+          game: game
         })
-        wx.getSystemInfo({
-            success: function (res) {
-                that.setData({
-                    sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
-                    sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
-                });
-            }
-        });
-        var gameId = game.id;
-
-      this.setComment(gameId);
+      }
+      if(options.id){
+        that.getGameInfo(options.id);
+      }
+      wx.getSystemInfo({
+        success: function (res) {
+          that.setData({
+            sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
+            sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
+          });
+        }
+      });
     },
+  onShow:function(){
+    var gameId = that.data.game.id;
+    that.setComment(gameId);
+  },
+  //获取球局信息 
+  getGameInfo: function (id) {
+    let that = this;
+    wx.request({
+      url: getApp().globalData.onlineUrl + 'api/game/' + id,
+      method: 'GET',
+      header: utilJs.hasTokenGetHeader(),
+      success: function (res) {
+        if (res.data.code == '200') {
+          let info = res.data.data.game;
+          that.setData({ game: info })
+        }
+      }
+    })
+  },
+
   setComment(gameId){
     let that = this;
     wx.request({
@@ -187,6 +208,13 @@ Page({
     this.setData({
       wxUserIds: e.detail.value
     });
+  },
+
+  onShareAppMessage:function(){
+    return {
+      title:"网球吧",
+      path:"/pages/my/mygame/releasegame/releasegame?id="+this.data.game.id
+    }    
   }
 
 })

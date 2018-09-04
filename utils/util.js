@@ -46,11 +46,20 @@ function noTokenGetHeader(){
   return header;
   
 }
+function replaceAllChar(char,replaceWith){
+  if(char){
+    let str = char.replace(/\-/g,"").replace(":","").replace(" ","");
+    return str;
+  }
+  return null;
+}
+
 
 module.exports = {
   formatDate: formatDate,
   formatTime: formatTime,
   hasTokenPostHeader: hasTokenPostHeader,
   hasTokenGetHeader: hasTokenGetHeader,
-  noTokenGetHeader: noTokenGetHeader
+  noTokenGetHeader: noTokenGetHeader,
+  replaceAllChar: replaceAllChar
 }

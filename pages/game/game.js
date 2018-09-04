@@ -27,7 +27,7 @@ Page({
         deadlineTime:null,  //报名截止日期
         remark:null,        //备注
         //球场
-        courts:'',
+        courts:{},
         //选择的球场
         selectedCourt:'',
         time: '',
@@ -45,10 +45,10 @@ Page({
         cc1:true,
         cc2:true,
         isopen:true, //是否公开
-        istype: true, //球局类型
+        isEntertaining: true, //球局类型
         isfull:false,
         isfirst:"1",
-        issex:true,
+        nolimitSex:true,
         array: ['3年以下', '3-5年', '5-10年', "10年以上"],
         array_ji: ['入门(0~1.0)', '中级(1.5~3.5)','专业(4.0~7.0)'],
         array_peo: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20'],
@@ -62,6 +62,28 @@ Page({
 
         index_total:0, //球龄
         index_ji:0    //球技
+    },
+
+    //球局类型
+    selectType:function(e){
+      let isEntertaining = e.currentTarget.dataset.entaintype;
+      this.setData({ isEntertaining : !isEntertaining})
+    },
+    //是否公开
+    selectOpenType:function(e){
+      let isOpen = e.currentTarget.dataset.opentype;
+      this.setData({ isopen : !isOpen })
+    },
+    // 是否限制性别
+    selectSex:function(e){
+      let noLimitsex = e.currentTarget.dataset.limittype;
+      if(!noLimitsex){
+        this.setData({ nolimitSex: !noLimitsex})
+        this.setData({ maleNum : 0 })
+        this.setData({ femaleNum: 0 })
+      }else{
+        this.setData({ nolimitSex: !noLimitsex })
+      }
     },
     // 点击下拉显示框
     selectTap() {
@@ -88,6 +110,7 @@ Page({
         this.setData({
             index_nan: Index,
             show_nan: !this.data.show_nan,
+            maleNum:this.data.selectData[Index]
         });
     },
     optionTap_peo(e) {
@@ -103,6 +126,7 @@ Page({
         this.setData({
             index: Index,
             show: !this.data.show,
+            femaleNum:this.data.selectData[Index]
         });
     },
     go_history() {//上一步
@@ -190,7 +214,27 @@ Page({
       let dateTimeArray1 = this.data.dateTimeArray1;
       let dateTime1 = this.data.dateTime1;
       let startTime = dateTimeArray1[0][dateTime1[0]] + "-" + dateTimeArray1[1][dateTime1[1]] + "-" + dateTimeArray1[2][dateTime1[2]] + " " + dateTimeArray1[3][dateTime1[3]] + ":" + dateTimeArray1[4][dateTime1[4]];
-      this.setData({ start_time: startTime })
+
+      if(this.data.end_time != null){
+        let stt = parseInt(utilJs.replaceAllChar(startTime));
+        let edt = parseInt(utilJs.replaceAllChar(this.data.end_time));
+        if(stt > edt){
+          wx.showToast({
+            title: '打球结束日期不得早于开始日期',
+            icon: 'none'
+          })
+          this.setData({ start_time: null })
+          this.setData({ deadlineTime: null })
+          return ;
+        }else{
+          this.setData({ start_time : startTime })
+          this.setData({ deadlineTime: startTime})
+        }
+      }else{
+        this.setData({ start_time: startTime })
+        this.setData({ deadlineTime: startTime })
+      }
+      
     },
     changeDateTimeColumn2(e) {
         var arr = this.data.dateTime2, dateArr = this.data.dateTimeArray2;
@@ -204,7 +248,20 @@ Page({
         let dateTimeArray2 = this.data.dateTimeArray2;
         let dateTime2 = this.data.dateTime2;
         let endTime = dateTimeArray2[0][dateTime2[0]]+"-"+dateTimeArray2[1][dateTime2[1]]+"-"+ dateTimeArray2[2][dateTime1[2]] + " " + dateTimeArray2[3][dateTime2[3]] + ":" + dateTimeArray2[4][dateTime2[4]];
-        this.setData({ end_time: endTime })
+        if(this.data.start_time != null){
+          let stt = parseInt(utilJs.replaceAllChar(this.data.start_time));
+          let edt = parseInt(utilJs.replaceAllChar(endTime));
+          if(stt > edt){
+            wx.showToast({
+              title: '打球结束日期不得早于开始日期',
+              icon:'none'
+            })
+            this.setData({ end_time: null })
+            return ;
+          }else{
+            this.setData({ end_time: endTime })
+          }
+        }
     },
     changeDateTimeColumn3(e) {
       var arr = this.data.dateTime3, dateArr = this.data.dateTimeArray3;
@@ -249,9 +306,24 @@ Page({
     //球局数据
     //球局名称
     gameName:function(e){
-      this.setData({
-        name:e.detail.value
-      })
+      let gameName = e.detail.value;
+      if(gameName.length > 10 ){
+        wx.showToast({
+          title: '球局名称长度不超过10位',
+          icon:'none'
+        })
+        return '';
+      }else if (gameName.length <= 0){
+        wx.showToast({
+          title: '球局名称不能为空!',
+          icon: 'none'
+        })
+        return '';
+      }else{
+        this.setData({
+          name:e.detail.value
+        })
+      }
     },
     //备注
     remark:function(e){
@@ -264,17 +336,48 @@ Page({
         let formData = {};
         // formData.organizerId = this.data.wxUserInfo.id;
         // formData.organizerId = 3;
+        if(this.data.name.length <= 0 || this.data.name.length > 10){
+          wx.showToast({
+            title: '球局名称长度0~10位~',
+            icon:'none'
+          })
+          return false;
+        }
         formData.name = this.data.name;
+        if (this.data.selectedCourt == null) {
+          wx.showToast({ title: '球场不能为空~', icon: 'none' })
+          return false;
+        }
+        formData.courtId = this.data.selectedCourt.id;
+        if(this.data.start_time == null || this.data.end_time == null){
+          wx.showToast({ title: '打球时间不能为空~', icon: 'none' })
+          return false;
+        }else if(parseInt(utilJs.replaceAllChar(this.data.start_time)) > parseInt(utilJs.replaceAllChar(this.data.end_time))){
+          wx.showToast({ title: '打球开始时间不能晚于打球结束时间~', icon: 'none' })
+          return false;
+        }
         formData.startTime = this.data.start_time;
         formData.endTime = this.data.end_time;
-        formData.gameType = this.data.istype ? 'Entertainment' :'Teaching';
-        formData.isPublic = this.data.isPublic;
-        formData.courtId = this.data.selectedCourt.id;
+        formData.gameType = this.data.isEntertaining ? 'Entertainment' :'Teaching';
+        formData.isPublic = this.data.isopen;
         formData.playAge = this.data.playAge==null ? this.data.ages[this.data.index]:this.data.playAge;
         formData.skillLevel = this.data.skillLevel==null ? this.data.level[this.data.index_ji]:this.data.skillLevel;
-        formData.limitGender = !this.data.issex;
+        formData.limitGender = this.data.nolimitSex;
+        if(!this.data.nolimitSex){
+          if(this.data.holderNum + this.data.maleNum + this.femaleNum != this.data.totalNum){
+            wx.showToast({ title: '打球人数设置错误,请重新检查~', icon: 'none' })
+            return false;
+          }
+        }else if(this.data.holderNum > this.data.totalNum){
+          wx.showToast({ title: '预留位置人数不能超过打球总人数~', icon: 'none' })
+          return false;
+        }
         formData.holderNum = this.data.holderNum;
         formData.totalNum = this.data.totalNum == 0 ? this.data.array_peo[this.data.index_total]:this.data.totalNum;
+        if(parseInt(utilJs.replaceAllChar(this.data.deadlineTime)) > parseInt(utilJs.replaceAllChar(this.data.start_time))){
+          wx.showToast({ title: '报名截止时间不能晚于打球开始时间~', icon: 'none' })
+          return false;
+        }
         formData.deadlineTime = this.data.deadlineTime;
         formData.remark = this.data.remark;
         wx.request({
