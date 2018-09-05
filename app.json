@@ -5,7 +5,6 @@
     "pages/application/application",
     "pages/my/joinconfirm/joinundetermined/joinundetermined",
     "pages/my/myevaluate/myevaluate",
-    "pages/game/demand/demand",
     "pages/activity/apply/apply",
     "pages/activity/join/join",
     "pages/my/mygame/joingame/joingame",
@@ -22,8 +21,7 @@
     "pages/ballFriend/ballFriend",
     "pages/friendxx/friendxx",
     "pages/activity/activity",
-    "pages/logs/logs",
-    "pages/game/court/court"
+    "pages/logs/logs"
   ],
   "window":{
     "backgroundTextStyle":"light",
