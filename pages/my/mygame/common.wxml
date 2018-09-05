@@ -83,5 +83,5 @@
         </view>
     </view>
     <view class='registration_time'>报名截止时间：{{game.deadlineTime}}</view>
-    <view class='remark'>备注：{{game.remark}}</view>
+    <view class='remark'>备注：{{game.remark == null ?'':game.remark}}</view>
 </view>

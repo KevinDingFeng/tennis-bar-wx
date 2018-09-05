@@ -34,7 +34,7 @@ Page({
             }
         });
         // 获取加入申请确认列表
-        that.getConfirmJoinGames(1,init_status);
+        that.getConfirmJoinGames(init_status);
     },
     tabClick: function (e) {
       let status = e.currentTarget.dataset.status;
@@ -44,7 +44,7 @@ Page({
           confirms: wx.getStorageSync(status)
         })
       // } else {
-        that.getConfirmJoinGames(1, status);
+        that.getConfirmJoinGames(status);
       // }
       this.setData({
         sliderOffset: e.currentTarget.offsetLeft,
@@ -83,7 +83,7 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function () {
-
+      this.getConfirmJoinGames(init_status);
     },
 
     /**
@@ -103,14 +103,13 @@ Page({
     /**
      * 发布者获取 球局申请列表
      */
-    getConfirmJoinGames: function (organizerId,status){
+    getConfirmJoinGames: function (status){
       let that = this;
       // 获取加入申请列表
       wx.request({
         url: getApp().globalData.onlineUrl + 'api/join/confirms',
         method: "POST",
         data: {
-          // "organizerId": organizerId,
           "status": status,
           "page": pageIndex,
           "value": pageSize

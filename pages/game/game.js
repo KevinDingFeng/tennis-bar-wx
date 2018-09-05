@@ -312,18 +312,15 @@ Page({
           title: '球局名称长度不超过10位',
           icon:'none'
         })
-        return '';
       }else if (gameName.length <= 0){
         wx.showToast({
           title: '球局名称不能为空!',
           icon: 'none'
         })
-        return '';
-      }else{
-        this.setData({
-          name:e.detail.value
-        })
       }
+      this.setData({
+        name:e.detail.value
+      })
     },
     //备注
     remark:function(e){
@@ -364,7 +361,7 @@ Page({
         formData.skillLevel = this.data.skillLevel==null ? this.data.level[this.data.index_ji]:this.data.skillLevel;
         formData.limitGender = this.data.nolimitSex;
         if(!this.data.nolimitSex){
-          if(this.data.holderNum + this.data.maleNum + this.femaleNum != this.data.totalNum){
+          if(this.data.holderNum + this.data.maleNum + this.data.femaleNum != this.data.totalNum){
             wx.showToast({ title: '打球人数设置错误,请重新检查~', icon: 'none' })
             return false;
           }

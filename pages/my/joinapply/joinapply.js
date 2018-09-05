@@ -34,7 +34,7 @@ Page({
             }
         });
       // 获取加入申请列表
-      this.getApplyJoinmGames(2, init_status);
+      this.getApplyJoinmGames(init_status);
     },
 
     tabClick: function (e) {
@@ -45,7 +45,7 @@ Page({
             applys: wx.getStorageSync(status)
           })
         // } else {
-          that.getApplyJoinmGames(2, status);
+          that.getApplyJoinmGames(status);
         // }
         this.setData({
             sliderOffset: e.currentTarget.offsetLeft,
@@ -71,7 +71,7 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function () {
-
+      this.getApplyJoinmGames(init_status);
     },
 
     /**
@@ -84,7 +84,7 @@ Page({
     /**
       * 获取 加入申请列表
       */
-    getApplyJoinmGames: function (wxUserInfoId, status) {
+    getApplyJoinmGames: function (status) {
       let that = this;
       // 获取加入申请列表
       wx.request({
