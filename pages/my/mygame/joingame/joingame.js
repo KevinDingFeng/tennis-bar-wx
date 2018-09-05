@@ -223,7 +223,7 @@ Page({
   },
   onShareAppMessage:function(){
     return {
-      title:"网球吧",
+      title:"来“一桔”网球吧",
       path: "/pages/my/mygame/joingame/joingame?id=" + this.data.game.id
 
     }

@@ -67,7 +67,7 @@ Page({
    */
   onShareAppMessage:function(){
     return {
-      title:"网球吧",
+      title:"来“一桔”网球吧",
       path: "/pages/activity/apply/apply?id="+this.data.game.id,
     };
   },

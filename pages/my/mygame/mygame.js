@@ -13,7 +13,9 @@ Page({
         currentTab: 0,
         joinGame: '',
         releaseGame: '',
-        games:''
+        games:'',
+        keyword:'',
+        inputVal:''
 
     },
     showInput: function() {
@@ -31,21 +33,22 @@ Page({
         this.setData({
             inputVal: ""
         });
+        this.getMyGames(init_type);
     },
     inputTyping: function(e) {
         this.setData({
             inputVal: e.detail.value
         });
+        this.getMyGames(init_type);
     },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-      console.log(getApp().globalData.tennisToken);
       wx.setNavigationBarTitle({
         title: '我的球局',
       })
-      this.getMyGames(2,init_type);
+      this.getMyGames(init_type);
     },
 
     /**
@@ -75,10 +78,10 @@ Page({
     /**
      * 获取我的球局数据
      */
-    getMyGames:function(userId,types){
+    getMyGames:function(types){
       let that = this;
       wx.request({
-        url: getApp().globalData.onlineUrl + 'api/join/query?type=' + types,
+        url: getApp().globalData.onlineUrl + 'api/join/query?type=' + types + '&keyword=' + this.data.inputVal,
         method: "GET",
         data:{
           "page": pageIndex,
@@ -115,12 +118,13 @@ Page({
               games: wx.getStorageSync(types)
             })
           // }else{
-            this.getMyGames(2,types);
+            this.getMyGames(types);
           // }
           that.setData({
               currentTab: e.target.dataset.current
           })
         }
+        init_type = types;
     },
 
     /**
