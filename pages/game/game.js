@@ -89,19 +89,19 @@ Page({
     selectTap() {
         this.setData({
             show: !this.data.show,
-            selectData: ['1', '2', '3', '4', '5', '6'],
+            selectData: [1, 2, 3, 4, 5, 6],
         });
     },
     selectTap_nan() {
         this.setData({
             show_nan: !this.data.show_nan,
-            selectData: ['1', '2', '3', '4', '5', '6'],
+            selectData: [1, 2, 3, 4, 5, 6],
         });
     },
     selectTap_peo() {
         this.setData({
             show_peo: !this.data.show_peo,
-            selectData: ['1', '2', '3', '4', '5', '6'],
+            selectData: [1, 2, 3, 4, 5, 6],
         });
     },
     // 点击下拉列表
@@ -140,9 +140,27 @@ Page({
         });
     },
     next_bu(){//下一步
-        this.setData({
-            isfirst: "2",
-        });
+      if (this.data.name.length <= 0 || this.data.name.length > 10) {
+        wx.showToast({
+          title: '球局名称长度0~10位~',
+          icon: 'none'
+        })
+        return false;
+      }
+      if (this.data.selectedCourt == '') {
+        wx.showToast({ title: '球场不能为空~', icon: 'none' })
+        return false;
+      }
+      if (this.data.start_time == null || this.data.end_time == null) {
+        wx.showToast({ title: '打球时间不能为空~', icon: 'none' })
+        return false;
+      } else if (parseInt(utilJs.replaceAllChar(this.data.start_time)) > parseInt(utilJs.replaceAllChar(this.data.end_time))) {
+        wx.showToast({ title: '打球开始时间不能晚于打球结束时间~', icon: 'none' })
+        return false;
+      }
+      this.setData({
+        isfirst: "2",
+      });
     },
     bindPickerChange: function (e) {//球龄
         console.log('picker发送选择改变，携带值为', e.detail.value)
@@ -333,26 +351,8 @@ Page({
         let formData = {};
         // formData.organizerId = this.data.wxUserInfo.id;
         // formData.organizerId = 3;
-        if(this.data.name.length <= 0 || this.data.name.length > 10){
-          wx.showToast({
-            title: '球局名称长度0~10位~',
-            icon:'none'
-          })
-          return false;
-        }
         formData.name = this.data.name;
-        if (this.data.selectedCourt == null) {
-          wx.showToast({ title: '球场不能为空~', icon: 'none' })
-          return false;
-        }
         formData.courtId = this.data.selectedCourt.id;
-        if(this.data.start_time == null || this.data.end_time == null){
-          wx.showToast({ title: '打球时间不能为空~', icon: 'none' })
-          return false;
-        }else if(parseInt(utilJs.replaceAllChar(this.data.start_time)) > parseInt(utilJs.replaceAllChar(this.data.end_time))){
-          wx.showToast({ title: '打球开始时间不能晚于打球结束时间~', icon: 'none' })
-          return false;
-        }
         formData.startTime = this.data.start_time;
         formData.endTime = this.data.end_time;
         formData.gameType = this.data.isEntertaining ? 'Entertainment' :'Teaching';
@@ -365,12 +365,14 @@ Page({
             wx.showToast({ title: '打球人数设置错误,请重新检查~', icon: 'none' })
             return false;
           }
+          formData.femaleNum = this.data.femaleNum;
+          formData.maleNum = this.data.maleNum;
         }else if(this.data.holderNum > this.data.totalNum){
           wx.showToast({ title: '预留位置人数不能超过打球总人数~', icon: 'none' })
           return false;
         }
         formData.holderNum = this.data.holderNum;
-        formData.totalNum = this.data.totalNum == 0 ? this.data.array_peo[this.data.index_total]:this.data.totalNum;
+        formData.totalNum = this.data.totalNum ;
         if(parseInt(utilJs.replaceAllChar(this.data.deadlineTime)) > parseInt(utilJs.replaceAllChar(this.data.start_time))){
           wx.showToast({ title: '报名截止时间不能晚于打球开始时间~', icon: 'none' })
           return false;

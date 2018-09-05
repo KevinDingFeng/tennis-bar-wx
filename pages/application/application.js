@@ -7,6 +7,7 @@ Page({
    */
   data: {
     apply:'',
+    joiner: '', //参与人
     status: {"agree":"已同意", "refuse":"已拒绝"},
   },
 
@@ -20,6 +21,25 @@ Page({
     let data =JSON.parse(options.data);
     this.setData({
       apply:data
+    })
+    this.getJoinGamerInfo(data.gameId);
+  },
+  //获取参加球局的球友  信息
+  getJoinGamerInfo: function (id) {
+    let that = this;
+    wx.request({
+      url: getApp().globalData.onlineUrl + 'api/join/info',
+      method: 'POST',
+      data: {
+        "gameId": id
+      },
+      header: utilJs.hasTokenGetHeader(),
+      success: function (res) {
+        if (res.data.code == '200') {
+          let joiner = res.data.data.list;
+          that.setData({ joiner: joiner })
+        }
+      }
     })
   },
 

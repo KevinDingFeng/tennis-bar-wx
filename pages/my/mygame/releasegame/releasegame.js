@@ -11,6 +11,7 @@ Page({
         sliderOffset: 0,
         sliderLeft: 36,
         game: '',
+        joiner: '',  //参与者信息
         ages: {
             "LessThree": "3年以下",
             "LessFive": "3~5年",
@@ -34,6 +35,7 @@ Page({
         that.setData({
           game: game
         })
+        that.getJoinGamerInfo(game.id);
       }
       if(options.id){
         that.getGameInfo(options.id);
@@ -62,6 +64,24 @@ Page({
         if (res.data.code == '200') {
           let info = res.data.data.game;
           that.setData({ game: info })
+        }
+      }
+    })
+  },
+  //获取参加球局的球友  信息
+  getJoinGamerInfo: function (id) {
+    let that = this;
+    wx.request({
+      url: getApp().globalData.onlineUrl + 'api/join/info',
+      method: 'POST',
+      data: {
+        "gameId": id
+      },
+      header: utilJs.hasTokenGetHeader(),
+      success: function (res) {
+        if (res.data.code == '200') {
+          let joiner = res.data.data.list;
+          that.setData({ joiner: joiner })
         }
       }
     })

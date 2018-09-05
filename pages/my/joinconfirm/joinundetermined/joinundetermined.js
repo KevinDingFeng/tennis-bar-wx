@@ -7,6 +7,7 @@ Page({
      */
     data: {
       apply:'',
+      joiner: '', //参与人
       personInfo:'',
       position: {"Common":"普通","Coach":"教练"},
       languages:{"Chinese":"中文","English":"英文"},
@@ -71,7 +72,26 @@ Page({
         apply: JSON.parse(info)
       })
       that.getPersonInfo(this.data.apply.wxUserInfoId);
+      that.getJoinGamerInfo(this.data.apply.gameId);
     },
+  //获取参加球局的球友  信息
+  getJoinGamerInfo: function (id) {
+    let that = this;
+    wx.request({
+      url: getApp().globalData.onlineUrl + 'api/join/info',
+      method: 'POST',
+      data: {
+        "gameId": id
+      },
+      header: utilJs.hasTokenGetHeader(),
+      success: function (res) {
+        if (res.data.code == '200') {
+          let joiner = res.data.data.list;
+          that.setData({ joiner: joiner })
+        }
+      }
+    })
+  },
 
     /**
      * 生命周期函数--监听页面初次渲染完成

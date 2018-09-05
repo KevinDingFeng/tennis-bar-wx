@@ -52,22 +52,14 @@
             <view class='xx_type f_wei'>{{apply.game.totalNum}}缺{{apply.game.vacancyNum}}</view>
         </view>
         <view class='cy_xx'>
+          <block wx:if="{{joiner.length > 0}}">
+            <block wx:for="{{joiner}}" wx:for-item="join" wx:key="**this">
             <view class='xx_1'>
-                <image src='../../../../images/index/banner.png'></image>
-                <view>微信昵称</view>
+                <image src='{{join.wxUserInfo.avatarUrl}}'></image>
+                <view>{{join.wxUserInfo.nickName}}</view>
             </view>
-            <view class='xx_1'>
-                <image src='../../../../images/index/banner.png'></image>
-                <view>微信昵称</view>
-            </view>
-            <view class='xx_1'>
-                <image src='../../../../images/index/banner.png'></image>
-                <view>微信昵称</view>
-            </view>
-            <view class='xx_1'>
-                <image src='../../../../images/index/d_join.png'></image>
-                <view class='dz_name'>待加入</view>
-            </view>
+            </block>
+          </block>
             <view class='xx_1'>
                 <image src='../../../../images/index/d_join.png'></image>
                 <view class='dz_name'>待加入</view>
