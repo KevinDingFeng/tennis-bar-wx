@@ -38,6 +38,7 @@ Page({
     },
     tabClick: function (e) {
       let status = e.currentTarget.dataset.status;
+      init_status = status;
       let that = this;
       // if (wx.getStorageSync(status)) {
         that.setData({
