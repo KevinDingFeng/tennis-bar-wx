@@ -1,8 +1,11 @@
-<wxs module="utils_apply">
+<wxs module="utils_pub">
   function formatDate(data) {
-    var _data = data;
-    _data = _data.split(" ")[1];
-    return _data
+    if(data){
+      var _data = data;
+      _data = _data.split(" ")[1];
+      return _data
+    }
+    return null;
   }
   module.exports = {
     formatDate: formatDate
@@ -235,7 +238,7 @@
             </view>
             <view class='xx_id'>
                 <view class='id_name'>打球时间</view>
-                <view>{{start_time == null?"":utils.formatDate(startTime)}}-{{end_time==null?"":utils.formatDate(endTime)}}</view>
+                <view>{{start_time}}-{{utils_pub.formatDate(end_time)}}</view>
             </view>
             <view class='xx_id'>
                 <view class='id_name'>球场</view>
