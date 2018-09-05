@@ -1,5 +1,6 @@
 // pages/activity/apply/apply.js
 var utilJs = require('../../../utils/util.js');
+const app = getApp();
 Page({
 
   /**
@@ -8,8 +9,8 @@ Page({
   data: {
     game:'',
     ages: { "LessThree": "3年以下", "LessFive": "3~5年", "LessTen": "5~10年", "MoreTen":"10年以上"},
-    levels: { "Entry": "入门(0~1.0)", "Medium": "中级(1.5~3.5)", "Professional":"专业(4.0~7.0)"}
-
+    levels: { "Entry": "入门(0~1.0)", "Medium": "中级(1.5~3.5)", "Professional":"专业(4.0~7.0)"},
+    joiner:''
   },
 
   /**
@@ -19,19 +20,30 @@ Page({
     wx.setNavigationBarTitle({
       title: '球局详情',
     })
-    let that = this;
-    if(options.game){
-      that.setData({
-        game: JSON.parse(options.game)
+    if (!wx.getStorageSync('tennisToken')){
+      wx.redirectTo({
+        url: '../../login/login',
       })
+    }else{
+      let that = this;
+      if (options.game) {
+        that.setData({
+          game: JSON.parse(options.game)
+        })
+        that.getJoinGamerInfo(JSON.parse(options.game).id);
+      }
+      if (options.id) {
+        that.getGameInfo(options.id);
+        that.getJoinGamerInfo(options.id);
+      }
     }
-    if(options.id){
-      that.getGameInfo(options.id);
-    }
-  },
-  onShow:function(){
 
   },
+
+  onShow: function () {
+
+  },
+
   //获取球局信息  分享步骤
   getGameInfo:function(id){
     let that = this ;
@@ -43,6 +55,24 @@ Page({
         if(res.data.code == '200'){
           let game = res.data.data.game;
           that.setData({game:game})
+        }
+      }
+    })
+  },
+  //获取参加球局的球友  信息
+  getJoinGamerInfo:function(id){
+    let that = this ;
+    wx.request({
+      url: getApp().globalData.onlineUrl + 'api/join/info',
+      method: 'POST',
+      data:{
+        "gameId":id
+      },
+      header: utilJs.hasTokenGetHeader(),
+      success: function (res) {
+        if (res.data.code == '200') {
+          let joiner = res.data.data.list;
+          that.setData({ joiner: joiner })
         }
       }
     })

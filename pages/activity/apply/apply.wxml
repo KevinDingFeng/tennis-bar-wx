@@ -53,16 +53,20 @@
     </view>
     <view class='ball_join'>
         <view class='join_title'>
-            <text class='game_name'>球局名称{{game.name}}</text>
+            <text class='game_name'>{{game.name}}</text>
             <view class='col_g f_wei' >
                 {{game.totalNum}}缺{{game.vacancyNum}}
             </view>
         </view>
         <view class='wx_peo'>
+          <block wx:if="{{joiner.length > 0}}">
+            <block wx:for="{{joiner}}" wx:for-item="join" wx:key="**this">
             <view class='peo_xx'>
-                <image src='../../../images/tabBar/ball_x.png'></image>
-                <view>微信昵称</view>
+                <image src='{{join.wxUserInfo.avatarUrl}}'></image>
+                <view>{{join.wxUserInfo.nickName}}</view>
             </view>
+            </block>
+          </block>
         </view>
     </view>
     <view class='ball_bottom'>
