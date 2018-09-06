@@ -188,13 +188,13 @@ Page({
   },
   modifyOccupation: function(e){
     var v = e.detail.value;
-    if(v){
+    // if(v){
       var wxUserInfo = this.data.wxUserInfo;
       wxUserInfo.occupation = v;
       this.setData({
         wxUserInfo: wxUserInfo
       });
-    }
+    // }
   },
   save: function(){
     var info = this.data.wxUserInfo;
@@ -220,6 +220,11 @@ Page({
           //保存成功，返回上一页
           wx.switchTab({
             url: '../my'
+          })
+        }else{
+          wx.showToast({
+            title: res.data.data,
+            icon: 'none'
           })
         }
       }

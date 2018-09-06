@@ -93,6 +93,7 @@ Page({
     });
   },
   inputCode: function (e) {
+    console.log(e.detail.value);
     this.setData({
       code: e.detail.value
     });
@@ -108,10 +109,17 @@ Page({
           cellphone:p
         },
         success: function (res) {
-          if (res.data.code == 200) {
-            console.log("发送成功");
-          }
+          var title = res.data.code == 200 ? '发送成功' : '验证码发送失败';
+          wx.showToast({
+            title: title,
+            icon: 'none'
+          }) 
         }
+      })
+    }else{
+      wx.showToast({
+        title: '请输入手机号',
+        icon: 'none'
       })
     }
   },
@@ -135,13 +143,23 @@ Page({
         },
         success: function (res) {
           console.log(res.data);
-          if (res.data.code = "200") {
+          if (res.data.code == "200") {
             //保存成功，返回基础信息
             wx.navigateTo({
               url: '../myXX'
             })
+          }else{
+            wx.showToast({
+              title: res.data.data,
+              icon: 'none'
+            })
           }
         }
+      })
+    }else{
+      wx.showToast({
+        title: '信息不完整',
+        icon: 'none'
       })
     }
   }

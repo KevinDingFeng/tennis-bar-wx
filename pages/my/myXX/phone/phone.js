@@ -90,9 +90,11 @@ Page({
       method: "GET",
        header: utilJs.hasTokenGetHeader(),
       success: function (res) {
-        if(res.data.code == 200){
-          console.log("发送成功");
-        }
+        var title = res.data.code == 200 ? '发送成功' : '验证码发送失败';
+        wx.showToast({
+          title: title,
+          icon: 'none'
+        }) 
       }
     })
   },
@@ -107,22 +109,34 @@ Page({
     //   url: '../phoneNext/phoneNext?t=1',
     // })
     var c = this.data.code;
-    //校验码是否正确
-    wx.request({
-      url: getApp().globalData.onlineUrl + 'api/sms_code/check',
-      method: "GET",
-      header: utilJs.hasTokenGetHeader(),
-      data: {
-        code: c
-      },
-      success: function (res) {
-        if (res.data.code == 200) {
-          console.log("校验通过成功");
-          wx.navigateTo({
-            url: '../phoneNext/phoneNext?t=1',
-          })
+    if(c){
+      //校验码是否正确
+      wx.request({
+        url: getApp().globalData.onlineUrl + 'api/sms_code/check',
+        method: "GET",
+        header: utilJs.hasTokenGetHeader(),
+        data: {
+          code: c
+        },
+        success: function (res) {
+          if (res.data.code == 200) {
+            console.log("校验通过成功");
+            wx.navigateTo({
+              url: '../phoneNext/phoneNext?t=1',
+            })
+          }else{
+            wx.showToast({
+              title: res.data.data,
+              icon: 'none'
+            })
+          }
         }
-      }
-    })
+      })
+    }else{
+      wx.showToast({
+        title: '请输入验证码',
+        icon: 'none'
+      })
+    }
   }
 })
