@@ -41,9 +41,11 @@
             <view>{{apply.game.court.telephone}}</view>
         </view>
         <view class='xx_id as_img'>
-            <image src='../../../../images/index/banner.png'></image>
-            <image src='../../../../images/index/banner.png'></image>
-            <image src='../../../../images/index/banner.png'></image>
+          <block wx:if="{{court_img.imgs.length > 0}}">
+            <block wx:for="{{court_img.imgs}}" wx:for-item="img" wx:key="**this">
+              <image src="{{court_img.prePath}}{{img.imgPath}}"></image>
+            </block>
+          </block>
         </view>
     </view>
     <view class='ball_xx'>

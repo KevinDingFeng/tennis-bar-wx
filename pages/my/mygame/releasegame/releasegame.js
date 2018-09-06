@@ -12,6 +12,7 @@ Page({
         sliderLeft: 36,
         game: '',
         joiner: '',  //参与者信息
+        court_img: '',  //球场图片信息
         ages: {
             "LessThree": "3年以下",
             "LessFive": "3~5年",
@@ -36,6 +37,7 @@ Page({
           game: game
         })
         that.getJoinGamerInfo(game.id);
+        that.getCourtImgInfo(game.courtId);
       }
       if(options.id){
         that.getGameInfo(options.id);
@@ -82,6 +84,21 @@ Page({
         if (res.data.code == '200') {
           let joiner = res.data.data.list;
           that.setData({ joiner: joiner })
+        }
+      }
+    })
+  },
+  //获取球场图片信息
+  getCourtImgInfo: function (id) {
+    let that = this;
+    wx.request({
+      url: getApp().globalData.onlineUrl + 'api/court_img/list?courtId=' + id,
+      method: 'GET',
+      header: utilJs.hasTokenGetHeader(),
+      success: function (res) {
+        if (res.data.code == '200') {
+          let courtImg = res.data.data;
+          that.setData({ court_img: courtImg })
         }
       }
     })

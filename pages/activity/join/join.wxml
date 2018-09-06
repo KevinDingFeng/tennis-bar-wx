@@ -32,10 +32,21 @@
             <view class='id_name'>参与情况</view>
             <view class='col_g'>{{game.totalNum}}缺{{game.vacancyNum}}</view>
         </view>
-         <view class='wx_peo'>
+        <view class='wx_peo'>
+          
+        </view>
+        <view class='wx_peo'>
+          <block wx:if="{{joiner.length > 0}}">
+            <block wx:for="{{joiner}}" wx:for-item="join" wx:key="**this">
             <view class='peo_xx'>
-                <image src='../../../images/tabBar/ball_x.png'></image>
-                <view>微信昵称</view>
+                <image src='{{join.wxUserInfo.avatarUrl}}'></image>
+                <view>{{join.wxUserInfo.nickName}}</view>
+            </view>
+            </block>
+          </block>
+            <view class='peo_xx'>
+                <image src='../../../images/index/d_join.png'></image>
+                <view class='dz_name'>待加入</view>
             </view>
         </view>
     </view>
@@ -43,9 +54,11 @@
         <text>温馨提示：</text>
         <view>确认加入球局后，发起人会尽快确认并回复，请注意查收消息哦~~</view>
     </view>
-    <view class='check-xy'>
-        <checkbox></checkbox><text>我同意并遵守《网球吧协议》</text>  
-    </view>
+    <checkbox-group bindchange='checkSelected'>
+      <view class='check-xy'>
+          <checkbox value='我同意并遵守《网球吧协议》'></checkbox><text>我同意并遵守《网球吧协议》</text>  
+      </view>
+    </checkbox-group>
     <view class='btn_sure'>
         <button bindtap="addGame" data-id="{{game.id}}">确认加入</button>
     </view>

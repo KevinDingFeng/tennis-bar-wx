@@ -30,6 +30,8 @@ Page({
         courts:{},
         //选择的球场
         selectedCourt:'',
+        //球场图片信息
+        court_img:'',
         time: '',
         dateTimeArray: null,
         dateTime: null,
@@ -440,10 +442,26 @@ Page({
     //选择球场
     selectCourt:function(e){
       let court = e.currentTarget.dataset.court;
+      this.getCourtImgInfo(court.id);
       this.setData({
         isfull: false,
         selectedCourt:court,
         courtName:court.name
+      })
+    },
+    //获取球场图片信息
+    getCourtImgInfo: function (id) {
+      let that = this;
+      wx.request({
+        url: getApp().globalData.onlineUrl + 'api/court_img/list?courtId=' + id,
+        method: 'GET',
+        header: utilJs.hasTokenGetHeader(),
+        success: function (res) {
+          if (res.data.code == '200') {
+            let courtImg = res.data.data;
+            that.setData({ court_img: courtImg })
+          }
+        }
       })
     },
     //获取微信用户信息

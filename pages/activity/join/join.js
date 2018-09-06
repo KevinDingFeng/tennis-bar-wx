@@ -1,12 +1,15 @@
 // pages/activity/join/join.js
 var utilJs = require("../../../utils/util.js");
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    game :''
+    game :'',
+    joiner:'',
+    checked:false
   },
 
   /**
@@ -20,6 +23,25 @@ Page({
     let that = this;
     that.setData({
       game : game
+    })
+    that.getJoinGamerInfo(game.id);
+  },
+  //获取参加球局的球友  信息
+  getJoinGamerInfo: function (id) {
+    let that = this;
+    wx.request({
+      url: getApp().globalData.onlineUrl + 'api/join/info',
+      method: 'POST',
+      data: {
+        "gameId": id
+      },
+      header: utilJs.hasTokenGetHeader(),
+      success: function (res) {
+        if (res.data.code == '200') {
+          let joiner = res.data.data.list;
+          that.setData({ joiner: joiner })
+        }
+      }
     })
   },
 
@@ -36,11 +58,24 @@ Page({
   onShow: function () {
   
   },
-
+  checkSelected:function(e){
+    if (e.detail.value == ''){
+      this.setData({checked:false})
+    }else{
+      this.setData({checked:true})
+    }
+  },
   /**
    * 加入球局
    */
   addGame:function(event){
+    if(!this.data.checked){
+      wx.showToast({
+        title: '请勾选协议',
+        icon:'none'
+      })
+      return false;
+    }
     let id = event.currentTarget.dataset.id;
     let data = new Object();
     data.gameId = id;

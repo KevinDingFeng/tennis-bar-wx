@@ -10,7 +10,8 @@ Page({
     game:'',
     ages: { "LessThree": "3年以下", "LessFive": "3~5年", "LessTen": "5~10年", "MoreTen":"10年以上"},
     levels: { "Entry": "入门(0~1.0)", "Medium": "中级(1.5~3.5)", "Professional":"专业(4.0~7.0)"},
-    joiner:''
+    joiner:'',
+    court_img:''
   },
 
   /**
@@ -31,10 +32,12 @@ Page({
           game: JSON.parse(options.game)
         })
         that.getJoinGamerInfo(JSON.parse(options.game).id);
+        that.getCourtImgInfo(JSON.parse(options.game).courtId);
       }
       if (options.id) {
         that.getGameInfo(options.id);
         that.getJoinGamerInfo(options.id);
+        that.getCourtImgInfo(that.data.game.courtId);
       }
     }
 
@@ -73,6 +76,21 @@ Page({
         if (res.data.code == '200') {
           let joiner = res.data.data.list;
           that.setData({ joiner: joiner })
+        }
+      }
+    })
+  },
+  //获取球场图片信息
+  getCourtImgInfo: function (id) {
+    let that = this;
+    wx.request({
+      url: getApp().globalData.onlineUrl + 'api/court_img/list?courtId='+id,
+      method: 'GET',
+      header: utilJs.hasTokenGetHeader(),
+      success: function (res) {
+        if (res.data.code == '200') {
+          let courtImg = res.data.data;
+          that.setData({ court_img: courtImg })
         }
       }
     })

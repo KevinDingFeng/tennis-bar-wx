@@ -8,6 +8,7 @@ Page({
   data: {
     apply:'',
     joiner: '', //参与人
+    court_img:'', //球场图片
     status: {"agree":"已同意", "refuse":"已拒绝"},
   },
 
@@ -23,6 +24,7 @@ Page({
       apply:data
     })
     this.getJoinGamerInfo(data.gameId);
+    this.getCourtImgInfo(data.game.courtId);
   },
   //获取参加球局的球友  信息
   getJoinGamerInfo: function (id) {
@@ -38,6 +40,21 @@ Page({
         if (res.data.code == '200') {
           let joiner = res.data.data.list;
           that.setData({ joiner: joiner })
+        }
+      }
+    })
+  },
+  //获取球场图片信息
+  getCourtImgInfo: function (id) {
+    let that = this;
+    wx.request({
+      url: getApp().globalData.onlineUrl + 'api/court_img/list?courtId=' + id,
+      method: 'GET',
+      header: utilJs.hasTokenGetHeader(),
+      success: function (res) {
+        if (res.data.code == '200') {
+          let courtImg = res.data.data;
+          that.setData({ court_img: courtImg })
         }
       }
     })

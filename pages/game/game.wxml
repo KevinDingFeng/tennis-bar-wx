@@ -35,9 +35,11 @@
             </view>
             <view class='sure_dz'>电话：{{selectedCourt.telephone}}</view>
             <view class='dz_img'>
-                <image src="../../images/index/banner.png"></image>
-                <image src="../../images/index/banner.png"></image>
-                <image src="../../images/index/banner.png"></image>
+              <block wx:if="{{court_img.imgs.length > 0}}">
+                <block wx:for="{{court_img.imgs}}" wx:for-item="img" wx:key="**this">
+                  <image src="{{court_img.prePath}}{{img.imgPath}}"></image>
+                </block>
+              </block>
             </view>
           </block>
         </view>
