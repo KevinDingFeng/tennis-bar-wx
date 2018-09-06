@@ -29,9 +29,9 @@ Page({
         //球场
         courts:{},
         //选择的球场
-        selectedCourt:'',
-        //球场图片信息
-        court_img:'',
+        selectedCourt:{
+            name:"请输入球场名称/球场地址关键字"
+        },
         time: '',
         dateTimeArray: null,
         dateTime: null,
@@ -142,12 +142,18 @@ Page({
         });
     },
     next_bu(){//下一步
-      if (this.data.name.length <= 0 || this.data.name.length > 10) {
+      if (this.data.name.length < 1 || this.data.name.length > 10) {
         wx.showToast({
           title: '球局名称长度0~10位~',
           icon: 'none'
         })
         return false;
+      } else if (this.data.name.length == "" || this.data.name.length == undefined || this.data.name.length == null){
+            wx.showToast({
+                title: '球局名称不能为空~',
+                icon: 'none'
+            })
+          return false;
       }
       if (this.data.selectedCourt == '') {
         wx.showToast({ title: '球场不能为空~', icon: 'none' })
@@ -442,26 +448,10 @@ Page({
     //选择球场
     selectCourt:function(e){
       let court = e.currentTarget.dataset.court;
-      this.getCourtImgInfo(court.id);
       this.setData({
         isfull: false,
         selectedCourt:court,
         courtName:court.name
-      })
-    },
-    //获取球场图片信息
-    getCourtImgInfo: function (id) {
-      let that = this;
-      wx.request({
-        url: getApp().globalData.onlineUrl + 'api/court_img/list?courtId=' + id,
-        method: 'GET',
-        header: utilJs.hasTokenGetHeader(),
-        success: function (res) {
-          if (res.data.code == '200') {
-            let courtImg = res.data.data;
-            that.setData({ court_img: courtImg })
-          }
-        }
       })
     },
     //获取微信用户信息

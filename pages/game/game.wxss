@@ -5,18 +5,18 @@
     position: relative;
 }
 
-.jb_xx{
-    display: flex;
-    flex-direction: row;
-    font-size: 30rpx;
-    padding: 0 22rpx;
-    margin-bottom: 21rpx;
-}
 .xx_g{
     width: 5rpx;
 	height: 38rpx;
 	background-color: #56a41f;
     margin-right: 14rpx;
+}
+.jb_xx{
+    display: flex;
+    flex-direction: row;
+    padding-left: 22rpx;
+    font-size: 30rpx;
+    font-weight: 700;
 }
 .ball_xx{
     display: flex;
@@ -46,6 +46,7 @@
     color: #959595;
     width: 100%;
     padding-left: 14%;
+    text-align: right;
 }
 .start_time{
     width: 67%;
@@ -115,11 +116,11 @@
 .c_di{
     width: 100%;
     background-color: #fff;
-    position: absolute;
-    top: 13%;
+    position: fixed;
+    top: 22%;
     padding-top: 28rpx;
     display: none;
-    z-index: 999;
+    z-index: 9999;
 }
 .ds_b{
     display: block;
@@ -131,7 +132,7 @@
     text-align: center;
 }
 .ball_inp{
-    width: 80%;
+    width: 85%;
     border-radius: 10rpx;
 	border: solid 1px #e4e4e4; 
     margin: 0 22rpx;
@@ -142,15 +143,14 @@
 }
 .icon_search{
     position: absolute;
-    top:109rpx;
+    top:100rpx;
     left:36rpx;
 }
 .Venue{
     margin: 28rpx 0;
     padding: 0 21rpx;
     padding-bottom: 20rpx;
-    height: 600rpx;
-    overflow: auto;
+    height: 650rpx;
 }
 .ball_venue{
     font-size: 24rpx;
@@ -194,7 +194,11 @@
     font-size: 20rpx;
     text-align: center;
     position: fixed;
+    left:0;
     bottom: 0rpx;
+}
+.fh_phone{
+   padding-top: 21rpx; 
 }
 /* 选择球场后 */
 .ball_sure{
