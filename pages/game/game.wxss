@@ -3,6 +3,7 @@
     margin-top: 30rpx;
     padding: 0 22rpx;
     position: relative;
+    overflow: hidden;
 }
 
 .xx_g{
@@ -245,6 +246,7 @@
     width:100%;
     margin-top:30rpx;
     padding:0 22rpx;
+    overflow: hidden;
 }
 .user_jbxx{
     display: flex;
@@ -384,6 +386,7 @@
 /* 预览 */
 .next_san{
     width: 100%;
+    overflow: hidden;
 }
 .yul_name {
     width: 94%;
