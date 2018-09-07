@@ -15,26 +15,26 @@
     <view class="fb_ball {{isfirst == '1' ? 'ds_b' : 'ds_n' }}">
         <view class='jb_xx'>
             <view class='xx_g'></view>
-            <view>»ù±¾ĞÅÏ¢</view>
+            <view>åŸºæœ¬ä¿¡æ¯</view>
         </view>
         <view class='ball_xx'>
-            <view style='width:50%;margin-top:32rpx;'>* Çò¾ÖĞÅÏ¢</view>
-            <input class='ball_name'  placeholder-style='text-align:right'  placeholder='10×ÖÒÔÄÚ'  bindinput='gameName'></input>
+            <view style='width:50%;margin-top:32rpx;'>* çƒå±€ä¿¡æ¯</view>
+            <input class='ball_name'  placeholder-style='text-align:right'  placeholder='10å­—ä»¥å†…'  bindinput='gameName'></input>
         </view>
         <view class='ball_xx bor_top bor_bottom'>
-            <view style='width:20%;'>* Çò³¡</view>
+            <view style='width:20%;'>* çƒåœº</view>
             <view class='ball_cc'  bindtap='ball_cc'>{{selectedCourt.name}}</view>
-            <!-- <input class='ball_cc' bindtap='ball_cc' value='{{selectedCourt.name}}' placeholder='ÇëÊäÈëÇò³¡Ãû³Æ/Çò³¡µØÖ·¹Ø¼ü×Ö'
+            <!-- <input class='ball_cc' bindtap='ball_cc' value='{{selectedCourt.name}}' placeholder='è¯·è¾“å…¥çƒåœºåç§°/çƒåœºåœ°å€å…³é”®å­—'
             placeholder-style='text-align:right'></input> -->
         </view>
         <view class='ball_sure'>
-          <block wx:if="{{selectedCourt.name != 'ÇëÊäÈëÇò³¡Ãû³Æ/Çò³¡µØÖ·¹Ø¼ü×Ö'}}">
-            <view>ÒÑÑ¡Çò³¡£º{{selectedCourt.name}}</view>
+          <block wx:if="{{selectedCourt.name != 'è¯·è¾“å…¥çƒåœºåç§°/çƒåœºåœ°å€å…³é”®å­—'}}">
+            <view>å·²é€‰çƒåœºï¼š{{selectedCourt.name}}</view>
             <view class='sure_dz'>
-                µØÖ·£º
+                åœ°å€ï¼š
                 <text class='dz_zn'>{{selectedCourt.address}}</text>
             </view>
-            <view class='sure_dz'>µç»°£º{{selectedCourt.telephone}}</view>
+            <view class='sure_dz'>ç”µè¯ï¼š{{selectedCourt.telephone}}</view>
             <view class='dz_img'>
                 <image src="../../images/index/banner.png"></image>
                 <image src="../../images/index/banner.png"></image>
@@ -43,54 +43,54 @@
           </block>
         </view>
         <view class='ball_xx mar_top '>
-            <view>* ´òÇò¿ªÊ¼Ê±¼ä</view>
+            <view>* æ‰“çƒå¼€å§‹æ—¶é—´</view>
             <view class='start_time'>
                 <picker mode="multiSelector" bindchange="changeDateTime1" bindcolumnchange="changeDateTimeColumn1" value="{{dateTime1}}" range="{{dateTimeArray1}}">
                     <view wx:if="{{!cc}}" class="tui-picker-detail">
-                        {{start_time == null ? 'ÇëÑ¡Ôñ¿ªÊ¼Ê±¼ä':start_time}}
+                        {{start_time == null ? 'è¯·é€‰æ‹©å¼€å§‹æ—¶é—´':start_time}}
                         <!-- {{dateTimeArray1[0][dateTime1[0]]}}-{{dateTimeArray1[1][dateTime1[1]]}}-{{dateTimeArray1[2][dateTime1[2]]}} {{dateTimeArray1[3][dateTime1[3]]}}:{{dateTimeArray1[4][dateTime1[4]]}} -->
                     </view>
                     <view wx:else class="tui-picker-detail">
-                        {{start_time == null ? 'ÇëÑ¡Ôñ¿ªÊ¼Ê±¼ä':start_time}}
+                        {{start_time == null ? 'è¯·é€‰æ‹©å¼€å§‹æ—¶é—´':start_time}}
                     </view>
                 </picker>
             </view>
         </view>
         <view class='ball_xx  bor_top'>
-            <view>* ´òÇò½áÊøÊ±¼ä</view>
+            <view>* æ‰“çƒç»“æŸæ—¶é—´</view>
             <view class='end_time'>
                 <picker mode="multiSelector" bindchange="changeDateTime2" bindcolumnchange="changeDateTimeColumn2" value="{{dateTime2}}" range="{{dateTimeArray2}}">
                     <view wx:if="{{!cc1}}" class="tui-picker-detail">
-                        {{end_time == null ? 'ÇëÑ¡Ôñ½áÊøÊ±¼ä':end_time}}
+                        {{end_time == null ? 'è¯·é€‰æ‹©ç»“æŸæ—¶é—´':end_time}}
                         <!-- {{dateTimeArray2[0][dateTime2[0]]}}-{{dateTimeArray2[1][dateTime2[1]]}}-{{dateTimeArray2[2][dateTime1[2]]}} {{dateTimeArray2[3][dateTime2[3]]}}:{{dateTimeArray2[4][dateTime2[4]]}} -->
                     </view>
                     <view wx:else class="tui-picker-detail">
-                        {{end_time == null ? 'ÇëÑ¡Ôñ½áÊøÊ±¼ä':end_time}}
+                        {{end_time == null ? 'è¯·é€‰æ‹©ç»“æŸæ—¶é—´':end_time}}
                     </view>
                 </picker>
             </view>
         </view>
         <view class='ball_type mar_top'>
-            <view class='type_name'>* Çò¾ÖÀàĞÍ</view>
-            <view class="type_sty mar_ri {{isEntertaining == true ? 'active' : 'no_active' }}" bindtap="selectType" data-entaintype="{{isEntertaining}}">ÓéÀÖ¾Ö</view>
-            <view class="type_sty {{isEntertaining != true ? 'active' : 'no_active' }}" bindtap="selectType" data-entaintype="{{isEntertaining}}">½ÌÑ§</view>
+            <view class='type_name'>* çƒå±€ç±»å‹</view>
+            <view class="type_sty mar_ri {{isEntertaining == true ? 'active' : 'no_active' }}" bindtap="selectType" data-entaintype="{{isEntertaining}}">å¨±ä¹å±€</view>
+            <view class="type_sty {{isEntertaining != true ? 'active' : 'no_active' }}" bindtap="selectType" data-entaintype="{{isEntertaining}}">æ•™å­¦</view>
         </view>
         <view class='ball_type mar_top'>
-            <view class='type_name '>* ÊÇ·ñ¹«¿ª</view>
-            <view class="type_sty mar_ri  {{isopen == true ? 'active' : 'no_active' }}" bindtap="selectOpenType" data-opentype="{{isopen}}" >¹«¿ª</view>
-            <view class="type_sty {{isopen != true ? 'active' : 'no_active' }}" bindtap="selectOpenType" data-opentype="{{isopen}}">²»¹«¿ª</view>
-            <!-- <view class="text_ds  {{isopen != true ? 'ds_b' : 'ds_n' }}">Ë½ÓĞ£¬½ö×Ô¼º»ò·ÖÏíµÄºÃÓÑ¿É¼û</view> -->
+            <view class='type_name '>* æ˜¯å¦å…¬å¼€</view>
+            <view class="type_sty mar_ri  {{isopen == true ? 'active' : 'no_active' }}" bindtap="selectOpenType" data-opentype="{{isopen}}" >å…¬å¼€</view>
+            <view class="type_sty {{isopen != true ? 'active' : 'no_active' }}" bindtap="selectOpenType" data-opentype="{{isopen}}">ä¸å…¬å¼€</view>
+            <!-- <view class="text_ds  {{isopen != true ? 'ds_b' : 'ds_n' }}">ç§æœ‰ï¼Œä»…è‡ªå·±æˆ–åˆ†äº«çš„å¥½å‹å¯è§</view> -->
         </view>
         <view class='btn_xia mar_bt'>
-            <button class="weui-btn" type="primary" bindtap='next_bu'>ÏÂÒ»²½</button>
+            <button class="weui-btn" type="primary" bindtap='next_bu'>ä¸‹ä¸€æ­¥</button>
         </view>
-        <!-- ÕÚ¸Ç²ã -->
+        <!-- é®ç›–å±‚ -->
         <view class="fullbg {{isfull ?'fullopacity':''}}" bindtap="hidebg"></view>
-        <!-- ³¡µØ -->
+        <!-- åœºåœ° -->
         <view class="c_di {{isfull ?'ds_b':''}}">
-            <view class='ball_g'>ËÑË÷Çò¹İ</view>
+            <view class='ball_g'>æœç´¢çƒé¦†</view>
             <icon class='icon_search' type="search" size="12"></icon>
-            <input class='ball_inp' bindinput='getCourts' placeholder='Çò³¡Ãû³Æ'></input>
+            <input class='ball_inp' bindinput='getCourts' placeholder='çƒåœºåç§°'></input>
             <view class='Venue'>
                 <view class='ball_venue'>
                   <block wx:if="{{courts}}">
@@ -103,7 +103,7 @@
                             </view>
                             <view class='palce_dh' bindtap='openMap' data-latitude='{{court.latitude}}' data-longitude='{{court.longitude}}'>
                                 <image src='../../images/index/dw.png'></image>
-                                <text>µ¼º½</text>
+                                <text>å¯¼èˆª</text>
                             </view>
                         </view>
                         <view class='palce_phone'>{{court.telephone}}</view>
@@ -112,48 +112,48 @@
                   </block>
                 </view>
                 <view class='Venue_bottom'>
-                    <view>Ã»ÕÒµ½ÏëÒªµÄÍøÇò¹İ£¿</view>
-                    <view class='fh_phone'>ÁªÏµ¿Í·ş 010-101012020</view>
+                    <view>æ²¡æ‰¾åˆ°æƒ³è¦çš„ç½‘çƒé¦†ï¼Ÿ</view>
+                    <view class='fh_phone'>è”ç³»å®¢æœ 010-101012020</view>
                 </view>
             </view>
         </view>
     </view>
-    <!-- µÚ¶ş²½ -->
+    <!-- ç¬¬äºŒæ­¥ -->
     <view class="next_two {{isfirst == '2' ? 'ds_b' : 'ds_n' }}">
         <view class='jb_xx'>
             <view class='xx_g'></view>
-            <view>²ÎÓëÒªÇó</view>
+            <view>å‚ä¸è¦æ±‚</view>
         </view>
         <view class='ball_ji'>
             <view class='user_jbxx'>
-                <view>ÇòÁä</view>
+                <view>çƒé¾„</view>
                 <view class='user_age'>
                     <picker mode="selector" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
-                        <text>{{array[index]?array[index]:'ÇëÑ¡ÔñÇòÁäÒªÇó >'}}</text>
+                        <text>{{array[index]?array[index]:'è¯·é€‰æ‹©çƒé¾„è¦æ±‚ >'}}</text>
                     </picker>
                 </view>
             </view>
             <view class='user_jbxx'>
-                <view>* Çò¼¼µÈ¼¶</view>
+                <view>* çƒæŠ€ç­‰çº§</view>
                 <view class='user_ji'>
                     <picker mode="selector" bindchange="bindPickerChange_ji" value="{{index_ji}}" range="{{array_ji}}">
-                        <text>{{array_ji[index_ji]?array_ji[index_ji]:'ÇëÑ¡ÔñµÈ¼¶ÒªÇó >'}}</text>
+                        <text>{{array_ji[index_ji]?array_ji[index_ji]:'è¯·é€‰æ‹©ç­‰çº§è¦æ±‚ >'}}</text>
                     </picker>
                 </view>
             </view>
             <view class='user_jbxx'>
-                <view>* ´òÇòÈËÊı</view>
+                <view>* æ‰“çƒäººæ•°</view>
                 <view class='user_ji'>
                     <picker mode="selector" bindchange="bindPickerChange_peo" value="{{index_total}}" range="{{array_peo}}">
-                        <text>{{array_peo[index_total]?array_peo[index_total]:'ÇëÑ¡Ôñ´òÇòÈËÊı >'}}</text>
+                        <text>{{array_peo[index_total]?array_peo[index_total]:'è¯·é€‰æ‹©æ‰“çƒäººæ•° >'}}</text>
                     </picker>
                 </view>
             </view>
         </view>
         <view class='user_sex mar_top'>
-            <view class='type_sex'>* ĞÔ±ğ</view>
-            <view class="type_sty mar_ri {{nolimitSex == true ? 'active' : 'no_active' }} mar_bt" bindtap="selectSex" data-limittype="{{nolimitSex}}">²»ÏŞ</view>
-            <view class="type_sty {{nolimitSex != true ? 'active' : 'no_active' }}  mar_bt" bindtap="selectSex" data-limittype="{{nolimitSex}}">ÏŞ¶¨</view>
+            <view class='type_sex'>* æ€§åˆ«</view>
+            <view class="type_sty mar_ri {{nolimitSex == true ? 'active' : 'no_active' }} mar_bt" bindtap="selectSex" data-limittype="{{nolimitSex}}">ä¸é™</view>
+            <view class="type_sty {{nolimitSex != true ? 'active' : 'no_active' }}  mar_bt" bindtap="selectSex" data-limittype="{{nolimitSex}}">é™å®š</view>
             <view class="sex_num   {{nolimitSex != true ? 'ds_b' : 'ds_n' }}" hidden="{{nolimitSex }}">
                 <view class='select_box' style="margin-top:{{(scale<0.55)? '32rpx':'20rpx'}};">
                     <view class='select' catchtap='selectTap'>
@@ -164,7 +164,7 @@
                         <text class='option' style='{{index==selectData_g.length-1&&"border:0;"}}' wx:for='{{selectData_g}}' wx:key='this' data-index='{{index}}' catchtap='optionTap'>{{item}}</text>
                     </view>
                 </view>
-                <view class='mar_top1'>Å®</view>
+                <view class='mar_top1'>å¥³</view>
 
 
                 <view class='select_box' style="margin-top:{{(scale<0.55)? '32rpx':'20rpx'}};">
@@ -176,12 +176,12 @@
                         <text class='option' style='{{index_nan==selectData_n.length-1&&"border:0;"}}' wx:for='{{selectData_n}}' wx:key='this' data-index='{{index}}' catchtap='optionTap_nan'>{{item}}</text>
                     </view>
                 </view>
-                <view class='mar_top1'>ÄĞ</view>
+                <view class='mar_top1'>ç”·</view>
             </view>
         </view>
 
         <view class='user_sex mar_top'>
-            <view class='type_sex'>Ô¤ÁôÎ»ÖÃ</view>
+            <view class='type_sex'>é¢„ç•™ä½ç½®</view>
             <view class='select_box' style="margin-top:{{(scale<0.55)? '32rpx':'-8rpx'}};width:35%">
                 <view class='select' catchtap='selectTap_peo'>
                     <input class='select_text' value="{{holderNum}}"></input>
@@ -191,68 +191,68 @@
                     <text class='option' style='{{index_peo==selectData.length-1&&"border:0;"}}' wx:for='{{selectData}}' wx:key='this' data-index='{{index}}' catchtap='optionTap_peo'>{{item}}</text>
                 </view>
             </view>
-            <view class='mar_top1' style='margin-top:10rpx;'>ÈË</view>
+            <view class='mar_top1' style='margin-top:10rpx;'>äºº</view>
         </view>
 
         <view class='ball_xx mar_top' style='width:94%'>
-            <view>±¨Ãû½ØÖ¹Ê±¼ä</view>
+            <view>æŠ¥åæˆªæ­¢æ—¶é—´</view>
             <view class='start_time'>
                 <picker mode="multiSelector" bindchange="changeDateTime3" bindcolumnchange="changeDateTimeColumn3" value="{{dateTime3}}" range="{{dateTimeArray3}}">
                     <view wx:if="{{!cc2}}" class="tui-picker-detail">
-                        {{deadlineTime == null ? 'ÇëÑ¡Ôñ½ØÖ¹Ê±¼ä' : deadlineTime }}
+                        {{deadlineTime == null ? 'è¯·é€‰æ‹©æˆªæ­¢æ—¶é—´' : deadlineTime }}
                         <!-- {{dateTimeArray3[0][dateTime3[0]]}}-{{dateTimeArray3[1][dateTime3[1]]}}-{{dateTimeArray3[2][dateTime3[2]]}} {{dateTimeArray3[3][dateTime3[3]]}}:{{dateTimeArray3[4][dateTime3[4]]}} -->
                     </view>
                     <view wx:else class="tui-picker-detail">
-                        {{deadlineTime == null ? 'ÇëÑ¡Ôñ½ØÖ¹Ê±¼ä' : deadlineTime }}
+                        {{deadlineTime == null ? 'è¯·é€‰æ‹©æˆªæ­¢æ—¶é—´' : deadlineTime }}
                     </view>
                 </picker>
             </view>
         </view>
         <view class='fb_remark mar_top'>
-            <view>±¸×¢</view>
-            <textarea placeholder='ÆäËû²¹³äËµÃ÷£¬¿ØÖÆÔÚ30×ÖÒÔÄÚ' bindinput='remark'></textarea>
+            <view>å¤‡æ³¨</view>
+            <textarea placeholder='å…¶ä»–è¡¥å……è¯´æ˜ï¼Œæ§åˆ¶åœ¨30å­—ä»¥å†…' bindinput='remark'></textarea>
         </view>
         <view class="s_btn">
-            <button class="weui-btn" type="default" bindtap='go_history'>ÉÏÒ»²½</button>
-            <button class="weui-btn bg_c" type="warn" bindtap='yul_show'>Ô¤ÀÀ</button>
-            <button class="weui-btn" type="primary" bindtap='addGame'>·¢²¼</button>
+            <button class="weui-btn" type="default" bindtap='go_history'>ä¸Šä¸€æ­¥</button>
+            <button class="weui-btn bg_c" type="warn" bindtap='yul_show'>é¢„è§ˆ</button>
+            <button class="weui-btn" type="primary" bindtap='addGame'>å‘å¸ƒ</button>
         </view>
     </view>
-    <!-- Ô¤ÀÀ -->
+    <!-- é¢„è§ˆ -->
     <view class="next_san {{isfirst == '3' ? 'ds_b' : 'ds_n' }}">
         <view class='yul_name'>
             <text class='game_name'>{{game.name}}</text>
             <view class='col_g f_wei' wx:if="{{game.gameType == 'Entertainment' }}">
-                ÓéÀÖ¾Ö
+                å¨±ä¹å±€
             </view>
             <view class='col_g f_wei' wx:else>
-                ½ÌÑ§¾Ö
+                æ•™å­¦å±€
             </view>
         </view>
         <view class='yul_xx'>
-            <view class='xx_title f_wei'>»ù±¾ĞÅÏ¢</view>
+            <view class='xx_title f_wei'>åŸºæœ¬ä¿¡æ¯</view>
             <!-- <view class='xx_id'>
-                <view class='id_name'>Çò¾Ö±àºÅ</view>
+                <view class='id_name'>çƒå±€ç¼–å·</view>
                 <view>{{game.id}}</view>
             </view> -->
             <view class='xx_id'>
-                <view class='id_name'>·¢ÆğÈË</view>
+                <view class='id_name'>å‘èµ·äºº</view>
                 <view>{{wxUserInfo.nickName}}</view>
             </view>
             <view class='xx_id'>
-                <view class='id_name'>´òÇòÊ±¼ä</view>
+                <view class='id_name'>æ‰“çƒæ—¶é—´</view>
                 <view>{{start_time}}-{{utils_pub.formatDate(end_time)}}</view>
             </view>
             <view class='xx_id'>
-                <view class='id_name'>Çò³¡</view>
+                <view class='id_name'>çƒåœº</view>
                 <view>{{selectedCourt.name}}</view>
             </view>
             <view class='xx_id'>
-                <view class='id_name'>µØÖ·</view>
+                <view class='id_name'>åœ°å€</view>
                 <view class='dz_name'>{{selectedCourt.address}}</view>
             </view>
             <view class='xx_id'>
-                <view class='id_name'>µç»°</view>
+                <view class='id_name'>ç”µè¯</view>
                 <view class='dz_name'>{{selectedCourt.telephone}}</view>
             </view>
             <view class='img_show'>
@@ -262,36 +262,36 @@
             </view>
         </view>
         <view class='yul_xx'>
-            <view class='xx_title f_wei'>²ÎÓëÒªÇó</view>
+            <view class='xx_title f_wei'>å‚ä¸è¦æ±‚</view>
             <view class='xx_id'>
-                <view class='id_name'>ÇòÁä</view>
+                <view class='id_name'>çƒé¾„</view>
                 <view>{{playAge == null ? array[index]:playAges[playAge]}}</view>
             </view>
             <view class='xx_id'>
-                <view class='id_name'>Çò¼¼µÈ¼¶</view>
+                <view class='id_name'>çƒæŠ€ç­‰çº§</view>
                 <view>{{skillLevel ==null ? array_ji[index_ji]:skillLevels[skillLevel]}}</view>
             </view>
             <view class='xx_id'>
-                <view class='id_name'>´òÇòÈËÊı</view>
+                <view class='id_name'>æ‰“çƒäººæ•°</view>
                 <view>{{totalNum == 0 ? array_peo[index_total]:totalNum}}</view>
             </view>
             <view class='xx_id'>
-                <view class='id_name'>ĞÔ±ğ</view>
+                <view class='id_name'>æ€§åˆ«</view>
                 <view >
-                  <block wx:if="{{nolimitSex}}">²»ÏŞ</block>
-                  <block wx:else><text>ÄĞ£º{{maleNum}}</text><text>Å®£º{{femaleNum}} </text></block>
+                  <block wx:if="{{nolimitSex}}">ä¸é™</block>
+                  <block wx:else><text>ç”·ï¼š{{maleNum}}</text><text>å¥³ï¼š{{femaleNum}} </text></block>
                 </view>
             </view>
             <view class='xx_id'>
-                <view class='id_name'>Ô¤ÁôÎ»ÖÃ</view>
+                <view class='id_name'>é¢„ç•™ä½ç½®</view>
                 <view>{{holderNum}}</view>
             </view>
         </view>
-        <view class='registration_time'>±¨Ãû½ØÖ¹Ê±¼ä£º{{deadlineTime == null ?"":deadlineTime}}</view>
-        <view class='remark'>±¸×¢£º{{remark == null?"":remark}}</view>
+        <view class='registration_time'>æŠ¥åæˆªæ­¢æ—¶é—´ï¼š{{deadlineTime == null ?"":deadlineTime}}</view>
+        <view class='remark'>å¤‡æ³¨ï¼š{{remark == null?"":remark}}</view>
         <view class='join_btn'>
-            <button class='join_firend' bindtap='next_bu'>·µ»Ø</button>
-            <button class='join_me' bindtap="addGame" >·¢²¼Çò¾Ö</button>
+            <button class='join_firend' bindtap='next_bu'>è¿”å›</button>
+            <button class='join_me' bindtap="addGame" >å‘å¸ƒçƒå±€</button>
         </view>
     </view>
 </view>
