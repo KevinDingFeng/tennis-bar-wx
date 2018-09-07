@@ -1,11 +1,13 @@
 // pages/my/mygame/releasegame/releasegame.js
 var utilJs = require("../../../../utils/util.js");
+const app = getApp();
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
+        imgUrl: app.globalData.imgUrl,
         tabs: ["球局信息", "评价"],
         activeIndex: 0,
         sliderOffset: 0,

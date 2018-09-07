@@ -8,6 +8,7 @@ Page({
      * 页面的初始数据
      */
     data: {
+        imgUrl: getApp().globalData.imgUrl,
         //微信用户信息
         wxUserInfo:'',
         ages: ["LessThree", "LessFive", "LessTen","MoreTen"],
@@ -32,6 +33,7 @@ Page({
         selectedCourt:{
             name:"请输入球场名称/球场地址关键字"
         },
+        court_img: '',
         time: '',
         dateTimeArray: null,
         dateTime: null,
@@ -53,7 +55,7 @@ Page({
         nolimitSex:true,
         array: ['3年以下', '3-5年', '5-10年', "10年以上"],
         array_ji: ['入门(0~1.0)', '中级(1.5~3.5)','专业(4.0~7.0)'],
-        array_peo: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20'],
+        array_peo: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
         show: false,//控制下拉列表的显示隐藏，false隐藏、true显示
         selectData: [], //预留位置
         selectData_g:[],//预留人数女
@@ -235,7 +237,7 @@ Page({
      */
     onLoad: function(options) {
         //获取微信用户信息
-        this.getWxUserInfo();
+        // this.getWxUserInfo();
 
         // 获取完整的年月日 时分秒，以及默认显示的数组
         var obj = dateTimePicker.dateTimePicker(this.data.startYear, this.data.endYear);
@@ -408,7 +410,7 @@ Page({
         formData.skillLevel = this.data.skillLevel==null ? this.data.level[this.data.index_ji]:this.data.skillLevel;
         formData.limitGender = this.data.nolimitSex;
         if(!this.data.nolimitSex){
-          if(this.data.holderNum + this.data.maleNum + this.data.femaleNum != this.data.totalNum){
+          if(this.data.maleNum + this.data.femaleNum != this.data.totalNum){
             wx.showToast({ title: '打球人数设置错误,请重新检查~', icon: 'none' })
             return false;
           }
@@ -426,6 +428,7 @@ Page({
         }
         formData.deadlineTime = this.data.deadlineTime;
         formData.remark = this.data.remark;
+        let that = this;
         wx.request({
           url: getApp().globalData.onlineUrl + 'api/game/create',
           data: formData,
@@ -433,6 +436,23 @@ Page({
           header: utilJs.hasTokenGetHeader(),
           success: function (res) {
             if (res.data.code == "200") {
+              that.setData({
+                name: '',
+                selectedCourt: {
+                  name: "请输入球场名称/球场地址关键字"
+                },
+                start_time: null,
+                end_time: null,
+                playAge: null,
+                skillLevel: null,
+                totalNum: 0,
+                maleNum: 0,
+                femaleNum: 0,
+                holderNum: 0,
+                deadlineTime: null,
+                remark: null,
+                isfirst: "1",
+              })
               wx.switchTab({
                 url: '../index/index',
               })
@@ -471,7 +491,9 @@ Page({
       }else{
         that.setData({
           courts:null,
-          selectedCourt:null
+          selectedCourt: {
+            name: "请输入球场名称/球场地址关键字"
+          },
         })
       }
     },
@@ -487,26 +509,42 @@ Page({
     //选择球场
     selectCourt:function(e){
       let court = e.currentTarget.dataset.court;
+      this.getCourtImgInfo(court.id);
       this.setData({
         isfull: false,
         selectedCourt:court,
         courtName:court.name
       })
     },
-    //获取微信用户信息
-    getWxUserInfo:function(){
+    //获取球场图片信息
+    getCourtImgInfo: function (id) {
       let that = this;
       wx.request({
-        url: getApp().globalData.onlineUrl + 'api/wx_user_info',
-        method:"GET",
+        url: getApp().globalData.onlineUrl + 'api/court_img/list?courtId=' + id,
+        method: 'GET',
         header: utilJs.hasTokenGetHeader(),
-        success:function(res){
-          if(res.data.code =="200"){
-            that.setData({
-              wxUserInfo:res.data.data
-            })
+        success: function (res) {
+          if (res.data.code == '200') {
+            let courtImg = res.data.data;
+            that.setData({ court_img: courtImg })
           }
         }
       })
-    }
+    },
+    //获取微信用户信息
+    // getWxUserInfo:function(){
+    //   let that = this;
+    //   wx.request({
+    //     url: getApp().globalData.onlineUrl + 'api/wx_user_info',
+    //     method:"GET",
+    //     header: utilJs.hasTokenGetHeader(),
+    //     success:function(res){
+    //       if(res.data.code =="200"){
+    //         that.setData({
+    //           wxUserInfo:res.data.data
+    //         })
+    //       }
+    //     }
+    //   })
+    // }
 })
