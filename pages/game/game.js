@@ -9,6 +9,7 @@ Page({
      */
     data: {
         //微信用户信息
+        wxUserInfo:'',
         ages: ["LessThree", "LessFive", "LessTen","MoreTen"],
         playAges: { "LessThree": "3年以下", "LessFive": "3~5年", "LessTen": "5~10年", "MoreTen": "10年以上"},
         level: ["Entry", "Medium","Professional"],
@@ -28,7 +29,9 @@ Page({
         //球场
         courts:{},
         //选择的球场
-        selectedCourt:null,
+        selectedCourt:{
+            name:"请输入球场名称/球场地址关键字"
+        },
         time: '',
         dateTimeArray: null,
         dateTime: null,
@@ -50,9 +53,11 @@ Page({
         nolimitSex:true,
         array: ['3年以下', '3-5年', '5-10年', "10年以上"],
         array_ji: ['入门(0~1.0)', '中级(1.5~3.5)','专业(4.0~7.0)'],
-        array_peo: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+        array_peo: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20'],
         show: false,//控制下拉列表的显示隐藏，false隐藏、true显示
-        selectData: [], //['1个', '2个', '3个', '4个', '5个', '6个'],下拉列表的数据
+        selectData: [], //预留位置
+        selectData_g:[],//预留人数女
+        selectData_n:[],//预留人数男
         index: 0,//选择的下拉列表下标
         show_nan: false,//控制下拉列表的显示隐藏，false隐藏、true显示
         index_nan: 0,//选择的下拉列表下标
@@ -85,22 +90,59 @@ Page({
       }
     },
     // 点击下拉显示框
-    selectTap() {
+    selectTap() {//性别女
+        let _this = this;
+        var _num;
+        var n_num = _this.data.index_nan;//男的数量
+        if (n_num >0){
+            _num = parseInt(_this.data.index_total) + 1;
+            _num =  _num - n_num;
+        }else{
+            _num = parseInt(_this.data.index_total) + 1;
+        }
+        
+        let _selectData = [];
+        for (var i = 0; i <= _num; i++) {
+            _selectData.push(i)
+        }
         this.setData({
             show: !this.data.show,
-            selectData: [1, 2, 3, 4, 5, 6],
+            selectData_g: _selectData,
+            // show_nan:false
         });
     },
-    selectTap_nan() {
+    selectTap_nan() {//性别男
+        let _this = this;
+        var _num = parseInt(_this.data.index_total) + 1;
+        var g_num = _this.data.femaleNum;//女的数量
+        if (g_num > 0){
+            _num = parseInt(_this.data.index_total) + 1;
+            _num = _num - g_num;
+        }else{
+            _num = parseInt(_this.data.index_total) + 1;
+        }
+        let _selectData = [];
+        for (var i = 0; i <= _num; i++) {
+            _selectData.push(i)
+        }
+      
         this.setData({
             show_nan: !this.data.show_nan,
-            selectData: [1, 2, 3, 4, 5, 6],
+            selectData_n: _selectData,
+            // show:false
         });
     },
-    selectTap_peo() {
+    selectTap_peo() {//预留位置
+        let _this = this;
+        var _num = parseInt(_this.data.index_total) +1;
+        let _selectData = [];
+       // _num = _num.toString();
+        for (var i = 0; i <= _num;i++){
+            _selectData.push(i)
+        }
         this.setData({
             show_peo: !this.data.show_peo,
-            selectData: [1, 2, 3, 4, 5, 6],
+            selectData: _selectData,
         });
     },
     // 点击下拉列表
@@ -109,7 +151,7 @@ Page({
         this.setData({
             index_nan: Index,
             show_nan: !this.data.show_nan,
-            maleNum:this.data.selectData[Index]
+            maleNum:this.data.selectData_n[Index]
         });
     },
     optionTap_peo(e) {
@@ -125,7 +167,7 @@ Page({
         this.setData({
             index: Index,
             show: !this.data.show,
-            femaleNum:this.data.selectData[Index]
+            femaleNum:this.data.selectData_g[Index]
         });
     },
     go_history() {//上一步
@@ -185,8 +227,7 @@ Page({
         console.log('picker发送选择改变，携带值为', e.detail.value)
         this.setData({
             index_total : e.detail.value,
-            totalNum : this.data.array_peo[e.detail.value],
-            holderNum: this.data.array_peo[e.detail.value]   
+            totalNum : this.data.array_peo[e.detail.value]   
         })
     },
     /**
@@ -194,7 +235,7 @@ Page({
      */
     onLoad: function(options) {
         //获取微信用户信息
-        // this.getWxUserInfo();
+        this.getWxUserInfo();
 
         // 获取完整的年月日 时分秒，以及默认显示的数组
         var obj = dateTimePicker.dateTimePicker(this.data.startYear, this.data.endYear);
@@ -365,9 +406,9 @@ Page({
         formData.isPublic = this.data.isopen;
         formData.playAge = this.data.playAge==null ? this.data.ages[this.data.index]:this.data.playAge;
         formData.skillLevel = this.data.skillLevel==null ? this.data.level[this.data.index_ji]:this.data.skillLevel;
-        formData.limitGender = !this.data.nolimitSex;
+        formData.limitGender = this.data.nolimitSex;
         if(!this.data.nolimitSex){
-          if(this.data.maleNum + this.data.femaleNum != this.data.totalNum){
+          if(this.data.holderNum + this.data.maleNum + this.data.femaleNum != this.data.totalNum){
             wx.showToast({ title: '打球人数设置错误,请重新检查~', icon: 'none' })
             return false;
           }
@@ -453,19 +494,19 @@ Page({
       })
     },
     //获取微信用户信息
-    // getWxUserInfo:function(){
-    //   let that = this;
-    //   wx.request({
-    //     url: getApp().globalData.onlineUrl + 'api/wx_user_info',
-    //     method:"GET",
-    //     header: utilJs.hasTokenGetHeader(),
-    //     success:function(res){
-    //       if(res.data.code =="200"){
-    //         that.setData({
-    //           wxUserInfo:res.data.data
-    //         })
-    //       }
-    //     }
-    //   })
-    // }
+    getWxUserInfo:function(){
+      let that = this;
+      wx.request({
+        url: getApp().globalData.onlineUrl + 'api/wx_user_info',
+        method:"GET",
+        header: utilJs.hasTokenGetHeader(),
+        success:function(res){
+          if(res.data.code =="200"){
+            that.setData({
+              wxUserInfo:res.data.data
+            })
+          }
+        }
+      })
+    }
 })
