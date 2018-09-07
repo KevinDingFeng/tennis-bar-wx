@@ -43,7 +43,7 @@
         <view class='xx_id as_img'>
           <block wx:if="{{court_img.imgs.length > 0}}">
             <block wx:for="{{court_img.imgs}}" wx:for-item="img" wx:key="**this">
-              <image src="{{court_img.prePath}}{{img.imgPath}}"></image>
+              <image src="{{imgUrl}}{{court_img.prePath}}{{img.imgPath}}"></image>
             </block>
           </block>
         </view>

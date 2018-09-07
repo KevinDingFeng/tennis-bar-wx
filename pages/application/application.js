@@ -1,11 +1,13 @@
 // pages/application/application.js
 var utilJs = require("../../utils/util.js");
+const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    imgUrl: app.globalData.imgUrl,
     apply:'',
     joiner: '', //参与人
     court_img:'', //球场图片
