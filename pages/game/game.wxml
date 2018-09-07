@@ -223,7 +223,7 @@
     <!-- 预览 -->
     <view class="next_san {{isfirst == '3' ? 'ds_b' : 'ds_n' }}">
         <view class='yul_name'>
-            <text class='game_name'>{{game.name}}</text>
+            <text class='game_name'>{{name}}</text>
             <view class='col_g f_wei' wx:if="{{game.gameType == 'Entertainment' }}">
                 娱乐局
             </view>
@@ -258,9 +258,11 @@
                 <view class='dz_name'>{{selectedCourt.telephone}}</view>
             </view>
             <view class='img_show'>
-                <image src="../../../images/tabBar/ball_x.png"></image>
-                <image src="../../../images/tabBar/ball_x.png"></image>
-                <image src="../../../images/tabBar/ball_x.png"></image>
+              <block wx:if="{{court_img.imgs.length > 0}}">
+                <block wx:for="{{court_img.imgs}}" wx:for-item="img" wx:key="**this">
+                  <image src="{{imgUrl}}{{court_img.prePath}}{{img.imgPath}}"></image>
+                </block>
+              </block>
             </view>
         </view>
         <view class='yul_xx'>
