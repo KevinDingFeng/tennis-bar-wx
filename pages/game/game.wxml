@@ -121,7 +121,7 @@
         </view>
     </view>
     <!-- 第二步 -->
-    <view class="next_two {{isfirst == '1' ? 'ds_b' : 'ds_n' }}">
+    <view class="next_two {{isfirst == '2' ? 'ds_b' : 'ds_n' }}">
         <view class='jb_xx'>
             <view class='xx_g'></view>
             <view>参与要求</view>
