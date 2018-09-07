@@ -237,7 +237,7 @@ Page({
      */
     onLoad: function(options) {
         //获取微信用户信息
-        // this.getWxUserInfo();
+        this.getWxUserInfo();
 
         // 获取完整的年月日 时分秒，以及默认显示的数组
         var obj = dateTimePicker.dateTimePicker(this.data.startYear, this.data.endYear);
@@ -532,19 +532,19 @@ Page({
       })
     },
     //获取微信用户信息
-    // getWxUserInfo:function(){
-    //   let that = this;
-    //   wx.request({
-    //     url: getApp().globalData.onlineUrl + 'api/wx_user_info',
-    //     method:"GET",
-    //     header: utilJs.hasTokenGetHeader(),
-    //     success:function(res){
-    //       if(res.data.code =="200"){
-    //         that.setData({
-    //           wxUserInfo:res.data.data
-    //         })
-    //       }
-    //     }
-    //   })
-    // }
+    getWxUserInfo:function(){
+      let that = this;
+      wx.request({
+        url: getApp().globalData.onlineUrl + 'api/wx_user_info',
+        method:"GET",
+        header: utilJs.hasTokenGetHeader(),
+        success:function(res){
+          if(res.data.code =="200"){
+            that.setData({
+              wxUserInfo:res.data.data
+            })
+          }
+        }
+      })
+    }
 })
