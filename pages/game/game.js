@@ -21,7 +21,7 @@ Page({
         end_time: null,
         playAge:null,       //球龄
         skillLevel:null,    //球技
-        totalNum:0,         //总人数 
+        totalNum:1,         //总人数 
         maleNum:0,          //男性人数
         femaleNum:0,        //女性人数
         holderNum:0,        //预留人数
@@ -445,6 +445,7 @@ Page({
                 selectedCourt: {
                   name: "请输入球场名称/球场地址关键字"
                 },
+                courts:{},
                 start_time: null,
                 end_time: null,
                 playAge: null,
@@ -494,7 +495,7 @@ Page({
         })
       }else{
         that.setData({
-          courts:null,
+          courts:{},
           selectedCourt: {
             name: "请输入球场名称/球场地址关键字"
           },
