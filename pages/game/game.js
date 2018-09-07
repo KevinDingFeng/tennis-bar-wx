@@ -428,6 +428,10 @@ Page({
         }
         formData.deadlineTime = this.data.deadlineTime;
         formData.remark = this.data.remark;
+        if (this.data.remark.length>31){
+            wx.showToast({ title: '备注字数为30字之内~', icon: 'none' })
+            return false;
+        }
         let that = this;
         wx.request({
           url: getApp().globalData.onlineUrl + 'api/game/create',
