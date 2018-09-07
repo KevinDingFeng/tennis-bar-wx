@@ -44,7 +44,7 @@
     border-bottom: 1px solid #ddd;
 }
 .work_xx{
-    margin-top: 22rpx;
+    
     width: 100%;
     height: 100rpx;
 }
