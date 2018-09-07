@@ -365,7 +365,7 @@ Page({
         formData.isPublic = this.data.isopen;
         formData.playAge = this.data.playAge==null ? this.data.ages[this.data.index]:this.data.playAge;
         formData.skillLevel = this.data.skillLevel==null ? this.data.level[this.data.index_ji]:this.data.skillLevel;
-        formData.limitGender = this.data.nolimitSex;
+        formData.limitGender = !this.data.nolimitSex;
         if(!this.data.nolimitSex){
           if(this.data.maleNum + this.data.femaleNum != this.data.totalNum){
             wx.showToast({ title: '打球人数设置错误,请重新检查~', icon: 'none' })
