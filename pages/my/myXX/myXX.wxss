@@ -15,16 +15,21 @@
     width: 15%;
 } */
 .user_name{
-    width: 90%;
+    width: 89%;
     text-align: right;
     color: #959595;
 }
 .user_age{
-    width: 85%;
+    width: 84%;
     text-align: right;
     color: #959595;
 }
 .user_sex{
+    width: 88%;
+    text-align: right;
+    color: #959595;
+}
+.user_language{
     width: 89%;
     text-align: right;
     color: #959595;
