@@ -282,9 +282,18 @@ Page({
       let dateTime1 = this.data.dateTime1;
       let startTime = dateTimeArray1[0][dateTime1[0]] + "-" + dateTimeArray1[1][dateTime1[1]] + "-" + dateTimeArray1[2][dateTime1[2]] + " " + dateTimeArray1[3][dateTime1[3]] + ":" + dateTimeArray1[4][dateTime1[4]];
 
+      let cur = parseInt(utilJs.replaceAllChar(utilJs.formatTime(new Date())));
+      let stt = parseInt(utilJs.replaceAllChar(startTime));
+      let edt = parseInt(utilJs.replaceAllChar(this.data.end_time));
+      if (cur > stt) {
+        wx.showToast({
+          title: '打球开始日期不得早于当前时间',
+          icon: 'none'
+        })
+        this.setData({ start_time: null })
+        return ;
+      }
       if(this.data.end_time != null){
-        let stt = parseInt(utilJs.replaceAllChar(startTime));
-        let edt = parseInt(utilJs.replaceAllChar(this.data.end_time));
         if(stt > edt){
           wx.showToast({
             title: '打球结束日期不得早于开始日期',
@@ -315,9 +324,9 @@ Page({
         let dateTimeArray2 = this.data.dateTimeArray2;
         let dateTime2 = this.data.dateTime2;
         let endTime = dateTimeArray2[0][dateTime2[0]]+"-"+dateTimeArray2[1][dateTime2[1]]+"-"+ dateTimeArray2[2][dateTime1[2]] + " " + dateTimeArray2[3][dateTime2[3]] + ":" + dateTimeArray2[4][dateTime2[4]];
+        let stt = parseInt(utilJs.replaceAllChar(this.data.start_time));
+        let edt = parseInt(utilJs.replaceAllChar(endTime));
         if(this.data.start_time != null){
-          let stt = parseInt(utilJs.replaceAllChar(this.data.start_time));
-          let edt = parseInt(utilJs.replaceAllChar(endTime));
           if(stt > edt){
             wx.showToast({
               title: '打球结束日期不得早于开始日期',

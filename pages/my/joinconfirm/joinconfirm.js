@@ -34,7 +34,7 @@ Page({
             }
         });
         // 获取加入申请确认列表
-        that.getConfirmJoinGames(init_status);
+        // that.getConfirmJoinGames(init_status);
     },
     tabClick: function (e) {
       let status = e.currentTarget.dataset.status;
@@ -63,7 +63,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+      this.getConfirmJoinGames(init_status);
     },
 
     /**
