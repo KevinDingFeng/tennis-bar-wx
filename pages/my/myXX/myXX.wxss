@@ -68,10 +68,11 @@
 }
 .phone_name{
     line-height: 73rpx;
+    width: 15%;
 }
 .phone_num{
     text-align: right;
-    width: 53%;
+    width: 50%;
     line-height: 73rpx;
 }
 .phone_sty{
@@ -79,7 +80,9 @@
 	border-radius: 10rpx;
     margin-left: 24rpx;
     padding: 16rpx 40rpx;
+    text-align: center;
     color: #fff;
+    width: 30%;
 }
 .btn_cu{
     width: 102%;
