@@ -11,6 +11,9 @@
     font-size: 28rpx;
     border-bottom: 1px solid #ddd;
 }
+/* .user_jbxx>view:first-child{
+    width: 15%;
+} */
 .user_name{
     width: 90%;
     text-align: right;
