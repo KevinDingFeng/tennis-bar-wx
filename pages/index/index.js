@@ -171,18 +171,58 @@ Page({
         });
     },
     selectcenter: function (e) {
-        this.setData({
-            cityright: this.data.citycenter[e.currentTarget.dataset.city].district,
-            select2: e.target.dataset.city,
-            level2: this.data.citycenter[e.currentTarget.dataset.city].code,
-            level3:''
-        });
+        let index = e.currentTarget.dataset.city;
+        if(index == 0){
+          this.setData({
+            level2: '',
+            level3: '',
+            qy_text: this.data.citycenter[index].name,
+            nz_text: "智能排序",
+            px_text: "打球时间",
+          })
+          this.hidebg();
+          this.setData({
+            date: '',
+            orderType: '',
+            lon_lat: {},
+            time: ''
+          })
+          this.queryGame();
+        }else{
+          this.setData({
+              cityright: this.data.citycenter[e.currentTarget.dataset.city].district,
+              select2: e.target.dataset.city,
+              level2: this.data.citycenter[e.currentTarget.dataset.city].code,
+              level3:''
+          });
+        }
     },
     selectright:function(e){
-        this.setData({
-            level3: this.data.cityright[e.currentTarget.dataset.city].code,
-        })
+        let index = e.currentTarget.dataset.city;
+        if(index == 0){
+          this.setData({
+            level3:'',
+            qy_text: this.data.cityright[index].name,
+            nz_text: "智能排序",
+            px_text: "打球时间",
+          })
+        }else{
+          this.setData({
+              level3: this.data.cityright[e.currentTarget.dataset.city].code,
+              qy_text: this.data.cityright[index].name,
+              nz_text: "智能排序",
+              px_text: "打球时间",
+          })
+        }
         this.hidebg();
+        this.setData({
+          date:'',
+          orderType: '',
+          lon_lat:{},
+          time:''
+        })
+        this.queryGame();
+
     },
     hidebg: function (e) {
         this.setData({
@@ -211,12 +251,9 @@ Page({
     //查询球局数据
     queryGame:function(){
       let that = this;
-      if(this.data.orderType != ''){
-        this.setData({ level1: null, level2: null, level3: null })
-      }
-      let bcode = null;
+      let code = null;
       if(this.data.level1 != null){
-        bcode = { "level1": this.data.level1, "level2": this.data.level2, "level3": this.data.level3 };
+        code = { "level1": this.data.level1, "level2": this.data.level2, "level3": this.data.level3 };
       }
       wx.request({
         url: getApp().globalData.onlineUrl + 'api/game',
@@ -224,7 +261,7 @@ Page({
         data:{
           // "curUserId":3,
           "keyword": this.data.keyword ,
-          "code": JSON.stringify(bcode),
+          "code": JSON.stringify(code),
           "date":this.data.date,
           "orderType":this.data.orderType,
           "lon_lat":JSON.stringify(this.data.lon_lat),
@@ -247,11 +284,6 @@ Page({
           }
         }
       })
-      this.setData({
-        // code:null,
-        date:'',
-        time:''
-      })
     },
 
     // 查看球场地址详情
@@ -273,20 +305,34 @@ Page({
 
     // 智能排序
     intelligentSort:function(event){
-      this.hidebg();
-      let idx = event.currentTarget.dataset.idx;
-      if(idx == 2){
-        this.getLoc();
-      }
-      this.setData({
-        orderType: this.data.orderTypeEnums[idx]
-      })
-      this.queryGame();
-      this.setData({
-        orderType:'',
-        lon_lat:{},
-      })
+        this.hidebg();
+        let idx = event.currentTarget.dataset.idx;
+        if(idx == 2){
+          this.getLoc();
+        }
+        this.setData({
+          orderType: this.data.orderTypeEnums[idx]
+        })
+        this.setData({
+          level1: null,
+          level2: null,
+          level3: null,
+          qy_text: "全部商区",
+          px_text: "打球时间",
+          nz_text: this.data.nv[idx],
+        })
+        if (this.data.orderType == 'familiarity'){
+          this.setData({ lon_lat: {}, date: '', time: ''})
+        }
+        if (this.data.orderType == 'distance') {
+          this.setData({ date: '', time: ''})
+        }
+        if (this.data.orderType == 'time'){
+          this.setData({ lon_lat: {}})
+        }
+        this.queryGame();
     },
+
     //获取当前定位
     getLoc:function(){
       let that =this;
@@ -309,7 +355,18 @@ Page({
     selectTime:function(event){
       this.hidebg();
       let idx = event.currentTarget.dataset.idx;
-      this.setData({time:this.data.timeType[idx]})
+      this.setData({
+          level1:null,
+          level2: null,
+          level3: null,
+          lon_lat: {},
+          orderType: '',
+          qy_text: "全部商区",
+          nz_text: "智能排序",
+          time: this.data.timeType[idx],
+          px_text: this.data.px[idx]
+      })
+      this.queryGame();
     },
     
     

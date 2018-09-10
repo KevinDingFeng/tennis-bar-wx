@@ -114,8 +114,8 @@
                   </block>
                 </view>
                 <view class='Venue_bottom'>
-                    <view>没找到想要的网球馆？</view>
-                    <view class='fh_phone'>联系客服 010-101012020</view>
+                  <view>没找到想要的网球馆？</view>
+                  <view class='fh_phone'>联系客服 010-101012020</view>
                 </view>
             </view>
         </view>

@@ -82,13 +82,13 @@ Page({
     },
     // 是否限制性别
     selectSex:function(e){
-      let noLimitsex = e.currentTarget.dataset.limittype;
-      if(!noLimitsex){
-        this.setData({ nolimitSex: !noLimitsex})
+      let limit = e.currentTarget.dataset.limittype;
+      if (!limit){
+        this.setData({ nolimitSex: !limit})
         this.setData({ maleNum : 0 })
         this.setData({ femaleNum: 0 })
       }else{
-        this.setData({ nolimitSex: !noLimitsex })
+        this.setData({ nolimitSex: !limit })
       }
     },
     // 点击下拉显示框
@@ -408,7 +408,7 @@ Page({
         formData.isPublic = this.data.isopen;
         formData.playAge = this.data.playAge==null ? this.data.ages[this.data.index]:this.data.playAge;
         formData.skillLevel = this.data.skillLevel==null ? this.data.level[this.data.index_ji]:this.data.skillLevel;
-        formData.limitGender = this.data.nolimitSex;
+        formData.limitGender = !this.data.nolimitSex;
         if(!this.data.nolimitSex){
           if(this.data.maleNum + this.data.femaleNum != this.data.totalNum){
             wx.showToast({ title: '打球人数设置错误,请重新检查~', icon: 'none' })
@@ -428,7 +428,7 @@ Page({
         }
         formData.deadlineTime = this.data.deadlineTime;
         formData.remark = this.data.remark;
-        if (this.data.remark.length>31){
+        if (this.data.remark !=null && this.data.remark.length>31){
             wx.showToast({ title: '备注字数为30字之内~', icon: 'none' })
             return false;
         }
@@ -457,6 +457,10 @@ Page({
                 deadlineTime: null,
                 remark: null,
                 isfirst: "1",
+                isopen: true, //是否公开
+                isEntertaining: true, //球局类型
+                isfull: false,
+                nolimitSex: true,
               })
               wx.switchTab({
                 url: '../index/index',
