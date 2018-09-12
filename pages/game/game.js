@@ -391,12 +391,13 @@ Page({
       wx.request({
         url: getApp().globalData.onlineUrl+'api/game/check?courtName='+courtName,
         method: 'GET',
-        header: utilJs.hasTokenPostHeader(),
+        header: utilJs.hasTokenGetHeader(),
         success:function(res){
-          if(res.data.code == '200'){
+          if(res.data.code == "200"){
             that.setData({
               selectedCourt:res.data.data.court
             })
+            that.getCourtImgInfo(res.data.data.court.id);
           }else{
             wx.showToast({
               title: res.data.data,
@@ -405,7 +406,6 @@ Page({
           }
         }
       })
-      that.getCourtImgInfo(this.data.selectCourt.id);
     },
     //球局数据
     //球局名称
@@ -553,14 +553,14 @@ Page({
       })
     },
     //选择球场
-    selectCourt:function(e){
-      let court = e.currentTarget.dataset.court;
-      this.getCourtImgInfo(court.id);
-      this.setData({
-        isfull: false,
-        selectedCourt:court,
-      })
-    },
+    // selectCourt:function(e){
+    //   let court = e.currentTarget.dataset.court;
+    //   this.getCourtImgInfo(court.id);
+    //   this.setData({
+    //     isfull: false,
+    //     selectedCourt:court,
+    //   })
+    // },
     //获取球场图片信息
     getCourtImgInfo: function (id) {
       let that = this;
