@@ -87,9 +87,9 @@
             <button class="weui-btn" type="primary" bindtap='next_bu'>下一步</button>
         </view>
         <!-- 遮盖层 -->
-        <view class="fullbg {{isfull ?'fullopacity':''}}" bindtap="hidebg"></view>
+        <!-- <view class="fullbg {{isfull ?'fullopacity':''}}" bindtap="hidebg"></view> -->
         <!-- 场地 -->
-        <view class="c_di {{isfull ?'ds_b':''}}">
+        <!-- <view class="c_di {{isfull ?'ds_b':''}}">
             <view class='ball_g'>搜索球馆</view>
             <icon class='icon_search' type="search" size="12"></icon>
             <input class='ball_inp' bindinput='getCourts' placeholder='球场名称'></input>
@@ -118,7 +118,7 @@
                   <view class='fh_phone'>联系客服 010-101012020</view>
                 </view>
             </view>
-        </view>
+        </view> -->
     </view>
     <!-- 第二步 -->
     <view class="next_two {{isfirst == '2' ? 'ds_b' : 'ds_n' }}">

@@ -1,6 +1,7 @@
 {
   "pages":[
     "pages/login/login",
+    "pages/game/map/map",
     "pages/index/index",
     "pages/application/application",
     "pages/my/joinconfirm/joinundetermined/joinundetermined",
