@@ -6,6 +6,10 @@ Page({
      * 页面的初始数据
      */
     data: {
+        comment:{
+          gameStar:0,
+          courtStar:0
+        },
         tabs: ["球局信息", "评价"],
         activeIndex: 0,
         sliderOffset: 0,
@@ -138,7 +142,7 @@ Page({
   getCourtImgInfo: function (id) {
     let that = this;
     wx.request({
-      url: getApp().globalData.onlineUrl + 'api/court_img/list?courtId=' + id,
+      url: getApp().globalData.imgUrl + 'api/court_img/list?courtId=' + id,
       method: 'GET',
       header: utilJs.hasTokenGetHeader(),
       success: function (res) {

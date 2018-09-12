@@ -7,6 +7,11 @@ Page({
      * 页面的初始数据
      */
     data: {
+        comment: {
+          gameStar: 0,
+          courtStar: 0,
+          presentStar:0
+        },
         imgUrl: app.globalData.imgUrl,
         tabs: ["球局信息", "评价"],
         activeIndex: 0,
