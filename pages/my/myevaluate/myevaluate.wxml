@@ -28,6 +28,22 @@
             <view class='col_56' bindtap='grade'>球技等级判定标准</view>
             <view class='user_jl col_56' bindtap="openAlert">找教练</view>
         </view>
+        <view class='user_jbxx'>
+            <view>证书</view>
+            <view>
+              <button catchtap="selectimage">选择图片</button> 
+              <!-- <block wx:if="{{certPaths}}">
+                <block wx:for="{{certPaths}}" wx:for-item="path">
+                  <image src="{{imgUrl}}{{prePath}}{{path}}" mode="aspectFill"/> 
+                </block>
+              </block> -->
+              <block wx:if="{{tempFiles.length > 0}}">
+                <block wx:for="{{tempFiles}}" wx:for-item="file">
+                  <image src="{{file.path}}" mode="aspectFill"/> 
+                </block>
+              </block>
+            </view>
+        </view>
         <view class='my_remark'>
             <view>备注</view>
             <textarea placeholder='{{selfEvaluation.remark?"":"其他补充说明，控制在30字以内"}}' bindinput="modifyRemark">{{selfEvaluation.remark?selfEvaluation.remark:""}}</textarea>

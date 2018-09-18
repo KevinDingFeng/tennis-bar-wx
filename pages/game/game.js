@@ -356,12 +356,14 @@ Page({
     },
     
     ball_cc(){//场地
-        // this.setData({
-        //     isfull: true,
-        // });
-        wx.navigateTo({
-          url: './map/map',
-        })
+        this.setData({
+            isfull: true,
+        });
+    },
+    search:function(){
+      wx.navigateTo({
+        url: './map/map',
+      })  
     },
     hidebg: function (e) {
         this.setData({
@@ -514,35 +516,35 @@ Page({
 
 
     //搜索球场
-    // getCourts:function(e){
-    //   let courtName = e.detail.value;
-    //   let that = this;
-    //   if(courtName){
-    //     wx.request({
-    //       url: getApp().globalData.onlineUrl + 'api/game/courts?courtName=' + courtName,
-    //       method:'GET',
-    //       data: {
-    //         "page": pageIndex,
-    //         "value": pageSize
-    //       },
-    //       header: utilJs.hasTokenGetHeader(),
-    //       success:function(res){
-    //         if(res.data.code == '200'){
-    //           that.setData({
-    //             courts:res.data.data.page
-    //           })
-    //         }
-    //       }
-    //     })
-    //   }else{
-    //     that.setData({
-    //       courts:{},
-    //       selectedCourt: {
-    //         name: "请输入球场名称/球场地址关键字"
-    //       },
-    //     })
-    //   }
-    // },
+    getCourts:function(e){
+      let courtName = e.detail.value;
+      let that = this;
+      if(courtName){
+        wx.request({
+          url: getApp().globalData.onlineUrl + 'api/game/courts?courtName=' + courtName,
+          method:'GET',
+          data: {
+            "page": pageIndex,
+            "value": pageSize
+          },
+          header: utilJs.hasTokenGetHeader(),
+          success:function(res){
+            if(res.data.code == '200'){
+              that.setData({
+                courts:res.data.data.page
+              })
+            }
+          }
+        })
+      }else{
+        that.setData({
+          courts:{},
+          selectedCourt: {
+            name: "请输入球场名称/球场地址关键字"
+          },
+        })
+      }
+    },
     //打开地图
     openMap:function(e){
       let latitude = event.currentTarget.dataset.latitude;
@@ -553,14 +555,14 @@ Page({
       })
     },
     //选择球场
-    // selectCourt:function(e){
-    //   let court = e.currentTarget.dataset.court;
-    //   this.getCourtImgInfo(court.id);
-    //   this.setData({
-    //     isfull: false,
-    //     selectedCourt:court,
-    //   })
-    // },
+    selectCourt:function(e){
+      let court = e.currentTarget.dataset.court;
+      this.getCourtImgInfo(court.id);
+      this.setData({
+        isfull: false,
+        selectedCourt:court,
+      })
+    },
     //获取球场图片信息
     getCourtImgInfo: function (id) {
       let that = this;

@@ -1,12 +1,16 @@
 // pages/my/myevaluate/myevaluate.js
 var utilJs = require("../../../utils/util.js");
 Page({
-
     /**
      * 页面的初始数据
      */
     data: {
-        isfirst:true
+        imgUrl:getApp().globalData.onlineUrl,
+        prePath:"f/",
+        isfirst:true,
+        //证书路径
+        path: [], 
+        certPaths:[]
     },
     bindPickerChange: function (e) {//打球频率
       var ar = this.data.playFrequencyNameArr[e.detail.value];
@@ -141,6 +145,16 @@ Page({
             that.setPlayFrequencyList();
             that.setPlayAgeList();
             that.setSkillLevelList();
+            
+            let certPath = that.data.selfEvaluation.certificatePath;
+            if (certPath && certPath.split(",") == undefined) {
+              let certPaths = that.data.certPath;
+              certPath.push(certPath);
+              that.setData({ certPaths: certPaths })
+            }
+            if (certPath && certPath.split(",").length > 0) {
+              that.setData({ certPaths: certPath.split(",") })
+            }
           }
         }
       })
@@ -205,7 +219,60 @@ Page({
     }
   },
   save: function () {
-    var info = this.data.selfEvaluation;
+    //上传图片
+    var i = 0;
+    let tempfiles = this.data.tempFiles;
+    if(tempfiles){
+      this.uploadImage(i,tempfiles);
+    }else{
+      wx.showToast({
+        title: '请选择图片',
+        icon:'none'
+      })
+    }
+  },
+
+  //上传图片
+  uploadImage: function (i, tempFiles) {
+    let that = this;
+    wx.uploadFile({
+      url: getApp().globalData.onlineUrl + 'api/wx_user_evaluation/upload',
+      filePath: tempFiles[i].path,
+      name: 'file',
+      header: {
+        "Content-Type": "multipart/form-data",
+        "tennisToken": getApp().globalData.tennisToken
+      },
+      success: function (res) {
+        var data = JSON.parse(res.data);
+        if (data.code == "200") {
+          let path = data.data.filepath;
+          let paths = that.data.path;
+          paths.push(path);
+          that.setData({
+            path: paths
+          })
+          i++;
+          if(i == tempFiles.length){
+            that.updateInfo(paths);
+          }else{
+            that.uploadImage(i,tempFiles);
+          }
+        } else {
+          wx.showToast({
+            title: data.data.errMsg,
+            icon: 'none'
+          })
+        }
+      },
+      complete:function(res){
+        
+      }
+    })
+  },
+  updateInfo:function(paths){
+    let that = this;
+    var info = that.data.selfEvaluation;
     var data = {};
     var id = info.id;
     if (id) {
@@ -216,7 +283,12 @@ Page({
     data.skillLevel = info.skillLevel;
     data.remark = info.remark ? info.remark : '';
     data.wxUserInfoId = info.wxUserInfoId;
-
+    if (paths.length > 1) {
+      let cp = paths.join(",");
+      data.certificatePath = cp;
+    } else {
+      data.certificatePath = paths[0];
+    }
     wx.request({
       url: getApp().globalData.onlineUrl + 'api/wx_user_evaluation/update',
       method: "POST",
@@ -232,5 +304,33 @@ Page({
         }
       }
     })
-  }
+  },
+
+  selectimage:function(){
+    let that = this;
+    wx.chooseImage({
+      count:9,
+      sizeType: ['compressed'],
+      sourceType: ['album', 'camera'],
+      success: function(res) {
+        var tempFiles = res.tempFiles;
+        that.setData({ tempFiles: tempFiles})
+        if(tempFiles.size == 0){
+          wx.showToast({
+            title: '请选择图片',
+            icon: 'none'
+          })
+        }
+        for(var i=0;i<tempFiles.length;i++){
+          if (tempFiles[i].size > 1024 * 1024) {
+            wx.showToast({
+              title: '上传图片不能大于1M!',
+              icon: 'none'
+            })
+          } 
+        }
+      },
+    })
+  },
+  
 })

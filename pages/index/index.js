@@ -8,6 +8,10 @@ var pageSize = 20;
 
 Page({
     data: {
+        //筛选
+        skillLev:'',
+        gameType:'',
+        coachName:'',
         //搜索条件
         keyword:'',
         //商区 商圈码
@@ -15,12 +19,8 @@ Page({
         level1:null,
         level2:null,
         level3:null,
-        // code: {"level1": "100", "level2": "101", "level3": "10101"},
-        // code: { "level1": "100", "level2": "101", "level3": "" },
-        // code: { "level1": "100", "level2": "", "level3": "" },
         //智能排序
         lon_lat:{},
-        // lon_lat: {"longitude": "116.366225", "latitude":"39.935242"},
         orderType:'',
         orderTypeEnums: ["familiarity", "familiarity", "distance", "time"], //默认 熟悉度  距离  时间
         //打球时间
@@ -36,6 +36,7 @@ Page({
         qy_text:"全部商区",
         nz_text:"智能排序",
         px_text:"打球时间",
+        ft_text:"筛选",
         px_time: utilJs.formatDate(new Date()),
         content: [],
         nv: ['默认排序', '熟人优先', '距离最近', '时间最近'],//智能排序
@@ -262,10 +263,13 @@ Page({
           // "curUserId":3,
           "keyword": this.data.keyword ,
           "code": JSON.stringify(code),
-          "date":this.data.date,
           "orderType":this.data.orderType,
           "lon_lat":JSON.stringify(this.data.lon_lat),
+          "date":this.data.date,
           "timeType":this.data.time,
+          "gameType":this.data.gameType,
+          "skillLev":this.data.skillLev,
+          "name":this.data.coachName,
           "page":  pageIndex,
           "value":  pageSize
         },
@@ -320,6 +324,7 @@ Page({
           qy_text: "全部商区",
           px_text: "打球时间",
           nz_text: this.data.nv[idx],
+
         })
         if (this.data.orderType == 'familiarity'){
           this.setData({ lon_lat: {}, date: '', time: ''})
@@ -369,8 +374,27 @@ Page({
       this.queryGame();
     },
     
-    
-    
-
+    //筛选
+    filter:function(){
+      this.setData({
+        level1: null,
+        level2: null,
+        level3: null,
+        lon_lat: {},
+        orderType: '',
+        qy_text: "全部商区",
+        nz_text: "智能排序",
+        px_text: "打球时间",
+        time: '',
+        date: '',
+        // gameType: 'Entertainment',
+        // gameType:'Teaching',
+        gameType: '',
+        // skillLev:'Entry',
+        skillLev: 'Professional',
+        name:''
+      })
+      this.queryGame();
+    }
 
 })
