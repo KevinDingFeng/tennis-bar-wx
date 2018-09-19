@@ -6,10 +6,15 @@ Page({
      * 页面的初始数据
      */
     data: {
+        wxUserInfo:'',
         comment:{
           gameStar:0,
           courtStar:0
         },
+        gameLabels:[],
+        selectedGameLabels:[],
+        courtLabels:[],
+        selectedCourtLabels:[],
         tabs: ["球局信息", "评价"],
         activeIndex: 0,
         sliderOffset: 0,
@@ -71,19 +76,12 @@ Page({
             flag: 5
         });
     },
-    onShow:function(){
-      var info = that.data.game;
-      var gameId = info.id;
-      that.setComment(gameId);
-    },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-        wx.setNavigationBarTitle({
-            title: '参与球局信息',
-        })
         let that = this;
+        that.getLabels();
         if(options.game){
           let game = JSON.parse(options.game);
           that.setData({
@@ -95,16 +93,41 @@ Page({
         if(options.id){
           that.getGameInfo(options.id);
         }
-        wx.getSystemInfo({
-            success: function (res) {
-                that.setData({
-                    sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
-                    sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
-                });
-            }
-        });
+        that.getWxUserInfo();
+        that.setComment(that.data.game.id);
+        // wx.getSystemInfo({
+        //     success: function (res) {
+        //         that.setData({
+        //             sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
+        //             sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
+        //         });
+        //     }
+        // });
     },  
-
+  onShow: function () {
+    var info = that.data.game;
+    var gameId = info.id;
+    that.setComment(gameId);
+  },
+  //获取评价标签
+  getLabels:function(){
+    let that = this;
+    wx.request({
+      url: getApp().globalData.onlineUrl + 'api/comment/labels',
+      method:'GET',
+      header:utilJs.hasTokenGetHeader(),
+      success:function(res){
+        if(res.data.code=='200'){
+          let gameLabels = res.data.data.gameLabel;
+          let courtLabels = res.data.data.courtLabel;
+          that.setData({
+            gameLabels:gameLabels,
+            courtLabels:courtLabels
+          })
+        }
+      }
+    })
+  },
   //获取球局信息  分享步骤
   getGameInfo: function (id) {
     let that = this;
@@ -154,7 +177,7 @@ Page({
     })
   },
 
-  setComment(gameId) {
+  setComment:function(gameId) {
     let that = this;
     wx.request({
       url: getApp().globalData.onlineUrl + 'api/comment/detail',
@@ -170,6 +193,12 @@ Page({
             that.setData({
               comment: res.data.data.comment
             });
+            if(res.data.data.comment.gameLabels){
+              that.setData({ selectedGameLabels: JSON.parse(res.data.data.comment.gameLabels)})
+            }
+            if(res.data.data.comment.courtLabels){
+              that.setData({ selectedCourtLabels: JSON.parse(res.data.data.comment.courtLabels)})
+            }
           }
           if (res.data.data.joinWxUser) {
             that.setData({
@@ -242,9 +271,22 @@ Page({
     var data = {};
     data.gameStar = info.gameStar;
     data.courtStar = info.courtStar;
-    data.presentStar = info.presentStar;
-    data.gameId = info.gameId;
-    data.wxUserInfoId = info.wxUserInfoId;
+    data.presentStar = info.presentStar == null ? 0:info.presentStar;
+    data.gameId = info.gameId == null ? that.data.game.id:info.gameId;
+    data.wxUserInfoId = info.wxUserInfoId == null ? that.data.wxUserInfo.id:info.wxUserInfoId;
+
+    //测试数据
+    let gamelabel = new Array();
+    gamelabel.push({"id":1,"name":"球友很nice"});
+    gamelabel.push({ "id": 2, "name": "领导力强" });
+    gamelabel.push({ "id": 3, "name": "打的很爽" });
+    let courtlabel = new Array();
+    courtlabel.push({"id":9,"name":"环境很好"});
+    courtlabel.push({ "id": 12, "name": "服务态度好" });
+
+    data.gameLabels = JSON.stringify(gamelabel);
+    data.courtLabels = JSON.stringify(courtlabel);
+
     if (info.id) {
       data.id = id;
     }
@@ -257,7 +299,7 @@ Page({
         console.log(res.data);
         if (res.data.code == "200") {
           console.log("保存成功");
-          that.setComment(info.gameId);
+          that.setComment(that.data.game.id);
         }
       }
     })
@@ -267,5 +309,21 @@ Page({
       title:"来“一桔”网球吧",
       path: "/pages/my/mygame/joingame/joingame?id=" + this.data.game.id
     }
+  },
+  //获取微信用户信息
+  getWxUserInfo: function () {
+    let that = this;
+    wx.request({
+      url: getApp().globalData.onlineUrl + 'api/wx_user_info',
+      method: "GET",
+      header: utilJs.hasTokenGetHeader(),
+      success: function (res) {
+        if (res.data.code == "200") {
+          that.setData({
+            wxUserInfo: res.data.data
+          })
+        }
+      }
+    })
   }
 })

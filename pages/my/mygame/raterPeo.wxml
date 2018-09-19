@@ -12,6 +12,20 @@
                     <view class="stars_cc  {{comment.gameStar>=5? 'on_cc': ''}}" data-star="5" bindtap="changeGameStar"></view>
                 </view>
             </view>
+
+            <!-- 球局和谐度标签 -->
+            <view>
+            <block wx:if="{{!comment.gameLabels}}">
+              <block wx:for="{{gameLabels}}" wx:for-item="gl">
+                <view>{{gl.name}}</view>
+              </block>
+            </block>
+            <block wx:else>
+              <block wx:for="{{selectedGameLabels}}" wx:for-item="sgl">
+                <view>{{sgl.name}}</view>
+              </block>
+            </block>
+            </view>
         </view>
         <view class='environment_xx'>
             <view class='environment_name'>球场环境</view>
@@ -23,6 +37,20 @@
                     <view class="stars_cc  {{comment.courtStar>=4? 'on_cc': ''}}" data-star="4" bindtap="changeCourtStar"></view>
                     <view class="stars_cc  {{comment.courtStar>=5? 'on_cc': ''}}" data-star="5" bindtap="changeCourtStar"></view>
                 </view>
+            </view>
+
+            <!-- 球场环境标签 -->
+            <view>
+            <block wx:if="{{!comment.courtLabels}}">
+              <block wx:for="{{courtLabels}}" wx:for-item="cl">
+                <view>{{cl.name}}</view>
+              </block>
+            </block>
+            <block wx:else>
+              <block wx:for="{{selectedCourtLabels}}" wx:for-item="scl">
+                <view>{{scl.name}}</view>
+              </block>
+            </block>
             </view>
         </view>
         <view class='environment_xx'>
