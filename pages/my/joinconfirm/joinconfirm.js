@@ -141,6 +141,7 @@ Page({
               isbottom = true;
             } else {
               pageIndex++;
+              isbottom = false;
             }
             // wx.setStorageSync(status, res.data.data.confirms);
           } else {

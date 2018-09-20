@@ -107,7 +107,7 @@
     </view>
     <!-- 球局信息 -->
     <view class='palce_xx'>
-        <view class='palce_list'  wx:for="{{games.content}}" wx:for-item="game" wx:key="**this" >
+        <view class='palce_list'  wx:for="{{games}}" wx:for-item="game" wx:key="**this" >
             <view class='list_top' bindtap="applyJoinGame" data-game="{{game}}">
                 <view class="palce_name">{{game.name}}</view>
                 <view class='palce_num'>{{game.totalNum}}缺{{game.vacancyNum}}</view>

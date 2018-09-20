@@ -5,7 +5,7 @@ var utilJs = require('../../utils/util.js');
 const app = getApp()
 var pageIndex = 0;
 var pageSize = 20;
-
+var isbottom = false;
 Page({
     data: {
         //筛选
@@ -55,7 +55,7 @@ Page({
         select1: '',
         select2: '',
         shownavindex: '',
-        games: ''
+        games: []
     },
     inputTyping: function (e) {
         let keyword = e.detail.value;
@@ -78,6 +78,8 @@ Page({
         });
     },
     onShow: function(){
+      pageIndex = 0;
+      this.setData({games:[]})
       this.queryGame();
     },
     listqy: function (e) {
@@ -189,7 +191,9 @@ Page({
             time: '',
             gameType: '',
             skillLev: '',
-            name: ''
+            name: '',
+            //清空games 数据
+            games: []
           })
           this.queryGame();
         }else{
@@ -226,7 +230,9 @@ Page({
           time:'',
           gameType: '',
           skillLev: '',
-          name: ''
+          name: '',
+          //清空games 数据
+          games: []
         })
         this.queryGame();
 
@@ -253,6 +259,9 @@ Page({
 
     //搜索
     search:function(){
+      this.setData({games:[]});
+      pageIndex = 0;
+      isbottom = false;
       this.queryGame();
     },
     
@@ -278,15 +287,23 @@ Page({
           "skillLev":this.data.skillLev,
           "name":this.data.coachName,
           "page":  pageIndex,
-          "value":  pageSize
+          "size":  pageSize
         },
         header: utilJs.hasTokenGetHeader(),
         success: function (res) {
           console.log(res.data);
           if (res.data.code == "200") {
+            let game = that.data.games;
+            game = game.concat(res.data.data.page.content);
             that.setData({
-              games: res.data.data.page
+              games: game
             })
+            if (res.data.data.page.content.length < pageSize) {
+              isbottom = true;
+            } else {
+              pageIndex++;
+              isbottom = false;
+            }
           }else{
             wx.showToast({
               title: res.data.data,
@@ -333,7 +350,9 @@ Page({
           nz_text: this.data.nv[idx],
           gameType: '',
           skillLev: '',
-          name: ''
+          name: '',
+          //清空games 数据
+          games: []
         })
         if (this.data.orderType == 'familiarity'){
           this.setData({ lon_lat: {}, date: '', time: ''})
@@ -381,7 +400,9 @@ Page({
           px_text: this.data.px[idx],
           gameType: '',
           skillLev: '',
-          name: ''
+          name: '',
+          //清空games 数据
+          games: []
       })
       this.queryGame();
     },
@@ -404,9 +425,38 @@ Page({
         gameType: '',
         // skillLev:'Entry',
         skillLev: 'Professional',
-        name:''
+        name:'',
+        //清空games 数据
+        games:[]
       })
       this.queryGame();
-    }
+    },
+
+    /**
+      * 页面相关事件处理函数--监听用户下拉动作
+      */
+    onPullDownRefresh: function () {
+      pageIndex = 0;
+      this.setData({ games: [] })
+      this.queryGame();
+    },
+
+    /**
+      * 页面上拉触底事件的处理函数
+      */
+    onReachBottom: function () {
+      if (!isbottom) {
+        let orderType = this.data.orderType;
+        if (orderType != 'familiarity') {
+          this.queryGame();
+        }
+      } else {
+        wx.showToast({
+          title: '已经到底了~',
+          icon: 'none'
+        })
+      }
+      
+    },
 
 })

@@ -504,6 +504,9 @@ Page({
                 isEntertaining: true, //球局类型
                 isfull: false,
                 nolimitSex: true,
+                index: 0,//选择的下拉列表下标
+                index_nan: 0,//选择的下拉列表下标
+                index_peo: 0,//选择的下拉列表下标
               })
               wx.switchTab({
                 url: '../index/index',

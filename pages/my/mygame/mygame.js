@@ -116,6 +116,7 @@ Page({
               isbottom = true;
             }else{
               pageIndex ++ ;
+              isbottom = false;
             }
             // wx.setStorageSync(types, res.data.data.page);
           }else{
