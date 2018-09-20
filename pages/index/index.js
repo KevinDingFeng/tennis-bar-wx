@@ -240,7 +240,8 @@ Page({
     bindDateChange: function (e) {//时间选择
         console.log('picker发送选择改变，携带值为', e.detail.value)
         this.setData({
-            date: e.detail.value
+            date: e.detail.value,
+            px_time:e.detail.value
         })
     },
 

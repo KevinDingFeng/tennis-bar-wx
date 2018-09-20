@@ -10,7 +10,8 @@ Page({
         isfirst:true,
         //证书路径
         path: [], 
-        certPaths:[]
+        certPaths:[],
+        tempFiles:[]
     },
     bindPickerChange: function (e) {//打球频率
       var ar = this.data.playFrequencyNameArr[e.detail.value];
@@ -222,19 +223,25 @@ Page({
     //上传图片
     var i = 0;
     let tempfiles = this.data.tempFiles;
-    if(tempfiles){
-      this.uploadImage(i,tempfiles);
-    }else{
+    let certPaths = this.data.certPaths;
+    if(tempfiles.length == 0 && certPaths.length == 0){
       wx.showToast({
         title: '请选择图片',
         icon:'none'
       })
+    }
+    else if (tempfiles.length > 0 ){
+      this.uploadImage(i,tempfiles);
+    }
+    else if (tempfiles.length == 0 && certPaths.length > 0){
+      this.updateInfo(certPaths);
     }
   },
 
   //上传图片
   uploadImage: function (i, tempFiles) {
     let that = this;
+    if(tempFiles)
     wx.uploadFile({
       url: getApp().globalData.onlineUrl + 'api/wx_user_evaluation/upload',
       filePath: tempFiles[i].path,

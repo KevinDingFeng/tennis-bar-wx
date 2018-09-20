@@ -32,9 +32,10 @@ Page({
         //球场名称
         courtName:'',
         //选择的球场
-        selectedCourt:{
-            name:"请输入球场名称/球场地址关键字"
-        },
+        selectedCourt:null,
+        // selectedCourt:{
+        //     name:"请输入球场名称/球场地址关键字"
+        // },
         court_img: '',
         time: '',
         dateTimeArray: null,
@@ -198,7 +199,7 @@ Page({
             })
           return false;
       }
-      if (this.data.selectedCourt == '') {
+      if (this.data.selectedCourt == null) {
         wx.showToast({ title: '球场不能为空~', icon: 'none' })
         return false;
       }
@@ -355,7 +356,9 @@ Page({
       this.setData({ deadlineTime: deadlineTime })
     },
     
-    ball_cc(){//场地
+    ball_cc(e){//场地  
+        let cname = e.detail.value;
+        this.getCourts(cname);
         this.setData({
             isfull: true,
         });
@@ -481,9 +484,10 @@ Page({
             if (res.data.code == "200") {
               that.setData({
                 name: '',
-                selectedCourt: {
-                  name: "请输入球场名称/球场地址关键字"
-                },
+                selectedCourt:null,
+                // selectedCourt: {
+                //   name: "请输入球场名称/球场地址关键字"
+                // },
                 courts:{},
                 start_time: null,
                 end_time: null,
@@ -516,8 +520,8 @@ Page({
 
 
     //搜索球场
-    getCourts:function(e){
-      let courtName = e.detail.value;
+    getCourts:function(courtName){
+      // let courtName = e.detail.value;
       let that = this;
       if(courtName){
         wx.request({
@@ -539,14 +543,15 @@ Page({
       }else{
         that.setData({
           courts:{},
-          selectedCourt: {
-            name: "请输入球场名称/球场地址关键字"
-          },
+          selectedCourt:null 
+          // {
+            // name: "请输入球场名称/球场地址关键字"
+          // },
         })
       }
     },
     //打开地图
-    openMap:function(e){
+    openMap:function(event){
       let latitude = event.currentTarget.dataset.latitude;
       let longitude = event.currentTarget.dataset.longitude;
       wx.openLocation({
