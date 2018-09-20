@@ -4,7 +4,7 @@ var cityData = require('../../utils/city.js');
 var utilJs = require('../../utils/util.js');
 const app = getApp()
 var pageIndex = 0;
-var pageSize = 20;
+var pageSize = 3;
 var isbottom = false;
 Page({
     data: {
@@ -195,6 +195,7 @@ Page({
             //清空games 数据
             games: []
           })
+          pageIndex = pageIndex > 0 ? 0:pageIndex;
           this.queryGame();
         }else{
           this.setData({
@@ -234,6 +235,7 @@ Page({
           //清空games 数据
           games: []
         })
+        pageIndex = pageIndex > 0 ? 0 : pageIndex;
         this.queryGame();
 
     },
@@ -260,7 +262,7 @@ Page({
     //搜索
     search:function(){
       this.setData({games:[]});
-      pageIndex = 0;
+      pageIndex = pageIndex > 0 ? 0 : pageIndex;
       isbottom = false;
       this.queryGame();
     },
@@ -363,6 +365,7 @@ Page({
         if (this.data.orderType == 'time'){
           this.setData({ lon_lat: {}})
         }
+        pageIndex = pageIndex > 0 ? 0 : pageIndex;
         this.queryGame();
     },
 
@@ -404,6 +407,7 @@ Page({
           //清空games 数据
           games: []
       })
+      pageIndex = pageIndex > 0 ? 0 : pageIndex;
       this.queryGame();
     },
     
@@ -429,6 +433,7 @@ Page({
         //清空games 数据
         games:[]
       })
+      pageIndex = pageIndex > 0 ? 0 : pageIndex;
       this.queryGame();
     },
 
@@ -436,7 +441,7 @@ Page({
       * 页面相关事件处理函数--监听用户下拉动作
       */
     onPullDownRefresh: function () {
-      pageIndex = 0;
+      pageIndex = pageIndex > 0 ? 0 : pageIndex;
       this.setData({ games: [] })
       this.queryGame();
     },
