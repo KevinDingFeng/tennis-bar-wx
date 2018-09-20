@@ -4,7 +4,7 @@ var cityData = require('../../utils/city.js');
 var utilJs = require('../../utils/util.js');
 const app = getApp()
 var pageIndex = 0;
-var pageSize = 3;
+var pageSize = 20;
 var isbottom = false;
 Page({
     data: {
