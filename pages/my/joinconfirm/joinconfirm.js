@@ -4,6 +4,7 @@ var sliderWidth = 115; // 需要设置slider的宽度，用于计算中间位置
 var init_status = "WaitingConfirm";
 var pageIndex = 0;
 var pageSize = 20;
+var isbottom = false;
 Page({
     /**
      * 页面的初始数据
@@ -14,7 +15,7 @@ Page({
         activeIndex: 1,
         sliderOffset: 0,
         sliderLeft: 0,
-        confirms:''
+        confirms:[]
     },
 
     /**
@@ -41,10 +42,13 @@ Page({
       init_status = status;
       let that = this;
       // if (wx.getStorageSync(status)) {
-        that.setData({
-          confirms: wx.getStorageSync(status)
-        })
+        // that.setData({
+        //   confirms: wx.getStorageSync(status)
+        // })
       // } else {
+        that.setData({confirms:[]});
+        pageIndex = 0;
+        isbottom = false;
         that.getConfirmJoinGames(status);
       // }
       this.setData({
@@ -63,6 +67,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
+      pageIndex =0;
       this.getConfirmJoinGames(init_status);
     },
 
@@ -84,6 +89,8 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function () {
+      pageIndex = 0;
+      this.setData({ confirms: [] })
       this.getConfirmJoinGames(init_status);
     },
 
@@ -91,7 +98,14 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
-
+      if (!isbottom) {
+        this.getConfirmJoinGames(init_status);
+      } else {
+        wx.showToast({
+          title: '已经到底了~',
+          icon: 'none'
+        })
+      }
     },
 
     /**
@@ -113,15 +127,21 @@ Page({
         data: {
           "status": status,
           "page": pageIndex,
-          "value": pageSize
+          "size": pageSize
         },
         header: utilJs.hasTokenGetHeader(), 
         success: function (res) {
           if (res.data.code == "200") {
-            console.log(res.data.data.confirms);
+            let confirm = that.data.confirms;
+            confirm =confirm.concat(res.data.data.confirms.content);
             that.setData({
-              confirms: res.data.data.confirms
+              confirms: confirm
             })
+            if(res.data.data.confirms.content.length < pageSize){
+              isbottom = true;
+            } else {
+              pageIndex++;
+            }
             // wx.setStorageSync(status, res.data.data.confirms);
           } else {
             wx.showToast({

@@ -523,7 +523,7 @@ Page({
     getCourts:function(courtName){
       // let courtName = e.detail.value;
       let that = this;
-      if(courtName){
+      if(courtName!=''){
         wx.request({
           url: getApp().globalData.onlineUrl + 'api/game/courts?courtName=' + courtName,
           method:'GET',

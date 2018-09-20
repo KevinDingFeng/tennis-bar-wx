@@ -44,8 +44,8 @@ bindtap="swichNav" data-type="release">我发起的球局</view>
 </view>
 <swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:1000px;width:100%;">
     <swiper-item>
-        <block wx:if="{{games.content.length > 0}}">
-            <view class='list_xx' wx:for="{{games.content}}" wx:key="**this" wx:for-item="jgame">
+        <block wx:if="{{games.length > 0}}">
+            <view class='list_xx' wx:for="{{games}}" wx:key="**this" wx:for-item="jgame">
               <block wx:if="{{jgame}}">
                 <view class='list_top' bindtap="joinGameDetail" data-game="{{jgame.game}}">
                     <view class='palce_name f_wei'>{{jgame.game.name}}</view>
@@ -75,8 +75,8 @@ bindtap="swichNav" data-type="release">我发起的球局</view>
         </block>
     </swiper-item>
     <swiper-item>
-        <block wx:if="{{games.content.length > 0}}">
-            <view class='list_xx' wx:for="{{games.content}}" wx:key="**this" wx:for-item="game">
+        <block wx:if="{{games.length > 0}}">
+            <view class='list_xx' wx:for="{{games}}" wx:key="**this" wx:for-item="game">
               <block wx:if="{{game}}">
                 <view class='list_top' bindtap="releaseGameDetail" data-game="{{game}}">
                     <view class='palce_name f_wei'>{{game.name}}</view>

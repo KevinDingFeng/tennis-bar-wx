@@ -23,8 +23,8 @@
                 <view class="weui-tab__panel">
                     <!-- 全部 -->
                     <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
-                      <block wx:if="{{applys.content.length > 0}}">
-                        <block wx:for="{{applys.content}}" wx:key="**this" wx:for-item="apply">
+                      <block wx:if="{{applys.length > 0}}">
+                        <block wx:for="{{applys}}" wx:key="**this" wx:for-item="apply">
                           <view class='list_xx' bindtap='gameDetail' data-apply='{{apply}}'>
                             <view class='list_top'>
                                 <view class='palce_name'>
@@ -50,8 +50,8 @@
                     </view>
                     <!-- 已同意 -->
                     <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
-                      <block wx:if="{{applys.content.length > 0}}">
-                        <block wx:for="{{applys.content}}" wx:key="**this" wx:for-item="apply">
+                      <block wx:if="{{applys.length > 0}}">
+                        <block wx:for="{{applys}}" wx:key="**this" wx:for-item="apply">
                           <view class='list_xx' bindtap='gameDetail' data-apply='{{apply}}'>
                             <view class='list_top'>
                                 <view class='palce_name'>
@@ -73,8 +73,8 @@
                     </view>
                     <!-- 已拒绝 -->
                     <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
-                      <block wx:if="{{applys.content.length > 0}}">
-                        <block wx:for="{{applys.content}}" wx:key="**this" wx:for-item="apply">
+                      <block wx:if="{{applys.length > 0}}">
+                        <block wx:for="{{applys}}" wx:key="**this" wx:for-item="apply">
                           <view class='list_xx' bindtap='gameDetail' data-apply='{{apply}}'>
                             <view class='list_top'>
                                 <view class='palce_name'>

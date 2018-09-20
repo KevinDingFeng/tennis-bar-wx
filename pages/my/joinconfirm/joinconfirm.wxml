@@ -23,8 +23,8 @@
                 <view class="weui-tab__panel">
                     <!-- 全部 -->
                     <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
-                      <block wx:if="{{confirms.content.length > 0}}">
-                        <block wx:for="{{confirms.content}}" wx:key="**this" wx:for-item="confirm">
+                      <block wx:if="{{confirms.length > 0}}">
+                        <block wx:for="{{confirms}}" wx:key="**this" wx:for-item="confirm">
                           <view class='list_xx' bindtap='viewDetail' data-info='{{confirm}}'>
                             <view class='list_top'>
                                 <view class='palce_name'>{{confirm.game.name}}</view>
@@ -47,8 +47,8 @@
                     </view>
                     <!-- 待确认 -->
                     <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
-                      <block wx:if="{{confirms.content.length > 0}}">
-                        <block wx:for="{{confirms.content}}" wx:key="**this" wx:for-item="confirm">
+                      <block wx:if="{{confirms.length > 0}}">
+                        <block wx:for="{{confirms}}" wx:key="**this" wx:for-item="confirm">
                           <view class='list_xx' bindtap="viewDetail" data-info='{{confirm}}'>
                             <view class='list_top'>
                                 <view class='palce_name'>{{confirm.game.name}}</view>
@@ -68,8 +68,8 @@
                     </view>
                     <!-- 已确认 -->
                     <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
-                      <block wx:if="{{confirms.content.length > 0}}">
-                        <block wx:for="{{confirms.content}}" wx:key="**this" wx:for-item="confirm">
+                      <block wx:if="{{confirms.length > 0}}">
+                        <block wx:for="{{confirms}}" wx:key="**this" wx:for-item="confirm">
                           <view class='list_xx' bindtap="viewDetail" data-info='{{confirm}}'>
                             <view class='list_top'>
                                 <view class='palce_name'>{{confirm.game.name}}</view>

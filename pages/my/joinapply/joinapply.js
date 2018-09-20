@@ -4,6 +4,7 @@ var sliderWidth = 115; // 需要设置slider的宽度，用于计算中间位置
 var init_status ="Agree";
 var pageIndex = 0;
 var pageSize = 20;
+var isbottom = false;
 Page({
     /**
      * 页面的初始数据
@@ -14,7 +15,7 @@ Page({
         activeIndex: 1,
         sliderOffset: 0,
         sliderLeft: 0,
-        applys:''
+        applys:[]
     },
 
     /**
@@ -33,8 +34,7 @@ Page({
                 });
             }
         });
-      // 获取加入申请列表
-      this.getApplyJoinmGames(init_status);
+      
     },
 
     tabClick: function (e) {
@@ -42,10 +42,13 @@ Page({
         init_status = status ;
         let that = this;
         // if (wx.getStorageSync(status)) {
-          that.setData({
-            applys: wx.getStorageSync(status)
-          })
+          // that.setData({
+          //   applys: wx.getStorageSync(status)
+          // })
         // } else {
+          that.setData({ applys: [] })
+          pageIndex = 0;
+          isbottom = false;
           that.getApplyJoinmGames(status);
         // }
         this.setData({
@@ -64,7 +67,9 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+      // 获取加入申请列表
+      pageIndex = 0;
+      this.getApplyJoinmGames(init_status);
     },
 
 
@@ -72,6 +77,8 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function () {
+      pageIndex = 0;
+      this.setData({applys:[]});
       this.getApplyJoinmGames(init_status);
     },
 
@@ -79,7 +86,14 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
-
+      if (!isbottom) {
+        this.getApplyJoinmGames(init_status);
+      } else {
+        wx.showToast({
+          title: '已经到底了~',
+          icon: 'none'
+        })
+      }
     },
 
     /**
@@ -95,14 +109,21 @@ Page({
           // "wxUserInfoId": wxUserInfoId,
           "status": status,
           "page": pageIndex,
-          "value": pageSize
+          "size": pageSize
         },
         header: utilJs.hasTokenGetHeader(),
         success: function (res) {
           if (res.data.code == "200") {
+            let apply = that.data.applys;
+            apply = apply.concat(res.data.data.applys.content);
             that.setData({
-              applys: res.data.data.applys
+              applys: apply
             })
+            if(res.data.data.applys.content.length < pageSize){
+              isbottom = true;
+            } else {
+              pageIndex++;
+            }
             // wx.setStorageSync(status, res.data.data.applys);
           }else{
             wx.showToast({

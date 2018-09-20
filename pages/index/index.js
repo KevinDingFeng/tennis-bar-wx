@@ -186,7 +186,10 @@ Page({
             date: '',
             orderType: '',
             lon_lat: {},
-            time: ''
+            time: '',
+            gameType: '',
+            skillLev: '',
+            name: ''
           })
           this.queryGame();
         }else{
@@ -220,7 +223,10 @@ Page({
           date:'',
           orderType: '',
           lon_lat:{},
-          time:''
+          time:'',
+          gameType: '',
+          skillLev: '',
+          name: ''
         })
         this.queryGame();
 
@@ -325,7 +331,9 @@ Page({
           qy_text: "全部商区",
           px_text: "打球时间",
           nz_text: this.data.nv[idx],
-
+          gameType: '',
+          skillLev: '',
+          name: ''
         })
         if (this.data.orderType == 'familiarity'){
           this.setData({ lon_lat: {}, date: '', time: ''})
@@ -370,7 +378,10 @@ Page({
           qy_text: "全部商区",
           nz_text: "智能排序",
           time: this.data.timeType[idx],
-          px_text: this.data.px[idx]
+          px_text: this.data.px[idx],
+          gameType: '',
+          skillLev: '',
+          name: ''
       })
       this.queryGame();
     },

@@ -3,6 +3,7 @@ var utilJs = require("../../../utils/util.js");
 var init_type = "join";
 var pageIndex = 0;
 var pageSize = 20;
+var isbottom = false;
 Page({
 
     /**
@@ -11,11 +12,12 @@ Page({
     data: {
         // tab切换
         currentTab: 0,
-        joinGame: '',
-        releaseGame: '',
-        games:'',
+        // joinGame: '',
+        // releaseGame: '',
+        games:[],
         keyword:'',
-        inputVal:''
+        inputVal:'',
+        isBottom:false
 
     },
     showInput: function() {
@@ -48,19 +50,23 @@ Page({
       wx.setNavigationBarTitle({
         title: '我的球局',
       })
-      this.getMyGames(init_type);
+      // pageIndex = 0;
+      // this.getMyGames(init_type);
     },
 
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
     onReady: function() {
+      
     },
 
     /**
      * 生命周期函数--监听页面显示
      */
     onShow: function() {
+      pageIndex = 0;
+      this.getMyGames(init_type);
     },
 
     /**
@@ -68,6 +74,7 @@ Page({
      */
     onPullDownRefresh: function() {
       pageIndex = 0;
+      this.setData({games:[]})
       this.getMyGames(init_type);
     },
 
@@ -75,6 +82,14 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function() {
+      if(!isbottom){
+        this.getMyGames(init_type);
+      }else{
+        wx.showToast({
+          title: '已经到底了~',
+          icon:'none'
+        })
+      }
     },
 
     /**
@@ -87,14 +102,21 @@ Page({
         method: "GET",
         data:{
           "page": pageIndex,
-          "value": pageSize
+          "size": pageSize
         },
         header: utilJs.hasTokenGetHeader(),
         success: function (res) {
           if (res.data.code == "200") {
+            let game = that.data.games;
+            game = game.concat(res.data.data.page.content);
             that.setData({
-              games: res.data.data.page,
+              games: game,
             })
+            if(res.data.data.page.content.length < pageSize){
+              isbottom = true;
+            }else{
+              pageIndex ++ ;
+            }
             // wx.setStorageSync(types, res.data.data.page);
           }else{
             wx.showToast({
@@ -116,11 +138,14 @@ Page({
             return false;
         } else {
           // if(wx.getStorageSync(types)){
-            that.setData({
-              games: wx.getStorageSync(types)
-            })
+            // that.setData({
+            //   games: wx.getStorageSync(types)
+            // })
           // }else{
-            this.getMyGames(types);
+            that.setData({games:[]})
+            pageIndex = 0;
+            isbottom = false;
+            that.getMyGames(types);
           // }
           that.setData({
               currentTab: e.target.dataset.current
