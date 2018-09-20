@@ -274,7 +274,7 @@ Page({
       }
       wx.request({
         url: getApp().globalData.onlineUrl + 'api/game',
-        method: "GET",
+        method: "POST",
         data:{
           // "curUserId":3,
           "keyword": this.data.keyword ,
@@ -289,7 +289,7 @@ Page({
           "page":  pageIndex,
           "size":  pageSize
         },
-        header: utilJs.hasTokenGetHeader(),
+        header: utilJs.hasTokenPostHeader(),
         success: function (res) {
           console.log(res.data);
           if (res.data.code == "200") {
