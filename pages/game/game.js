@@ -507,6 +507,7 @@ Page({
                 index: 0,//选择的下拉列表下标
                 index_nan: 0,//选择的下拉列表下标
                 index_peo: 0,//选择的下拉列表下标
+                index_total:0
               })
               wx.switchTab({
                 url: '../index/index',
