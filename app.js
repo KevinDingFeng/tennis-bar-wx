@@ -107,7 +107,7 @@ App({
     })
   },
   globalData: {
-    imgUrl:"https://tennismanage.dazonghetong.com",
+    imgUrl:"https://tennismanage.dazonghetong.com/",
     userInfo: null,
     tennisToken: null,
     onlineUrl: "https://tennis.dazonghetong.com/"
