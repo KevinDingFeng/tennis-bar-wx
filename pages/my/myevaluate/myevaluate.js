@@ -261,7 +261,9 @@ Page({
           })
           i++;
           if(i == tempFiles.length){
-            that.updateInfo(paths);
+            let certs = that.data.certPaths;
+            certs =  certs.concat(paths);
+            that.updateInfo(certs);
           }else{
             that.uploadImage(i,tempFiles);
           }
@@ -291,11 +293,9 @@ Page({
     data.remark = info.remark ? info.remark : '';
     data.wxUserInfoId = info.wxUserInfoId;
 
-    let certs = that.data.certPaths;
     if (paths.length > 1) {
       let cp = paths.join(",");
-      certs = certs.concat(cp);
-      data.certificatePath = certs;
+      data.certificatePath = cp;
     } else {
       data.certificatePath = paths[0];
     }

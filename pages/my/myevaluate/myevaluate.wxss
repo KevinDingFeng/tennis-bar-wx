@@ -39,7 +39,6 @@
 }
 .imgs_view view{
   height: 200rpx;
-  border: 1px solid gainsboro;
   display: inline-block;
 }
 .img_v{
