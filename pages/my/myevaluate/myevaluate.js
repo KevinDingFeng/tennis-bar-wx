@@ -290,9 +290,12 @@ Page({
     data.skillLevel = info.skillLevel;
     data.remark = info.remark ? info.remark : '';
     data.wxUserInfoId = info.wxUserInfoId;
+
+    let certs = that.data.certPaths;
     if (paths.length > 1) {
       let cp = paths.join(",");
-      data.certificatePath = cp;
+      certs = certs.concat(cp);
+      data.certificatePath = certs;
     } else {
       data.certificatePath = paths[0];
     }
@@ -316,7 +319,7 @@ Page({
   selectimage:function(){
     let that = this;
     wx.chooseImage({
-      count:9,
+      count:3,
       sizeType: ['compressed'],
       sourceType: ['album', 'camera'],
       success: function(res) {

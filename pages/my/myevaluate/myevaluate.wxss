@@ -11,6 +11,45 @@
     border-bottom: 1px solid #ddd;
     background-color: #fff;
 }
+.user_cer{
+    display: flex;
+    flex-direction: column;
+    padding: 36rpx 24rpx;
+    font-size: 28rpx;
+    border-bottom: 1px solid #ddd;
+    background-color: #fff;
+}
+.user_ope{
+    display: flex;
+    flex-direction: row;
+    padding: 36rpx 24rpx;
+    font-size: 28rpx;
+    background-color: #fff;
+}
+.user_ope_btn{
+  height: 23px;
+}
+.user_cer_img{
+  width: 100%;
+}
+.imgs_view{
+  display: flex;
+  flex-direction: row;
+  white-space: nowrap;
+}
+.imgs_view view{
+  height: 200rpx;
+  border: 1px solid gainsboro;
+  display: inline-block;
+}
+.img_v{
+  padding-top: 25rpx;
+  padding-bottom: 25rpx;
+  padding-left: 25rpx;
+  padding-right: 25rpx;
+  width:150rpx;
+  height: 150rpx;
+}
 .user_name{
     width: 90%;
     text-align: right;

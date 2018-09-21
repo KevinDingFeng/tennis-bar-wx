@@ -276,16 +276,16 @@ Page({
     data.wxUserInfoId = info.wxUserInfoId == null ? that.data.wxUserInfo.id:info.wxUserInfoId;
 
     //测试数据
-    let gamelabel = new Array();
-    gamelabel.push({"id":1,"name":"球友很nice"});
-    gamelabel.push({ "id": 2, "name": "领导力强" });
-    gamelabel.push({ "id": 3, "name": "打的很爽" });
-    let courtlabel = new Array();
-    courtlabel.push({"id":9,"name":"环境很好"});
-    courtlabel.push({ "id": 12, "name": "服务态度好" });
+    // let gamelabel = new Array();
+    // gamelabel.push({"id":1,"name":"球友很nice"});
+    // gamelabel.push({ "id": 2, "name": "领导力强" });
+    // gamelabel.push({ "id": 3, "name": "打的很爽" });
+    // let courtlabel = new Array();
+    // courtlabel.push({"id":9,"name":"环境很好"});
+    // courtlabel.push({ "id": 12, "name": "服务态度好" });
 
-    data.gameLabels = JSON.stringify(gamelabel);
-    data.courtLabels = JSON.stringify(courtlabel);
+    // data.gameLabels = JSON.stringify(gamelabel);
+    // data.courtLabels = JSON.stringify(courtlabel);
 
     if (info.id) {
       data.id = id;

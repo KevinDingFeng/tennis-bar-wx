@@ -36,7 +36,7 @@ Page({
         qy_text:"全部商区",
         nz_text:"智能排序",
         px_text:"打球时间",
-        ft_text:"筛选",
+        // ft_text:"筛选",
         px_time: utilJs.formatDate(new Date()),
         content: [],
         nv: ['默认排序', '熟人优先', '距离最近', '时间最近'],//智能排序
