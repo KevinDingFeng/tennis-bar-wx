@@ -79,7 +79,7 @@
         <view class='ball_type mar_top'>
             <view class='type_name '>* 是否公开</view>
             <view class="type_sty mar_ri  {{isopen == true ? 'active' : 'no_active' }}" bindtap="selectOpenType" data-opentype="{{isopen}}" >公开</view>
-            <view class="type_sty {{isopen != true ? 'active' : 'no_active' }}" bindtap="selectOpenType" data-opentype="{{isopen}}">不公开</view>
+            <view class="type_sty {{isopen != true ? 'active' : 'no_active' }}" bindtap="selectOpenType" data-opentype="{{isopen}}">私有</view>
             <!-- <view class="text_ds  {{isopen != true ? 'ds_b' : 'ds_n' }}">私有，仅自己或分享的好友可见</view> -->
         </view>
         <view class='btn_xia mar_bt'>
