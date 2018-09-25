@@ -19,11 +19,11 @@
         </view>
         <view class='ball_xx'>
             <view style='width:50%;margin-top:32rpx;'>* 球局信息</view>
-            <input class='ball_name'  placeholder-style='text-align:right'  placeholder='10字以内'  bindinput='gameName' value='{{name}}' maxlength='10' />
+            <input class='ball_name' type='text' placeholder-style='text-align:right'  placeholder='10字以内'  bindinput='gameName' value='{{name}}' maxlength='10' />
         </view>
         <view class='ball_xx bor_top bor_bottom'>
             <view style='width:20%;'>* 球场</view>
-            <input class='ball_cc' bindconfirm='ball_cc' value='{{selectedCourt.name}}' placeholder='请输入球场名称/球场地址关键字' />
+            <input class='ball_cc' bindconfirm='ball_cc' maxlength='20' value='{{selectedCourt.name}}' placeholder='请输入球场名称/球场地址关键字' />
             <view class=''  bindtap='search'>周边</view>
         </view>
         <view class='ball_sure'>
@@ -130,7 +130,7 @@
                 <view>球龄</view>
                 <view class='user_age'>
                     <picker mode="selector" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
-                        <text>{{array[index]?array[index]:'请选择球龄要求 >'}}</text>
+                        <text>{{array[index_age]?array[index_age]:'请选择球龄要求 >'}}</text>
                     </picker>
                 </view>
             </view>

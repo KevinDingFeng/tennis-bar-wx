@@ -9,8 +9,8 @@ Page({
   data: {
     imgUrl: app.globalData.imgUrl,
     game:'',
-    ages: { "LessThree": "3年以下", "LessFive": "3~5年", "LessTen": "5~10年", "MoreTen":"10年以上"},
-    levels: { "Entry": "入门(0~1.0)", "Medium": "中级(1.5~3.5)", "Professional":"专业(4.0~7.0)"},
+    ages: {"All":"不限" ,"LessThree": "3年以下", "LessFive": "3~5年", "LessTen": "5~10年", "MoreTen":"10年以上"},
+    levels: {"All":"不限" , "Entry": "入门(0~1.0)", "Medium": "中级(1.5~3.5)", "Professional":"专业(4.0~7.0)"},
     joiner:'',
     court_img:''
   },

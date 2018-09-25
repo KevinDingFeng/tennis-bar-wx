@@ -11,10 +11,10 @@ Page({
         imgUrl: getApp().globalData.imgUrl,
         //微信用户信息
         wxUserInfo:'',
-        ages: ["LessThree", "LessFive", "LessTen","MoreTen"],
-        playAges: { "LessThree": "3年以下", "LessFive": "3~5年", "LessTen": "5~10年", "MoreTen": "10年以上"},
-        level: ["Entry", "Medium","Professional"],
-        skillLevels: { "Entry": "入门(0~1.0)", "Medium": "中级(1.5~3.5)", "Professional": "专业(4.0~7.0)"},
+        ages: ["All","LessThree","LessFive","LessTen","MoreTen"],
+        playAges: {"All": "不限", "LessThree": "3年以下", "LessFive": "3~5年", "LessTen": "5~10年", "MoreTen": "10年以上"},
+        level: ["All","Entry","Medium","Professional"],
+        skillLevels: {"All":"不限","Entry": "入门(0~1.0)", "Medium": "中级(1.5~3.5)", "Professional": "专业(4.0~7.0)"},
         // 球局数据
         name:'',
         start_time: null,
@@ -56,8 +56,8 @@ Page({
         isfull:false,
         isfirst:"1",
         nolimitSex:true,
-        array: ['3年以下', '3-5年', '5-10年', "10年以上"],
-        array_ji: ['入门(0~1.0)', '中级(1.5~3.5)','专业(4.0~7.0)'],
+        array: ['不限','3年以下', '3-5年', '5-10年', "10年以上"],
+        array_ji: ['不限','入门(0~1.0)', '中级(1.5~3.5)','专业(4.0~7.0)'],
         array_peo: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
         show: false,//控制下拉列表的显示隐藏，false隐藏、true显示
         selectData: [], //预留位置
@@ -67,9 +67,9 @@ Page({
         show_nan: false,//控制下拉列表的显示隐藏，false隐藏、true显示
         index_nan: 0,//选择的下拉列表下标
         show_yul: false,//控制下拉列表的显示隐藏，false隐藏、true显示
-        index_peo: 0,//选择的下拉列表下标
-
-        index_total:0, //球龄
+        index_peo: 0, //选择的下拉列表下标
+        index_age: 0, //球龄
+        index_total:0, 
         index_ji:0    //球技
     },
 
@@ -186,30 +186,30 @@ Page({
         });
     },
     next_bu(){//下一步
-      if (this.data.name.length < 1 || this.data.name.length > 10) {
-        wx.showToast({
-          title: '球局名称长度0~10位~',
-          icon: 'none'
-        })
-        return false;
-      } else if (this.data.name.length == "" || this.data.name.length == undefined || this.data.name.length == null){
-            wx.showToast({
-                title: '球局名称不能为空~',
-                icon: 'none'
-            })
-          return false;
-      }
-      if (this.data.selectedCourt == null) {
-        wx.showToast({ title: '球场不能为空~', icon: 'none' })
-        return false;
-      }
-      if (this.data.start_time == null || this.data.end_time == null) {
-        wx.showToast({ title: '打球时间不能为空~', icon: 'none' })
-        return false;
-      } else if (parseInt(utilJs.replaceAllChar(this.data.start_time)) > parseInt(utilJs.replaceAllChar(this.data.end_time))) {
-        wx.showToast({ title: '打球开始时间不能晚于打球结束时间~', icon: 'none' })
-        return false;
-      }
+      // if (this.data.name.length < 1 || this.data.name.length > 10) {
+      //   wx.showToast({
+      //     title: '球局名称长度0~10位~',
+      //     icon: 'none'
+      //   })
+      //   return false;
+      // } else if (this.data.name.length == "" || this.data.name.length == undefined || this.data.name.length == null){
+      //       wx.showToast({
+      //           title: '球局名称不能为空~',
+      //           icon: 'none'
+      //       })
+      //     return false;
+      // }
+      // if (this.data.selectedCourt == null) {
+      //   wx.showToast({ title: '球场不能为空~', icon: 'none' })
+      //   return false;
+      // }
+      // if (this.data.start_time == null || this.data.end_time == null) {
+      //   wx.showToast({ title: '打球时间不能为空~', icon: 'none' })
+      //   return false;
+      // } else if (parseInt(utilJs.replaceAllChar(this.data.start_time)) > parseInt(utilJs.replaceAllChar(this.data.end_time))) {
+      //   wx.showToast({ title: '打球开始时间不能晚于打球结束时间~', icon: 'none' })
+      //   return false;
+      // }
       this.setData({
         isfirst: "2",
       });
@@ -217,7 +217,7 @@ Page({
     bindPickerChange: function (e) {//球龄
         console.log('picker发送选择改变，携带值为', e.detail.value)
         this.setData({
-            index: e.detail.value,
+            index_age: e.detail.value,
             playAge:this.data.ages[e.detail.value]
         })
     },
@@ -426,6 +426,11 @@ Page({
           title: '球局名称不能为空!',
           icon: 'none'
         })
+      } else if (!(/^[\u4E00-\u9FA5]+$/.test(gameName))){
+        wx.showToast({
+          title: '球局名称不能输入特殊符号和数字',
+          icon:'none'
+        })
       }
       this.setData({
         name:e.detail.value
@@ -448,7 +453,7 @@ Page({
         formData.endTime = this.data.end_time;
         formData.gameType = this.data.isEntertaining ? 'Entertainment' :'Teaching';
         formData.isPublic = this.data.isopen;
-        formData.playAge = this.data.playAge==null ? this.data.ages[this.data.index]:this.data.playAge;
+        formData.playAge = this.data.playAge == null ? this.data.ages[this.data.index_age]:this.data.playAge;
         formData.skillLevel = this.data.skillLevel==null ? this.data.level[this.data.index_ji]:this.data.skillLevel;
         formData.limitGender = !this.data.nolimitSex;
         if(!this.data.nolimitSex){
@@ -464,6 +469,13 @@ Page({
         }
         formData.holderNum = this.data.holderNum;
         formData.totalNum = this.data.totalNum ;
+        if(formData.totalNum == 0){
+          wx.showToast({
+            title: '打球人数不能为0~',
+            icon:'none'
+          })
+          return false;
+        }
         if(parseInt(utilJs.replaceAllChar(this.data.deadlineTime)) > parseInt(utilJs.replaceAllChar(this.data.start_time))){
           wx.showToast({ title: '报名截止时间不能晚于打球开始时间~', icon: 'none' })
           return false;
