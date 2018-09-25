@@ -193,11 +193,17 @@ Page({
         })
         return false;
       } else if (this.data.name.length == "" || this.data.name.length == undefined || this.data.name.length == null){
-            wx.showToast({
-                title: '球局名称不能为空~',
-                icon: 'none'
-            })
-          return false;
+        wx.showToast({
+          title: '球局名称不能为空~',
+          icon: 'none'
+        })
+        return false;
+      } else if (!(/^[\u4E00-\u9FA5]+$/.test(this.data.name))){
+        wx.showToast({
+          title: '球局名称不能输入特殊符号和数字~',
+          icon: 'none'
+        })
+        return false;
       }
       if (this.data.selectedCourt == null) {
         wx.showToast({ title: '球场不能为空~', icon: 'none' })
@@ -431,10 +437,11 @@ Page({
           title: '球局名称不能输入特殊符号和数字',
           icon:'none'
         })
-      }
-      this.setData({
-        name:e.detail.value
-      })
+      } 
+        this.setData({
+          name:e.detail.value
+        })
+      
     },
     //备注
     remark:function(e){
