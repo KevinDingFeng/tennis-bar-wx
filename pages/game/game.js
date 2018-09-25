@@ -186,30 +186,30 @@ Page({
         });
     },
     next_bu(){//下一步
-      // if (this.data.name.length < 1 || this.data.name.length > 10) {
-      //   wx.showToast({
-      //     title: '球局名称长度0~10位~',
-      //     icon: 'none'
-      //   })
-      //   return false;
-      // } else if (this.data.name.length == "" || this.data.name.length == undefined || this.data.name.length == null){
-      //       wx.showToast({
-      //           title: '球局名称不能为空~',
-      //           icon: 'none'
-      //       })
-      //     return false;
-      // }
-      // if (this.data.selectedCourt == null) {
-      //   wx.showToast({ title: '球场不能为空~', icon: 'none' })
-      //   return false;
-      // }
-      // if (this.data.start_time == null || this.data.end_time == null) {
-      //   wx.showToast({ title: '打球时间不能为空~', icon: 'none' })
-      //   return false;
-      // } else if (parseInt(utilJs.replaceAllChar(this.data.start_time)) > parseInt(utilJs.replaceAllChar(this.data.end_time))) {
-      //   wx.showToast({ title: '打球开始时间不能晚于打球结束时间~', icon: 'none' })
-      //   return false;
-      // }
+      if (this.data.name.length < 1 || this.data.name.length > 10) {
+        wx.showToast({
+          title: '球局名称长度0~10位~',
+          icon: 'none'
+        })
+        return false;
+      } else if (this.data.name.length == "" || this.data.name.length == undefined || this.data.name.length == null){
+            wx.showToast({
+                title: '球局名称不能为空~',
+                icon: 'none'
+            })
+          return false;
+      }
+      if (this.data.selectedCourt == null) {
+        wx.showToast({ title: '球场不能为空~', icon: 'none' })
+        return false;
+      }
+      if (this.data.start_time == null || this.data.end_time == null) {
+        wx.showToast({ title: '打球时间不能为空~', icon: 'none' })
+        return false;
+      } else if (parseInt(utilJs.replaceAllChar(this.data.start_time)) > parseInt(utilJs.replaceAllChar(this.data.end_time))) {
+        wx.showToast({ title: '打球开始时间不能晚于打球结束时间~', icon: 'none' })
+        return false;
+      }
       this.setData({
         isfirst: "2",
       });
