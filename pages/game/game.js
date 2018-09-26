@@ -156,9 +156,9 @@ Page({
                 icon: 'none'
             })
             return false;
-        } else if (!(/^[\u4E00-\u9FA5]+$/.test(this.data.name))) {
+        } else if (!(/^[A-Za-z0-9\u4e00-\u9fa5]+$/.test(this.data.name))) {
             wx.showToast({
-                title: '球局名称不能输入特殊符号和数字~',
+                title: '球局名称不能输入特殊符号~',
                 icon: 'none'
             })
             return false;
