@@ -300,23 +300,27 @@ Page({
         // 获取完整的年月日 时分秒，以及默认显示的数组
         var obj = dateTimePicker.dateTimePicker(this.data.startYear, this.data.endYear);
         var obj1 = dateTimePicker.dateTimePicker(this.data.startYear, this.data.endYear);
+        var obj2 = dateTimePicker.dateTimePicker(this.data.startYear, this.data.endYear);
+        obj2.dateTime[2] =26;
         // 精确到分的处理，将数组的秒去掉
         var lastArray = obj1.dateTimeArray.pop();
         var lastTime = obj1.dateTime.pop();
-
         this.setData({
             dateTime: obj.dateTime,
             dateTimeArray: obj.dateTimeArray,
             dateTimeArray1: obj1.dateTimeArray,
             dateTime1: obj1.dateTime,
-            dateTimeArray2: obj1.dateTimeArray,
-            dateTime2: obj1.dateTime,
+            dateTimeArray2: obj2.dateTimeArray,
+            dateTime2: obj2.dateTime,
             dateTimeArray3: obj1.dateTimeArray,
             dateTime3: obj1.dateTime
         });
     },
     changeDateTime1(e) {
-        this.setData({ dateTime1: e.detail.value });
+        this.setData({ 
+            dateTime1: e.detail.value,
+            end_time: null
+         });
         this.setData({ cc: false });
     },
     changeDateTime2(e) {
@@ -328,7 +332,6 @@ Page({
         this.setData({ cc2: false });
     },
     changeDateTimeColumn1(e) {
-
         var arr = this.data.dateTime1;
         var dateArr = this.data.dateTimeArray1;
         arr[e.detail.column] = e.detail.value;
@@ -371,6 +374,7 @@ Page({
         }
     },
     changeDateTimeColumn2(e) {
+        
         var arr = this.data.dateTime2, dateArr = this.data.dateTimeArray2;
         arr[e.detail.column] = e.detail.value;
         dateArr[2] = dateTimePicker.getMonthDay(dateArr[0][arr[0]], dateArr[1][arr[1]]);
@@ -381,7 +385,7 @@ Page({
         let dateTime1 = this.data.dateTime1;
         let dateTimeArray2 = this.data.dateTimeArray2;
         let dateTime2 = this.data.dateTime2;
-        let endTime = dateTimeArray2[0][dateTime2[0]] + "-" + dateTimeArray2[1][dateTime2[1]] + "-" + dateTimeArray2[2][dateTime1[2]] + " " + dateTimeArray2[3][dateTime2[3]] + ":" + dateTimeArray2[4][dateTime2[4]];
+        let endTime = dateTimeArray2[0][dateTime2[0]] + "-" + dateTimeArray2[1][dateTime2[1]] + "-" + dateTimeArray2[2][dateTime2[2]] + " " + dateTimeArray2[3][dateTime2[3]] + ":" + dateTimeArray2[4][dateTime2[4]];
         let stt = parseInt(utilJs.replaceAllChar(this.data.start_time));
         let edt = parseInt(utilJs.replaceAllChar(endTime));
         if (this.data.start_time != null) {
