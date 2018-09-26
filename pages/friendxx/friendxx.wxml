@@ -71,7 +71,7 @@
         <text class='join_text'>TA最新参与的球局</text>
     </view>
      <!-- 球局信息 -->
-    <view class='palce_xx'>
+    <view class="palce_xx  {{show == '1' ? 'ds_b' : 'ds_n' }}">
         <view class='palce_list'  wx:for="{{list}}" wx:for-item="game" wx:key="**this" bindtap="applyJoinGame" data-game="{{game}}">
             <view class='list_top'>
                 <view class="palce_name">{{game.name}}</view>
@@ -89,5 +89,9 @@
                 </view>
             </view>
         </view>
+    </view>
+    <!-- 没有球局-->
+    <view class="no_list {{show == '2' ? 'ds_b' : 'ds_n' }}">
+        <view>最近比较忙， 未参与任何球局~~</view>
     </view>
 </view>

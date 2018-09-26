@@ -8,7 +8,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-     
+        show:"1"
     },
 
     /**
@@ -26,7 +26,6 @@ Page({
         success: function (res) {
           console.log(res.data);
           if (res.data.code == "200") {
-
             that.setData({
               familiarity: res.data.data.familiarity,
               data: res.data.data.data,
@@ -41,6 +40,10 @@ Page({
               that.setData({
                 list: res.data.data.list
               })
+            }else{
+                that.setData({
+                    show: "2"
+                })
             }
             console.log(that.data.evaluation.skillLevel);
           }

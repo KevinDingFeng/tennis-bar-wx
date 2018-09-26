@@ -74,6 +74,9 @@ page{
     margin-bottom: 23rpx;
     padding-left: 50rpx;
 }
+.no_list{
+    margin-top: 25%;
+}
 .join_zu{
     display: inline-block;
     width: 5rpx;
