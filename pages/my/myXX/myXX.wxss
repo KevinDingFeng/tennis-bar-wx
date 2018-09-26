@@ -52,8 +52,8 @@
     border-bottom: 1px solid #ddd;
 }
 .work_xx{
-    
-    width: 100%;
+    line-height:33rpx;
+    width: 93%;
     height: 100rpx;
 }
 .user_phone{
