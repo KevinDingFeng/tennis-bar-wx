@@ -146,7 +146,7 @@ Page({
     next_bu() {//下一步
         if (this.data.name.length < 1 || this.data.name.length > 10) {
             wx.showToast({
-                title: '球局名称长度0~10位~',
+                title: '球局名称长度1~10位~',
                 icon: 'none'
             })
             return false;
@@ -305,6 +305,8 @@ Page({
         // 精确到分的处理，将数组的秒去掉
         var lastArray = obj1.dateTimeArray.pop();
         var lastTime = obj1.dateTime.pop();
+        var lastArray1= obj2.dateTimeArray.pop();
+        var lastTime1 = obj2.dateTime.pop();
         this.setData({
             dateTime: obj.dateTime,
             dateTimeArray: obj.dateTimeArray,
