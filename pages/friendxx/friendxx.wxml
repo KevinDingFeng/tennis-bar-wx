@@ -45,13 +45,13 @@
             </view>
         </view>
         <view class='firend_bottom'>
-            <view class='cen_left'>
+            <view class='cen_left_b'>
                 <text>打球频率</text>
                 <view>
                     <text class='col_g'>{{evaluation? playFrequencies[evaluation.playFrequency] : '未填写'}} </text>
                 </view>
             </view>
-            <view class='cen_left'>
+            <view class='cen_center'>
                 <text>球龄</text>
                 <view>
                     <text class='col_g'>{{evaluation? playAges[evaluation.playAge] : '未填写'}} </text>

@@ -44,6 +44,20 @@ page{
     text-align: center;
     border-right: 1px solid #ddd;
 }
+.cen_left_b{
+    display: inline-block;
+    padding-left: 64rpx;
+    padding-right: 48rpx;
+    text-align: center;
+    border-right: 1px solid #ddd;
+}
+.cen_center{
+    display: inline-block;
+    padding-left: 85rpx;
+    padding-right: 67rpx;
+    text-align: center;
+    border-right: 1px solid #ddd;
+}
 .cen_end{
     display: inline-block;
     padding-left: 42rpx;

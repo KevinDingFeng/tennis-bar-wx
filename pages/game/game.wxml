@@ -24,7 +24,7 @@
         <view class='ball_xx bor_top bor_bottom'>
             <view style='width:20%;'>* 球场</view>
             <input class='ball_cc' bindconfirm='ball_cc' maxlength='20' value='{{selectedCourt.name}}' placeholder='请输入球场名称/球场地址关键字' />
-            <view class=''  bindtap='search'>周边</view>
+            <view class='dz_zb col_g '  bindtap='search'>周边球场</view>
         </view>
         <view class='ball_sure'>
           <block wx:if="{{selectedCourt}}">
@@ -157,43 +157,35 @@
             <view class="type_sty {{nolimitSex != true ? 'active' : 'no_active' }}  mar_bt" bindtap="selectSex" data-limittype="{{nolimitSex}}">限定</view>
             <view class="sex_num   {{nolimitSex != true ? 'ds_b' : 'ds_n' }}" hidden="{{nolimitSex }}">
                 <view class='select_box' style="margin-top:{{(scale<0.55)? '32rpx':'20rpx'}};">
-                    <view class='select' catchtap='selectTap'>
-                        <input class='select_text' value="{{femaleNum}}"></input>
-                        <image class='select_img {{show&&"select_img_rotate"}}' src='../../images/gobottom.png'></image>
+                    <view class="type_xb">
+                        <view class="sex_nv">女</view>
+                        <view class='user_g'>
+                            <picker mode="selector" bindchange="bindPickerChange_nv" value="{{femaleNum}}" range="{{selectData_g}}">
+                                <text>{{selectData_g[femaleNum_show]?selectData_g[femaleNum_show]:'请选择女性人数 >'}}</text>
+                            </picker>
+                        </view>
                     </view>
-                    <view class='option_box' style='height:{{show?(selectData_g.length>5?300:selectData_g.length*60):0}}rpx;'>
-                        <text class='option' style='{{index==selectData_g.length-1&&"border:0;"}}' wx:for='{{selectData_g}}' wx:key='this' data-index='{{index}}' catchtap='optionTap'>{{item}}</text>
+
+                    <view class="type_xb">
+                        <view class="sex_nv">男</view>
+                        <view class='user_g'>
+                            <picker mode="selector" bindchange="bindPickerChange_nan" value="{{maleNum}}" range="{{selectData_n}}">
+                                <text>{{selectData_n[maleNum_show]?selectData_n[maleNum_show]:'请选择男性人数 >'}}</text>
+                            </picker>
+                        </view>
                     </view>
                 </view>
-                <view class='mar_top1'>女</view>
-
-
-                <view class='select_box' style="margin-top:{{(scale<0.55)? '32rpx':'20rpx'}};">
-                    <view class='select' catchtap='selectTap_nan'>
-                        <input class='select_text' value="{{maleNum}}"></input>
-                        <image class='select_img {{show_nan&&"select_img_rotate"}}' src='../../images/gobottom.png'></image>
-                    </view>
-                    <view class='option_box' style='height:{{show_nan?(selectData_n.length>5?300:selectData_n.length*60):0}}rpx;'>
-                        <text class='option' style='{{index_nan==selectData_n.length-1&&"border:0;"}}' wx:for='{{selectData_n}}' wx:key='this' data-index='{{index}}' catchtap='optionTap_nan'>{{item}}</text>
-                    </view>
-                </view>
-                <view class='mar_top1'>男</view>
-            </view>
+            </view>     
         </view>
-
         <view class='user_sex mar_top'>
             <view class='type_sex'>预留位置</view>
-            <view class='select_box' style="margin-top:{{(scale<0.55)? '32rpx':'-8rpx'}};width:35%">
-                <view class='select' catchtap='selectTap_peo'>
-                    <input class='select_text' value="{{holderNum}}"></input>
-                    <image class='select_img {{show_peo&&"select_img_rotate"}}' src='../../images/gobottom.png'></image>
-                </view>
-                <view class='option_box' style='height:{{show_peo?(selectData.length>5?300:selectData.length*60):0}}rpx;'>
-                    <text class='option' style='{{index_peo==selectData.length-1&&"border:0;"}}' wx:for='{{selectData}}' wx:key='this' data-index='{{index}}' catchtap='optionTap_peo'>{{item}}</text>
-                </view>
+            <view class='user_yul'>
+                <picker mode="selector" bindchange="bindPickerChange_yul" value="{{holderNum}}" range="{{yul_arr}}">
+                    <text>{{yul_arr[holderNum_show]?yul_arr[holderNum_show]:'请选择预留人数 >'}}</text>
+                </picker>
             </view>
-            <view class='mar_top1' style='margin-top:10rpx;'>人</view>
         </view>
+        
 
         <view class='ball_xx mar_top' style='width:94%'>
             <view>报名截止时间</view>

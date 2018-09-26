@@ -49,6 +49,11 @@
     padding-left: 14%;
     text-align: right;
 }
+.dz_zb{
+    position: absolute;
+    left:64rpx;
+    top:306rpx;
+}
 .start_time{
     width: 67%;
     text-align: right;
@@ -122,6 +127,7 @@
     padding-top: 28rpx;
     display: none;
     z-index: 9999;
+    overflow: auto;
 }
 .ds_b{
     display: block;
@@ -283,21 +289,38 @@
     margin-top:20rpx;
     margin-right:256rpx;
 }
-.sex_num{
+.type_xb{
     width: 100%;
     display: flex;
     flex-direction: row;
+    flex-wrap:wrap;
+}
+.user_yul{
+    width:46%;
+    text-align:right;
+    color:#959595;
+    padding-top:20rpx; 
+}
+.user_g{
+    width:88%;
+    text-align:right;
+    color:#959595;
+    padding-top:20rpx; 
+}
+.sex_num{
+    width: 100%;
+    display: flex;
     border-top: 1px solid #ddd;
-    padding-left: 27%;
+    padding-left: 50%;
+}
+.sex_nv{
+    padding-top:20rpx;
 }
 .select_box {
-    width: 50%;
+    width: 100%;
     background-color: #fff;
     margin-top: 20rpx;
     color: #aba1eb;
-    position: relative;
-    border: 1px solid #e4e4e4;
-    border-radius: 20rpx;
 }
 
 .select {
