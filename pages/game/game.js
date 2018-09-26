@@ -21,7 +21,7 @@ Page({
         end_time: null,
         playAge: null,       //球龄
         skillLevel: null,    //球技
-        totalNum: 1,         //总人数 
+        totalNum: null,         //总人数 
         maleNum: null,          //男性人数
         femaleNum: null,        //女性人数
         holderNum: null,        //预留人数
@@ -70,7 +70,7 @@ Page({
         selectData_n: [1],//预留人数男
         index: 0,//选择的下拉列表下标
         index_age: 0, //球龄
-        index_total: 0,
+        index_total: null,
         index_ji: 0    //球技
     },
 
@@ -198,7 +198,7 @@ Page({
         this.data.yul_arr = [];
         var _cc = this.data.yul_arr;
         if (_num == 0) {
-            _cc.push(1);
+            
         } else {
             for (var i = 1; i <= _num + 1; i++) {
                 _cc.push(i);
@@ -233,7 +233,11 @@ Page({
         console.log('picker发送选择改变，携带值为', e.detail.value)
         let _num = this.data.index_total;
         if (_num == 0) {
-            this.data.yul_arr.push(1);
+            wx.showToast({
+                title: '请先选择打球人数~',
+                icon: 'none'
+            })
+            return;
         }
         this.setData({
             holderNum_show: e.detail.value,
@@ -251,7 +255,11 @@ Page({
             n_arr.push(i);
         }
         if (_num == 0) {
-            this.data.selectData_g.push(1);
+            wx.showToast({
+                title: '请先选择打球人数~',
+                icon: 'none'
+            })
+            return;
         }
         this.setData({
             femaleNum_show: e.detail.value,
@@ -270,7 +278,11 @@ Page({
             n_arr.push(i);
         }
         if (_num == 0) {
-            this.data.selectData_n.push(1);
+            wx.showToast({
+                title: '请先选择打球人数~',
+                icon: 'none'
+            })
+            return;
         }
         this.setData({
             maleNum_show: e.detail.value,
