@@ -41,6 +41,9 @@ page{
     width: 100%;
     margin-top: 97rpx;
 }
+.no_firend{
+    margin-top:70%;
+}
 .list_xx{
     display: flex;
     flex-direction: row;

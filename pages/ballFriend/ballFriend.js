@@ -10,7 +10,8 @@ Page({
       inputVal: "",
       ballFriend: "",
       pageNum: "",
-      wxUserInfoId: ""
+      wxUserInfoId: "",
+      wx_show:"1"
     },
     showInput: function () {
         this.setData({
@@ -173,7 +174,7 @@ Page({
       success: function (res) {
         //console.log(res.data);
         if (res.data.code == "200") {
-
+            debugger
           that.setData({
             ballFriend: res.data.data.list,
             pageNum: res.data.data.pageNum,

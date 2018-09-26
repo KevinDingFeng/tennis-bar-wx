@@ -17,7 +17,7 @@
         </view>
     </view>
     <!-- 球友列表 -->
-    <view class='friend_list'>
+    <view class="friend_list {{wx_show == '1' ? 'ds_b' : 'ds_n' }}">
         <view class='list_xx' bindtap='friend_xx' wx:for="{{ballFriend}}" wx:for-item="bfItem" wx:key="bfKey" data-ballfriend="{{bfItem.id}}">
             <block wx:if="{{wxUserInfoId == bfItem.oneWxUserId}}">
             <!-- 微信头像 -->
@@ -44,5 +44,8 @@
                 <text>参与 {{bfItem.totalTimes}} 场</text>
             </view>
         </view>
+    </view>
+    <view class="no_firend  {{wx_show == '2' ? 'ds_b' : 'ds_n' }}">
+        <view>未搜索到符合条件的球友哦~~</view>
     </view>
 </view>
