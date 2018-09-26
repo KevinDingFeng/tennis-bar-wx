@@ -129,6 +129,9 @@
     z-index: 9999;
     overflow: auto;
 }
+.c_di::-webkit-scrollbar{
+    display: none;
+}
 .ds_b{
     display: block;
 }
