@@ -52,7 +52,7 @@
 }
 
 .check-xy {
-    width: 94%;
+    width: 100%;
     font-size: 20rpx;
     margin-top: 350rpx;
     display: flex;
