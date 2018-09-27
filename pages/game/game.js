@@ -532,7 +532,7 @@ Page({
         }
         formData.holderNum = this.data.holderNum;
         formData.totalNum = this.data.totalNum;
-        if (formData.totalNum == 0) {
+        if (formData.totalNum == 0 || formData.totalNum == null )  {
             wx.showToast({
                 title: '打球人数不能为0~',
                 icon: 'none'
