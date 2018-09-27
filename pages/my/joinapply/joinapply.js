@@ -69,6 +69,7 @@ Page({
     onShow: function () {
       // 获取加入申请列表
       pageIndex = 0;
+      this.setData({ applys: [] });
       this.getApplyJoinmGames(init_status);
     },
 

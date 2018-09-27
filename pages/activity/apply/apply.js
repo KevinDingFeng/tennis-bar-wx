@@ -19,15 +19,24 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.setNavigationBarTitle({
-      title: '球局详情',
-    })
     if (!wx.getStorageSync('tennisToken')){
       wx.redirectTo({
         url: '../../login/login',
       })
     }else{
       let that = this;
+      wx.showShareMenu({
+        withShareTicket:true,
+        success:function(res){
+        },
+        complete:function(res){
+          if (options.id) {
+            that.getGameInfo(options.id);
+            that.getJoinGamerInfo(options.id);
+            that.getCourtImgInfo(that.data.game.courtId);
+          }
+        }
+      })
       if (options.game) {
         that.setData({
           game: JSON.parse(options.game)
@@ -35,13 +44,7 @@ Page({
         that.getJoinGamerInfo(JSON.parse(options.game).id);
         that.getCourtImgInfo(JSON.parse(options.game).courtId);
       }
-      if (options.id) {
-        that.getGameInfo(options.id);
-        that.getJoinGamerInfo(options.id);
-        that.getCourtImgInfo(that.data.game.courtId);
-      }
     }
-
   },
 
   onShow: function () {
@@ -118,6 +121,11 @@ Page({
     return {
       title:"来“一桔”网球吧",
       path: "/pages/activity/apply/apply?id="+this.data.game.id,
+      success:function(res){
+        wx.getShareInfo({
+          shareTicket: res.shareTickets[0],
+        })
+      }
     };
   },
 

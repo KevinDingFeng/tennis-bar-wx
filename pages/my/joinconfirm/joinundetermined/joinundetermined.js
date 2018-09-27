@@ -192,6 +192,13 @@ Page({
     refuse:function(e){
       let applyId = this.data.apply.id;
       let reason = e.detail.value.remark;
+      if(!reason){
+        wx.showToast({
+          title: '请填写拒绝原因~',
+          icon:'none'
+        })
+        return false;
+      }
       wx.request({
         url: getApp().globalData.onlineUrl + 'api/join/update',
         data:{

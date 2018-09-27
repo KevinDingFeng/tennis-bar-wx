@@ -66,6 +66,7 @@ Page({
      */
     onShow: function() {
       pageIndex = 0;
+      this.setData({ games: [] })
       this.getMyGames(init_type);
     },
 

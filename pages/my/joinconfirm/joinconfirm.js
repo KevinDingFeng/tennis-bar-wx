@@ -68,6 +68,7 @@ Page({
      */
     onShow: function () {
       pageIndex =0;
+      this.setData({ confirms: [] })
       this.getConfirmJoinGames(init_status);
     },
 
