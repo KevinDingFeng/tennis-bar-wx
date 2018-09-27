@@ -260,11 +260,11 @@
             <view class='xx_title f_wei'>参与要求</view>
             <view class='xx_id'>
                 <view class='id_name'>球龄</view>
-                <view>{{playAge == null ? array[index]:playAges[playAge]}}</view>
+                <view>{{playAge == null ? array[0]:playAges[playAge]}}</view>
             </view>
             <view class='xx_id'>
                 <view class='id_name'>球技等级</view>
-                <view>{{skillLevel ==null ? array_ji[index_ji]:skillLevels[skillLevel]}}</view>
+                <view>{{skillLevel ==null ? array_ji[0]:skillLevels[skillLevel]}}</view>
             </view>
             <view class='xx_id'>
                 <view class='id_name'>打球人数</view>
