@@ -37,7 +37,7 @@
     </view>
     <view class='user_work'>
         <view>职业</view>
-        <textarea class='work_xx' name="_textarea"  maxlength="20" placeholder='您的职业，20字以内' adjust-position="true" value="{{wxUserInfo.occupation}}"  bindinput="modifyOccupation">{{wxUserInfo.occupation?wxUserInfo.occupation:""}}</textarea>
+        <textarea class='work_xx' name="_textarea"  maxlength="20" placeholder='您的职业，20字以内' adjust-position="true" value="{{wxUserInfo.occupation}}"  bindinput="modifyOccupation"/>
     </view>
     <view class='user_phone'>
         <view class='phone_name'>手机号</view>
