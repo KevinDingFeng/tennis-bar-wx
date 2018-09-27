@@ -516,8 +516,22 @@ Page({
         formData.endTime = this.data.end_time;
         formData.gameType = this.data.isEntertaining ? 'Entertainment' : 'Teaching';
         formData.isPublic = this.data.isopen;
-        formData.playAge = this.data.playAge == null ? this.data.ages[this.data.index_age] : this.data.playAge;
-        formData.skillLevel = this.data.skillLevel == null ? this.data.level[this.data.index_ji] : this.data.skillLevel;
+        if(this.data.playAge == null){
+          wx.showToast({
+            title: '请选择球龄~',
+            icon:'none'
+          })
+          return false;
+        }
+        formData.playAge = this.data.playAge;
+        if(this.data.skillLevel == null){
+          wx.showToast({
+            title: '请选择球技等级~',
+            icon:'none'
+          })
+          return false;
+        }
+        formData.skillLevel = this.data.skillLevel;
         formData.limitGender = !this.data.nolimitSex;
         if (!this.data.nolimitSex) {
             if (this.data.maleNum + this.data.femaleNum != this.data.totalNum) {
@@ -580,9 +594,11 @@ Page({
                         isfull: false,
                         nolimitSex: true,
                         index: 0,//选择的下拉列表下标
-                        index_nan: 0,//选择的下拉列表下标
-                        index_peo: 0,//选择的下拉列表下标
-                        index_total: 0
+                        // index_nan: 0,//选择的下拉列表下标
+                        // index_peo: null,//选择的下拉列表下标
+                        index_age:null,
+                        index_ji:null,
+                        index_total: null
                     })
                     wx.switchTab({
                         url: '../index/index',
