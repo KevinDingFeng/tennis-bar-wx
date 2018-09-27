@@ -70,9 +70,9 @@ bindtap="swichNav" data-type="release">我发起的球局</view>
               </block>
             </view>
         </block>
-        <block wx:else>
+        <!-- <block wx:else>
             暂无数据
-        </block>
+        </block> -->
     </swiper-item>
     <swiper-item>
         <block wx:if="{{games.length > 0}}">
@@ -101,8 +101,8 @@ bindtap="swichNav" data-type="release">我发起的球局</view>
               </block>
             </view>
         </block>
-        <block wx:else>
+        <!-- <block wx:else>
             暂无数据
-        </block>
+        </block> -->
     </swiper-item>
 </swiper>
