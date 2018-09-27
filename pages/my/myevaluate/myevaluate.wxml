@@ -50,7 +50,7 @@
         </view>
         <view class='my_remark'>
             <view>备注</view>
-            <textarea maxlength="20" placeholder='{{selfEvaluation.remark?"":"其他补充说明，控制在30字以内"}}' bindinput="modifyRemark">{{selfEvaluation.remark?selfEvaluation.remark:""}}</textarea>
+            <textarea maxlength="20" placeholder='{{selfEvaluation.remark?"":"其他补充说明，控制在30字以内"}}' bindinput="modifyRemark" />
         </view>
         <view class='bot_btn'>
             <button class="weui-btn" type="primary" bindtap='save'>保存</button>
