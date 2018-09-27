@@ -268,7 +268,7 @@
             </view>
             <view class='xx_id'>
                 <view class='id_name'>打球人数</view>
-                <view>{{totalNum == 0 ? array_peo[index_total]:totalNum}}</view>
+                <view>{{totalNum == null ? 0 : totalNum}}</view>
             </view>
             <view class='xx_id'>
                 <view class='id_name'>性别</view>
@@ -279,7 +279,7 @@
             </view>
             <view class='xx_id'>
                 <view class='id_name'>预留位置</view>
-                <view>{{holderNum}}</view>
+                <view>{{holderNum == null ? 0 : holderNum}}</view>
             </view>
         </view>
         <view class='registration_time'>报名截止时间：{{deadlineTime == null ?"":deadlineTime}}</view>
