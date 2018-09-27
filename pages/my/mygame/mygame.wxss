@@ -67,11 +67,12 @@
 .sanj{
     background: #efa719;
     position: absolute;
-    top:8rpx;
-    right:84rpx;
+    top:7rpx;
+    right:86rpx;
     border:6px solid #efa719;  
     border-left: 6px solid #fff;
     z-index: 999;
+    height:6rpx;
 }
 .palce_num1{
     width: 129rpx;
