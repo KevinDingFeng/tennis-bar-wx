@@ -69,9 +69,9 @@ Page({
         selectData_g: [1],//预留人数女
         selectData_n: [1],//预留人数男
         index: 0,//选择的下拉列表下标
-        index_age: 0, //球龄
+        index_age: null, //球龄
         index_total: null,
-        index_ji: 0    //球技
+        index_ji: null   //球技
     },
 
     //球局类型
@@ -200,7 +200,7 @@ Page({
         if (_num == 0) {
             
         } else {
-            for (var i = 1; i <= _num + 1; i++) {
+            for (var i = 0; i <= _num + 1; i++) {
                 _cc.push(i);
             }
         }
@@ -215,7 +215,7 @@ Page({
             g_arr.push(0);
             n_arr.push(1);
         } else {
-            for (var i = 1; i <= _num + 1; i++) {
+            for (var i = 0; i <= _num + 1; i++) {
                 g_arr.push(i);
                 n_arr.push(i);
             }
@@ -247,11 +247,11 @@ Page({
     bindPickerChange_nv: function (e) {//性别女
         console.log('picker发送选择改变，携带值为', e.detail.value)
         let _num = parseInt(this.data.index_total) + 1;
-        let g_num = parseInt(e.detail.value) + 1;//女性人数
+        let g_num = parseInt(e.detail.value);//女性人数
         let n_num = _num - g_num;//男性人数
         this.data.selectData_n = [];
         let n_arr = this.data.selectData_n;
-        for (var i = 1; i <= n_num; i++) {
+        for (var i = 0; i <= n_num; i++) {
             n_arr.push(i);
         }
         if (_num == 0) {
@@ -270,11 +270,11 @@ Page({
     bindPickerChange_nan: function (e) {//性别男
         console.log('picker发送选择改变，携带值为', e.detail.value)
         let _num = parseInt(this.data.index_total) + 1;
-        let n_num = parseInt(e.detail.value) + 1;//男性人数
+        let n_num = parseInt(e.detail.value);//男性人数
         let g_num = _num - n_num;//女性人数
         this.data.selectData_g = [];
         let n_arr = this.data.selectData_g;
-        for (var i = 1; i <= g_num; i++) {
+        for (var i = 0; i <= g_num; i++) {
             n_arr.push(i);
         }
         if (_num == 0) {
@@ -490,7 +490,7 @@ Page({
             })
         } else if (!reg.test(gameName)) {
             wx.showToast({
-                title: '球局名称不能输入特殊符号和数字',
+                title: '球局名称不能输入特殊符号~',
                 icon: 'none'
             })
         }
@@ -613,6 +613,14 @@ Page({
                 header: utilJs.hasTokenGetHeader(),
                 success: function (res) {
                     if (res.data.code == '200') {
+                        let _cc = res.data.data.page.content;
+                        if (_cc.length<=0){
+                            wx.showToast({
+                                title: '暂无此球场~~',
+                                icon: 'none'
+                            })
+                            return;
+                        }
                         that.setData({
                             courts: res.data.data.page
                         })

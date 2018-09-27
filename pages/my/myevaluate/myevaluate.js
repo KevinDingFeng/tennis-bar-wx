@@ -227,6 +227,31 @@ Page({
         var i = 0;
         let tempfiles = this.data.tempFiles;
         let certPaths = this.data.certPaths;
+        
+        let _index = this.data.index;//打球频率
+        if (_index<0){
+            wx.showToast({
+                title: '请选择打球频率~',
+                icon: 'none'
+            });
+            return;
+        }
+        let _index_age = this.data.index_age;//球龄
+        if (_index_age <0) {
+            wx.showToast({
+                title: '请选择球龄~',
+                icon: 'none'
+            });
+            return;
+        }
+        let _index_ji = this.data.index_ji;//球技等级
+        if (_index_ji <0) {
+            wx.showToast({
+                title: '请选择球技等级~',
+                icon: 'none'
+            });
+            return;
+        }
         if (tempfiles.length == 0 && certPaths.length == 0) {
             wx.showToast({
                 title: '请选择图片',

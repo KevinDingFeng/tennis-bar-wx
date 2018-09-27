@@ -135,7 +135,7 @@
                 </view>
             </view>
             <view class='user_jbxx'>
-                <view>* 球技等级</view>
+                <view>球技等级</view>
                 <view class='user_ji'>
                     <picker mode="selector" bindchange="bindPickerChange_ji" value="{{index_ji}}" range="{{array_ji}}">
                         <text>{{array_ji[index_ji]?array_ji[index_ji]:'请选择等级要求 >'}}</text>

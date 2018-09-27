@@ -52,10 +52,10 @@
 .dz_zb{
     position: absolute;
     left:64rpx;
-    top:306rpx;
+    top:300rpx;
 }
 .start_time{
-    width: 67%;
+    width: 74%;
     text-align: right;
     font-size: 28rpx;
     color: #959595;
@@ -123,15 +123,13 @@
     width: 100%;
     background-color: #fff;
     position: fixed;
-    top: 22%;
+    top: 23%;
     padding-top: 28rpx;
     display: none;
     z-index: 9999;
-    overflow: auto;
+   
 }
-.c_di::-webkit-scrollbar{
-    display: none;
-}
+
 .ds_b{
     display: block;
 }
@@ -161,6 +159,10 @@
     padding: 0 21rpx;
     padding-bottom: 20rpx;
     height: 650rpx;
+    overflow: auto;
+}
+.Venue::-webkit-scrollbar{
+    display: none;
 }
 .ball_venue{
     font-size: 24rpx;
