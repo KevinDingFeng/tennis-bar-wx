@@ -14,7 +14,7 @@
             </view>
 
             <!-- 球局和谐度标签 -->
-            <view>
+            <!-- <view>
             <block wx:if="{{!comment.gameLabels}}">
               <block wx:for="{{gameLabels}}" wx:for-item="gl">
                 <view>{{gl.name}}</view>
@@ -25,7 +25,7 @@
                 <view>{{sgl.name}}</view>
               </block>
             </block>
-            </view>
+            </view> -->
         </view>
         <view class='environment_xx'>
             <view class='environment_name'>球场环境</view>
@@ -40,7 +40,7 @@
             </view>
 
             <!-- 球场环境标签 -->
-            <view>
+            <!-- <view>
             <block wx:if="{{!comment.courtLabels}}">
               <block wx:for="{{courtLabels}}" wx:for-item="cl">
                 <view>{{cl.name}}</view>
@@ -51,7 +51,7 @@
                 <view>{{scl.name}}</view>
               </block>
             </block>
-            </view>
+            </view> -->
         </view>
         <view class='environment_xx'>
             <view class='environment_name'>球友到场情况</view>

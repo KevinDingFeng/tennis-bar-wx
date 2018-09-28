@@ -68,7 +68,7 @@ Page({
             title: '球局',
         })
         //获取所有教练，筛选的时候用
-        this.getCoachList();
+        // this.getCoachList();
     },
     getCoachList:function(){
       let that = this ;
