@@ -203,7 +203,7 @@
         </view>
         <view class='fb_remark mar_top'>
             <view>备注</view>
-            <textarea placeholder='其他补充说明，控制在30字以内' bindinput='remark'></textarea>
+            <textarea placeholder='其他补充说明，控制在30字以内' maxlength='30' bindinput='remark'></textarea>
         </view>
         <view class="s_btn">
             <button class="weui-btn" type="default" bindtap='go_history'>上一步</button>

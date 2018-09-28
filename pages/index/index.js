@@ -120,6 +120,12 @@ Page({
                 pxshow: true,
                 qyshow: false,
                 isfull: true,
+                citycenter: this.data.cityleft[0].city,
+                select1: 0,
+                select2: '',
+                level1: this.data.cityleft[0].city[0].code,
+                level2: '',
+                level3: '',
                 shownavindex: e.currentTarget.dataset.nav
             })
         }
