@@ -36,7 +36,7 @@ Page({
         qy_text:"全部商区",
         nz_text:"智能排序",
         px_text:"打球时间",
-        // ft_text:"筛选",
+        ft_text:"筛选",
         px_time: utilJs.formatDate(new Date()),
         content: [],
         nv: ['默认排序', '熟人优先', '距离最近', '时间最近'],//智能排序
@@ -65,6 +65,21 @@ Page({
         wx.setNavigationBarTitle({
             title: '球局',
         })
+        //获取所有教练，筛选的时候用
+        this.getCoachList();
+    },
+    getCoachList:function(){
+      let that = this ;
+      wx.request({
+        url: getApp().globalData.onlineUrl + 'api/wx_user_info/coach',
+        method:'GET',
+        header: utilJs.hasTokenGetHeader(),
+        success:function(res){
+          if(res.data.code == '200'){
+            that.setData({coach:res.data.data.coachList})
+          }
+        }
+      })
     },
     showInput: function () {
         this.setData({
@@ -182,6 +197,7 @@ Page({
             qy_text: this.data.citycenter[index].name,
             nz_text: "智能排序",
             px_text: "打球时间",
+            ft_text: "筛选",
           })
           this.hidebg();
           this.setData({
@@ -214,6 +230,7 @@ Page({
             qy_text: this.data.cityright[index].name,
             nz_text: "智能排序",
             px_text: "打球时间",
+            ft_text: "筛选",
           })
         }else{
           this.setData({
@@ -221,6 +238,7 @@ Page({
               qy_text: this.data.cityright[index].name,
               nz_text: "智能排序",
               px_text: "打球时间",
+              ft_text: "筛选",
           })
         }
         this.hidebg();
@@ -349,6 +367,7 @@ Page({
           level3: null,
           qy_text: "全部商区",
           px_text: "打球时间",
+          ft_text: "筛选",
           nz_text: this.data.nv[idx],
           gameType: '',
           skillLev: '',
@@ -399,6 +418,7 @@ Page({
           orderType: '',
           qy_text: "全部商区",
           nz_text: "智能排序",
+          ft_text: "筛选",
           time: this.data.timeType[idx],
           px_text: this.data.px[idx],
           gameType: '',

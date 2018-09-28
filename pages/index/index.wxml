@@ -49,10 +49,10 @@
                 <view class="content">{{px_text}}</view>
                 <view class="icon"></view>
             </view>
-            <!-- <view class="nav-son borders {{shownavindex == 4? 'active' : ''}}" bindtap="filter" data-nav="4">
+            <view class="nav-son borders {{shownavindex == 4? 'active' : ''}}" bindtap="filter" data-nav="4">
                 <view class="content">{{ft_text}}</view>
                 <view class="icon"></view>
-            </view> -->
+            </view>
         </view>
         <!-- 下拉内容 -->
         <view class="quyu {{qyopen ? 'slidown' : 'slidup'}} {{qyshow ? 'disappear':''}}">
@@ -99,9 +99,9 @@
             </view>
         </view>
         <!-- 筛选 -->
-        <!-- <view>
+        <view>
         
-        </view> -->
+        </view>
         <!-- 遮盖层 -->
         <view class="fullbg {{isfull ?'fullopacity':''}}" bindtap="hidebg"></view>
     </view>
@@ -112,7 +112,7 @@
                 <view class="palce_name">{{game.name}}</view>
                 <view class='palce_num'>{{game.totalNum}}缺{{game.vacancyNum}}</view>
             </view>
-            <view class='list_center'>
+            <view class='list_center' bindtap="applyJoinGame" data-game="{{game}}">
                 <view class="palce_peo">发起人：{{game.organizer.nickName}}</view>
                 <view class='palce_time'>{{game.startTime}}-{{utils.formatDate(game.endTime)}}</view>
             </view>
