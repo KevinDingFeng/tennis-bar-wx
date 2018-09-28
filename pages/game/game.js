@@ -520,22 +520,8 @@ Page({
         formData.endTime = this.data.end_time;
         formData.gameType = this.data.isEntertaining ? 'Entertainment' : 'Teaching';
         formData.isPublic = this.data.isopen;
-        if(this.data.playAge == null){
-          wx.showToast({
-            title: '请选择球龄~',
-            icon:'none'
-          })
-          return false;
-        }
-        formData.playAge = this.data.playAge;
-        if(this.data.skillLevel == null){
-          wx.showToast({
-            title: '请选择球技等级~',
-            icon:'none'
-          })
-          return false;
-        }
-        formData.skillLevel = this.data.skillLevel;
+        formData.playAge = this.data.playAge == null ? this.data.ages[0] : this.data.playAge;
+        formData.skillLevel = this.data.skillLevel == null ? this.data.level[0] : this.data.skillLevel;
         formData.limitGender = !this.data.nolimitSex;
         if (!this.data.nolimitSex) {
             if (this.data.maleNum + this.data.femaleNum != this.data.totalNum) {
@@ -552,7 +538,7 @@ Page({
         formData.totalNum = this.data.totalNum;
         if (formData.totalNum == 0 || formData.totalNum == null )  {
             wx.showToast({
-                title: '打球人数不能为0~',
+                title: '请设置打球人数~',
                 icon: 'none'
             })
             return false;
