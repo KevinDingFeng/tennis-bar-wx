@@ -66,8 +66,8 @@ Page({
         yul_arr: [1],//预留人数
         show: false,//控制下拉列表的显示隐藏，false隐藏、true显示
         selectData: [], //预留位置
-        selectData_g: [1],//预留人数女
-        selectData_n: [1],//预留人数男
+        selectData_g: [],//预留人数女
+        selectData_n: [],//预留人数男
         index: 0,//选择的下拉列表下标
         index_age: null, //球龄
         index_total: null,
@@ -264,7 +264,9 @@ Page({
         this.setData({
             femaleNum_show: e.detail.value,
             femaleNum: this.data.selectData_g[e.detail.value],
-            selectData_n: n_arr
+            // selectData_n: n_arr,
+            maleNum_show: n_num,
+            maleNum: n_num
         })
     },
     bindPickerChange_nan: function (e) {//性别男
@@ -287,7 +289,9 @@ Page({
         this.setData({
             maleNum_show: e.detail.value,
             maleNum: this.data.selectData_n[e.detail.value],
-            selectData_g: n_arr
+            // selectData_g: n_arr,
+            femaleNum_show: g_num,
+            femaleNum: g_num
         })
     },
     /**

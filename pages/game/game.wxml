@@ -130,7 +130,7 @@
                 <view>球龄</view>
                 <view class='user_age'>
                     <picker mode="selector" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
-                        <text>{{array[index_age]?array[index_age]:'请选择球龄要求 >'}}</text>
+                       <text>{{array[index_age]?array[index_age]:'请选择球龄要求 >'}}</text>
                     </picker>
                 </view>
             </view>
@@ -161,7 +161,7 @@
                         <view class="sex_nv">女</view>
                         <view class='user_g'>
                             <picker mode="selector" bindchange="bindPickerChange_nv" value="{{femaleNum}}" range="{{selectData_g}}">
-                                <text>{{selectData_g[femaleNum_show]?selectData_g[femaleNum_show]:'请选择女性人数 >'}}</text>
+                                <text>{{(selectData_g[femaleNum_show] == 0)?selectData_g[femaleNum_show]:(selectData_g[femaleNum_show]?selectData_g[femaleNum_show]:"请选择女性人数 >")}}</text>
                             </picker>
                         </view>
                     </view>
@@ -170,7 +170,8 @@
                         <view class="sex_nv">男</view>
                         <view class='user_g'>
                             <picker mode="selector" bindchange="bindPickerChange_nan" value="{{maleNum}}" range="{{selectData_n}}">
-                                <text>{{selectData_n[maleNum_show]?selectData_n[maleNum_show]:'请选择男性人数 >'}}</text>
+                                <text>{{(selectData_n[maleNum_show] == 0)?selectData_n[maleNum_show]:(selectData_n[maleNum_show]?selectData_n[maleNum_show]:"请选择男性人数 >")}}</text>
+                                <!-- <text>{{selectData_n[maleNum_show]?selectData_n[maleNum_show]:'请选择男性人数 >'}}</text> -->
                             </picker>
                         </view>
                     </view>
@@ -181,12 +182,11 @@
             <view class='type_sex'>预留位置</view>
             <view class='user_yul'>
                 <picker mode="selector" bindchange="bindPickerChange_yul" value="{{holderNum}}" range="{{yul_arr}}">
-                    <text>{{yul_arr[holderNum_show]?yul_arr[holderNum_show]:'请选择预留人数 >'}}</text>
+                    <text>{{(yul_arr[holderNum_show] == 0)?yul_arr[holderNum_show]:(yul_arr[holderNum_show]?yul_arr[holderNum_show]:"请选择预留人数 >")}}</text>
+                    <!-- <text>{{yul_arr[holderNum_show]?yul_arr[holderNum_show]:'请选择预留人数 >'}}</text> -->
                 </picker>
             </view>
         </view>
-        
-
         <view class='ball_xx mar_top' style='width:94%'>
             <view>报名截止时间</view>
             <view class='start_time'>
