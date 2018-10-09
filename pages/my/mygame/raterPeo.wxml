@@ -2,56 +2,58 @@
     <view class='assess'>
         <view class='assess_name'>评价</view>
         <view class='assess_xx'>
-            <view class='xx_name'>球局和谐度</view>
-            <view class="comment1-description">
-                <view class="star-pos" style="display:flex;flex-direction:row;">
-                    <view class="stars_cc  {{comment.gameStar>=1? 'on_cc': ''}}" data-star="1" bindtap="changeGameStar"></view>
-                    <view class="stars_cc  {{comment.gameStar>=2? 'on_cc': ''}}" data-star="2" bindtap="changeGameStar"></view>
-                    <view class="stars_cc  {{comment.gameStar>=3? 'on_cc': ''}}" data-star="3" bindtap="changeGameStar"></view>
-                    <view class="stars_cc  {{comment.gameStar>=4? 'on_cc': ''}}" data-star="4" bindtap="changeGameStar"></view>
-                    <view class="stars_cc  {{comment.gameStar>=5? 'on_cc': ''}}" data-star="5" bindtap="changeGameStar"></view>
+            <view>
+                <view class='xx_name'>球局和谐度</view>
+                <view class="comment1-description">
+                    <view class="star-pos" style="display:flex;flex-direction:row;">
+                        <view class="stars_cc  {{comment.gameStar>=1? 'on_cc': ''}}" data-star="1" bindtap="changeGameStar"></view>
+                        <view class="stars_cc  {{comment.gameStar>=2? 'on_cc': ''}}" data-star="2" bindtap="changeGameStar"></view>
+                        <view class="stars_cc  {{comment.gameStar>=3? 'on_cc': ''}}" data-star="3" bindtap="changeGameStar"></view>
+                        <view class="stars_cc  {{comment.gameStar>=4? 'on_cc': ''}}" data-star="4" bindtap="changeGameStar"></view>
+                        <view class="stars_cc  {{comment.gameStar>=5? 'on_cc': ''}}" data-star="5" bindtap="changeGameStar"></view>
+                    </view>
                 </view>
             </view>
-
             <!-- 球局和谐度标签 -->
-            <!-- <view>
-            <block wx:if="{{!comment.gameLabels}}">
-              <block wx:for="{{gameLabels}}" wx:for-item="gl">
-                <view>{{gl.name}}</view>
-              </block>
-            </block>
-            <block wx:else>
-              <block wx:for="{{selectedGameLabels}}" wx:for-item="sgl">
-                <view>{{sgl.name}}</view>
-              </block>
-            </block>
-            </view> -->
+            <view>
+                <block wx:if="{{!comment.gameLabels}}">
+                    <block wx:for="{{gameLabels}}" wx:for-item="gl">
+                        <view>{{gl.name}}</view>
+                    </block>
+                </block>
+                <block wx:else>
+                    <block wx:for="{{selectedGameLabels}}" wx:for-item="sgl">
+                        <view>{{sgl.name}}</view>
+                    </block>
+                </block>
+            </view>
         </view>
         <view class='environment_xx'>
-            <view class='environment_name'>球场环境</view>
-            <view class="comment1-description">
-                <view class="star-pos" style="display:flex;flex-direction:row;">
-                    <view class="stars_cc  {{comment.courtStar>=1? 'on_cc': ''}}" data-star="1" bindtap="changeCourtStar"></view>
-                    <view class="stars_cc  {{comment.courtStar>=2? 'on_cc': ''}}" data-star="2" bindtap="changeCourtStar"></view>
-                    <view class="stars_cc  {{comment.courtStar>=3? 'on_cc': ''}}" data-star="3" bindtap="changeCourtStar"></view>
-                    <view class="stars_cc  {{comment.courtStar>=4? 'on_cc': ''}}" data-star="4" bindtap="changeCourtStar"></view>
-                    <view class="stars_cc  {{comment.courtStar>=5? 'on_cc': ''}}" data-star="5" bindtap="changeCourtStar"></view>
+            <view>
+                <view class='environment_name'>球场环境</view>
+                <view class="comment1-description">
+                    <view class="star-pos" style="display:flex;flex-direction:row;">
+                        <view class="stars_cc  {{comment.courtStar>=1? 'on_cc': ''}}" data-star="1" bindtap="changeCourtStar"></view>
+                        <view class="stars_cc  {{comment.courtStar>=2? 'on_cc': ''}}" data-star="2" bindtap="changeCourtStar"></view>
+                        <view class="stars_cc  {{comment.courtStar>=3? 'on_cc': ''}}" data-star="3" bindtap="changeCourtStar"></view>
+                        <view class="stars_cc  {{comment.courtStar>=4? 'on_cc': ''}}" data-star="4" bindtap="changeCourtStar"></view>
+                        <view class="stars_cc  {{comment.courtStar>=5? 'on_cc': ''}}" data-star="5" bindtap="changeCourtStar"></view>
+                    </view>
                 </view>
             </view>
-
             <!-- 球场环境标签 -->
-            <!-- <view>
-            <block wx:if="{{!comment.courtLabels}}">
-              <block wx:for="{{courtLabels}}" wx:for-item="cl">
-                <view>{{cl.name}}</view>
-              </block>
-            </block>
-            <block wx:else>
-              <block wx:for="{{selectedCourtLabels}}" wx:for-item="scl">
-                <view>{{scl.name}}</view>
-              </block>
-            </block>
-            </view> -->
+            <view>
+                <block wx:if="{{!comment.courtLabels}}">
+                    <block wx:for="{{courtLabels}}" wx:for-item="cl">
+                        <view>{{cl.name}}</view>
+                    </block>
+                </block>
+                <block wx:else>
+                    <block wx:for="{{selectedCourtLabels}}" wx:for-item="scl">
+                        <view>{{scl.name}}</view>
+                    </block>
+                </block>
+            </view>
         </view>
         <view class='environment_xx'>
             <view class='environment_name'>球友到场情况</view>
@@ -67,27 +69,27 @@
         </view>
         <view class='pj_img'>
             <checkbox-group bindchange="checkboxChange">
-                <view  class='peo_list' wx:for="{{joinWxUser}}" wx:for-item="wxItem" wx:key="wxKey" >
+                <view class='peo_list' wx:for="{{joinWxUser}}" wx:for-item="wxItem" wx:key="wxKey">
                     <image src="{{wxItem.wxUserInfo.avatarUrl? wxItem.avatarUrl: '../../../../images/index/banner.png'}}"></image>
                     <view class='pj_name'>{{wxItem.wxUserInfo.nickName}}</view>
                     <view class='pj_check'>
-                    <label class="checkbox"  class='checkbox_sty'>
-                        <block wx:if="{{wxItem.presented}}">
-                        <checkbox value="{{wxItem.id}}" checked="checked"/>到场
-                        </block>
-                        <block wx:else>
-                        <checkbox value="{{wxItem.id}}"/>到场
-                        </block>                      
-                    </label>
+                        <label class="checkbox" class='checkbox_sty'>
+                            <block wx:if="{{wxItem.presented}}">
+                                <checkbox value="{{wxItem.id}}" checked="checked" />到场
+                            </block>
+                            <block wx:else>
+                                <checkbox value="{{wxItem.id}}" />到场
+                            </block>
+                        </label>
                     </view>
                 </view>
             </checkbox-group>
         </view>
         <!-- 提交 -->
         <block wx:if="{{!comment.id}}">
-          <view class='btn_cu' bindtap='save'>
-            <button>保存</button>
-          </view>
+            <view class='btn_cu' bindtap='save'>
+                <button>保存</button>
+            </view>
         </block>
     </view>
 </view>
