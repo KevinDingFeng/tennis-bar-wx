@@ -58,13 +58,13 @@
     top:300rpx;
 }
 .start_time{
-    width: 74%;
+    width: 72%;
     text-align: right;
     font-size: 28rpx;
     color: #959595;
 }
 .end_time{
-    width:74%;
+    width:72%;
     text-align: right;
     font-size: 28rpx;
     color: #959595;
@@ -99,7 +99,7 @@
 }
 .type_name{
     margin-top: 20rpx;
-    margin-right: 218rpx;
+    margin-right: 29%;
 }
 .btn_xia{
     width: 94%;

@@ -15,7 +15,7 @@ Page({
         activeIndex: 1,
         sliderOffset: 0,
         sliderLeft: 0,
-        confirms:[]
+        confirms: []
     },
 
     /**
@@ -23,7 +23,7 @@ Page({
      */
     onLoad: function () {
         wx.setNavigationBarTitle({
-          title: '加入确认',
+            title: '加入确认',
         })
         var that = this;
         wx.getSystemInfo({
@@ -38,23 +38,23 @@ Page({
         // that.getConfirmJoinGames(init_status);
     },
     tabClick: function (e) {
-      let status = e.currentTarget.dataset.status;
-      init_status = status;
-      let that = this;
-      // if (wx.getStorageSync(status)) {
+        let status = e.currentTarget.dataset.status;
+        init_status = status;
+        let that = this;
+        // if (wx.getStorageSync(status)) {
         // that.setData({
         //   confirms: wx.getStorageSync(status)
         // })
-      // } else {
-        that.setData({confirms:[]});
+        // } else {
+        that.setData({ confirms: [] });
         pageIndex = 0;
         isbottom = false;
         that.getConfirmJoinGames(status);
-      // }
-      this.setData({
-        sliderOffset: e.currentTarget.offsetLeft,
-        activeIndex: e.currentTarget.id
-      });
+        // }
+        this.setData({
+            sliderOffset: e.currentTarget.offsetLeft,
+            activeIndex: e.currentTarget.id
+        });
     },
     /**
      * 生命周期函数--监听页面初次渲染完成
@@ -67,9 +67,9 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-      pageIndex =0;
-      this.setData({ confirms: [] })
-      this.getConfirmJoinGames(init_status);
+        pageIndex = 0;
+        this.setData({ confirms: [] })
+        this.getConfirmJoinGames(init_status);
     },
 
     /**
@@ -90,23 +90,30 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function () {
-      pageIndex = 0;
-      this.setData({ confirms: [] })
-      this.getConfirmJoinGames(init_status);
+        pageIndex = 0;
+        this.setData({ confirms: [] })
+        this.getConfirmJoinGames(init_status);
+        wx.showNavigationBarLoading();
+        //模拟加载    
+        setTimeout(function () {
+            // complete 
+            wx.hideNavigationBarLoading()  //完成停止加载     
+            wx.stopPullDownRefresh() //停止下拉刷新    
+        }, 1500);
     },
 
     /**
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
-      if (!isbottom) {
-        this.getConfirmJoinGames(init_status);
-      } else {
-        wx.showToast({
-          title: '已经到底了~',
-          icon: 'none'
-        })
-      }
+        if (!isbottom) {
+            this.getConfirmJoinGames(init_status);
+        } else {
+            wx.showToast({
+                title: '已经到底了~',
+                icon: 'none'
+            })
+        }
     },
 
     /**
@@ -119,48 +126,48 @@ Page({
     /**
      * 发布者获取 球局申请列表
      */
-    getConfirmJoinGames: function (status){
-      let that = this;
-      // 获取加入申请列表
-      wx.request({
-        url: getApp().globalData.onlineUrl + 'api/join/confirms',
-        method: "POST",
-        data: {
-          "status": status,
-          "page": pageIndex,
-          "size": pageSize
-        },
-        header: utilJs.hasTokenGetHeader(), 
-        success: function (res) {
-          if (res.data.code == "200") {
-            let confirm = that.data.confirms;
-            confirm =confirm.concat(res.data.data.confirms.content);
-            that.setData({
-              confirms: confirm
-            })
-            if(res.data.data.confirms.content.length < pageSize){
-              isbottom = true;
-            } else {
-              pageIndex++;
-              isbottom = false;
+    getConfirmJoinGames: function (status) {
+        let that = this;
+        // 获取加入申请列表
+        wx.request({
+            url: getApp().globalData.onlineUrl + 'api/join/confirms',
+            method: "POST",
+            data: {
+                "status": status,
+                "page": pageIndex,
+                "size": pageSize
+            },
+            header: utilJs.hasTokenGetHeader(),
+            success: function (res) {
+                if (res.data.code == "200") {
+                    let confirm = that.data.confirms;
+                    confirm = confirm.concat(res.data.data.confirms.content);
+                    that.setData({
+                        confirms: confirm
+                    })
+                    if (res.data.data.confirms.content.length < pageSize) {
+                        isbottom = true;
+                    } else {
+                        pageIndex++;
+                        isbottom = false;
+                    }
+                    // wx.setStorageSync(status, res.data.data.confirms);
+                } else {
+                    wx.showToast({
+                        title: res.data.data,
+                        icon: 'none'
+                    })
+                }
             }
-            // wx.setStorageSync(status, res.data.data.confirms);
-          } else {
-            wx.showToast({
-              title: res.data.data,
-              icon: 'none'
-            })
-          }
-        }
-      })
+        })
     },
 
     //详情
-    viewDetail:function(e){
-      let info = e.currentTarget.dataset.info;
-      wx.navigateTo({
-        url: './joinundetermined/joinundetermined?info=' + JSON.stringify(info),
-      })
+    viewDetail: function (e) {
+        let info = e.currentTarget.dataset.info;
+        wx.navigateTo({
+            url: './joinundetermined/joinundetermined?info=' + JSON.stringify(info),
+        })
 
-    }  
+    }
 })

@@ -8,48 +8,52 @@ var pageSize = 20;
 var isbottom = false;
 Page({
     data: {
-        gameTypes: [{ "All": "不限" }, { "Entertainment": "娱乐局" }, {"Teaching":"教学局"}],    // 球局类型
-        skillLevs: [{ "All": "不限" }, { "Entry": "入门(0~1.0)" }, { "Medium": "中级(1.5~3.5)" }, { "Professional":"专业(4.0~7.0)"}],        // 球技等级 
+        gameTypes: [{ "All": "不限" }, { "Entertainment": "娱乐局" }, { "Teaching": "教学局" }],    // 球局类型
+        skillLevs: [{ "All": "不限" }, { "Entry": "入门(0~1.0)" }, { "Medium": "中级(1.5~3.5)" }, { "Professional": "专业(4.0~7.0)" }],        // 球技等级 
         //筛选
-        skillLev:'',
-        gameType:'',
-        coachName:'',
+        skillLev: '',
+        gameType: '',
+        coachName: '',
         //搜索条件
-        keyword:'',
+        keyword: '',
         //商区 商圈码
         // code:null,
-        level1:null,
-        level2:null,
-        level3:null,
+        level1: null,
+        level2: null,
+        level3: null,
         //智能排序
-        lon_lat:{},
-        orderType:'',
+        lon_lat: {},
+        orderType: '',
         orderTypeEnums: ["familiarity", "familiarity", "distance", "time"], //默认 熟悉度  距离  时间
         //打球时间
-        date:'',  //日期
-        time:'',  //时间
-        timeType:["morning","afternoon","night"],
+        date: '',  //日期
+        time: '',  //时间
+        timeType: ["morning", "afternoon", "night"],
         motto: 'Hello World',
         userInfo: {},
         hasUserInfo: false,
         canIUse: wx.canIUse('button.open-type.getUserInfo'),
         inputShowed: false,
         inputVal: "",//三栏导航系列
-        qy_text:"全部商区",
-        nz_text:"智能排序",
-        px_text:"打球时间",
-        ft_text:"筛选",
+        qy_text: "全部商区",
+        nz_text: "智能排序",
+        px_text: "打球时间",
+        ft_text: "筛选",
         px_time: utilJs.formatDate(new Date()),
         content: [],
         nv: ['默认排序', '熟人优先', '距离最近', '时间最近'],//智能排序
         px: ['上午场', '下午场', '夜场'],//打球时间
+        lx:['球局类型','球技等级'],//筛选
+        gods:['张三','赵四','王五'],//大神列表
         qyopen: false,
         qyshow: true,//商区显示隐藏
         nzopen: false,
         pxopen: false,
         nzshow: false,//智能筛选x显示 隐藏
         pxshow: false,//打球时间显示隐藏
-        childopen:false,
+        sxopen: false,
+        sxshow: true,//筛选显示隐藏
+        childopen: false,
         isfull: false,
         cityleft: cityData.getCity(),
         citycenter: {},
@@ -57,11 +61,12 @@ Page({
         select1: '',
         select2: '',
         shownavindex: '',
-        games: []
+        games: [],
+        sx_active:null//筛选点击类型
     },
     inputTyping: function (e) {
         let keyword = e.detail.value;
-        this.setData({keyword:keyword})
+        this.setData({ keyword: keyword })
     },
     onLoad: function (options) {
         wx.setNavigationBarTitle({
@@ -70,18 +75,18 @@ Page({
         //获取所有教练，筛选的时候用
         // this.getCoachList();
     },
-    getCoachList:function(){
-      let that = this ;
-      wx.request({
-        url: getApp().globalData.onlineUrl + 'api/wx_user_info/coach',
-        method:'GET',
-        header: utilJs.hasTokenGetHeader(),
-        success:function(res){
-          if(res.data.code == '200'){
-            that.setData({coach:res.data.data.coachList})
-          }
-        }
-      })
+    getCoachList: function () {
+        let that = this;
+        wx.request({
+            url: getApp().globalData.onlineUrl + 'api/wx_user_info/coach',
+            method: 'GET',
+            header: utilJs.hasTokenGetHeader(),
+            success: function (res) {
+                if (res.data.code == '200') {
+                    that.setData({ coach: res.data.data.coachList })
+                }
+            }
+        })
     },
     showInput: function () {
         this.setData({
@@ -91,13 +96,21 @@ Page({
     hideInput: function () {
         this.setData({
             inputVal: "",
+            keyword: "",
             inputShowed: false
         });
     },
-    onShow: function(){
-      pageIndex = 0;
-      this.setData({games:[]})
-      this.queryGame();
+    //点击筛选 选择类型
+    selectLX:function(e){
+        let _idx = e.currentTarget.dataset.idx;//点击当前的自定义id
+        this.setData({
+            sx_active: _idx
+        });
+    },
+    onShow: function () {
+        pageIndex = 0;
+        this.setData({ games: [] })
+        this.queryGame();
     },
     listqy: function (e) {
         if (this.data.qyopen) {
@@ -105,6 +118,8 @@ Page({
                 qyopen: false,
                 nzopen: false,
                 pxopen: false,
+                sxopen: false,
+                sxshow: true,//筛选显示隐藏
                 nzshow: true,
                 pxshow: true,
                 qyshow: true,//商区显示隐藏
@@ -119,6 +134,8 @@ Page({
                 nzshow: true,
                 pxshow: true,
                 qyshow: false,
+                sxopen: false,
+                sxshow: true,//筛选显示隐藏
                 isfull: true,
                 citycenter: this.data.cityleft[0].city,
                 select1: 0,
@@ -136,6 +153,8 @@ Page({
                 nzopen: false,
                 pxopen: false,
                 qyopen: false,
+                sxopen: false,
+                sxshow: true,//筛选显示隐藏
                 nzshow: true,//智能筛选x显示 隐藏
                 pxshow: true,
                 qyshow: true,
@@ -149,6 +168,8 @@ Page({
                 pxopen: false,
                 qyopen: false,
                 nzshow: false,
+                sxopen: false,
+                sxshow: true,//筛选显示隐藏
                 pxshow: true,
                 qyshow: true,
                 isfull: true,
@@ -162,10 +183,12 @@ Page({
                 nzopen: false,
                 pxopen: false,
                 qyopen: false,
+                sxopen: false,
+                sxshow: true,//筛选显示隐藏
                 nzshow: true,
                 pxshow: true,//打球时间显示隐藏
                 qyshow: true,
-                childopen:false,
+                childopen: false,
                 isfull: false,
                 shownavindex: 0
             })
@@ -179,6 +202,8 @@ Page({
                 pxshow: false,
                 qyshow: true,
                 childopen: true,
+                sxopen: false,
+                sxshow: true,//筛选显示隐藏
                 isfull: true,
                 shownavindex: e.currentTarget.dataset.nav
             })
@@ -192,23 +217,65 @@ Page({
             select1: e.target.dataset.city,
             select2: '',
             level1: this.data.cityleft[e.currentTarget.dataset.city].code,
-            level2:'',
-            level3:''
+            level2: '',
+            level3: ''
         });
     },
     selectcenter: function (e) {
         let index = e.currentTarget.dataset.city;
-        if(index == 0){
-          this.setData({
-            level2: '',
-            level3: '',
-            qy_text: this.data.citycenter[index].name,
-            nz_text: "智能排序",
-            px_text: "打球时间",
-            ft_text: "筛选",
-          })
-          this.hidebg();
-          this.setData({
+        if (index == 0) {
+            this.setData({
+                level2: '',
+                level3: '',
+                qy_text: this.data.citycenter[index].name,
+                nz_text: "智能排序",
+                px_text: "打球时间",
+                ft_text: "筛选",
+            })
+            this.hidebg();
+            this.setData({
+                date: '',
+                orderType: '',
+                lon_lat: {},
+                time: '',
+                gameType: '',
+                skillLev: '',
+                name: '',
+                //清空games 数据
+                games: []
+            })
+            pageIndex = pageIndex > 0 ? 0 : pageIndex;
+            this.queryGame();
+        } else {
+            this.setData({
+                cityright: this.data.citycenter[e.currentTarget.dataset.city].district,
+                select2: e.target.dataset.city,
+                level2: this.data.citycenter[e.currentTarget.dataset.city].code,
+                level3: ''
+            });
+        }
+    },
+    selectright: function (e) {
+        let index = e.currentTarget.dataset.city;
+        if (index == 0) {
+            this.setData({
+                level3: '',
+                qy_text: this.data.cityright[index].name,
+                nz_text: "智能排序",
+                px_text: "打球时间",
+                ft_text: "筛选",
+            })
+        } else {
+            this.setData({
+                level3: this.data.cityright[e.currentTarget.dataset.city].code,
+                qy_text: this.data.cityright[index].name,
+                nz_text: "智能排序",
+                px_text: "打球时间",
+                ft_text: "筛选",
+            })
+        }
+        this.hidebg();
+        this.setData({
             date: '',
             orderType: '',
             lon_lat: {},
@@ -218,48 +285,6 @@ Page({
             name: '',
             //清空games 数据
             games: []
-          })
-          pageIndex = pageIndex > 0 ? 0:pageIndex;
-          this.queryGame();
-        }else{
-          this.setData({
-              cityright: this.data.citycenter[e.currentTarget.dataset.city].district,
-              select2: e.target.dataset.city,
-              level2: this.data.citycenter[e.currentTarget.dataset.city].code,
-              level3:''
-          });
-        }
-    },
-    selectright:function(e){
-        let index = e.currentTarget.dataset.city;
-        if(index == 0){
-          this.setData({
-            level3:'',
-            qy_text: this.data.cityright[index].name,
-            nz_text: "智能排序",
-            px_text: "打球时间",
-            ft_text: "筛选",
-          })
-        }else{
-          this.setData({
-              level3: this.data.cityright[e.currentTarget.dataset.city].code,
-              qy_text: this.data.cityright[index].name,
-              nz_text: "智能排序",
-              px_text: "打球时间",
-              ft_text: "筛选",
-          })
-        }
-        this.hidebg();
-        this.setData({
-          date:'',
-          orderType: '',
-          lon_lat:{},
-          time:'',
-          gameType: '',
-          skillLev: '',
-          name: '',
-          //清空games 数据
-          games: []
         })
         pageIndex = pageIndex > 0 ? 0 : pageIndex;
         this.queryGame();
@@ -281,65 +306,65 @@ Page({
         console.log('picker发送选择改变，携带值为', e.detail.value)
         this.setData({
             date: e.detail.value,
-            px_time:e.detail.value
+            px_time: e.detail.value
         })
     },
 
     //搜索
-    search:function(){
-      this.setData({games:[]});
-      pageIndex = pageIndex > 0 ? 0 : pageIndex;
-      isbottom = false;
-      this.queryGame();
+    search: function () {
+        this.setData({ games: [] });
+        pageIndex = pageIndex > 0 ? 0 : pageIndex;
+        isbottom = false;
+        this.queryGame();
     },
-    
+
     //查询球局数据
-    queryGame:function(){
-      let that = this;
-      let code = null;
-      if(this.data.level1 != null){
-        code = { "level1": this.data.level1, "level2": this.data.level2, "level3": this.data.level3 };
-      }
-      wx.request({
-        url: getApp().globalData.onlineUrl + 'api/game',
-        method: "POST",
-        data:{
-          // "curUserId":3,
-          "keyword": this.data.keyword ,
-          "code": JSON.stringify(code),
-          "orderType":this.data.orderType,
-          "lon_lat":JSON.stringify(this.data.lon_lat),
-          "date":this.data.date,
-          "timeType":this.data.time,
-          "gameType":this.data.gameType,
-          "skillLev":this.data.skillLev,
-          "name":this.data.coachName,
-          "page":  pageIndex,
-          "size":  pageSize
-        },
-        header: utilJs.hasTokenPostHeader(),
-        success: function (res) {
-          console.log(res.data);
-          if (res.data.code == "200") {
-            let game = that.data.games;
-            game = game.concat(res.data.data.page.content);
-            that.setData({
-              games: game
-            })
-            if (res.data.data.page.content.length < pageSize) {
-              isbottom = true;
-            } else {
-              pageIndex++;
-              isbottom = false;
-            }
-          }else{
-            wx.showToast({
-              title: res.data.data,
-              icon:'none'
-            })
-          }
+    queryGame: function () {
+        let that = this;
+        let code = null;
+        if (this.data.level1 != null) {
+            code = { "level1": this.data.level1, "level2": this.data.level2, "level3": this.data.level3 };
         }
-      })
+        wx.request({
+            url: getApp().globalData.onlineUrl + 'api/game',
+            method: "POST",
+            data: {
+                // "curUserId":3,
+                "keyword": this.data.keyword,
+                "code": JSON.stringify(code),
+                "orderType": this.data.orderType,
+                "lon_lat": JSON.stringify(this.data.lon_lat),
+                "date": this.data.date,
+                "timeType": this.data.time,
+                "gameType": this.data.gameType,
+                "skillLev": this.data.skillLev,
+                "name": this.data.coachName,
+                "page": pageIndex,
+                "size": pageSize
+            },
+            header: utilJs.hasTokenPostHeader(),
+            success: function (res) {
+                console.log(res.data);
+                if (res.data.code == "200") {
+                    let game = that.data.games;
+                    game = game.concat(res.data.data.page.content);
+                    that.setData({
+                        games: game
+                    })
+                    if (res.data.data.page.content.length < pageSize) {
+                        isbottom = true;
+                    } else {
+                        pageIndex++;
+                        isbottom = false;
+                    }
+                } else {
+                    wx.showToast({
+                        title: res.data.data,
+                        icon: 'none'
+                    })
+                }
+            }
+        })
     },
 
     // 查看球场地址详情
@@ -360,136 +385,167 @@ Page({
     },
 
     // 智能排序
-    intelligentSort:function(event){
+    intelligentSort: function (event) {
         this.hidebg();
         let idx = event.currentTarget.dataset.idx;
-        if(idx == 2){
-          this.getLoc();
+        if (idx == 2) {
+            this.getLoc();
         }
         this.setData({
-          orderType: this.data.orderTypeEnums[idx]
+            orderType: this.data.orderTypeEnums[idx]
         })
         this.setData({
-          level1: null,
-          level2: null,
-          level3: null,
-          qy_text: "全部商区",
-          px_text: "打球时间",
-          ft_text: "筛选",
-          nz_text: this.data.nv[idx],
-          gameType: '',
-          skillLev: '',
-          name: '',
-          //清空games 数据
-          games: []
+            level1: null,
+            level2: null,
+            level3: null,
+            qy_text: "全部商区",
+            px_text: "打球时间",
+            ft_text: "筛选",
+            nz_text: this.data.nv[idx],
+            gameType: '',
+            skillLev: '',
+            name: '',
+            //清空games 数据
+            games: []
         })
-        if (this.data.orderType == 'familiarity'){
-          this.setData({ lon_lat: {}, date: '', time: ''})
+        if (this.data.orderType == 'familiarity') {
+            this.setData({ lon_lat: {}, date: '', time: '' })
         }
         if (this.data.orderType == 'distance') {
-          this.setData({ date: '', time: ''})
+            this.setData({ date: '', time: '' })
         }
-        if (this.data.orderType == 'time'){
-          this.setData({ lon_lat: {}})
+        if (this.data.orderType == 'time') {
+            this.setData({ lon_lat: {} })
         }
         pageIndex = pageIndex > 0 ? 0 : pageIndex;
         this.queryGame();
     },
 
     //获取当前定位
-    getLoc:function(){
-      let that =this;
-      let locations = that.data.lon_lat;
-      //获取当前位置经纬度
-      wx.getLocation({
-        type: 'wgs84',
-        success: function (res) {
-          var latitude = res.latitude;
-          var longitude = res.longitude;
-          locations.longitude = longitude;
-          locations.latitude  = latitude;
-          that.setData({
-            lon_lat : locations
-          })
-        }
-      })
+    getLoc: function () {
+        let that = this;
+        let locations = that.data.lon_lat;
+        //获取当前位置经纬度
+        wx.getLocation({
+            type: 'wgs84',
+            success: function (res) {
+                var latitude = res.latitude;
+                var longitude = res.longitude;
+                locations.longitude = longitude;
+                locations.latitude = latitude;
+                that.setData({
+                    lon_lat: locations
+                })
+            }
+        })
     },
     //选择时间 上/下/晚
-    selectTime:function(event){
-      this.hidebg();
-      let idx = event.currentTarget.dataset.idx;
-      this.setData({
-          level1:null,
-          level2: null,
-          level3: null,
-          lon_lat: {},
-          orderType: '',
-          qy_text: "全部商区",
-          nz_text: "智能排序",
-          ft_text: "筛选",
-          time: this.data.timeType[idx],
-          px_text: this.data.px[idx],
-          gameType: '',
-          skillLev: '',
-          name: '',
-          //清空games 数据
-          games: []
-      })
-      pageIndex = pageIndex > 0 ? 0 : pageIndex;
-      this.queryGame();
+    selectTime: function (event) {
+        this.hidebg();
+        let idx = event.currentTarget.dataset.idx;
+        this.setData({
+            level1: null,
+            level2: null,
+            level3: null,
+            lon_lat: {},
+            orderType: '',
+            qy_text: "全部商区",
+            nz_text: "智能排序",
+            ft_text: "筛选",
+            time: this.data.timeType[idx],
+            px_text: this.data.px[idx],
+            gameType: '',
+            skillLev: '',
+            name: '',
+            //清空games 数据
+            games: []
+        })
+        pageIndex = pageIndex > 0 ? 0 : pageIndex;
+        this.queryGame();
     },
-    
+
     //筛选
-    filter:function(){
-      this.setData({
-        level1: null,
-        level2: null,
-        level3: null,
-        lon_lat: {},
-        orderType: '',
-        qy_text: "全部商区",
-        nz_text: "智能排序",
-        px_text: "打球时间",
-        time: '',
-        date: '',
-        // gameType: 'Entertainment',
-        // gameType:'Teaching',
-        gameType: '',
-        // skillLev:'Entry',
-        skillLev: 'Professional',
-        name:'',
-        //清空games 数据
-        games:[]
-      })
-      pageIndex = pageIndex > 0 ? 0 : pageIndex;
-      this.queryGame();
+    filter: function (e) {
+        if (this.data.sxopen) {
+            this.setData({
+                nzopen: false,
+                pxopen: false,
+                qyopen: false,
+                nzshow: true,
+
+                sxshow:true,
+
+                sxopen: false,
+
+                pxshow: true,
+                qyshow: true,
+                isfull: false,
+                shownavindex: 0
+            })
+        } else {
+            this.setData({
+                sxopen:true,
+                nzopen: false,
+                pxopen: false,
+                qyopen: false,
+                nzshow: true,
+                sxshow: false,
+
+                pxshow: true,
+                qyshow: true,
+                isfull: true,
+                shownavindex: e.currentTarget.dataset.nav
+            })
+        }
+        // this.setData({
+        //     level1: null,
+        //     level2: null,
+        //     level3: null,
+        //     lon_lat: {},
+        //     orderType: '',
+        //     qy_text: "全部商区",
+        //     nz_text: "智能排序",
+        //     px_text: "打球时间",
+        //     time: '',
+        //     date: '',
+        //     // gameType: 'Entertainment',
+        //     // gameType:'Teaching',
+        //     gameType: '',
+        //     // skillLev:'Entry',
+        //     skillLev: 'Professional',
+        //     name: '',
+        //     //清空games 数据
+        //     games: []
+        // })
+        // //   pageIndex = pageIndex > 0 ? 0 : pageIndex;
+        // //   this.queryGame();
     },
 
     /**
       * 页面相关事件处理函数--监听用户下拉动作
       */
     onPullDownRefresh: function () {
-      pageIndex = pageIndex > 0 ? 0 : pageIndex;
-      this.setData({ games: [] })
-      this.queryGame();
+        pageIndex = pageIndex > 0 ? 0 : pageIndex;
+        this.setData({ games: [] })
+        this.queryGame();
     },
 
     /**
       * 页面上拉触底事件的处理函数
       */
     onReachBottom: function () {
-      if (!isbottom) {
-        let orderType = this.data.orderType;
-        if (orderType != 'familiarity') {
-          this.queryGame();
+        if (!isbottom) {
+            let orderType = this.data.orderType;
+            if (orderType != 'familiarity') {
+                this.queryGame();
+            }
+        } else {
+            wx.showToast({
+                title: '已经到底了~',
+                icon: 'none'
+            })
         }
-      } else {
-        wx.showToast({
-          title: '已经到底了~',
-          icon: 'none'
-        })
-      }
-      
+
     },
 
 })

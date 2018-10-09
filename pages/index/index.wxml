@@ -1,12 +1,12 @@
 <wxs module="utils">
-  function formatDate(data) {
-    var _data = data;
-    _data = _data.split(" ")[1];
-    return _data
-  }
-  module.exports = {
-    formatDate: formatDate
-  }
+    function formatDate(data) {
+        var _data = data;
+        _data = _data.split(" ")[1];
+        return _data
+    }
+    module.exports = {
+        formatDate: formatDate
+    }
 </wxs>
 <!--index.wxml-->
 <view class="container">
@@ -49,10 +49,10 @@
                 <view class="content">{{px_text}}</view>
                 <view class="icon"></view>
             </view>
-            <!-- <view class="nav-son borders {{shownavindex == 4? 'active' : ''}}" bindtap="filter" data-nav="4">
+            <view class="nav-son borders {{shownavindex == 4? 'active' : ''}}" bindtap="filter" data-nav="4">
                 <view class="content">{{ft_text}}</view>
                 <view class="icon"></view>
-            </view> -->
+            </view>
         </view>
         <!-- 下拉内容 -->
         <view class="quyu {{qyopen ? 'slidown' : 'slidup'}} {{qyshow ? 'disappear':''}}">
@@ -99,15 +99,30 @@
             </view>
         </view>
         <!-- 筛选 -->
-        <!-- <view>
-        
-        </view> -->
+        <view class="temp temp1 {{sxopen ? 'slidown' : 'slidup'}} {{sxshow ? 'disappear':''}}">
+            <view class='check_time border_cc'>
+                <view class='time_name'>选择类型</view>
+                <view class='widcc'>
+                    <view class="time_type {{sx_active == index ? 'active1' : 'no_active1' }}" wx:for="{{lx}}" wx:for-index="index" bindtap='selectLX' data-idx='{{index}}'>
+                        <view  data-idx='{{index}}'>{{item}}</view>
+                    </view>
+                </view>
+            </view>
+            <view class='check_time border_cc'>
+                <view class='time_name'>选择教练</view>
+                <view class='widcc'>
+                    <view class='gods_list' wx:for="{{gods}}" wx:for-index="index">
+                        <view bindtap='selectLX' data-idx='{{index}}'>{{item}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
         <!-- 遮盖层 -->
         <view class="fullbg {{isfull ?'fullopacity':''}}" bindtap="hidebg"></view>
     </view>
     <!-- 球局信息 -->
-    <view class='palce_xx'>
-        <view class='palce_list'  wx:for="{{games}}" wx:for-item="game" wx:key="**this" >
+    <view class='palce_xx' wx:if="{{games}}">
+        <view class='palce_list' wx:for="{{games}}" wx:for-item="game" wx:key="**this">
             <view class='list_top' bindtap="applyJoinGame" data-game="{{game}}">
                 <view class="palce_name">{{game.name}}</view>
                 <view class='palce_num'>{{game.totalNum}}缺{{game.vacancyNum}}</view>
@@ -123,6 +138,11 @@
                     <text>导航</text>
                 </view>
             </view>
+        </view>
+    </view>
+    <view class='palce_xx' wx:else>
+        <view class="no_list">
+            暂无球场信息
         </view>
     </view>
 </view>
