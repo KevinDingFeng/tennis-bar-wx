@@ -42,10 +42,10 @@
 .icon_sty{
    position: relative;
 }
-.icon_sty>icon{
+.icon_sty_icon{
     position: absolute;
     top:0;
-    right:-3rpx;
+    left:172rpx;
     font-weight: 700;
     z-index: 9999
 }

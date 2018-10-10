@@ -30,28 +30,33 @@
         </view>
         <view class='user_cer'>
             <view class='user_ope'>
-              <view>证书</view>
-              <view class='user_jl col_56' catchtap="selectimage">选择图片</view> 
+                <view>证书</view>
+                <view class='user_jl col_56' catchtap="selectimage">选择图片</view>
             </view>
             <scroll-view scroll-x="true" class="imgs_view">
-              <view class="icon_sty">
-                <block wx:if="{{certPaths}}">
-                  <block wx:for="{{certPaths}}" wx:for-item="path">
-                    <image class="img_v" src="{{imgUrl}}{{prePath}}{{path}}" mode="aspectFill"/> 
-                  </block>
-                </block>
-                <block wx:if="{{tempFiles.length > 0}}">
-                  <block wx:for="{{tempFiles}}" wx:for-item="file">
-                    <image class="img_v" src="{{file.path}}" mode="aspectFill"/>
-                    <icon  type="cancel" bindtap='cancel_xq'></icon>
-                  </block>
-                </block>
-              </view>
+                <view>
+                    <block wx:if="{{certPaths}}">
+                        <block wx:for="{{certPaths}}" wx:for-item="path">
+                            <view class='icon_sty'>
+                                <image class="img_v" src="{{imgUrl}}{{prePath}}{{path}}" mode="aspectFill" />
+                                <icon class='icon_sty_icon' type="cancel" bindtap='cancel_xq'></icon>
+                            </view>
+                        </block>
+                    </block>
+                    <block wx:if="{{tempFiles.length > 0}}">
+                        <block wx:for="{{tempFiles}}" wx:for-item="file">
+                            <view class='icon_sty'>
+                                <image class="img_v  " src="{{file.path}}" mode="aspectFill" />
+                                <icon class='icon_sty_icon' type="cancel" bindtap='cancel_xq'></icon>
+                            </view>
+                        </block>
+                    </block>
+                </view>
             </scroll-view>
         </view>
         <view class='my_remark'>
             <view>备注</view>
-            <textarea maxlength="20" value='{{selfEvaluation.remark}}' placeholder="其他补充说明，控制在30字以内" bindinput="modifyRemark" maxlength='30'/>
+            <textarea maxlength="20" value='{{selfEvaluation.remark}}' placeholder="其他补充说明，控制在30字以内" bindinput="modifyRemark" maxlength='30' />
         </view>
         <view class='bot_btn'>
             <button class="weui-btn" type="primary" bindtap='save'>保存</button>

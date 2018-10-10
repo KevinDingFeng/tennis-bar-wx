@@ -116,7 +116,7 @@ page{
 /* 模板 */
 
 .game_name {
-    width: 85%;
+    width: 80%;
 }
 
 .ball_xx {
