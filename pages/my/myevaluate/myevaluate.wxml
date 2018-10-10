@@ -34,7 +34,7 @@
               <view class='user_jl col_56' catchtap="selectimage">选择图片</view> 
             </view>
             <scroll-view scroll-x="true" class="imgs_view">
-              <view>
+              <view class="icon_sty">
                 <block wx:if="{{certPaths}}">
                   <block wx:for="{{certPaths}}" wx:for-item="path">
                     <image class="img_v" src="{{imgUrl}}{{prePath}}{{path}}" mode="aspectFill"/> 
@@ -42,7 +42,8 @@
                 </block>
                 <block wx:if="{{tempFiles.length > 0}}">
                   <block wx:for="{{tempFiles}}" wx:for-item="file">
-                    <image class="img_v" src="{{file.path}}" mode="aspectFill"/> 
+                    <image class="img_v" src="{{file.path}}" mode="aspectFill"/>
+                    <icon  type="cancel" bindtap='cancel_xq'></icon>
                   </block>
                 </block>
               </view>

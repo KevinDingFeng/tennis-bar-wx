@@ -50,6 +50,12 @@ Page({
             isfirst: true
         })
     },
+    //清除图片
+    cancel_xq:function(){
+        this.setData({
+            tempFiles:{path:""}
+        })
+    },
     openAlert: function () {
         wx.showModal({
             title: "找教练判定级别",

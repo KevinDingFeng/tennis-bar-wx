@@ -39,6 +39,16 @@
   flex-direction: row;
   white-space: nowrap;
 }
+.icon_sty{
+   position: relative;
+}
+.icon_sty>icon{
+    position: absolute;
+    top:0;
+    right:-3rpx;
+    font-weight: 700;
+    z-index: 9999
+}
 .imgs_view view{
   height: 200rpx;
   display: inline-block;
