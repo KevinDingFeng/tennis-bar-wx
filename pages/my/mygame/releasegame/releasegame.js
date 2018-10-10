@@ -37,7 +37,8 @@ Page({
             "Medium": "中级(1.5~3.5)",
             "Professional": "专业(4.0~7.0)"
         },
-        label_active:null//球局和谐度的标签
+        label_active:null,//球局和谐度的标签
+        label_active_hj: null//球局环境的标签
     },
 
     /**
@@ -107,13 +108,20 @@ Page({
         })
     },
     //点击评价标签
-    click_label: function (e) {
+    click_pjlabel: function (e) {
         let that = this;
         var _idx = e.currentTarget.dataset.index;
         that.setData({
             label_active: _idx
         })
-
+    },
+    //点击环境标签
+    click_hjlabel: function (e) {
+        let that = this;
+        var _idx = e.currentTarget.dataset.index;
+        that.setData({
+            label_active_hj: _idx
+        })
     },
     //获取参加球局的球友  信息
     getJoinGamerInfo: function (id) {

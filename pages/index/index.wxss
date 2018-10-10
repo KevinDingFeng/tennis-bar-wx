@@ -262,15 +262,31 @@ picker{
     border-bottom: 2px solid #d1d3d4!important;
 }
 .active1{
-    background-color: #56a41f;
-    
+    color: #56a41f!important;
 }
 .active1>view{
-    color: #fff!important;
+    color: #56a41f!important;
 }
 .no_active1{
     background-color: #fff;
     color: #000;
+}
+.active_gods{
+    color: #56a41f!important;
+}
+.active_gods>view{
+    color: #fff!important;
+}
+.no_active_gods{
+    background-color: #fff;
+    color: #000;
+}
+.sx_but{
+    display: flex;
+    flex-direction: row;
+}
+.sx_but>button{
+    
 }
 .time_type>view{
     border-bottom:none!important;
@@ -285,7 +301,7 @@ picker{
     display: inline-block;
     border-bottom:none!important;
     margin-left: 0!important;
-    margin-right: 15rpx;
+    margin-right: 35rpx;
 }
 .gods_list>view{
     border-bottom:none!important;

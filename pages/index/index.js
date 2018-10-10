@@ -43,8 +43,12 @@ Page({
         content: [],
         nv: ['默认排序', '熟人优先', '距离最近', '时间最近'],//智能排序
         px: ['上午场', '下午场', '夜场'],//打球时间
-        lx:['球局类型','球技等级'],//筛选
-        gods:['张三','赵四','王五'],//大神列表
+        lx: ['球局类型1', '球局类型2',"球局类型3"],//筛选
+        gods: [
+            { id: "1", name: '张三', checked: false },
+            { id: "2", name: '赵四', checked: false },
+            { id: "3", name: '王五', checked: false }
+        ],//大神列表
         qyopen: false,
         qyshow: true,//商区显示隐藏
         nzopen: false,
@@ -62,7 +66,8 @@ Page({
         select2: '',
         shownavindex: '',
         games: [],
-        sx_active:null//筛选点击类型
+        sx_active: null,//筛选点击类型
+        dj_active: null//筛选的选择教练
     },
     inputTyping: function (e) {
         let keyword = e.detail.value;
@@ -101,10 +106,26 @@ Page({
         });
     },
     //点击筛选 选择类型
-    selectLX:function(e){
+    selectLX: function (e) {
         let _idx = e.currentTarget.dataset.idx;//点击当前的自定义id
         this.setData({
             sx_active: _idx
+        });
+    },
+    //点击筛选 选择等级
+    selectDJ: function (e) {
+        let _idx = e.currentTarget.dataset.idx;//点击当前的自定义id
+        this.setData({
+            dj_active: _idx
+        });
+    },
+    //点击筛选 选择教练
+    selecJL: function (e) {
+        let _idx = e.currentTarget.dataset.idx;//点击当前的自定义id
+        let gods_arr = this.data.gods;//大神数据
+        gods_arr[_idx].checked = !gods_arr[_idx].checked;
+        this.setData({
+            gods: gods_arr
         });
     },
     onShow: function () {
@@ -473,7 +494,7 @@ Page({
                 qyopen: false,
                 nzshow: true,
 
-                sxshow:true,
+                sxshow: true,
 
                 sxopen: false,
 
@@ -484,7 +505,7 @@ Page({
             })
         } else {
             this.setData({
-                sxopen:true,
+                sxopen: true,
                 nzopen: false,
                 pxopen: false,
                 qyopen: false,

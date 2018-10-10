@@ -147,9 +147,7 @@ page{
 .dz_name {
 }
 .active1{
-    background-color: #56a41f;
-    color: #fff!important;
-    
+    color: #56a41f!important;
 }
 .active1>view{
     color: #fff!important;

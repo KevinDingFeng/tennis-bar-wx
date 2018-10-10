@@ -103,8 +103,16 @@
             <view class='check_time border_cc'>
                 <view class='time_name'>选择类型</view>
                 <view class='widcc'>
-                    <view class="time_type {{sx_active == index ? 'active1' : 'no_active1' }}" wx:for="{{lx}}" wx:for-index="index" bindtap='selectLX' data-idx='{{index}}'>
-                        <view  data-idx='{{index}}'>{{item}}</view>
+                    <view class="gods_list {{sx_active == index ? 'active1' : 'no_active1' }}" wx:for="{{lx}}" wx:for-index="index" bindtap='selectLX' data-idx='{{index}}'>
+                        <view data-idx='{{index}}'>{{item}}</view>
+                    </view>
+                </view>
+            </view>
+             <view class='check_time border_cc'>
+                <view class='time_name'>选择等级</view>
+                <view class='widcc'>
+                    <view class="gods_list {{dj_active == index ? 'active1' : 'no_active1' }}" wx:for="{{lx}}" wx:for-index="index" bindtap='selectDJ' data-idx='{{index}}'>
+                        <view data-idx='{{index}}'>{{item}}</view>
                     </view>
                 </view>
             </view>
@@ -112,9 +120,13 @@
                 <view class='time_name'>选择教练</view>
                 <view class='widcc'>
                     <view class='gods_list' wx:for="{{gods}}" wx:for-index="index">
-                        <view bindtap='selectLX' data-idx='{{index}}'>{{item}}</view>
+                        <view class="{{gods[index].checked ? 'active_gods' : 'no_active_gods' }}" bindtap='selecJL' data-idx='{{index}}'>{{item.name}}</view>
                     </view>
                 </view>
+            </view>
+            <view class='check_time border_cc sx_but'>
+                    <button type="primary">确定</button>
+                    <button type="default">重置</button>
             </view>
         </view>
         <!-- 遮盖层 -->

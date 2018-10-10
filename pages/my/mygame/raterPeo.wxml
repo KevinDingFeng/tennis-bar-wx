@@ -17,7 +17,7 @@
         <view class='hx_label'>
             <block wx:if="{{!comment.gameLabels}}">
                 <block wx:for="{{gameLabels}}" wx:for-item="gl">
-                    <view class="{{label_active == index ? 'active1' : 'no_active1' }}" bindtap='click_label' data-index = "{{index}}">{{gl.name}}</view>
+                    <view class="{{label_active == index ? 'active1' : 'no_active1' }}" bindtap='click_pjlabel' data-index = "{{index}}">{{gl.name}}</view>
                 </block>
             </block>
             <block wx:else>
@@ -41,8 +41,8 @@
         <!-- 球场环境标签 -->
         <view class='hx_label'>
             <block wx:if="{{!comment.courtLabels}}">
-                <block wx:for="{{courtLabels}}" wx:for-item="cl">
-                    <view>{{cl.name}}</view>
+                <block wx:for="{{courtLabels}}" wx:for-item="cl" >
+                    <view class="{{label_active_hj == index ? 'active1' : 'no_active1' }}" bindtap='click_hjlabel' data-index = "{{index}}">{{cl.name}}</view>
                 </block>
             </block>
             <block wx:else>
