@@ -39,7 +39,7 @@
                         <block wx:for="{{certPaths}}" wx:for-item="path">
                             <view class='icon_sty'>
                                 <image class="img_v" src="{{imgUrl}}{{prePath}}{{path}}" mode="aspectFill" />
-                                <icon class='icon_sty_icon' type="cancel" bindtap='cancel_xq'></icon>
+                                <icon class='icon_sty_icon' type="cancel" data-idx="{{index}}" bindtap='cancel_xq_existed'></icon>
                             </view>
                         </block>
                     </block>
@@ -47,7 +47,7 @@
                         <block wx:for="{{tempFiles}}" wx:for-item="file">
                             <view class='icon_sty'>
                                 <image class="img_v  " src="{{file.path}}" mode="aspectFill" />
-                                <icon class='icon_sty_icon' type="cancel" bindtap='cancel_xq'></icon>
+                                <icon class='icon_sty_icon' type="cancel" data-idx="{{index}}" bindtap='cancel_xq_temp'></icon>
                             </view>
                         </block>
                     </block>

@@ -51,10 +51,23 @@ Page({
         })
     },
     //清除图片
-    cancel_xq:function(){
-        this.setData({
-            tempFiles:{path:""}
-        })
+    //已经保存
+    cancel_xq_existed:function(e){
+      let idx_existed = e.currentTarget.dataset.idx;
+      let certPaths = this.data.certPaths;
+      let tmpF = utilJs.remove(idx_existed,certPaths);
+      this.setData({
+        certPaths:tmpF
+      })
+    },
+    //即将保存
+    cancel_xq_temp:function(e){
+      let idx_temp = e.currentTarget.dataset.idx;
+      let tempFiles = this.data.tempFiles;
+      let tmpF = utilJs.remove(idx_temp,tempFiles);
+      this.setData({
+        tempFiles:tmpF
+      })
     },
     openAlert: function () {
         wx.showModal({

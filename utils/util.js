@@ -54,6 +54,16 @@ function replaceAllChar(char,replaceWith){
   return null;
 }
 
+function remove(idx,arr){
+  var arr_new = new Array();
+  arr.forEach(function(item,index){
+    if(idx != index){
+      arr_new.push(item)
+    }
+  })
+  return arr_new;
+}
+
 
 module.exports = {
   formatDate: formatDate,
@@ -61,5 +71,6 @@ module.exports = {
   hasTokenPostHeader: hasTokenPostHeader,
   hasTokenGetHeader: hasTokenGetHeader,
   noTokenGetHeader: noTokenGetHeader,
-  replaceAllChar: replaceAllChar
+  replaceAllChar: replaceAllChar,
+  remove: remove
 }

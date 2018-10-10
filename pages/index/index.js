@@ -8,8 +8,10 @@ var pageSize = 20;
 var isbottom = false;
 Page({
     data: {
-        gameTypes: [{ "All": "不限" }, { "Entertainment": "娱乐局" }, { "Teaching": "教学局" }],    // 球局类型
-        skillLevs: [{ "All": "不限" }, { "Entry": "入门(0~1.0)" }, { "Medium": "中级(1.5~3.5)" }, { "Professional": "专业(4.0~7.0)" }],        // 球技等级 
+        gameTypes: { "All": "不限" ,"Entertainment": "娱乐局" ,"Teaching": "教学局" },    // 球局类型
+        gt: ["All", "Entertainment","Teaching"],
+        skillLevs: { "All": "不限" , "Entry": "入门(0~1.0)" , "Medium": "中级(1.5~3.5)" , "Professional": "专业(4.0~7.0)" },        // 球技等级 
+        sl: ["All", "Entry", "Medium","Professional"],
         //筛选
         skillLev: '',
         gameType: '',
@@ -44,11 +46,7 @@ Page({
         nv: ['默认排序', '熟人优先', '距离最近', '时间最近'],//智能排序
         px: ['上午场', '下午场', '夜场'],//打球时间
         lx: ['球局类型1', '球局类型2',"球局类型3"],//筛选
-        gods: [
-            { id: "1", name: '张三', checked: false },
-            { id: "2", name: '赵四', checked: false },
-            { id: "3", name: '王五', checked: false }
-        ],//大神列表
+        gods: [],//大神列表
         qyopen: false,
         qyshow: true,//商区显示隐藏
         nzopen: false,
@@ -78,7 +76,7 @@ Page({
             title: '球局',
         })
         //获取所有教练，筛选的时候用
-        // this.getCoachList();
+        this.getCoachList();
     },
     getCoachList: function () {
         let that = this;
@@ -88,7 +86,16 @@ Page({
             header: utilJs.hasTokenGetHeader(),
             success: function (res) {
                 if (res.data.code == '200') {
-                    that.setData({ coach: res.data.data.coachList })
+                  let coachs = res.data.data.coachList;
+                  var gods = [];
+                  coachs.forEach(function(item,index){
+                    gods.push({
+                      id:item.id,
+                      name:item.nickName,
+                      checked:false
+                    })
+                  })
+                  that.setData({ gods: gods })
                 }
             }
         })
@@ -105,21 +112,21 @@ Page({
             inputShowed: false
         });
     },
-    //点击筛选 选择类型
+    //点击筛选 球局类型
     selectLX: function (e) {
         let _idx = e.currentTarget.dataset.idx;//点击当前的自定义id
         this.setData({
             sx_active: _idx
         });
     },
-    //点击筛选 选择等级
+    //点击筛选 球技等级
     selectDJ: function (e) {
         let _idx = e.currentTarget.dataset.idx;//点击当前的自定义id
         this.setData({
             dj_active: _idx
         });
     },
-    //点击筛选 选择教练
+    //点击筛选 教练
     selecJL: function (e) {
         let _idx = e.currentTarget.dataset.idx;//点击当前的自定义id
         let gods_arr = this.data.gods;//大神数据
@@ -127,6 +134,41 @@ Page({
         this.setData({
             gods: gods_arr
         });
+    },
+
+    //确认筛选
+    filter_search:function(){
+      let gt = this.data.gt;
+      let sl = this.data.sl;
+      let qj_idx = this.data.sx_active;
+      let dj_idx = this.data.dj_active;
+      let gods = this.data.gods;
+      if (qj_idx){
+        this.setData({gameType:gt[qj_idx]})
+      }
+      if (dj_idx){
+        this.setData({skillLev:sl[dj_idx]})
+      }
+      if (gods){
+        var gods_sub = [];
+        gods.forEach(function(item,index){
+          if(item.checked){
+            gods_sub.push(item.id)
+          }
+        })
+        this.setData({coachName:gods_sub.length == 0 ? '':JSON.stringify(gods_sub)})
+      }
+      console.log(this.data.coachName);
+      pageIndex = pageIndex > 0 ? 0 : pageIndex;
+      this.queryGame();
+    },
+    //重置
+    reset_search:function(){
+      this.setData({
+        sx_active:null,
+        dj_active:null,
+      })
+      this.resetSelectCoach();
     },
     onShow: function () {
         pageIndex = 0;
@@ -261,10 +303,13 @@ Page({
                 time: '',
                 gameType: '',
                 skillLev: '',
-                name: '',
+                coachName: '',
+                sx_active: null,//筛选点击类型
+                dj_active: null,//筛选的选择教练
                 //清空games 数据
                 games: []
             })
+            this.resetSelectCoach();
             pageIndex = pageIndex > 0 ? 0 : pageIndex;
             this.queryGame();
         } else {
@@ -303,10 +348,13 @@ Page({
             time: '',
             gameType: '',
             skillLev: '',
-            name: '',
+            coachName: '',
+            sx_active: null,//筛选点击类型
+            dj_active: null,//筛选的选择教练
             //清空games 数据
             games: []
         })
+        this.resetSelectCoach();
         pageIndex = pageIndex > 0 ? 0 : pageIndex;
         this.queryGame();
 
@@ -425,10 +473,13 @@ Page({
             nz_text: this.data.nv[idx],
             gameType: '',
             skillLev: '',
-            name: '',
+            coachName: '',
+            sx_active: null,//筛选点击类型
+            dj_active: null,//筛选的选择教练
             //清空games 数据
             games: []
         })
+        this.resetSelectCoach();
         if (this.data.orderType == 'familiarity') {
             this.setData({ lon_lat: {}, date: '', time: '' })
         }
@@ -477,10 +528,13 @@ Page({
             px_text: this.data.px[idx],
             gameType: '',
             skillLev: '',
-            name: '',
+            coachName: '',
+            sx_active: null,//筛选点击类型
+            dj_active: null,//筛选的选择教练
             //清空games 数据
             games: []
         })
+        this.resetSelectCoach();
         pageIndex = pageIndex > 0 ? 0 : pageIndex;
         this.queryGame();
     },
@@ -518,28 +572,24 @@ Page({
                 shownavindex: e.currentTarget.dataset.nav
             })
         }
-        // this.setData({
-        //     level1: null,
-        //     level2: null,
-        //     level3: null,
-        //     lon_lat: {},
-        //     orderType: '',
-        //     qy_text: "全部商区",
-        //     nz_text: "智能排序",
-        //     px_text: "打球时间",
-        //     time: '',
-        //     date: '',
-        //     // gameType: 'Entertainment',
-        //     // gameType:'Teaching',
-        //     gameType: '',
-        //     // skillLev:'Entry',
-        //     skillLev: 'Professional',
-        //     name: '',
-        //     //清空games 数据
-        //     games: []
-        // })
-        // //   pageIndex = pageIndex > 0 ? 0 : pageIndex;
-        // //   this.queryGame();
+        this.setData({
+            level1: null,
+            level2: null,
+            level3: null,
+            lon_lat: {},
+            orderType: '',
+            qy_text: "全部商区",
+            nz_text: "智能排序",
+            px_text: "打球时间",
+            time: '',
+            date: '',
+            gameType: '',
+            skillLev: '',
+            name: '',
+            //清空games 数据
+            games: []
+        })
+        this.resetSelectCoach();
     },
 
     /**
@@ -568,5 +618,17 @@ Page({
         }
 
     },
+    resetSelectCoach:function(){
+      let gods = this.data.gods;
+      var gods_new = [];
+      gods.forEach(function (item, index) {
+        gods_new.push({
+          id: item.id,
+          name: item.name,
+          checked: false
+        })
+      })
+      this.setData({ gods: gods_new })
+    }
 
 })

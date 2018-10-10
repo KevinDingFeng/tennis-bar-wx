@@ -101,23 +101,23 @@
         <!-- 筛选 -->
         <view class="temp temp1 {{sxopen ? 'slidown' : 'slidup'}} {{sxshow ? 'disappear':''}}">
             <view class='check_time border_cc'>
-                <view class='time_name'>选择类型</view>
+                <view class='time_name'>球局类型</view>
                 <view class='widcc'>
-                    <view class="gods_list {{sx_active == index ? 'active1' : 'no_active1' }}" wx:for="{{lx}}" wx:for-index="index" bindtap='selectLX' data-idx='{{index}}'>
-                        <view data-idx='{{index}}'>{{item}}</view>
+                    <view class="gods_list {{sx_active == index ? 'active1' : 'no_active1' }}" wx:for="{{gt}}" wx:for-index="index" bindtap='selectLX' data-idx='{{index}}'>
+                        <view data-idx='{{index}}'>{{gameTypes[item]}}</view>
                     </view>
                 </view>
             </view>
              <view class='check_time border_cc'>
-                <view class='time_name'>选择等级</view>
+                <view class='time_name'>球技等级</view>
                 <view class='widcc'>
-                    <view class="gods_list {{dj_active == index ? 'active1' : 'no_active1' }}" wx:for="{{lx}}" wx:for-index="index" bindtap='selectDJ' data-idx='{{index}}'>
-                        <view data-idx='{{index}}'>{{item}}</view>
+                    <view class="gods_list {{dj_active == index ? 'active1' : 'no_active1' }}" wx:for="{{sl}}" wx:for-index="index" bindtap='selectDJ' data-idx='{{index}}'>
+                        <view data-idx='{{index}}'>{{skillLevs[item]}}</view>
                     </view>
                 </view>
             </view>
             <view class='check_time border_cc'>
-                <view class='time_name'>选择教练</view>
+                <view class='time_name'>教练</view>
                 <view class='widcc'>
                     <view class='gods_list' wx:for="{{gods}}" wx:for-index="index">
                         <view class="{{gods[index].checked ? 'active_gods' : 'no_active_gods' }}" bindtap='selecJL' data-idx='{{index}}'>{{item.name}}</view>
@@ -125,8 +125,8 @@
                 </view>
             </view>
             <view class='check_time border_cc sx_but'>
-                    <button type="primary">确定</button>
-                    <button type="default">重置</button>
+                    <button type="primary" bindtap="filter_search">确定</button>
+                    <button type="default" bindtap="reset_search">重置</button>
             </view>
         </view>
         <!-- 遮盖层 -->
