@@ -22,7 +22,7 @@
             </block>
             <block wx:else>
                 <block wx:for="{{selectedGameLabels}}" wx:for-item="sgl">
-                    <view>{{sgl.name}}</view>
+                    <view class="active1">{{sgl.name}}</view>
                 </block>
             </block>
         </view>
@@ -47,7 +47,7 @@
             </block>
             <block wx:else>
                 <block wx:for="{{selectedCourtLabels}}" wx:for-item="scl">
-                    <view>{{scl.name}}</view>
+                    <view class="active1">{{scl.name}}</view>
                 </block>
             </block>
         </view>
