@@ -34,7 +34,7 @@
     <view class='index_banner'>
         <image src="../../images/index/banner.png"></image>
     </view>
-    <!-- 三栏搜索 -->
+    <!-- 四栏搜索 -->
     <view class='index_search'>
         <view class="nav">
             <view class="nav-son {{shownavindex == 1? 'active' : ''}}" bindtap="listqy" data-nav="1">
@@ -68,15 +68,23 @@
                 </view>
             </view>
             <view class="qy quyu-right">
-                <view wx:for="{{cityright}}" bindtap='selectright' data-city='{{index}}'>
+                <view wx:for="{{cityright}}" bindtap='selectright' data-city='{{index}}' data-cityName='{{cityright[index].name}}'>
                     {{cityright[index].name}}
+                    <view class="{{cityright[index].name == sq_hx ? 'children_show' : 'children_hide'}}">
+                        <icon class="con_sty" type="success" size='20'></icon>
+                    </view>
                 </view>
             </view>
         </view>
         <!-- 智能排序 -->
         <view class="temp temp1 {{nzopen ? 'slidown' : 'slidup'}} {{nzshow ? 'disappear':''}}">
             <view wx:for="{{content}}" wx:for-index="index">
-                <view bindtap="intelligentSort" data-idx="{{index}}">{{item}}</view>
+                <view class="px_flex" bindtap="intelligentSort" data-idx="{{index}}" data-pxName="{{item}}">
+                    {{item}}
+                    <view class="{{item == px_hx ? 'children_show' : 'children_hide'}}">
+                        <icon class="con_sty" type="success" size='20'></icon>
+                    </view>
+                </view>
             </view>
         </view>
         <!-- 打球时间 -->
@@ -93,7 +101,9 @@
                 <view class='check_time'>
                     <view class='time_name'>选择时间</view>
                     <view class='time_type' wx:for="{{content}}" wx:for-index="index">
-                        <view bindtap='selectTime' data-idx='{{index}}'>{{item}}</view>
+                        <view class="{{item == time_hx ? 'time_active' : 'no_active_gods'}}"  bindtap='selectTime' data-idx='{{index}}' data-type="{{item}}">
+                            {{item}}
+                        </view>
                     </view>
                 </view>
             </view>
@@ -108,10 +118,10 @@
                     </view>
                 </view>
             </view>
-             <view class='check_time border_cc'>
+            <view class='check_time border_cc'>
                 <view class='time_name'>球技等级</view>
                 <view class='widcc'>
-                    <view class="gods_list {{dj_active == index ? 'active1' : 'no_active1' }}" wx:for="{{sl}}" wx:for-index="index" bindtap='selectDJ' data-idx='{{index}}'>
+                    <view class="gods_list  {{dj_active == index ? 'active1' : 'no_active1' }}" wx:for="{{sl}}" wx:for-index="index" bindtap='selectDJ' data-idxdj='{{index}}'>
                         <view data-idx='{{index}}'>{{skillLevs[item]}}</view>
                     </view>
                 </view>
@@ -120,13 +130,13 @@
                 <view class='time_name'>教练</view>
                 <view class='widcc'>
                     <view class='gods_list' wx:for="{{gods}}" wx:for-index="index">
-                        <view class="{{gods[index].checked ? 'active_gods' : 'no_active_gods' }}" bindtap='selecJL' data-idx='{{index}}'>{{item.name}}</view>
+                        <view class="{{gods[index].checked ? 'active_gods' : 'no_active_gods' }}" bindtap='selecJL' data-idxjl='{{index}}'>{{item.name}}</view>
                     </view>
                 </view>
             </view>
             <view class='check_time border_cc sx_but'>
-                    <button type="primary" bindtap="filter_search">确定</button>
-                    <button type="default" bindtap="reset_search">重置</button>
+                <button type="primary" bindtap="filter_search">确定</button>
+                <button type="default" bindtap="reset_search">重置</button>
             </view>
         </view>
         <!-- 遮盖层 -->

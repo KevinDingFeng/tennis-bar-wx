@@ -8,10 +8,10 @@ var pageSize = 20;
 var isbottom = false;
 Page({
     data: {
-        gameTypes: { "All": "不限" ,"Entertainment": "娱乐局" ,"Teaching": "教学局" },    // 球局类型
-        gt: ["All", "Entertainment","Teaching"],
-        skillLevs: { "All": "不限" , "Entry": "入门(0~1.0)" , "Medium": "中级(1.5~3.5)" , "Professional": "专业(4.0~7.0)" },        // 球技等级 
-        sl: ["All", "Entry", "Medium","Professional"],
+        gameTypes: { "All": "不限", "Entertainment": "娱乐局", "Teaching": "教学局" },    // 球局类型
+        gt: ["All", "Entertainment", "Teaching"],
+        skillLevs: { "All": "不限", "Entry": "入门(0~1.0)", "Medium": "中级(1.5~3.5)", "Professional": "专业(4.0~7.0)" },        // 球技等级 
+        sl: ["All", "Entry", "Medium", "Professional"],
         //筛选
         skillLev: '',
         gameType: '',
@@ -45,7 +45,7 @@ Page({
         content: [],
         nv: ['默认排序', '熟人优先', '距离最近', '时间最近'],//智能排序
         px: ['上午场', '下午场', '夜场'],//打球时间
-        lx: ['球局类型1', '球局类型2',"球局类型3"],//筛选
+        lx: ['球局类型1', '球局类型2', "球局类型3"],//筛选
         gods: [],//大神列表
         qyopen: false,
         qyshow: true,//商区显示隐藏
@@ -65,7 +65,11 @@ Page({
         shownavindex: '',
         games: [],
         sx_active: null,//筛选点击类型
-        dj_active: null//筛选的选择教练
+        dj_active: null,//筛选的选择教练
+        sq_hx: null,//商区回显
+        px_hx: null,//排序回显
+        time_hx: null,//打球时间回显
+        xs_jl: null,//教练回显
     },
     inputTyping: function (e) {
         let keyword = e.detail.value;
@@ -86,16 +90,15 @@ Page({
             header: utilJs.hasTokenGetHeader(),
             success: function (res) {
                 if (res.data.code == '200') {
-                  let coachs = res.data.data.coachList;
-                  var gods = [];
-                  coachs.forEach(function(item,index){
-                    gods.push({
-                      id:item.id,
-                      name:item.nickName,
-                      checked:false
+                    let coachs = res.data.data.coachList;
+                    var gods = [];
+                    coachs.forEach(function (item, index) {
+                        gods.push({
+                            id: item.id,
+                            name: item.nickName,
+                        })
                     })
-                  })
-                  that.setData({ gods: gods })
+                    that.setData({ gods: gods })
                 }
             }
         })
@@ -116,20 +119,29 @@ Page({
     selectLX: function (e) {
         let _idx = e.currentTarget.dataset.idx;//点击当前的自定义id
         this.setData({
-            sx_active: _idx
+            sx_active: _idx,
         });
     },
     //点击筛选 球技等级
     selectDJ: function (e) {
-        let _idx = e.currentTarget.dataset.idx;//点击当前的自定义id
+        let _idx = e.currentTarget.dataset.idxdj;//点击当前的自定义id
         this.setData({
             dj_active: _idx
         });
     },
     //点击筛选 教练
     selecJL: function (e) {
-        let _idx = e.currentTarget.dataset.idx;//点击当前的自定义id
+        console.log(this.data.gods)
+        let _idx = e.currentTarget.dataset.idxjl;//点击当前的自定义id
         let gods_arr = this.data.gods;//大神数据
+        for(var i=0;i<gods_arr.length;i++){
+            if (gods_arr[i].checked == true){
+
+            }else{
+                gods_arr[i].checked = false;
+            }
+            
+        }
         gods_arr[_idx].checked = !gods_arr[_idx].checked;
         this.setData({
             gods: gods_arr
@@ -137,38 +149,46 @@ Page({
     },
 
     //确认筛选
-    filter_search:function(){
-      let gt = this.data.gt;
-      let sl = this.data.sl;
-      let qj_idx = this.data.sx_active;
-      let dj_idx = this.data.dj_active;
-      let gods = this.data.gods;
-      if (qj_idx){
-        this.setData({gameType:gt[qj_idx]})
-      }
-      if (dj_idx){
-        this.setData({skillLev:sl[dj_idx]})
-      }
-      if (gods){
-        var gods_sub = [];
-        gods.forEach(function(item,index){
-          if(item.checked){
-            gods_sub.push(item.id)
-          }
+    filter_search: function () {
+        this.setData({
+            isfull: false,
+            sxshow:true,
+            sxopen:false,
+            pxshow: true,
+            qyshow: true,
+            shownavindex:0
         })
-        this.setData({coachName:gods_sub.length == 0 ? '':JSON.stringify(gods_sub)})
-      }
-      console.log(this.data.coachName);
-      pageIndex = pageIndex > 0 ? 0 : pageIndex;
-      this.queryGame();
+        let gt = this.data.gt;
+        let sl = this.data.sl;
+        let qj_idx = this.data.sx_active;
+        let dj_idx = this.data.dj_active;
+        let gods = this.data.gods;
+        if (qj_idx) {
+            this.setData({ gameType: gt[qj_idx] });
+        }
+        if (dj_idx) {
+            this.setData({ skillLev: sl[dj_idx] })
+        }
+        if (gods) {
+            var gods_sub = [];
+            gods.forEach(function (item, index) {
+                if (item.checked) {
+                    gods_sub.push(item.id)
+                }
+            })
+            this.setData({ coachName: gods_sub.length == 0 ? '' : JSON.stringify(gods_sub) })
+        }
+        console.log(this.data.coachName);
+        pageIndex = pageIndex > 0 ? 0 : pageIndex;
+        this.queryGame();
     },
     //重置
-    reset_search:function(){
-      this.setData({
-        sx_active:null,
-        dj_active:null,
-      })
-      this.resetSelectCoach();
+    reset_search: function () {
+        this.setData({
+            sx_active: null,
+            dj_active: null,
+        })
+        this.resetSelectCoach();
     },
     onShow: function () {
         pageIndex = 0;
@@ -323,6 +343,7 @@ Page({
     },
     selectright: function (e) {
         let index = e.currentTarget.dataset.city;
+        let city_name = e.currentTarget.dataset.cityname;
         if (index == 0) {
             this.setData({
                 level3: '',
@@ -338,6 +359,7 @@ Page({
                 nz_text: "智能排序",
                 px_text: "打球时间",
                 ft_text: "筛选",
+                sq_hx: city_name
             })
         }
         this.hidebg();
@@ -356,20 +378,32 @@ Page({
         })
         this.resetSelectCoach();
         pageIndex = pageIndex > 0 ? 0 : pageIndex;
+        wx.showToast({
+            title: '数据查询中',
+            icon: 'none'
+        })
         this.queryGame();
 
     },
     hidebg: function (e) {
-        this.setData({
-            qyopen: false,
-            nzopen: false,
-            pxopen: false,
-            nzshow: true,
-            pxshow: true,
-            qyshow: true,
-            isfull: false,
-            shownavindex: 0
-        })
+        if (this.data.sxopen) {
+            this.setData({
+                isfull: true,
+            })
+        } else {
+            this.setData({
+                qyopen: false,
+                nzopen: false,
+                pxopen: false,
+                nzshow: true,
+                pxshow: true,
+                qyshow: true,
+                sxshow: true,
+                sxopen: false,
+                isfull: false,
+                shownavindex: 0
+            })
+        }
     },
     bindDateChange: function (e) {//时间选择
         console.log('picker发送选择改变，携带值为', e.detail.value)
@@ -457,6 +491,7 @@ Page({
     intelligentSort: function (event) {
         this.hidebg();
         let idx = event.currentTarget.dataset.idx;
+        let _name = event.currentTarget.dataset.pxname;
         if (idx == 2) {
             this.getLoc();
         }
@@ -477,7 +512,8 @@ Page({
             sx_active: null,//筛选点击类型
             dj_active: null,//筛选的选择教练
             //清空games 数据
-            games: []
+            games: [],
+            px_hx: _name
         })
         this.resetSelectCoach();
         if (this.data.orderType == 'familiarity') {
@@ -515,6 +551,7 @@ Page({
     selectTime: function (event) {
         this.hidebg();
         let idx = event.currentTarget.dataset.idx;
+        let _type = event.currentTarget.dataset.type;
         this.setData({
             level1: null,
             level2: null,
@@ -532,7 +569,8 @@ Page({
             sx_active: null,//筛选点击类型
             dj_active: null,//筛选的选择教练
             //清空games 数据
-            games: []
+            games: [],
+            time_hx: _type
         })
         this.resetSelectCoach();
         pageIndex = pageIndex > 0 ? 0 : pageIndex;
@@ -547,11 +585,8 @@ Page({
                 pxopen: false,
                 qyopen: false,
                 nzshow: true,
-
                 sxshow: true,
-
                 sxopen: false,
-
                 pxshow: true,
                 qyshow: true,
                 isfull: false,
@@ -618,17 +653,17 @@ Page({
         }
 
     },
-    resetSelectCoach:function(){
-      let gods = this.data.gods;
-      var gods_new = [];
-      gods.forEach(function (item, index) {
-        gods_new.push({
-          id: item.id,
-          name: item.name,
-          checked: false
+    resetSelectCoach: function () {
+        let gods = this.data.gods;
+        var gods_new = [];
+        gods.forEach(function (item, index) {
+            gods_new.push({
+                id: item.id,
+                name: item.name,
+                checked:false
+            })
         })
-      })
-      this.setData({ gods: gods_new })
+        this.setData({ gods: gods_new })
     }
 
 })

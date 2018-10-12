@@ -151,7 +151,17 @@ page {
     font-size: 28rpx;
     color: #222;
 }
-
+.px_flex{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+}
+.px_flex >view{
+    border-bottom: none;
+}
+.px_flex icon{
+    margin-right: 90rpx!important;
+}
 .quyu {
     border-top: 1px solid #e4e4e4;
     position: relative;
@@ -201,10 +211,16 @@ page {
     width: 55%;
 }
 
-.quyu-right view {
+.quyu-right>view {
     border-bottom: 1px solid #e4e4e4;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
-
+.con_sty{
+    line-height:2rpx;
+    margin-right:20rpx;
+}
 .current {
     background-color: #fefefe;
     color: #56a41f !important;
@@ -298,11 +314,14 @@ picker {
     /* border-bottom:1px solid #d1d3d4; */
     border-bottom: none !important;
     padding: 30rpx 0;
+    display: flex;
+    flex-direction: row;
+    justify-content:flex-start;
 }
 
-.check_time view:nth-child(2) {
+/* .check_time view:nth-child(2) {
     margin-left: 42rpx;
-}
+} */
 
 .time_type {
     display: inline-block;
@@ -310,15 +329,17 @@ picker {
     border: solid 1px #e4e4e4;
     text-align: center;
     margin-right: 21rpx;
-    padding: 0 37rpx;
+    /* padding: 0 37rpx; */
     font-size: 28rpx !important;
     color: #424242;
+    width:18%;
+
 }
 
 .widcc {
     display: inline-block;
-    margin-left: 130rpx !important;
     border-bottom: none !important;
+    width: 75%;
 }
 
 .border_cc {
@@ -351,6 +372,10 @@ picker {
     color: #000;
 }
 
+.time_active{
+    background-color: #56a41f!important;
+    color: #fff !important;
+}
 .sx_but {
     display: flex;
     flex-direction: row;
@@ -361,6 +386,7 @@ picker {
 
 .time_type>view {
     border-bottom: none !important;
+    border-radius: 10px;
 }
 
 .time_name {
@@ -368,6 +394,7 @@ picker {
     border-bottom: none !important;
     font-size: 28rpx !important;
     color: #222 !important;
+    width: 20%;
 }
 
 .gods_list {
