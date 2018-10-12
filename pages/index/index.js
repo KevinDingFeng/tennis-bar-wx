@@ -96,6 +96,7 @@ Page({
                         gods.push({
                             id: item.id,
                             name: item.nickName,
+                            checked:false
                         })
                     })
                     that.setData({ gods: gods })
@@ -180,6 +181,10 @@ Page({
         }
         console.log(this.data.coachName);
         pageIndex = pageIndex > 0 ? 0 : pageIndex;
+        wx.showToast({
+            title: '数据查询中',
+            icon: 'none'
+        })
         this.queryGame();
     },
     //重置
@@ -378,12 +383,7 @@ Page({
         })
         this.resetSelectCoach();
         pageIndex = pageIndex > 0 ? 0 : pageIndex;
-        wx.showToast({
-            title: '数据查询中',
-            icon: 'none'
-        })
         this.queryGame();
-
     },
     hidebg: function (e) {
         if (this.data.sxopen) {
@@ -449,6 +449,7 @@ Page({
             success: function (res) {
                 console.log(res.data);
                 if (res.data.code == "200") {
+                    console.log(that.data.gods)
                     let game = that.data.games;
                     game = game.concat(res.data.data.page.content);
                     that.setData({
@@ -624,7 +625,7 @@ Page({
             //清空games 数据
             games: []
         })
-        this.resetSelectCoach();
+        // this.resetSelectCoach();
     },
 
     /**
