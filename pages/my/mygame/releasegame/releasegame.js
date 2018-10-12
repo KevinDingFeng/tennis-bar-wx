@@ -60,16 +60,9 @@ Page({
         }
         that.getWxUserInfo();
         that.setComment(that.data.game.id);
-        // wx.getSystemInfo({
-        //   success: function (res) {
-        //     that.setData({
-        //       sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
-        //       sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
-        //     });
-        //   }
-        // });
     },
     onShow: function () {
+        var that = this;
         var gameId = that.data.game.id;
         that.setComment(gameId);
     },
@@ -83,11 +76,25 @@ Page({
             success: function (res) {
                 if (res.data.code == '200') {
                     let gameLabels = res.data.data.gameLabel;
-                    let courtLabels = res.data.data.courtLabel;
-                    that.setData({
-                        gameLabels: gameLabels,
-                        courtLabels: courtLabels
+                    let gl = [];
+                    gameLabels.forEach(function (item, index) {
+                      gl.push({
+                        id: item.id,
+                        name: item.name,
+                        checked: false
+                      })
                     })
+                    that.setData({ gameLabels: gl })
+                    let courtLabels = res.data.data.courtLabel;
+                    let cl = [];
+                    courtLabels.forEach(function (item, index) {
+                      cl.push({
+                        id: item.id,
+                        name: item.name,
+                        checked: false
+                      })
+                    })
+                    that.setData({ courtLabels: cl })
                 }
             }
         })
@@ -111,17 +118,17 @@ Page({
     click_pjlabel: function (e) {
         let that = this;
         var _idx = e.currentTarget.dataset.index;
-        that.setData({
-            label_active: _idx
-        })
+        let gameLabels = that.data.gameLabels;
+        gameLabels[_idx].checked = !gameLabels[_idx].checked;
+        that.setData({ gameLabels: gameLabels })
     },
     //点击环境标签
     click_hjlabel: function (e) {
         let that = this;
         var _idx = e.currentTarget.dataset.index;
-        that.setData({
-            label_active_hj: _idx
-        })
+        let courtLabels = that.data.courtLabels;
+        courtLabels[_idx].checked = !courtLabels[_idx].checked;
+        that.setData({ courtLabels: courtLabels })
     },
     //获取参加球局的球友  信息
     getJoinGamerInfo: function (id) {
@@ -285,19 +292,24 @@ Page({
         if (info.id) {
             data.id = id;
         }
-        // data.wxUserIds = that.data.wxUserIds == null?0:that.data.wxUserIds;
+        data.wxUserIds = that.data.wxUserIds == null?0:that.data.wxUserIds;
 
-        //测试数据
-        let gamelabel = new Array();
-        gamelabel.push({ "id": 1, "name": "球友很nice" });
-        gamelabel.push({ "id": 2, "name": "领导力强" });
-        gamelabel.push({ "id": 3, "name": "打的很爽" });
-        let courtlabel = new Array();
-        courtlabel.push({ "id": 9, "name": "环境很好" });
-        courtlabel.push({ "id": 12, "name": "服务态度好" });
-
-        data.gameLabels = JSON.stringify(gamelabel);
-        data.courtLabels = JSON.stringify(courtlabel);
+        let gameLabel = new Array();
+        let courtLabel = new Array();
+        let gameL = that.data.gameLabels;
+        let courtL = that.data.courtLabels;
+        gameL.forEach(function (item, index) {
+          if (item.checked) {
+            gameLabel.push({ id: item.id, name: item.name })
+          }
+        })
+        courtL.forEach(function (item, index) {
+          if (item.checked) {
+            courtLabel.push({ id: item.id, name: item.name })
+          }
+        })
+        data.gameLabels = JSON.stringify(gameLabel);
+        data.courtLabels = JSON.stringify(courtLabel);
 
         wx.request({
             url: getApp().globalData.onlineUrl + 'api/comment/update',
@@ -314,6 +326,7 @@ Page({
         })
     },
     checkboxChange: function (e) {
+        
         this.setData({
             wxUserIds: e.detail.value
         });

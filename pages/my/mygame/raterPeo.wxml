@@ -17,12 +17,12 @@
         <view class='hx_label'>
             <block wx:if="{{!comment.gameLabels}}">
                 <block wx:for="{{gameLabels}}" wx:for-item="gl">
-                    <view class="{{label_active == index ? 'active1' : 'no_active1' }}" bindtap='click_pjlabel' data-index = "{{index}}">{{gl.name}}</view>
+                    <view class="{{gl.checked == true ? 'active1' : 'no_active1' }}" bindtap='click_pjlabel' data-index="{{index}}">{{gl.name}}</view>
                 </block>
             </block>
             <block wx:else>
                 <block wx:for="{{selectedGameLabels}}" wx:for-item="sgl">
-                    <view>{{sgl.name}}</view>
+                    <view class="active1">{{sgl.name}}</view>
                 </block>
             </block>
         </view>
@@ -42,12 +42,12 @@
         <view class='hx_label'>
             <block wx:if="{{!comment.courtLabels}}">
                 <block wx:for="{{courtLabels}}" wx:for-item="cl" >
-                    <view class="{{label_active_hj == index ? 'active1' : 'no_active1' }}" bindtap='click_hjlabel' data-index = "{{index}}">{{cl.name}}</view>
+                    <view class="{{cl.checked == true ? 'active1' : 'no_active1' }}" bindtap='click_hjlabel' data-index = "{{index}}">{{cl.name}}</view>
                 </block>
             </block>
             <block wx:else>
                 <block wx:for="{{selectedCourtLabels}}" wx:for-item="scl">
-                    <view>{{scl.name}}</view>
+                    <view class="active1">{{scl.name}}</view>
                 </block>
             </block>
         </view>
@@ -65,16 +65,16 @@
         </view>
         <view class='pj_img'>
             <checkbox-group bindchange="checkboxChange">
-                <view class='peo_list' wx:for="{{joinWxUser}}" wx:for-item="wxItem" wx:key="wxKey">
-                    <image src="{{wxItem.wxUserInfo.avatarUrl? wxItem.avatarUrl: '../../../../images/index/banner.png'}}"></image>
-                    <view class='pj_name'>{{wxItem.wxUserInfo.nickName}}</view>
+                <view class='peo_list' wx:for="{{joinWxUser}}" wx:for-item="item" wx:key="wxKey">
+                    <image src="{{item.wxUserInfo.avatarUrl}}"></image>
+                    <view class='pj_name'>{{item.wxUserInfo.nickName}}</view>
                     <view class='pj_check'>
                         <label class="checkbox" class='checkbox_sty'>
-                            <block wx:if="{{wxItem.presented}}">
-                                <checkbox value="{{wxItem.id}}" checked="checked" />到场
+                            <block wx:if="{{item.presented}}">
+                                <checkbox value="{{item.wxUserInfo.id}}" checked="checked" />到场
                             </block>
                             <block wx:else>
-                                <checkbox value="{{wxItem.id}}" />到场
+                                <checkbox value="{{item.wxUserInfo.id}}" />到场
                             </block>
                         </label>
                     </view>

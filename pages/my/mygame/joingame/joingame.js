@@ -97,16 +97,9 @@ Page({
         }
         that.getWxUserInfo();
         that.setComment(that.data.game.id);
-        // wx.getSystemInfo({
-        //     success: function (res) {
-        //         that.setData({
-        //             sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
-        //             sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
-        //         });
-        //     }
-        // });
     },
     onShow: function () {
+        var that = this;
         var info = that.data.game;
         var gameId = info.id;
         that.setComment(gameId);
@@ -121,30 +114,45 @@ Page({
             success: function (res) {
                 if (res.data.code == '200') {
                     let gameLabels = res.data.data.gameLabel;
-                    let courtLabels = res.data.data.courtLabel;
-                    that.setData({
-                        gameLabels: gameLabels,
-                        courtLabels: courtLabels
+                    let gl = [];
+                    gameLabels.forEach(function(item,index){
+                      gl.push({
+                        id:item.id,
+                        name:item.name,
+                        checked:false
+                      })
                     })
+                    that.setData({ gameLabels:gl})
+
+                    let courtLabels = res.data.data.courtLabel;
+                    let cl = [];
+                    courtLabels.forEach(function(item,index){
+                      cl.push({
+                        id:item.id,
+                        name:item.name,
+                        checked:false
+                      })
+                    })
+                    that.setData({courtLabels: cl})
                 }
             }
         })
     },
-    //点击评价标签
+    //球局和谐度标签
     click_pjlabel: function (e) {
         let that = this;
-        var _idx = e.currentTarget.dataset.index;
-        that.setData({
-            label_active: _idx
-        })
+        let _idx = e.currentTarget.dataset.idx;
+        let gameLabels = that.data.gameLabels;
+        gameLabels[_idx].checked = !gameLabels[_idx].checked; 
+        that.setData({gameLabels:gameLabels})
     },
-    //点击环境标签
+    //球场环境标签
     click_hjlabel: function (e) {
         let that = this;
         var _idx = e.currentTarget.dataset.index;
-        that.setData({
-            label_active_hj: _idx
-        })
+        let courtLabels = that.data.courtLabels;
+        courtLabels[_idx].checked = !courtLabels[_idx].checked;
+        that.setData({ courtLabels: courtLabels})
     },
     //获取球局信息  分享步骤
     getGameInfo: function (id) {
@@ -241,20 +249,6 @@ Page({
             })
         }
     },
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function () {
-
-    },
-
 
     /**
      * 点击tab切换
@@ -293,17 +287,22 @@ Page({
         data.gameId = info.gameId == null ? that.data.game.id : info.gameId;
         data.wxUserInfoId = info.wxUserInfoId == null ? that.data.wxUserInfo.id : info.wxUserInfoId;
 
-        //测试数据
-        // let gamelabel = new Array();
-        // gamelabel.push({"id":1,"name":"球友很nice"});
-        // gamelabel.push({ "id": 2, "name": "领导力强" });
-        // gamelabel.push({ "id": 3, "name": "打的很爽" });
-        // let courtlabel = new Array();
-        // courtlabel.push({"id":9,"name":"环境很好"});
-        // courtlabel.push({ "id": 12, "name": "服务态度好" });
-
-        // data.gameLabels = JSON.stringify(gamelabel);
-        // data.courtLabels = JSON.stringify(courtlabel);
+        let gameLabel = new Array();
+        let courtLabel = new Array();
+        let gameL = that.data.gameLabels;
+        let courtL = that.data.courtLabels;
+        gameL.forEach(function(item,index){
+          if(item.checked){
+            gameLabel.push({id:item.id,name:item.name})
+          }
+        })
+        courtL.forEach(function (item, index) {
+          if (item.checked) {
+            courtLabel.push({ id: item.id, name: item.name })
+          }
+        })
+        data.gameLabels = JSON.stringify(gameLabel);
+        data.courtLabels = JSON.stringify(courtLabel);
 
         if (info.id) {
             data.id = id;
