@@ -16,17 +16,22 @@ Page({
     latitude:'',
     city:'',
     keyword:'',
-    textData: {}
+    textData: {},
+    courts:[]
   },
   //获取球场信息
-  getCourtAround:function(){
+  getCourtAround:function(name){
+    let that = this;
+    name = name == undefined ?'':name;
     wx.request({
-      url: getApp().globalData.onlineUrl + 'api/game/around',
+      url: getApp().globalData.onlineUrl + 'api/game/around?keyword='+name,
       method: "GET",
       header: utilJs.hasTokenGetHeader(),
       success:function(res){
         if(res.data.code == '200'){
-          wx.setStorageSync("courts", res.data.data.courts);
+          markersData = [];
+          that.setData({ courts: res.data.data.courts})
+          // wx.setStorageSync("courts", res.data.data.courts);
         }
       }
     })
@@ -49,16 +54,27 @@ Page({
       iconHeight: 32,
       success: function (data) {
         console.log(data[0]);
+        var marker = [];
         // var marker = [{
-        //   id: data[0].id,
+        //   id: 0,
         //   latitude: data[0].latitude,
         //   longitude: data[0].longitude,
         //   iconPath: data[0].iconPath,
         //   width: data[0].width,
         //   height: data[0].height
         // }]
-        var marker = [];
-        var courtsData = wx.getStorageSync("courts");
+        // markersData = [{
+        //   id: 0,
+        //   latitude: data[0].latitude,
+        //   longitude: data[0].longitude,
+        //   iconPath: data[0].iconPath,
+        //   width: data[0].width,
+        //   height: data[0].height,
+        //   name: data[0].name,
+        //   address: data[0].desc
+        // }]
+        var courtsData = that.data.courts;
+        // var courtsData = wx.getStorageSync("courts");
         courtsData.forEach(function (item, index) {
           marker.push({
             id: index,
@@ -69,7 +85,8 @@ Page({
             height: 32
           })
           markersData.push({
-            id: index,
+            // id: index == 0 ? 1 : index+1,
+            id:index,
             latitude: item.latitude,
             longitude: item.longitude,
             iconPath: "../../../images/map/marker.png",
@@ -79,6 +96,8 @@ Page({
             address:item.address
           })
         });
+        
+        console.log(markersData);
         that.setData({
           markers: marker,
           latitude: data[0].latitude,
@@ -215,7 +234,8 @@ Page({
   bindInput:function(e){
     var that = this;
     var keyword = e.detail.value;
-    that.getPoi(keyword);
+    that.getCourtAround(keyword);
+    // that.getPoi(keyword);
   },
   //确定选择的对象
   confirm:function(){
