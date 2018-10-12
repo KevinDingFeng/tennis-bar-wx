@@ -90,7 +90,7 @@ Page({
       method: "GET",
        header: utilJs.hasTokenGetHeader(),
       success: function (res) {
-        var title = res.data.code == 200 ? '发送成功' : '验证码发送失败';
+        var title = res.data.code == 200 ? '发送成功' : res.data.data;
         wx.showToast({
           title: title,
           icon: 'none'
