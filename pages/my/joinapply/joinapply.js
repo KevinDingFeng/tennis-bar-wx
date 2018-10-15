@@ -26,6 +26,8 @@ Page({
         wx.setNavigationBarTitle({
           title: '加入申请',
         })
+        //初始化查询状态
+        init_status = "Agree";
         wx.getSystemInfo({
             success: function (res) {
                 that.setData({

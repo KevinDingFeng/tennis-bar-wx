@@ -26,6 +26,8 @@ Page({
             title: '加入确认',
         })
         var that = this;
+        //初始化查询状态
+        init_status = "WaitingConfirm";
         wx.getSystemInfo({
             success: function (res) {
                 that.setData({

@@ -141,7 +141,7 @@ Page({
     //球局和谐度标签
     click_pjlabel: function (e) {
         let that = this;
-        let _idx = e.currentTarget.dataset.idx;
+        let _idx = e.currentTarget.dataset.index;
         let gameLabels = that.data.gameLabels;
         gameLabels[_idx].checked = !gameLabels[_idx].checked; 
         that.setData({gameLabels:gameLabels})
@@ -149,7 +149,7 @@ Page({
     //球场环境标签
     click_hjlabel: function (e) {
         let that = this;
-        var _idx = e.currentTarget.dataset.index;
+        let _idx = e.currentTarget.dataset.index;
         let courtLabels = that.data.courtLabels;
         courtLabels[_idx].checked = !courtLabels[_idx].checked;
         that.setData({ courtLabels: courtLabels})

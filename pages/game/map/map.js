@@ -29,7 +29,7 @@ Page({
       header: utilJs.hasTokenGetHeader(),
       success:function(res){
         if(res.data.code == '200'){
-          markersData = [];
+          // markersData = [];
           that.setData({ courts: res.data.data.courts})
           // wx.setStorageSync("courts", res.data.data.courts);
         }
@@ -41,6 +41,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // if (!wx.getStorageSync("courts")){
+    // }
     this.getCourtAround();
     this.getRego();  
   },
@@ -54,7 +56,7 @@ Page({
       iconHeight: 32,
       success: function (data) {
         console.log(data[0]);
-        var marker = [];
+        var marker = new Array();
         // var marker = [{
         //   id: 0,
         //   latitude: data[0].latitude,
@@ -115,67 +117,70 @@ Page({
     })
   },
 
-  // getPoi:function(keyword){
-  //   var that = this;
-  //   var myAmapFun = new amapFile.AMapWX({ key: key });
-  //   var params = {
-  //     iconPathSelected: '../../../images/map/marker_checked.png',
-  //     iconPath: '../../../images/map/marker.png',
-  //     success: function (data) {
-  //       markersData = data.markers;
-  //       var poisData = data.poisData;
-  //       var markers_new = [];
-  //       markersData.forEach(function (item, index) {
-  //         markers_new.push({
-  //           id: item.id,
-  //           latitude: item.latitude,
-  //           longitude: item.longitude,
-  //           iconPath: item.iconPath,
-  //           width: item.width,
-  //           height: item.height
-  //         })
-  //       })
-  //       if (markersData.length > 0) {
-  //         that.setData({
-  //           markers: markers_new,
-  //           city: poisData[0].cityname || '',
-  //           latitude: markersData[0].latitude,
-  //           longitude: markersData[0].longitude
-  //         });
-  //         that.showMarkerInfo(markersData, 0);
-  //       } else {
-  //         wx.getLocation({
-  //           type: 'gcj02',
-  //           success: function (res) {
-  //             that.setData({
-  //               latitude: res.latitude,
-  //               longitude: res.longitude,
-  //               city: '北京市'
-  //             });
-  //           },
-  //           fail: function () {
-  //             that.setData({
-  //               latitude: 39.909729,
-  //               longitude: 116.398419,
-  //               city: '北京市'
-  //             });
-  //           }
-  //         })
-  //         that.setData({
-  //           textData: {
-  //             name: '抱歉，未找到结果',
-  //             desc: ''
-  //           }
-  //         });
-  //       }
-  //     },
-  //     fail: function (info) {
-  //       // wx.showModal({title:info.errMsg})
-  //     }
-  //   }
-  //   params.querykeywords = keyword == '' ? '网球场' : keyword;
-  //   myAmapFun.getPoiAround(params)
-  // },
+  /**
+   * 
+  getPoi:function(keyword){
+    var that = this;
+    var myAmapFun = new amapFile.AMapWX({ key: key });
+    var params = {
+      iconPathSelected: '../../../images/map/marker_checked.png',
+      iconPath: '../../../images/map/marker.png',
+      success: function (data) {
+        markersData = data.markers;
+        var poisData = data.poisData;
+        var markers_new = [];
+        markersData.forEach(function (item, index) {
+          markers_new.push({
+            id: item.id,
+            latitude: item.latitude,
+            longitude: item.longitude,
+            iconPath: item.iconPath,
+            width: item.width,
+            height: item.height
+          })
+        })
+        if (markersData.length > 0) {
+          that.setData({
+            markers: markers_new,
+            city: poisData[0].cityname || '',
+            latitude: markersData[0].latitude,
+            longitude: markersData[0].longitude
+          });
+          that.showMarkerInfo(markersData, 0);
+        } else {
+          wx.getLocation({
+            type: 'gcj02',
+            success: function (res) {
+              that.setData({
+                latitude: res.latitude,
+                longitude: res.longitude,
+                city: '北京市'
+              });
+            },
+            fail: function () {
+              that.setData({
+                latitude: 39.909729,
+                longitude: 116.398419,
+                city: '北京市'
+              });
+            }
+          })
+          that.setData({
+            textData: {
+              name: '抱歉，未找到结果',
+              desc: ''
+            }
+          });
+        }
+      },
+      fail: function (info) {
+        // wx.showModal({title:info.errMsg})
+      }
+    }
+    params.querykeywords = keyword == '' ? '网球场' : keyword;
+    myAmapFun.getPoiAround(params)
+  },
+   */
   //显示选择的球场
   showMarkerInfo: function (data, i) {
     var that = this;
@@ -188,7 +193,7 @@ Page({
   },
   changeMarkerColor: function (data, i) {
     var that = this;
-    var markers = [];
+    var markers = new Array();
     for (var j = 0; j < data.length; j++) {
       if (j == i) {
         data[j].iconPath = "../../../images/map/marker_checked.png";

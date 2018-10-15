@@ -98,5 +98,10 @@
         <button class="weui-btn btn_sure" type="primary" bindtap="quitGame" data-id="{{apply.id}}">退出不参与</button>
     </view>
     </block>
+    <block wx:if="{{apply.applyJoinGameStatus == 'Refuse'}}">
+    <view class='bot_btn'>
+        <button class="weui-btn btn_sure" type="primary" bindtap="applyagain" data-id="{{apply.id}}">重新申请</button>
+    </view>
+    </block>
   </block>
 </view>

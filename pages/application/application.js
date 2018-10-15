@@ -80,7 +80,7 @@ Page({
   quitGame:function(e){
     let applyId = e.currentTarget.dataset.id;
     let that = this;
-    // 获取加入申请列表
+    // 退出球局
     wx.request({
       url: getApp().globalData.onlineUrl + 'api/join/quit',
       method: "POST",
@@ -91,6 +91,30 @@ Page({
       success: function (res) {
         if (res.data.code == "200") {
           console.log(res);
+        }
+      }
+    })
+  },
+
+  //重新申请
+  applyagain:function(e){
+    let applyId = e.currentTarget.dataset.id;
+    let that = this;
+    wx.request({
+      url: getApp().globalData.onlineUrl + 'api/join/reapply',
+      method: "POST",
+      data: {
+        "applyId": applyId
+      },
+      header: utilJs.hasTokenGetHeader(),
+      success: function (res) {
+        if (res.data.code == "200") {
+          wx.navigateBack({})
+        }else{
+          wx.showToast({
+            title: res.data.data.errMsg,
+            icon:'none'
+          })
         }
       }
     })
