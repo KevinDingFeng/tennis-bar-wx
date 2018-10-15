@@ -136,15 +136,16 @@ page {
     display: none;
     width: 100%;
     max-height: 750rpx;
-    overflow-y: scroll;
+    overflow-y: scroll; 
+    overflow: hidden;
     padding: 0 0 0 20rpx;
     line-height: 100rpx;
     background: #fff;
 }
 
-.slidedown {
+/* .slidedown {
     transform: translateY(0%);
-}
+} */
 
 .temp view {
     border-bottom: 1px solid #d1d3d4;
@@ -345,7 +346,6 @@ picker {
 .border_cc {
     border-bottom: 2px solid #d1d3d4 !important;
 }
-
 .active1 {
     color: #56a41f !important;
 }
@@ -418,7 +418,7 @@ picker {
 .palce_xx {
     width: 100%;
     background-color: #f5f5f5;
-    min-height: 700rpx;
+    /* min-height: 700rpx; */
     /* overflow: auto; */
 }
 
