@@ -519,7 +519,7 @@ Page({
         formData.startTime = this.data.start_time;
         formData.endTime = this.data.end_time;
         formData.gameType = this.data.isEntertaining ? 'Entertainment' : 'Teaching';
-        formData.isPublic = this.data.isopen;
+        formData.open = this.data.isopen;
         formData.playAge = this.data.playAge == null ? this.data.ages[0] : this.data.playAge;
         formData.skillLevel = this.data.skillLevel == null ? this.data.level[0] : this.data.skillLevel;
         formData.limitGender = !this.data.nolimitSex;
