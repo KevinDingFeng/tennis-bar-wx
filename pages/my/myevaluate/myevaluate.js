@@ -271,17 +271,21 @@ Page({
             });
             return;
         }
+        if((tempfiles.length + certPaths.length) > 3){
+          wx.showToast({
+            title: '最多上传3张图片~',
+            icon:'none'
+          })
+          return ;
+        }
         if (tempfiles.length == 0 && certPaths.length == 0) {
-            wx.showToast({
-                title: '请选择图片',
-                icon: 'none'
-            })
+          this.updateInfo(certPaths);
         }
         else if (tempfiles.length > 0) {
-            this.uploadImage(i, tempfiles);
+          this.uploadImage(i, tempfiles);
         }
         else if (tempfiles.length == 0 && certPaths.length > 0) {
-            this.updateInfo(certPaths);
+          this.updateInfo(certPaths);
         }
     },
 
@@ -343,8 +347,10 @@ Page({
         if (paths.length > 1) {
             let cp = paths.join(",");
             data.certificatePath = cp;
-        } else {
+        } else if(paths.length == 1){
             data.certificatePath = paths[0];
+        } else if(paths.length == 0){
+            data.certificatePath = '';
         }
         wx.request({
             url: getApp().globalData.onlineUrl + 'api/wx_user_evaluation/update',
@@ -370,8 +376,9 @@ Page({
             sizeType: ['compressed'],
             sourceType: ['album', 'camera'],
             success: function (res) {
+                var temp = that.data.tempFiles;
                 var tempFiles = res.tempFiles;
-                that.setData({ tempFiles: tempFiles })
+                that.setData({ tempFiles: temp.concat(tempFiles) })
                 if (tempFiles.size == 0) {
                     wx.showToast({
                         title: '请选择图片',

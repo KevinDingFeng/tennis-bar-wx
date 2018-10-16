@@ -97,6 +97,10 @@ Page({
         wx.setNavigationBarTitle({
             title: '球局',
         })
+        //获取当前微信用户信息
+        this.getWxUserInfo();
+        //获取所有教练，筛选的时候用
+        this.getCoachList();
     },
     getCoachList: function () {
         let that = this;
@@ -215,10 +219,6 @@ Page({
         pageIndex = 0;
         this.setData({ games: [] })
         this.queryGame();
-        //获取当前微信用户信息
-        this.getWxUserInfo();
-        //获取所有教练，筛选的时候用
-        this.getCoachList();
     },
     listqy: function (e) {
         if (this.data.qyopen) {

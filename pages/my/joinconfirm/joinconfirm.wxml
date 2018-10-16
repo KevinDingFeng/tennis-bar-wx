@@ -32,6 +32,7 @@
                                 <view class='palce_num'>
                                   <block wx:if="{{confirm.applyJoinGameStatus =='WaitingConfirm' }}">待确认</block>
                                   <block wx:if="{{confirm.applyJoinGameStatus =='Agree' }}">已确认</block>
+                                  <block wx:if="{{confirm.applyJoinGameStatus == 'Refuse'}}">已拒绝</block>
                                 </view>
                             </view>
                             <view class='list_center'>
@@ -74,7 +75,10 @@
                             <view class='list_top'>
                                 <view class='palce_name'>{{confirm.game.name}}</view>
                                 <i class="sanj1"></i>
-                                <view class='palce_num1'>已确认</view>
+                                <view class='palce_num1'>
+                                  <block wx:if="{{confirm.applyJoinGameStatus == 'Agree'}}">已确认</block>
+                                  <block wx:if="{{confirm.applyJoinGameStatus == 'Refuse'}}">已拒绝</block>
+                                </view>
                             </view>
                             <view class='list_center'>
                                 <view class="palce_peo">加入者：{{confirm.wxUserInfo.nickName}}</view>
