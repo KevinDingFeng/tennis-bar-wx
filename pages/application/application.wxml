@@ -96,25 +96,23 @@
     <block wx:if="{{apply.applyJoinGameStatus == 'Agree' && apply.game.gameStatus == 'WaitingJoin'}}">
       <view class='bot_btn'>
           <button class="weui-btn btn_sure" type="primary" bindtap="quitGame" data-id="{{apply.id}}">退出不参与</button>
-          <button class="weui-btn btn_sure" type="primary" bindtap="applyagain" data-id="{{apply.id}}">重新申请</button>
       </view>
     </block>
     <block wx:if="{{apply.applyJoinGameStatus == 'Agree' && apply.game.gameStatus == 'Fulled'}}">
       <view class='bot_btn'>
           <button class="weui-btn btn_sure" type="primary" bindtap="quitGame" data-id="{{apply.id}}">退出不参与</button>
-          <button class="weui-btn btn_sure" type="primary" bindtap="applyagain" data-id="{{apply.id}}">重新申请</button>
       </view>
     </block>
 
-    <!-- <block wx:if="{{apply.applyJoinGameStatus == 'Refuse' && apply.game.gameStatus == 'WaitingJoin'}}">
+    <block wx:if="{{apply.applyJoinGameStatus == 'Refuse' && apply.game.gameStatus == 'WaitingJoin'}}">
       <view class='bot_btn'>
-          
+          <button class="weui-btn btn_sure" type="primary" bindtap="applyagain" data-id="{{apply.id}}">重新申请</button>
       </view>
     </block>
     <block wx:if="{{apply.applyJoinGameStatus == 'Refuse' && apply.game.gameStatus == 'Fulled'}}">
       <view class='bot_btn'>
-          
+          <button class="weui-btn btn_sure" type="primary" bindtap="applyagain" data-id="{{apply.id}}">重新申请</button>
       </view>
-    </block> -->
+    </block>
   </block>
 </view>
