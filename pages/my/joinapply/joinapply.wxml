@@ -35,6 +35,8 @@
                                   <block wx:if="{{apply.applyJoinGameStatus =='WaitingConfirm' }}">确认中</block>
                                   <block wx:if="{{apply.applyJoinGameStatus =='Agree' }}">已同意</block>
                                   <block wx:if="{{apply.applyJoinGameStatus =='Refuse' }}">已拒绝</block>
+                                  <block wx:if="{{apply.applyJoinGameStatus =='Quited' }}">已退出</block>
+                                  <block wx:if="{{apply.applyJoinGameStatus =='Canceled' }}">已取消</block>
                                 </view>
                             </view>
                             <view class='list_center'>

@@ -93,6 +93,11 @@
         </view>
         </block>
     </view>
+    <block wx:if="{{apply.applyJoinGameStatus == 'Quited'}}">
+      <view class='bot_btn'>
+        <button class="weui-btn btn_sure" type="primary" disabled="true">已退出</button>
+      </view>
+    </block>
     <block wx:if="{{apply.applyJoinGameStatus == 'Agree' && apply.game.gameStatus == 'WaitingJoin'}}">
       <view class='bot_btn'>
           <button class="weui-btn btn_sure" type="primary" bindtap="quitGame" data-id="{{apply.id}}">退出不参与</button>
