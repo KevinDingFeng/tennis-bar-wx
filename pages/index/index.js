@@ -70,15 +70,35 @@ Page({
         px_hx: null,//排序回显
         time_hx: null,//打球时间回显
         xs_jl: null,//教练回显
+        //当前用户信息
+        wxUserInfo:null
     },
     inputTyping: function (e) {
         let keyword = e.detail.value;
         this.setData({ keyword: keyword })
     },
+    //获取微信用户信息
+    getWxUserInfo: function () {
+      let that = this;
+      wx.request({
+        url: getApp().globalData.onlineUrl + 'api/wx_user_info',
+        method: "GET",
+        header: utilJs.hasTokenGetHeader(),
+        success: function (res) {
+          if (res.data.code == "200") {
+            that.setData({
+              wxUserInfo: res.data.data
+            })
+          }
+        }
+      })
+    },
     onLoad: function (options) {
         wx.setNavigationBarTitle({
             title: '球局',
         })
+        //获取当前微信用户信息
+        this.getWxUserInfo();
         //获取所有教练，筛选的时候用
         this.getCoachList();
     },

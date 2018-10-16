@@ -144,7 +144,10 @@
     </view>
     <!-- 球局信息 -->
     <view class='palce_xx' wx:if="{{games}}">
-        <view class='palce_list' wx:for="{{games}}" wx:for-item="game" wx:key="**this">
+      <block wx:for="{{games}}" wx:for-item="game" wx:key="**this">
+        <!-- <view class='' wx:for="{{games}}" wx:for-item="game" wx:key="**this"> -->
+        <block wx:if="{{game.open}}">
+          <view class='palce_list'>
             <view class='list_top' bindtap="applyJoinGame" data-game="{{game}}">
                 <view class="palce_name">{{game.name}}</view>
                 <view class='palce_num'>{{game.totalNum}}缺{{game.vacancyNum}}</view>
@@ -160,7 +163,29 @@
                     <text>导航</text>
                 </view>
             </view>
-        </view>
+          </view>
+        </block>
+        <block wx:elif="{{game.organizerId == wxUserInfo.id}}">
+          <view class='palce_list'>
+            <view class='list_top' bindtap="applyJoinGame" data-game="{{game}}">
+                <view class="palce_name">{{game.name}}</view>
+                <view class='palce_num'>{{game.totalNum}}缺{{game.vacancyNum}}</view>
+            </view>
+            <view class='list_center' bindtap="applyJoinGame" data-game="{{game}}">
+                <view class="palce_peo">发起人：{{game.organizer.nickName}}</view>
+                <view class='palce_time'>{{game.startTime}}-{{utils.formatDate(game.endTime)}}</view>
+            </view>
+            <view class='list_bottom'>
+                <view class="palce_dz">球场：{{game.court.name}}</view>
+                <view class='palce_dh' bindtap="openLocation" data-latitude="{{game.court.latitude}}" data-longitude="{{game.court.longitude}}">
+                    <image src='../../images/index/dw.png'></image>
+                    <text>导航</text>
+                </view>
+            </view>
+          </view>
+        </block>
+      </block>
+        <!-- </view> -->
     </view>
     <view class='palce_xx' wx:else>
         <view class="no_list">

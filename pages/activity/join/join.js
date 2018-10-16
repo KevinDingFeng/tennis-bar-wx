@@ -20,9 +20,10 @@ Page({
       title: '我要加入球局',
     })
     let game = JSON.parse(options.game);
+    let types = options.type;
     let that = this;
     that.setData({
-      game : game
+      game : game, types : types == null ? '':types
     })
     that.getJoinGamerInfo(game.id);
   },
@@ -81,7 +82,7 @@ Page({
     data.gameId = id;
     // data.wxUserInfoId = 2;
     wx.request({
-      url: getApp().globalData.onlineUrl + 'api/join/create',
+      url: getApp().globalData.onlineUrl + 'api/join/create?types='+ this.data.types,
       method :"POST",
       data:data,
       header: utilJs.hasTokenGetHeader(),

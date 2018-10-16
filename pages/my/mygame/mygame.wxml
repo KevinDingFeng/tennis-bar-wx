@@ -53,7 +53,7 @@ bindtap="swichNav" data-type="release">我发起的球局</view>
                     <view class='palce_num'>
                         <view wx:if="{{jgame.game.gameStatus =='Completed'}}">已结束</view>
                         <view wx:if="{{jgame.game.gameStatus =='Canceled'}}">已取消</view>
-                        <view wx:if="{{jgame.applyJoinGameStatus =='Agree'}}">即将开始</view>
+                        <view wx:if="{{jgame.game.gameStatus =='WaitingJoin'}}">即将开始</view>
                     </view>
                 </view>
                 <view class='list_center'>
@@ -83,8 +83,8 @@ bindtap="swichNav" data-type="release">我发起的球局</view>
                     <i class="sanj"></i>
                     <view class='palce_num'>
                         <view wx:if="{{game.gameStatus =='Completed'}}">已结束</view>
-                        <view wx:elif="{{game.gameStatus =='Canceled'}}">已取消</view>
-                        <view wx:else>即将开始</view>
+                        <view wx:if="{{game.gameStatus =='Canceled'}}">已取消</view>
+                        <view wx:if="{{game.gameStatus =='WaitingJoin'}}">即将开始</view>
                     </view>
                 </view>
                 <view class='list_center'>

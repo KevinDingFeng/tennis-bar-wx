@@ -18,6 +18,7 @@
         <view class='col_g f_wei' wx:else>
             教学局
         </view>
+        <view class='col_g f_wei' style='color:red;' bindtap='gobackIndex'>返回首页</view>
     </view>
     <view class='ball_xx'>
         <view class='xx_title f_wei'>基本信息</view>
@@ -106,8 +107,13 @@
     <view class='registration_time'>报名截止时间：{{game.deadlineTime}}</view>
     <view class='remark'>备注：{{game.remark==null?"":game.remark}}</view>
     <view class='join_btn'>
+      <!-- <block wx:if="{{game.open}}">
         <button class='join_firend' open-type='share'>邀请好友加入</button>
-        <button class='join_me' bindtap="joinGame" data-game="{{game}}">我要加入</button>
+      </block>
+      <block wx:elif="{{game.organizerId == wxUserInfo.id}}"> -->
+      <button class='join_firend' open-type='share'>邀请好友加入</button>
+      <!-- </block> -->
+      <button class='join_me' bindtap="joinGame" data-game="{{game}}">我要加入</button>
     </view>
   </block>
 </view>

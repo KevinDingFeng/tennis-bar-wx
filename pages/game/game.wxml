@@ -215,7 +215,7 @@
     <view class="next_san {{isfirst == '3' ? 'ds_b' : 'ds_n' }}">
         <view class='yul_name'>
             <text class='game_name'>{{name}}</text>
-            <view class='col_g f_wei' wx:if="{{game.gameType == 'Entertainment' }}">
+            <view class='col_g f_wei' wx:if="{{isEntertaining}}">
                 娱乐局
             </view>
             <view class='col_g f_wei' wx:else>
