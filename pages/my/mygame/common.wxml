@@ -12,7 +12,7 @@
         <view class='xx_title f_wei'>基本信息</view>
         <view class='xx_id'>
             <view class='id_name'>球局编号</view>
-            <view>{{game.id}}</view>
+            <view>{{game.no}}</view>
         </view>
         <view class='xx_id'>
             <view class='id_name'>打球时间</view>

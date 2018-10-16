@@ -56,7 +56,7 @@
         </view>
         <view class='xx_id'>
             <view class='id_name'>参与球局</view>
-            <view>{{apply.game.id}}</view>
+            <view>{{apply.game.no}}</view>
         </view>
         <view class='xx_id'>
             <view class='id_name'>球局名称</view>
@@ -64,7 +64,7 @@
         </view>
         <view class='xx_id'>
             <view class='id_name'>发起人</view>
-            <view>{{apply.game.organizer.name}}</view>
+            <view>{{apply.game.organizer.nickName}}</view>
             <view>{{position[apply.wxUserInfo.position]}}</view>
         </view>
         <view class='xx_id'>

@@ -14,7 +14,7 @@
         <text class='game_name'>{{game.name}}</text>
         <view class='xx_id'>
             <view class='id_name'>球局编号</view>
-            <view>{{game.id}}</view>
+            <view>{{game.no}}</view>
         </view>
         <view class='xx_id'>
             <view class='id_name'>发起人</view>

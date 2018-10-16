@@ -17,11 +17,11 @@
         </view>
         <view class='xx_id'>
             <view class='id_name'>参与球局</view>
-            <view>{{apply.game.id}}</view>
+            <view>{{apply.game.no}}</view>
         </view>
         <view class='xx_id'>
             <view class='id_name'>发起人</view>
-            <view>{{}}</view>
+            <view>{{apply.game.nickName}}</view>
             <view>教练</view>
         </view>
         <view class='xx_id'>
