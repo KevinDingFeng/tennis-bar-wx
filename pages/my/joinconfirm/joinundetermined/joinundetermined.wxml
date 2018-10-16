@@ -104,11 +104,17 @@
             </view>
         </view>
     </view>
-    <block wx:if="{{apply.applyJoinGameStatus == 'WaitingConfirm'}}">
-    <view class='bot_btn'>
+    <block wx:if="{{apply.applyJoinGameStatus == 'WaitingConfirm' && apply.game.gameStatus =='WaitingJoin'}}">
+      <view class='bot_btn'>
         <button class="weui-btn bg_c btn_j" type="primary" data-type="refuse" bindtap="showDialogBtn">拒绝</button>
         <button class="weui-btn btn_sure" data-type="agree" data-id="{{apply.id}}" bindtap="confirmJoin" type="primary">同意</button>
-    </view>
+      </view>
+    </block>
+    <block wx:if="{{apply.applyJoinGameStatus == 'WaitingConfirm' && apply.game.gameStatus =='Fulled'}}">
+      <view class='bot_btn'>
+        <button class="weui-btn bg_c btn_j" type="primary" data-type="refuse" bindtap="showDialogBtn">拒绝</button>
+        <button class="weui-btn btn_sure" data-type="agree" data-id="{{apply.id}}" bindtap="confirmJoin" type="primary">同意</button>
+      </view>
     </block>
     <!--弹窗-->
     <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
