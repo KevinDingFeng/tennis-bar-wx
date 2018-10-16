@@ -333,8 +333,15 @@ picker {
     /* padding: 0 37rpx; */
     font-size: 28rpx !important;
     color: #424242;
-    width:18%;
-
+    width:20%;
+    height: 66rpx;
+   margin-top: 20rpx;
+}
+.time_type>view{
+    height: 0%;
+    margin-top: -17rpx;
+   font-size:28rpx;
+   color:#222;
 }
 
 .widcc {
@@ -373,8 +380,9 @@ picker {
 }
 
 .time_active{
-    background-color: #56a41f!important;
-    color: #fff !important;
+    background-color: #E4FFD2!important;
+    color: #57A31E !important;
+    border:1px solid #E4FFD2;
 }
 .sx_but {
     display: flex;
@@ -498,4 +506,7 @@ picker {
     margin-top: 40%;
     font-size: 28rpx;
     color: #222;
+}
+.children_active{
+    color: #56a41f!important;
 }

@@ -339,6 +339,7 @@ Page({
                 nz_text: "智能排序",
                 px_text: "打球时间",
                 ft_text: "筛选",
+                sq_hx:""
             })
             this.hidebg();
             this.setData({

@@ -68,7 +68,7 @@
                 </view>
             </view>
             <view class="qy quyu-right">
-                <view wx:for="{{cityright}}" bindtap='selectright' data-city='{{index}}' data-cityName='{{cityright[index].name}}'>
+                <view class="{{cityright[index].name == sq_hx ? 'children_active' : ''}}" wx:for="{{cityright}}" bindtap='selectright' data-city='{{index}}' data-cityName='{{cityright[index].name}}'>
                     {{cityright[index].name}}
                     <view class="{{cityright[index].name == sq_hx ? 'children_show' : 'children_hide'}}">
                         <icon class="con_sty" type="success" size='20'></icon>
