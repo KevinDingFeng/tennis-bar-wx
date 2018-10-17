@@ -9,6 +9,7 @@ var isbottom = false;
 Page({
     data: {
         is_cc:false,
+        is_kk:false,
         isScroll:true,
         pageStyle: `width:${app.globalData.width};height:${app.globalData.height}`,
         scale: app.globalData.windowWidth / app.globalData.windowHeight,
@@ -712,11 +713,12 @@ Page({
         let _cc = e.currentTarget.dataset.type;
         if (_cc == false){
             that.setData({
-                is_cc: true
+                is_cc: true,
+                is_kk:false
             });
         }else{
             that.setData({
-                is_cc: false
+                is_cc: false,
             });
         }
     },

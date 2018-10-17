@@ -113,7 +113,7 @@
                     
                 </view>
             </view>
-            <view class="{{childopen ? 'children_show post_flxed' : 'children_hide'}}">
+            <view class="{{childopen ? 'children_show ' : 'children_hide'}}">
                 <view class="index_btn">
                     <button>重置</button>
                     <button type='primary'>确定</button>
@@ -121,7 +121,7 @@
             </view>
         </view>
         <!-- 筛选 -->
-        <view class="temp temp1 {{sxopen ? 'slidown' : 'slidup'}} {{sxshow ? 'disappear':''}} sx_dd">
+        <view class="temp temp1 {{sxopen ? 'slidown' : 'slidup'}} {{sxshow ? 'disappear':''}} sx_dd" style="height:{{is_cc ?'700rpx':'600rpx;'}}">
             <view class='check_time border_cc' style='padding:0;'>
                 <view class='time_name'>球局类型</view>
                 <view class='widcc'>
@@ -142,14 +142,14 @@
                 <view class='time_name'>
                     教练<view class="tra_bor {{is_cc ? 'children_show' : 'tra_bor_s' }}" data-type="{{is_cc}}" bindtap='jl_shows'>></view>
                 </view> 
-                <view class="widcc {{is_cc ? 'children_show' : 'children_hide'}}" style='margin-bottom:70rpx;'>
+                <view class="widcc {{is_cc ? 'children_show' : 'children_hide'}}" style='min-height:100rpx;'>
                     <view class="gods_list {{gods[index].checked ? 'active_gods' : 'no_active_gods' }}" wx:for="{{gods}}" wx:for-index="index">
                         <view class="" bindtap='selecJL' data-idxjl='{{index}}'>{{item.name}}</view>
                     </view>
                 </view>
             </view>
-            <view class='post_flxed'>
-                <view class='check_time border_cc sx_but' style='padding-bottom:10rpx;'>
+            <view class="{{is_cc ? 'children_show post_flxed1 ' : 'children_show post_flxed'}}">
+                <view class='check_time border_cc sx_but' style='padding-top:0;padding-bottom:4rpx;'>
                     <button type="primary" bindtap="filter_search">确定</button>
                     <button type="default" bindtap="reset_search">重置</button>
                 </view>
