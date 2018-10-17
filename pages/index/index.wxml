@@ -92,29 +92,36 @@
             <view class="{{childopen ? 'children_show' : 'children_hide'}}">
                 <view class="section">
                     <view class="section__title">日期选择器</view>
-                    <picker mode="date" value="{{date}}" bindchange="bindDateChange">
-                        <view class="picker">
-                            {{px_time}}
-                        </view>
-                    </picker>
-                </view>
-                <view class='check_time'>
-                    <view class='time_name'>选择时间</view>
-                    <view class='time_type' wx:for="{{content}}" wx:for-index="index">
-                        <view class="{{item == time_hx ? 'time_active' : 'no_active_gods'}}" bindtap='selectTime' data-idx='{{index}}' data-type="{{item}}">
-                            {{item}}
-                        </view>
+                    <view class='bore_no'>
+                        <picker mode="date" value="{{date}}" bindchange="bindDateChange">
+                            <view class="picker">
+                                {{px_time}}
+                            </view>
+                        </picker>
+                        <text style='color:#959595'>></text>
                     </view>
                 </view>
+                <view class='check_time bore_no'>
+                    <view class='time_name'>选择时间</view>
+                    <view class='time_cc_type'>
+                        <view class="time_type {{item == time_hx ? 'time_active' : 'no_active_gods'}}" wx:for="{{content}}" wx:for-index="index">
+                            <view class="{{item == time_hx ? 'time_active' : 'no_active_gods'}}"  bindtap='selectTime' data-idx='{{index}}' data-type="{{item}}">
+                                {{item}}
+                            </view>
+                        </view>
+                    </view>
+                    
+                </view>
+            </view>
+            <view class="{{childopen ? 'children_show post_flxed' : 'children_hide'}}">
                 <view class="index_btn">
                     <button>重置</button>
                     <button type='primary'>确定</button>
                 </view>
-
             </view>
         </view>
         <!-- 筛选 -->
-        <view class="temp temp1 {{sxopen ? 'slidown' : 'slidup'}} {{sxshow ? 'disappear':''}}">
+        <view class="temp temp1 {{sxopen ? 'slidown' : 'slidup'}} {{sxshow ? 'disappear':''}} sx_dd">
             <view class='check_time border_cc' style='padding:0;'>
                 <view class='time_name'>球局类型</view>
                 <view class='widcc'>
@@ -132,16 +139,20 @@
                 </view>
             </view>
             <view class='check_time border_cc' style='padding:0;'>
-                <view class='time_name'>教练</view>
-                <view class='widcc'>
-                    <view class='gods_list' wx:for="{{gods}}" wx:for-index="index">
-                        <view class="{{gods[index].checked ? 'active_gods' : 'no_active_gods' }}" bindtap='selecJL' data-idxjl='{{index}}'>{{item.name}}</view>
+                <view class='time_name'>
+                    教练<view class="tra_bor {{is_cc ? 'children_show' : 'tra_bor_s' }}" data-type="{{is_cc}}" bindtap='jl_shows'>></view>
+                </view> 
+                <view class="widcc {{is_cc ? 'children_show' : 'children_hide'}}" style='margin-bottom:70rpx;'>
+                    <view class="gods_list {{gods[index].checked ? 'active_gods' : 'no_active_gods' }}" wx:for="{{gods}}" wx:for-index="index">
+                        <view class="" bindtap='selecJL' data-idxjl='{{index}}'>{{item.name}}</view>
                     </view>
                 </view>
             </view>
-            <view class='check_time border_cc sx_but' style='padding-bottom:10rpx;'>
-                <button type="primary" bindtap="filter_search">确定</button>
-                <button type="default" bindtap="reset_search">重置</button>
+            <view class='post_flxed'>
+                <view class='check_time border_cc sx_but' style='padding-bottom:10rpx;'>
+                    <button type="primary" bindtap="filter_search">确定</button>
+                    <button type="default" bindtap="reset_search">重置</button>
+                </view>
             </view>
         </view>
         <!-- 遮盖层 -->
@@ -158,15 +169,15 @@
                         <view class='palce_num'>{{game.totalNum}}缺{{game.vacancyNum}}</view>
                     </view>
                     <view class='list_center' bindtap="applyJoinGame" data-game="{{game}}">
+                        <view class='palce_time'>{{game.startTime}}~{{utils.formatDate(game.endTime)}}</view>
                         <view class="palce_peo">发起人：{{game.organizer.nickName}}</view>
-                        <view class='palce_time'>{{game.startTime}}-{{utils.formatDate(game.endTime)}}</view>
                     </view>
                     <view class='list_bottom'>
-                        <view class="palce_dz">球场：{{game.court.name}}</view>
-                        <view class='palce_dh' bindtap="openLocation" data-latitude="{{game.court.latitude}}" data-longitude="{{game.court.longitude}}">
+                        <view class="palce_dz" bindtap="openLocation" data-latitude="{{game.court.latitude}}" data-longitude="{{game.court.longitude}}">
                             <image src='../../images/index/dw.png'></image>
-                            <view>导航</view>
-                        </view>
+                            <view class='palce_text'>
+                                球场：{{game.court.name}}</view>
+                            </view>
                     </view>
                 </view>
             </block>

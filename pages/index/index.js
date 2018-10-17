@@ -8,6 +8,7 @@ var pageSize = 20;
 var isbottom = false;
 Page({
     data: {
+        is_cc:false,
         isScroll:true,
         pageStyle: `width:${app.globalData.width};height:${app.globalData.height}`,
         scale: app.globalData.windowWidth / app.globalData.windowHeight,
@@ -706,8 +707,17 @@ Page({
         })
         this.setData({ gods: gods_new })
     },
-    preventD:function(){
-
-    }
-
+    jl_shows:function(e){
+        let that = this;
+        let _cc = e.currentTarget.dataset.type;
+        if (_cc == false){
+            that.setData({
+                is_cc: true
+            });
+        }else{
+            that.setData({
+                is_cc: false
+            });
+        }
+    },
 })

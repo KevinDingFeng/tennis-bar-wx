@@ -61,11 +61,11 @@ page {
 /* 三栏导航 */
 
 .children_show {
-    display: block;
+    display: block!important;
 }
 
 .children_hide {
-    display: none;
+    display: none!important;
 }
 
 .index_search {
@@ -80,6 +80,7 @@ page {
     z-index: 99;
     display: flex;
     padding: 15rpx 0 15rpx;
+    background-color: #fff;
 }
 
 .nav-son {
@@ -90,8 +91,11 @@ page {
     align-items: center;
     justify-content: center;
     font-size: 14px;
+    border-right:1px solid #ddd; 
 }
-
+.nav>.nav-son:last-child{
+    border: none;
+}
 /* .borders{
     border-left: 1px solid #e6e6e6;
     border-right: 1px solid #e6e6e6;
@@ -126,7 +130,9 @@ page {
     line-height: 100rpx;
     background: #fff;
 }
-
+.sx_dd::-webkit-scrollbar {
+    display: none;
+}
 .temp1>view:last-child {
     border-bottom: none !important;
 }
@@ -303,23 +309,29 @@ page {
     border-bottom: none !important;
     font-size: 28rpx !important;
     color: #222 !important;
+    font-weight: 700;
 }
 
 picker {
     display: inline-block !important;
-    width: 70%;
-    text-align: right;
+    width: 94%;
+    text-align: left;
 }
 
 .picker {
     border-bottom: none !important;
+    color: #959595!important;
+}
+.bore_no{
+    border-bottom: none!important;
 }
 
 .check_time {
     border-bottom:1px solid #d1d3d4; 
     padding: 30rpx 0;
     display: flex;
-    flex-direction: row;
+    flex-wrap:wrap;
+    /* flex-direction: row; */
     justify-content:flex-start;
 }
 
@@ -336,7 +348,7 @@ picker {
     /* padding: 0 37rpx; */
     font-size: 28rpx !important;
     color: #424242;
-    width:20%;
+    width:30%;
     height: 66rpx;
    margin-top: 20rpx;
 }
@@ -350,7 +362,7 @@ picker {
 .widcc {
     display: inline-block;
     border-bottom: none !important;
-    width: 75%;
+    width: 100%;
 }
 
 .border_cc {
@@ -358,6 +370,7 @@ picker {
 }
 .active1 {
     color: #56a41f !important;
+    background-color: #e4ffd1;
 }
 
 .active1>view {
@@ -370,11 +383,12 @@ picker {
 }
 
 .active_gods {
+    background-color:#e4ffd1;
     color: #56a41f !important;
 }
 
 .active_gods>view {
-    color: #fff !important;
+    color: #56a41f  !important;
 }
 
 .no_active_gods {
@@ -392,8 +406,6 @@ picker {
     flex-direction: row;
 }
 
-.sx_but>button {
-}
 
 .time_type>view {
     border-bottom: none !important;
@@ -401,22 +413,33 @@ picker {
 }
 
 .time_name {
-    display: inline-block;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
     border-bottom: none !important;
-    font-size: 28rpx !important;
+    font-size: 30rpx !important;
     color: #222 !important;
-    width: 20%;
+    font-weight: 700;
+    width: 95%;
 }
 
 .gods_list {
     display: inline-block;
-    border-bottom: none !important;
+    border: 1px solid #ddd;
     margin-left: 0 !important;
-    margin-right: 35rpx;
+    margin-right: 13rpx;
+    width: 165rpx;
+    height: 66rpx;
+    text-align: center;
+    border-radius: 5px;
+    vertical-align: middle;
 }
 
 .gods_list>view {
     border-bottom: none !important;
+    font-size: 24rpx!important;
+    height: 66rpx;
+    margin-top:-16rpx;
 }
 
 .active_time {
@@ -431,6 +454,7 @@ picker {
     background-color: #f5f5f5;
     /* min-height: 700rpx; */
     overflow: hidden; 
+    margin-top: 21rpx;
 }
 
 .palce_list {
@@ -444,9 +468,11 @@ picker {
 .palce_name {
     display: inline-block;
     width: 50%;
+    font-weight: 700;
 }
 
 .palce_num {
+    color: #fff;
     width: 91rpx;
     text-align: center;
     font-size: 18rpx;
@@ -462,22 +488,27 @@ picker {
     display: inline-block;
     font-size: 24rpx;
     width: 60%;
+    text-align: right;
 }
 
 .palce_time {
     display: inline-block;
-    font-size: 22rpx;
+    font-size: 24rpx;
     color: #959595;
 }
 
 .palce_dz {
-    display: inline-block;
+    display: flex;
+    flex-direction: row;
     font-size: 20rpx;
     width: 82%;
-    padding-top: 20rpx;
     color: #9b9b9b;
+    vertical-align: middle;
 }
-
+.palce_text{
+    display: inline-block;
+    padding-top:19rpx;
+}
 .palce_dh {
     display: inline-block;
     font-size: 20rpx;
@@ -485,9 +516,9 @@ picker {
     vertical-align: middle;
 }
 
-.palce_dh>image {
+.palce_dz>image {
     display: inline-block;
-    width: 60rpx;
+    width: 50rpx;
     height: 60rpx;
     /* position: absolute;
     top: 155rpx;
@@ -537,5 +568,26 @@ picker {
 .list_bottom{
     display: flex;
     flex-direction: row;
-
+    margin-left: -12rpx;
+}
+.time_cc_type{
+    width: 100%;
+    border-bottom: none!important;
+}
+.tra_bor{
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    border-bottom: none!important;
+}
+.tra_bor_s{
+    transform: rotate(-90deg)!important;
+    -webkit-transform: rotate(-90deg)!important;
+    border-bottom: none!important;
+}
+.post_flxed{
+    width: 102%;
+    background-color: #fff;
+    position: fixed;
+    top:80%;
+    left: -2%;
 }
