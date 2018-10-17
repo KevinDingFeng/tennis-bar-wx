@@ -591,7 +591,7 @@ picker {
     width: 102%;
     background-color: #fff;
     position: fixed;
-    top:83%;
+    top:79%;
     left: -2%;
     z-index: 99999899;
     height: 97rpx;
@@ -600,7 +600,7 @@ picker {
     width: 102%;
     background-color: #fff;
     position: fixed;
-    top:89%!important;
+    top:88%!important;
     left: -2%;
     z-index: 99999899;
     height: 85rpx;
