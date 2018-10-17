@@ -69,11 +69,13 @@ page {
 }
 
 .index_search {
-    width: 100%;
+    width: 94%;
     background-color: #f5f5f5;
+    margin-left:-46rpx;
 }
 
 .nav {
+    width: 106%;
     position: relative;
     z-index: 99;
     display: flex;
@@ -112,11 +114,12 @@ page {
 .temp {
     position: relative;
     z-index: 4;
+    width: 103.5%!important;
 }
 
 .temp1 {
     display: none;
-    width: 100%;
+     width: 100%;
     max-height: 550rpx;
     overflow-y: scroll;
     padding: 0 0 0 20rpx;
@@ -136,7 +139,7 @@ page {
     display: none;
     width: 100%;
     max-height: 750rpx;
-    overflow-y: scroll; 
+    overflow-y: auto;
     overflow: hidden;
     padding: 0 0 0 20rpx;
     line-height: 100rpx;
@@ -169,6 +172,7 @@ page {
     display: none;
     height: 450rpx;
     z-index: 5;
+    width: 106.5%;
 }
 
 .quyu .qy {
@@ -235,13 +239,13 @@ page {
 .fullbg {
     position: fixed;
     z-index: 1;
-    width: 100%;
-    height: 100%;
     background: rgb(1, 1, 1);
     transition: all 2s;
     opacity: 0;
     display: none;
     top: 50%;
+    left: 0;
+    overflow-x: hidden;
 }
 
 .fullopacity {
@@ -312,8 +316,7 @@ picker {
 }
 
 .check_time {
-    /* border-bottom:1px solid #d1d3d4; */
-    border-bottom: none !important;
+    border-bottom:1px solid #d1d3d4; 
     padding: 30rpx 0;
     display: flex;
     flex-direction: row;
@@ -427,7 +430,7 @@ picker {
     width: 100%;
     background-color: #f5f5f5;
     /* min-height: 700rpx; */
-    /* overflow: auto; */
+    overflow: hidden; 
 }
 
 .palce_list {
@@ -509,4 +512,13 @@ picker {
 }
 .children_active{
     color: #56a41f!important;
+}
+.index_btn{
+    width: 94%;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around;
+    border-bottom: none!important;
+    margin-top: 26rpx;
+    margin-bottom: 26rpx;
 }

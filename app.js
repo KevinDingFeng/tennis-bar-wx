@@ -12,6 +12,18 @@ App({
     //     // 发送 res.code 到后台换取 openId, sessionKey, unionId
     //   }
     // })
+      var sysinfo = wx.getSystemInfoSync();
+      //console.log(sysinfo);
+      if (sysinfo) {
+          this.globalData.sysinfo = sysinfo;
+          var width = sysinfo.windowWidth;
+          var height = sysinfo.windowHeight;
+          var px2rpx = 750 / width;
+          this.globalData.width = width * px2rpx + 'rpx';
+          this.globalData.height = height * px2rpx + 'rpx';
+          this.globalData.windowWidth = width;
+          this.globalData.windowHeight = height;
+      }
     // 获取用户信息
     wx.getSetting({
       success: res => {
@@ -111,6 +123,6 @@ App({
     userInfo: null,
     tennisToken: null,
     onlineUrl: "https://tennis.dazonghetong.com/"
-    // onlineUrl: "http://localhost:6677/"
+//    onlineUrl: "http://localhost:6677/"
   }
 })

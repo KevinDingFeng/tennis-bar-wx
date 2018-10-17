@@ -8,6 +8,8 @@ var pageSize = 20;
 var isbottom = false;
 Page({
     data: {
+        pageStyle: `width:${app.globalData.width};height:${app.globalData.height}`,
+        scale: app.globalData.windowWidth / app.globalData.windowHeight,
         gameTypes: { "All": "不限", "Entertainment": "娱乐局", "Teaching": "教学局" },    // 球局类型
         gt: ["All", "Entertainment", "Teaching"],
         skillLevs: { "All": "不限", "Entry": "入门(0~1.0)", "Medium": "中级(1.5~3.5)", "Professional": "专业(4.0~7.0)" },        // 球技等级 
