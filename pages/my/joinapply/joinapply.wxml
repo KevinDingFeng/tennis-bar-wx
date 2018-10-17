@@ -1,12 +1,12 @@
 <wxs module="utils">
-  function formatDate(data) {
-    var _data = data;
-    _data = _data.split(" ")[1];
-    return _data
-  }
-  module.exports = {
-    formatDate: formatDate
-  }
+    function formatDate(data) {
+        var _data = data;
+        _data = _data.split(" ")[1];
+        return _data
+    }
+    module.exports = {
+        formatDate: formatDate
+    }
 </wxs>
 <view class='container'>
     <view class="page">
@@ -23,78 +23,78 @@
                 <view class="weui-tab__panel">
                     <!-- 全部 -->
                     <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
-                      <block wx:if="{{applys.length > 0}}">
-                        <block wx:for="{{applys}}" wx:key="**this" wx:for-item="apply">
-                          <view class='list_xx' bindtap='gameDetail' data-apply='{{apply}}'>
-                            <view class='list_top'>
-                                <view class='palce_name'>
-                                    {{apply.game.name}}
+                        <block wx:if="{{applys.length > 0}}">
+                            <block wx:for="{{applys}}" wx:key="**this" wx:for-item="apply">
+                                <view class='list_xx' bindtap='gameDetail' data-apply='{{apply}}'>
+                                    <view class='list_top'>
+                                        <view class='palce_name'>
+                                            {{apply.game.name}}
+                                        </view>
+                                        <i class="{{apply.applyJoinGameStatus =='Refuse'?'sanj_kong':'sanj1'}}"></i>
+                                        <view class="palce_num1">
+                                            <block wx:if="{{apply.applyJoinGameStatus =='WaitingConfirm' }}">确认中</block>
+                                            <block wx:if="{{apply.applyJoinGameStatus =='Agree' }}">已同意</block>
+                                            <block wx:if="{{apply.applyJoinGameStatus =='Refuse' }}">已拒绝</block>
+                                            <block wx:if="{{apply.applyJoinGameStatus =='Quited' }}">已退出</block>
+                                            <block wx:if="{{apply.applyJoinGameStatus =='Canceled' }}">已取消</block>
+                                        </view>
+                                    </view>
+                                    <view class='list_center'>
+                                        <view class="palce_peo">发起人：{{apply.game.organizer.nickName}}</view>
+                                        <view class='palce_time'>{{apply.game.startTime}}-{{utils.formatDate(apply.game.endTime)}}</view>
+                                    </view>
+                                    <view class='list_bottom'>
+                                        <view class="palce_dz">球场：{{apply.game.court.name}}</view>
+                                    </view>
                                 </view>
-                                <i class="sanj1"></i>
-                                <view class='palce_num1'>
-                                  <block wx:if="{{apply.applyJoinGameStatus =='WaitingConfirm' }}">确认中</block>
-                                  <block wx:if="{{apply.applyJoinGameStatus =='Agree' }}">已同意</block>
-                                  <block wx:if="{{apply.applyJoinGameStatus =='Refuse' }}">已拒绝</block>
-                                  <block wx:if="{{apply.applyJoinGameStatus =='Quited' }}">已退出</block>
-                                  <block wx:if="{{apply.applyJoinGameStatus =='Canceled' }}">已取消</block>
-                                </view>
-                            </view>
-                            <view class='list_center'>
-                                <view class="palce_peo">发起人：{{apply.game.organizer.nickName}}</view>
-                                <view class='palce_time'>{{apply.game.startTime}}-{{utils.formatDate(apply.game.endTime)}}</view>
-                            </view>
-                            <view class='list_bottom'>
-                                <view class="palce_dz">球场：{{apply.game.court.name}}</view>
-                            </view>
-                          </view>
+                            </block>
                         </block>
-                      </block>
                     </view>
                     <!-- 已同意 -->
                     <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
-                      <block wx:if="{{applys.length > 0}}">
-                        <block wx:for="{{applys}}" wx:key="**this" wx:for-item="apply">
-                          <view class='list_xx' bindtap='gameDetail' data-apply='{{apply}}'>
-                            <view class='list_top'>
-                                <view class='palce_name'>
-                                    {{apply.game.name}}
+                        <block wx:if="{{applys.length > 0}}">
+                            <block wx:for="{{applys}}" wx:key="**this" wx:for-item="apply">
+                                <view class='list_xx' bindtap='gameDetail' data-apply='{{apply}}'>
+                                    <view class='list_top'>
+                                        <view class='palce_name'>
+                                            {{apply.game.name}}
+                                        </view>
+                                        <i class="sanj"></i>
+                                        <view class='palce_num'>已同意</view>
+                                    </view>
+                                    <view class='list_center'>
+                                        <view class="palce_peo">发起人：{{apply.game.organizer.nickName}}</view>
+                                        <view class='palce_time'>{{apply.game.startTime}}-{{utils.formatDate(apply.game.endTime)}}</view>
+                                    </view>
+                                    <view class='list_bottom'>
+                                        <view class="palce_dz">球场：{{apply.game.court.name}}</view>
+                                    </view>
                                 </view>
-                                <i class="sanj"></i>
-                                <view class='palce_num'>已同意</view>
-                            </view>
-                            <view class='list_center'>
-                                <view class="palce_peo">发起人：{{apply.game.organizer.nickName}}</view>
-                                <view class='palce_time'>{{apply.game.startTime}}-{{utils.formatDate(apply.game.endTime)}}</view>
-                            </view>
-                            <view class='list_bottom'>
-                                <view class="palce_dz">球场：{{apply.game.court.name}}</view>
-                            </view>
-                          </view>
+                            </block>
                         </block>
-                      </block>
                     </view>
                     <!-- 已拒绝 -->
                     <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
-                      <block wx:if="{{applys.length > 0}}">
-                        <block wx:for="{{applys}}" wx:key="**this" wx:for-item="apply">
-                          <view class='list_xx' bindtap='gameDetail' data-apply='{{apply}}'>
-                            <view class='list_top'>
-                                <view class='palce_name'>
-                                    {{apply.game.name}}
+                        <block wx:if="{{applys.length > 0}}">
+                            <block wx:for="{{applys}}" wx:key="**this" wx:for-item="apply">
+                                <view class='list_xx' bindtap='gameDetail' data-apply='{{apply}}'>
+                                    <view class='list_top'>
+                                        <view class='palce_name'>
+                                            {{apply.game.name}}
+                                        </view>
+                                        <i class="sanj3"></i>
+                                        <view class='palce_num3'>已拒绝</view>
+                                    </view>
+                                    <view class='list_center'>
+                                        <view class="palce_peo">发起人：{{apply.game.organizer.nickName}}</view>
+                                        <view class='palce_time'>{{apply.game.startTime}}-{{utils.formatDate(apply.game.endTime)}}</view>
+                                    </view>
+                                    <view class='list_bottom'>
+                                        <view class="palce_dz">球场：{{apply.game.court.name}}</view>
+                                    </view>
                                 </view>
-                                <i class="sanj3"></i>
-                                <view class='palce_num3'>已拒绝</view>
-                            </view>
-                            <view class='list_center'>
-                                <view class="palce_peo">发起人：{{apply.game.organizer.nickName}}</view>
-                                <view class='palce_time'>{{apply.game.startTime}}-{{utils.formatDate(apply.game.endTime)}}</view>
-                            </view>
-                            <view class='list_bottom'>
-                                <view class="palce_dz">球场：{{apply.game.court.name}}</view>
-                            </view>
-                          </view>
+                            </block>
                         </block>
-                      </block>
                     </view>
                 </view>
             </view>

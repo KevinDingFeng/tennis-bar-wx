@@ -74,7 +74,7 @@
         <view class='ball_type mar_top'>
             <view class='type_name'>* 球局类型</view>
             <view class="type_sty mar_ri {{isEntertaining == true ? 'active' : 'no_active' }}" bindtap="selectType" data-entaintype="{{isEntertaining}}">娱乐局</view>
-            <view class="type_sty {{isEntertaining != true ? 'active' : 'no_active' }}" bindtap="selectType" data-entaintype="{{isEntertaining}}">教学</view>
+            <view class="type_sty {{isEntertaining != true ? 'active' : 'no_active' }}" bindtap="selectType" data-entaintype="{{isEntertaining}}">教学局</view>
         </view>
         <view class='ball_type mar_top'>
             <view class='type_name '>* 是否公开</view>

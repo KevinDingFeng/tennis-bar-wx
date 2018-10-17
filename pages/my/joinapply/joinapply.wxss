@@ -61,6 +61,20 @@
     border-left: 7px solid #efa719;
     z-index: 999;
 }
+.sanj_kong{
+    position: absolute;
+    top:12rpx;
+    right:96rpx;
+    content: '';
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-top: 1px solid #56a41f;
+    border-right: 1px solid #56a41f;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    z-index: 999;
+}
 .sanj3{
     position: absolute;
     top:8rpx;
