@@ -16,7 +16,7 @@
 .user_cer{
     display: flex;
     flex-direction: column;
-    padding: 36rpx 24rpx;
+    padding: 0rpx 24rpx;
     font-size: 28rpx;
     border-bottom: 1px solid #ddd;
     background-color: #fff;
