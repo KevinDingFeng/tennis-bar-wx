@@ -473,7 +473,8 @@ picker {
 .palce_dz {
     display: inline-block;
     font-size: 20rpx;
-    width: 93%;
+    width: 82%;
+    padding-top: 20rpx;
     color: #9b9b9b;
 }
 
@@ -481,16 +482,23 @@ picker {
     display: inline-block;
     font-size: 20rpx;
     color: #56a41f;
+    vertical-align: middle;
 }
 
 .palce_dh>image {
+    display: inline-block;
     width: 60rpx;
     height: 60rpx;
-    position: absolute;
+    /* position: absolute;
     top: 155rpx;
-    right: 67rpx;
+    right: 67rpx; */
 }
-
+.palce_dh>view{
+    margin-top: -10rpx;
+    display: inline-block;
+    height: 60rpx;
+    vertical-align: middle;
+}
 /* //登录按钮 */
 
 .btn_login {
@@ -521,4 +529,13 @@ picker {
     border-bottom: none!important;
     margin-top: 26rpx;
     margin-bottom: 26rpx;
+}
+.tripList{
+    top: 50%;
+    position: fixed;
+}
+.list_bottom{
+    display: flex;
+    flex-direction: row;
+
 }

@@ -8,6 +8,7 @@ var pageSize = 20;
 var isbottom = false;
 Page({
     data: {
+        isScroll:true,
         pageStyle: `width:${app.globalData.width};height:${app.globalData.height}`,
         scale: app.globalData.windowWidth / app.globalData.windowHeight,
         gameTypes: { "All": "不限", "Entertainment": "娱乐局", "Teaching": "教学局" },    // 球局类型
@@ -234,6 +235,7 @@ Page({
                 pxshow: true,
                 qyshow: true,//商区显示隐藏
                 isfull: false,
+                isScroll: true,
                 shownavindex: 0
             })
         } else {
@@ -253,6 +255,7 @@ Page({
                 level1: this.data.cityleft[0].city[0].code,
                 level2: '',
                 level3: '',
+                isScroll: true,
                 shownavindex: e.currentTarget.dataset.nav
             })
         }
@@ -300,7 +303,8 @@ Page({
                 qyshow: true,
                 childopen: false,
                 isfull: false,
-                shownavindex: 0
+                shownavindex: 0,
+               
             })
         } else {
             this.setData({
@@ -315,9 +319,11 @@ Page({
                 sxopen: false,
                 sxshow: true,//筛选显示隐藏
                 isfull: true,
+               
                 shownavindex: e.currentTarget.dataset.nav
             })
         }
+
         console.log(e.target)
     },
     selectleft: function (e) {
@@ -658,6 +664,17 @@ Page({
         pageIndex = pageIndex > 0 ? 0 : pageIndex;
         this.setData({ games: [] })
         this.queryGame();
+        wx.showNavigationBarLoading();
+        //模拟加载    
+        setTimeout(function () {
+            // complete 
+            wx.hideNavigationBarLoading()  //完成停止加载     
+            wx.stopPullDownRefresh() //停止下拉刷新    
+            wx.showToast({
+                title: '刷新完成！',
+                icon: 'none'
+            })
+        }, 1500);
     },
 
     /**
@@ -688,6 +705,9 @@ Page({
             })
         })
         this.setData({ gods: gods_new })
+    },
+    preventD:function(){
+
     }
 
 })
