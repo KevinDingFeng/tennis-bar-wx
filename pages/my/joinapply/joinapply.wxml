@@ -30,13 +30,35 @@
                                         <view class='palce_name'>
                                             {{apply.game.name}}
                                         </view>
-                                        <i class="{{apply.applyJoinGameStatus =='Refuse'?'sanj1':'sanj_kong'}}"></i>
-                                        <view class="palce_num1">
-                                            <block wx:if="{{apply.applyJoinGameStatus =='WaitingConfirm' }}">确认中</block>
-                                            <block wx:if="{{apply.applyJoinGameStatus =='Agree' }}">已同意</block>
-                                            <block wx:if="{{apply.applyJoinGameStatus =='Refuse' }}">已拒绝</block>
-                                            <block wx:if="{{apply.applyJoinGameStatus =='Quited' }}">已退出</block>
-                                            <block wx:if="{{apply.applyJoinGameStatus =='Canceled' }}">已取消</block>
+                                        <view wx:if="{{apply.applyJoinGameStatus =='WaitingConfirm' }}">
+                                            <i class="sanj_kong"></i>
+                                            <view class='palce_num1'>
+                                                <text>确认中</text>
+                                            </view>
+                                        </view>
+                                        <view wx:if="{{apply.applyJoinGameStatus =='Agree' }}">
+                                            <i class="sanj"></i>
+                                            <view class='palce_num'>
+                                                <text>已同意</text>
+                                            </view>
+                                        </view>
+                                        <view wx:if="{{apply.applyJoinGameStatus =='Refuse' }}">
+                                            <i class="sanj_h"></i>
+                                            <view class='palce_num3'>
+                                                <text>已拒绝</text>
+                                            </view>
+                                        </view>
+                                        <view wx:if="{{apply.applyJoinGameStatus =='Quited' }}">
+                                            <i class="sanj_h"></i>
+                                            <view class='palce_num3'>
+                                                <text>已退出</text>
+                                            </view>
+                                        </view>
+                                        <view wx:if="{{apply.applyJoinGameStatus =='Canceled' }}">
+                                            <i class="sanj_kong"></i>
+                                            <view class='palce_num1'>
+                                                <text>已取消</text>
+                                            </view>
                                         </view>
                                     </view>
                                     <view class='list_center'>
@@ -82,7 +104,7 @@
                                         <view class='palce_name'>
                                             {{apply.game.name}}
                                         </view>
-                                        <i class="sanj3"></i>
+                                        <i class="sanj_h"></i>
                                         <view class='palce_num3'>已拒绝</view>
                                     </view>
                                     <view class='list_center'>
