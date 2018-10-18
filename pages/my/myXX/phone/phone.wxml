@@ -16,11 +16,11 @@
             <view class='code_name'>验证码</view>
             <input class='code_num' bindinput="inputCode"></input>
             <view class='btn_code'>
-                <button class="weui-btn" type="primary" bindtap='sendCode'>获取验证码</button>
+                <button class="weui-btn" type="primary" bindtap='sendCode' disabled='{{disabled}}'>{{time}}</button>
             </view>
         </view>
     </view>
     <view class='sure_btn'>
-            <button class="weui-btn" type="primary" bindtap='toNext'>下一步</button>
+            <button class="weui-btn" type="primary" bindtap='toNext' >下一步</button>
         </view>
 </view>
