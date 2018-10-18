@@ -173,6 +173,6 @@ page {
     left: 88%;
 }
 .go_backList>image{
-    width: 60rpx;
-    height: 60rpx;
+    width: 80rpx;
+    height: 80rpx;
 }

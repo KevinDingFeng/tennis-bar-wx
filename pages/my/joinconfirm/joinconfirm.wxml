@@ -74,8 +74,8 @@
                           <view class='list_xx' bindtap="viewDetail" data-info='{{confirm}}'>
                             <view class='list_top'>
                                 <view class='palce_name'>{{confirm.game.name}}</view>
-                                <i class="sanj1"></i>
-                                <view class='palce_num1'>
+                                <i class="sanj"></i>
+                                <view class='palce_num'>
                                   <block wx:if="{{confirm.applyJoinGameStatus == 'Agree'}}">已确认</block>
                                   <block wx:if="{{confirm.applyJoinGameStatus == 'Refuse'}}">已拒绝</block>
                                 </view>

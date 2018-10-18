@@ -23,7 +23,7 @@
     background: #efa719;
     position: absolute;
     top:8rpx;
-    right:84rpx;
+    right:86rpx;
     border:6px solid #efa719;  
     border-left: 6px solid #fff;
     z-index: 999;
@@ -86,7 +86,7 @@
 .palce_peo{
     display: inline-block;
     font-size: 24rpx;
-    width: 64%;
+    width: 60%;
 }
 .palce_time{
     display: inline-block;
