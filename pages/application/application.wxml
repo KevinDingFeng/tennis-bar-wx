@@ -22,7 +22,7 @@
         <view class='xx_id'>
             <view class='id_name'>发起人</view>
             <view>{{apply.game.organizer.nickName}}</view>
-            <view>教练</view>
+            <view class='jl_sty'>教练</view>
         </view>
         <view class='xx_id'>
             <view class='id_name'>打球时间</view>

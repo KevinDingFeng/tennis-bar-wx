@@ -142,21 +142,28 @@
 .list_center{
     margin: 20rpx 0;
 }
+.list_bottom{
+   display: flex;
+   flex-direction: row;
+}
 .palce_dz{
     display: inline-block;
     font-size: 20rpx;
-    width: 93%;
+    width: 80%;
     color: #9b9b9b;
 }
+
 .palce_dh{
-    display: inline-block;
     font-size: 20rpx;
     color: #56a41f;
+    display: flex;
+    flex-direction: row;
 }
 .palce_dh>image{
     width: 60rpx;
 	height: 60rpx;
-    position: absolute;
-    top:155rpx;
-    right:67rpx;
+    
+}
+.palce_dh>view{
+    padding-top:20rpx;
 }

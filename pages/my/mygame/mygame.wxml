@@ -64,7 +64,7 @@ bindtap="swichNav" data-type="release">我发起的球局</view>
                     <view class="palce_dz">球场：{{jgame.game.court.name}}</view>
                     <view class='palce_dh' bindtap="openLocation" data-latitude="{{jgame.game.court.latitude}}" data-longitude="{{jgame.game.court.longitude}}">
                         <image src='../../../images/index/dw.png'></image>
-                        <text>导航</text>
+                        <view>导航</view>
                     </view>
                 </view>
               </block>
@@ -95,7 +95,7 @@ bindtap="swichNav" data-type="release">我发起的球局</view>
                     <view class="palce_dz">球场：{{game.court.name}}</view>
                     <view class='palce_dh' bindtap="openLocation" data-latitude="{{game.court.latitude}}" data-longitude="{{game.court.longitude}}">
                         <image src='../../../images/index/dw.png'></image>
-                        <text>导航</text>
+                        <view>导航</view>
                     </view>
                 </view>
               </block>
