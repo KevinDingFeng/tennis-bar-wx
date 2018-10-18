@@ -130,6 +130,9 @@ page {
     line-height: 100rpx;
     background: #fff;
 }
+.sx_dd{
+    height: 628rpx;
+}
 .sx_dd::-webkit-scrollbar {
     display: none;
 }
@@ -365,7 +368,9 @@ picker {
     width: 100%;
     overflow-y: scroll;
 }
-
+.widcc ::-webkit-scrollbar{
+    display: none;
+}
 .border_cc {
     border-bottom: 2px solid #d1d3d4 !important;
 }
@@ -591,7 +596,7 @@ picker {
     width: 102%;
     background-color: #fff;
     position: fixed;
-    top:79%;
+    bottom:0%;
     left: -2%;
     z-index: 99999899;
     height: 97rpx;

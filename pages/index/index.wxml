@@ -121,7 +121,7 @@
             </view>
         </view>
         <!-- 筛选 -->
-        <view class="temp temp1 {{sxopen ? 'slidown' : 'slidup'}} {{sxshow ? 'disappear':''}} sx_dd" style="height:{{is_cc ?'700rpx':'600rpx;'}}">
+        <view class="temp temp1 {{sxopen ? 'slidown' : 'slidup'}} {{sxshow ? 'disappear':''}} sx_dd" >
             <view class='check_time border_cc' style='padding:0;'>
                 <view class='time_name'>球局类型</view>
                 <view class='widcc'>
@@ -148,7 +148,7 @@
                     </view>
                 </view>
             </view>
-            <view class="{{is_cc ? 'children_show post_flxed1 ' : 'children_show post_flxed'}}">
+            <view class="children_show post_flxed">
                 <view class='check_time border_cc sx_but' style='padding-top:0;padding-bottom:4rpx;'>
                     <button type="primary" bindtap="filter_search">确定</button>
                     <button type="default" bindtap="reset_search">重置</button>
