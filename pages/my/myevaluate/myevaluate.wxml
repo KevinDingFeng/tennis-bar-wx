@@ -1,5 +1,5 @@
-<view class='container'>
-    <view class="myevaluate {{isfirst == true?'ds_b':'ds_n'}} mar_top">
+<view class='container'  >
+    <view class="myevaluate {{isfirst == true?'ds_b':'ds_n'}} mar_top" catchtouchmove="ture">
         <view class='user_jbxx'>
             <view>* 打球频率</view>
             <view class='user_age'>
