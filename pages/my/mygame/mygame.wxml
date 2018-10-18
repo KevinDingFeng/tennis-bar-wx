@@ -42,18 +42,30 @@ bindtap="swichNav" data-type="release">我发起的球局</view>
         </navigator>
     </view> -->
 </view>
-<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:1000px;width:100%;">
+<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:600px;width:100%;">
     <swiper-item>
         <block wx:if="{{games.length > 0}}">
             <view class='list_xx' wx:for="{{games}}" wx:key="**this" wx:for-item="jgame">
               <block wx:if="{{jgame}}">
                 <view class='list_top' bindtap="joinGameDetail" data-game="{{jgame.game}}">
                     <view class='palce_name f_wei'>{{jgame.game.name}}</view>
-                    <i class="sanj"></i>
-                    <view class='palce_num'>
-                        <view wx:if="{{jgame.game.gameStatus =='Completed'}}">已结束</view>
-                        <view wx:if="{{jgame.game.gameStatus =='Canceled'}}">已取消</view>
-                        <view wx:if="{{jgame.game.gameStatus =='WaitingJoin'||jgame.game.gameStatus =='Fulled'}}">即将开始</view>
+                    <view wx:if="{{jgame.game.gameStatus =='Completed'}}">
+                        <i class="sanj_h"></i>
+                        <view class='palce_num3'>
+                            <text>已结束</text>
+                        </view>
+                    </view>
+                    <view  wx:if="{{jgame.game.gameStatus =='Canceled'}}">
+                        <i class="sanj_kong"></i>
+                        <view class='palce_num1'>
+                            <text>已取消</text>
+                        </view>
+                    </view>
+                    <view wx:if="{{jgame.game.gameStatus =='WaitingJoin'||jgame.game.gameStatus =='Fulled'}}">
+                        <i class="sanj"></i>
+                        <view class='palce_num'>
+                            <text>即将开始</text>
+                        </view>
                     </view>
                 </view>
                 <view class='list_center'>
@@ -80,11 +92,23 @@ bindtap="swichNav" data-type="release">我发起的球局</view>
               <block wx:if="{{game}}">
                 <view class='list_top' bindtap="releaseGameDetail" data-game="{{game}}">
                     <view class='palce_name f_wei'>{{game.name}}</view>
-                    <i class="sanj"></i>
-                    <view class='palce_num'>
-                        <view wx:if="{{game.gameStatus =='Completed'}}">已结束</view>
-                        <view wx:if="{{game.gameStatus =='Canceled'}}">已取消</view>
-                        <view wx:if="{{game.gameStatus =='WaitingJoin'||game.gameStatus =='Fulled'}}">即将开始</view>
+                    <view wx:if="{{game.gameStatus =='Completed'}}">
+                        <i class="sanj_h"></i>
+                        <view class='palce_num3'>
+                            <text>已结束</text>
+                        </view>
+                    </view>
+                    <view wx:if="{{game.gameStatus =='Canceled'}}">
+                        <i class="sanj_kong"></i>
+                        <view class='palce_num1'>
+                            <text>已取消</text>
+                        </view>
+                    </view>
+                    <view wx:if="{{game.gameStatus =='WaitingJoin'||game.gameStatus =='Fulled'}}">
+                        <i class="sanj"></i>
+                        <view class='palce_num'>
+                            <text>即将开始</text>
+                        </view>
                     </view>
                 </view>
                 <view class='list_center'>
