@@ -1,119 +1,121 @@
 <wxs module="utils_apply">
-  function formatDate(data) {
-    var _data = data;
-    _data = _data.split(" ")[1];
-    return _data
-  }
-  module.exports = {
-    formatDate: formatDate
-  }
+    function formatDate(data) {
+        var _data = data;
+        _data = _data.split(" ")[1];
+        return _data
+    }
+    module.exports = {
+        formatDate: formatDate
+    }
 </wxs>
 <view class='container' style='{{width_cc}};height:100%;'>
     <block wx:if="{{game}}">
-    <view class='ball_name'>
-        <text class='game_name'>{{game.name}}</text>
-        <view class='col_g f_wei' wx:if="{{game.gameType == 'Entertainment' }}">
-            娱乐局
-        </view>
-        <view class='col_g f_wei' wx:else>
-            教学局
-        </view>
-        <view class='col_g f_wei' style='color:red;' bindtap='gobackIndex'>返回首页</view>
-    </view>
-    <view class='ball_xx'>
-        <view class='xx_title f_wei'>基本信息</view>
-        <view class='xx_id'>
-            <view class='id_name'>球局编号</view>
-            <view>{{game.no}}</view>
-        </view>
-        <view class='xx_id'>
-            <view class='id_name'>发起人</view>
-            <view>{{game.organizer.nickName}}</view>
-        </view>
-        <view class='xx_id'>
-            <view class='id_name'>打球时间</view>
-            <view>{{game.startTime}}-{{utils_apply.formatDate(game.endTime)}}</view>
-        </view>
-        <view class='xx_id'>
-            <view class='id_name'>球场</view>
-            <view >{{game.court.name}}</view>
-        </view>
-        <view class='xx_id'>
-            <view class='id_name'>地址</view>
-            <view class='dz_name'>{{game.court.address}}</view>
-        </view>
-         <view class='xx_id'>
-            <view class='id_name'>电话</view>
-            <view class='dz_name'>{{game.court.telephone}}</view>
-        </view>
-        <view class='img_show'>
-          <block wx:if="{{court_img.imgs.length > 0}}">
-            <block wx:for="{{court_img.imgs}}" wx:for-item="img" wx:key="**this">
-              <image src="{{imgUrl}}{{court_img.prePath}}{{img.imgPath}}"></image>
-            </block>
-          </block>
-        </view>
-    </view>
-    <view class='ball_join'>
-        <view class='join_title'>
+        <view class='ball_name'>
             <text class='game_name'>{{game.name}}</text>
-            <view class='col_g f_wei' >
-                {{game.totalNum}}缺{{game.vacancyNum}}
+            <view class='col_g f_wei' wx:if="{{game.gameType == 'Entertainment' }}">
+                娱乐局
+            </view>
+            <view class='col_g f_wei' wx:else>
+                教学局
             </view>
         </view>
-        <view class='wx_peo'>
-          <block wx:if="{{joiner.length > 0}}">
-            <block wx:for="{{joiner}}" wx:for-item="join" wx:key="**this">
-            <view class='peo_xx'>
-                <image src='{{join.wxUserInfo.avatarUrl}}'></image>
-                <view>{{join.wxUserInfo.nickName}}</view>
+        <view class='ball_xx'>
+            <view class='xx_title f_wei'>基本信息</view>
+            <view class='xx_id'>
+                <view class='id_name'>球局编号</view>
+                <view>{{game.no}}</view>
             </view>
-            </block>
-          </block>
-            <view class='peo_xx'>
-                <image src='../../../images/index/d_join.png'></image>
-                <view class='dz_name'>待加入</view>
+            <view class='xx_id'>
+                <view class='id_name'>发起人</view>
+                <view>{{game.organizer.nickName}}</view>
+            </view>
+            <view class='xx_id'>
+                <view class='id_name'>打球时间</view>
+                <view>{{game.startTime}}-{{utils_apply.formatDate(game.endTime)}}</view>
+            </view>
+            <view class='xx_id'>
+                <view class='id_name'>球场</view>
+                <view>{{game.court.name}}</view>
+            </view>
+            <view class='xx_id'>
+                <view class='id_name'>地址</view>
+                <view class='dz_name'>{{game.court.address}}</view>
+            </view>
+            <view class='xx_id'>
+                <view class='id_name'>电话</view>
+                <view class='dz_name'>{{game.court.telephone}}</view>
+            </view>
+            <view class='img_show'>
+                <block wx:if="{{court_img.imgs.length > 0}}">
+                    <block wx:for="{{court_img.imgs}}" wx:for-item="img" wx:key="**this">
+                        <image src="{{imgUrl}}{{court_img.prePath}}{{img.imgPath}}"></image>
+                    </block>
+                </block>
             </view>
         </view>
-    </view>
-    <view class='ball_bottom'>
-        <view class='xx_title f_wei'>参与要求</view>
-        <view class='ball_require'>
-            <view class='require'>
-                <text>球龄</text>
-                <view class='col_g'>{{ages[game.playAge]}}</view>
+        <view class='ball_join'>
+            <view class='join_title'>
+                <text class='game_name xx_title f_wei'>参与情况</text>
+                <view class='col_g f_wei'>
+                    {{game.totalNum}}缺{{game.vacancyNum}}
+                </view>
             </view>
-            <view class='require'>
-                <text>球技等级</text>
-                <view class='col_g'>{{levels[game.skillLevel]}}</view>
-            </view>
-            <view class='require'>
-                <text>打球人数</text>
-                <view class='col_g'>{{game.totalNum}}人</view>
-            </view>
-            <view class='require no_bor'>
-                <text>性别</text>
-                <view class='col_g'>
-                  <block wx:if="{{game.limitGender}}">
-                    {{game.maleNum}}男{{game.femaleNum}}女
-                  </block>
-                  <block wx:else>
-                    不限
-                  </block>
+            <view class='wx_peo'>
+                <block wx:if="{{joiner.length > 0}}">
+                    <block wx:for="{{joiner}}" wx:for-item="join" wx:key="**this">
+                        <view class='peo_xx'>
+                            <image src='{{join.wxUserInfo.avatarUrl}}'></image>
+                            <view>{{join.wxUserInfo.nickName}}</view>
+                        </view>
+                    </block>
+                </block>
+                <view class='peo_xx'>
+                    <image src='../../../images/index/d_join.png'></image>
+                    <view class='dz_name'>待加入</view>
                 </view>
             </view>
         </view>
-    </view>
-    <view class='registration_time'>报名截止时间：{{game.deadlineTime}}</view>
-    <view class='remark'>备注：{{game.remark==null?"":game.remark}}</view>
-    <view class='join_btn'>
-      <!-- <block wx:if="{{game.open}}">
+        <view class='ball_bottom'>
+            <view class='xx_title f_wei'>参与要求</view>
+            <view class='ball_require'>
+                <view class='require'>
+                    <text>球龄</text>
+                    <view class='col_g'>{{ages[game.playAge]}}</view>
+                </view>
+                <view class='require'>
+                    <text>球技等级</text>
+                    <view class='col_g'>{{levels[game.skillLevel]}}</view>
+                </view>
+                <view class='require'>
+                    <text>打球人数</text>
+                    <view class='col_g'>{{game.totalNum}}人</view>
+                </view>
+                <view class='require no_bor'>
+                    <text>性别</text>
+                    <view class='col_g'>
+                        <block wx:if="{{game.limitGender}}">
+                            {{game.maleNum}}男{{game.femaleNum}}女
+                        </block>
+                        <block wx:else>
+                            不限
+                        </block>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class='registration_time'>报名截止时间：{{game.deadlineTime}}</view>
+        <view class='remark'>备注：{{game.remark==null?"":game.remark}}</view>
+        <view class='join_btn'>
+            <!-- <block wx:if="{{game.open}}">
         <button class='join_firend' open-type='share'>邀请好友加入</button>
       </block>
       <block wx:elif="{{game.organizerId == wxUserInfo.id}}"> -->
-      <button class='join_firend' open-type='share'>邀请好友加入</button>
-      <!-- </block> -->
-      <button class='join_me' bindtap="joinGame" data-game="{{game}}">我要加入</button>
+            <button class='join_firend' open-type='share'>邀请好友加入</button>
+            <!-- </block> -->
+            <button class='join_me' bindtap="joinGame" data-game="{{game}}">我要加入</button>
+        </view>
+    </block>
+    <view class='go_backList' bindtap='gobackIndex'>
+        <image src="../../../images/index/go_home.png"></image>
     </view>
-  </block>
 </view>

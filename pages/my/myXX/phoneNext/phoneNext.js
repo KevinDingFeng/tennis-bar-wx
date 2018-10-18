@@ -9,7 +9,7 @@ Page({
     data: {
         subText: "确认绑定",
         time: "获取验证码",
-        currentTime: 360,
+        currentTime: 90,
         disabled:false
     },
 
@@ -126,7 +126,7 @@ Page({
                                 clearInterval(interval)
                                 that.setData({
                                     time: '重新发送',
-                                    currentTime: 360,
+                                    currentTime: 90,
                                     disabled: false
                                 })
                             }else{
@@ -143,7 +143,7 @@ Page({
                 })
             }else{
                 wx.showToast({
-                    title: '360秒后再试！',
+                    title: '90秒后再试！',
                     icon: 'none'
                 })
             }
