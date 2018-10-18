@@ -480,6 +480,10 @@ Page({
             success: function (res) {
                 console.log(res.data);
                 if (res.data.code == "200") {
+                    wx.showToast({
+                        title: '加载完成！',
+                        icon: 'none'
+                    })
                     console.log(that.data.gods)
                     let game = that.data.games;
                     game = game.concat(res.data.data.page.content);
@@ -671,11 +675,7 @@ Page({
         setTimeout(function () {
             // complete 
             wx.hideNavigationBarLoading()  //完成停止加载     
-            wx.stopPullDownRefresh() //停止下拉刷新    
-            wx.showToast({
-                title: '刷新完成！',
-                icon: 'none'
-            })
+            wx.stopPullDownRefresh() //停止下拉刷新   
         }, 1500);
     },
 
