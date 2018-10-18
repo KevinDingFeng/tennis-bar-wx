@@ -14,7 +14,9 @@
         </view>
         <view class='phone_num'>
             <view class='code_name'>验证码</view>
-            <input class='code_num' bindinput="inputCode"></input>
+            <view class='code_num'>
+                <input placeholder='请输入验证码'  bindinput="inputCode"></input>
+            </view>
             <view class='btn_code'>
                 <button class="weui-btn" type="primary" bindtap='sendCode' disabled='{{disabled}}'>{{time}}</button>
             </view>

@@ -589,12 +589,16 @@ picker {
     -webkit-transform: rotate(90deg);
     border-bottom: none!important;
     text-align: center;
+    height: 60rpx;
+    width: 60rpx;
 }
 .tra_bor_s{
     transform: rotate(-90deg)!important;
     -webkit-transform: rotate(-90deg)!important;
     border-bottom: none!important;
     height: 60rpx;
+    width: 60rpx;
+    text-align: center;
 }
 
 .post_flxed{

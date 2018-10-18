@@ -1,5 +1,6 @@
 // pages/my/myXX/phone/phone.js
 var utilJs = require("../../../../utils/util.js");
+var interval = null //倒计时函数
 Page({
 
     /**
@@ -87,36 +88,45 @@ Page({
 
     },
     sendCode: function () {
-        wx.request({
-            url: getApp().globalData.onlineUrl + 'api/sms_code/send',
-            method: "GET",
-            header: utilJs.hasTokenGetHeader(),
-            success: function (res) {
-                var title = res.data.code == 200 ? '发送成功' : res.data.data;
-                interval = setInterval(function () {
-                    currentTime--;
-                    that.setData({
-                        time: "剩余" + currentTime + '秒'
+        var that = this;
+        if (this.data.disabled == false) {
+            wx.request({
+                url: getApp().globalData.onlineUrl + 'api/sms_code/send',
+                method: "GET",
+                header: utilJs.hasTokenGetHeader(),
+                success: function (res) {
+                    var title = res.data.code == 200 ? '发送成功' : res.data.data;
+                    var currentTime = that.data.currentTime;
+                    interval = setInterval(function () {
+                        currentTime--;
+                        that.setData({
+                            time: "剩余" + currentTime + '秒'
+                        })
+                        if (currentTime <= 0) {
+                            clearInterval(interval)
+                            that.setData({
+                                time: '重新发送',
+                                currentTime: 90,
+                                disabled: false
+                            })
+                        } else {
+                            that.setData({
+                                disabled: true
+                            })
+                        }
+                    }, 1000)
+                    wx.showToast({
+                        title: title,
+                        icon: 'none'
                     })
-                    if (currentTime <= 0) {
-                        clearInterval(interval)
-                        that.setData({
-                            time: '重新发送',
-                            currentTime: 90,
-                            disabled: false
-                        })
-                    } else {
-                        that.setData({
-                            disabled: true
-                        })
-                    }
-                }, 1000)
-                wx.showToast({
-                    title: title,
-                    icon: 'none'
-                })
-            }
-        })
+                }
+            })
+        } else {
+            wx.showToast({
+                title: '90秒后再试！',
+                icon: 'none'
+            })
+        }
     },
     inputCode: function (e) {
         this.setData({

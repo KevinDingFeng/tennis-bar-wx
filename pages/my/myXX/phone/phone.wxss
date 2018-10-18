@@ -51,10 +51,15 @@
     margin-top: -5rpx;
 }
 .code_num{
-    width: 38%;
-    border-radius: 15rpx;
-	border: solid 1px #e4e4e4;
+    width: 33%;
+	border: none;
+    border-bottom: solid 1px #e4e4e4;
     margin-right: 20rpx;
+    margin-left: 20rpx;
+    padding-left: 20rpx;
+}
+.code_num>input{
+    padding-left: 20rpx;
 }
 .btn_code{
     margin-top: -10rpx;
