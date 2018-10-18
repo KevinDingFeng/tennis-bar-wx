@@ -121,7 +121,7 @@
             </view>
         </view>
         <!-- 筛选 -->
-        <view class="temp temp1 {{sxopen ? 'slidown' : 'slidup'}} {{sxshow ? 'disappear':''}} sx_dd" >
+        <view class="temp temp1 {{sxopen ? 'slidown' : 'slidup'}} {{sxshow ? 'disappear':''}} sx_dd" style="{{is_cc ? 'min-height:628rpx;' : 'min-height:540rpx;' }}"  catchtouchmove="ture">
             <view class='check_time border_cc' style='padding:0;'>
                 <view class='time_name'>球局类型</view>
                 <view class='widcc'>
@@ -147,13 +147,12 @@
                         <view class="" bindtap='selecJL' data-idxjl='{{index}}'>{{item.name}}</view>
                     </view>
                 </view>
-            </view>
-            <view class="children_show post_flxed">
-                <view class='check_time border_cc sx_but' style='padding-top:0;padding-bottom:4rpx;'>
-                    <button type="primary" bindtap="filter_search">确定</button>
+                 <view class='check_time border_cc sx_but' style='padding-top:0;padding-bottom:4rpx;'>
                     <button type="default" bindtap="reset_search">重置</button>
+                    <button type="primary" bindtap="filter_search">确定</button>
                 </view>
             </view>
+               
         </view>
         <!-- 遮盖层 -->
         <view class="fullbg {{isfull ?'fullopacity':''}}" bindtap="hidebg" style='{{pageStyle}}' catchtouchmove="ture"></view>

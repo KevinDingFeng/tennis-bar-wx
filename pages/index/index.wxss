@@ -131,7 +131,7 @@ page {
     background: #fff;
 }
 .sx_dd{
-    height: 628rpx;
+    min-height: 628rpx;
 }
 .sx_dd::-webkit-scrollbar {
     display: none;
@@ -366,7 +366,6 @@ picker {
     display: inline-block;
     border-bottom: none !important;
     width: 100%;
-    overflow-y: scroll;
 }
 .widcc ::-webkit-scrollbar{
     display: none;
@@ -411,6 +410,10 @@ picker {
 .sx_but {
     display: flex;
     flex-direction: row;
+    width: 100%;
+    border: none!important;
+    margin-top: 15rpx;
+    
 }
 
 .time_type>view {
@@ -585,11 +588,13 @@ picker {
     transform: rotate(90deg);
     -webkit-transform: rotate(90deg);
     border-bottom: none!important;
+    text-align: center;
 }
 .tra_bor_s{
     transform: rotate(-90deg)!important;
     -webkit-transform: rotate(-90deg)!important;
     border-bottom: none!important;
+    height: 60rpx;
 }
 
 .post_flxed{
