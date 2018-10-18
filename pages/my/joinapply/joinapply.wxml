@@ -30,7 +30,7 @@
                                         <view class='palce_name'>
                                             {{apply.game.name}}
                                         </view>
-                                        <i class="{{apply.applyJoinGameStatus =='Refuse'?'sanj_kong':'sanj1'}}"></i>
+                                        <i class="{{apply.applyJoinGameStatus =='Refuse'?'sanj1':'sanj_kong'}}"></i>
                                         <view class="palce_num1">
                                             <block wx:if="{{apply.applyJoinGameStatus =='WaitingConfirm' }}">确认中</block>
                                             <block wx:if="{{apply.applyJoinGameStatus =='Agree' }}">已同意</block>
