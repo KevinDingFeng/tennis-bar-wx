@@ -2,10 +2,21 @@
 
 page {
     background-color: #f5f5f5;
+    overflow-x: hidden;
 }
+.container{
+    overflow-y: scroll;
+    max-height: 1000px;
+}
+.container>view{
+    overflow: hidden;
+}   
 
+.container::-webkit-scrollbar {
+    display: none;
+}
 .ball_name {
-    width: 94%;
+    /* width: 94%; */
     margin-top: 19rpx;
     display: flex;
     flex-direction: row;
@@ -20,7 +31,7 @@ page {
 }
 
 .ball_xx {
-    width: 94%;
+    /* width: 94%; */
     margin-top: 18rpx;
     background-color: #fff;
     padding: 30rpx 23rpx;
@@ -40,7 +51,7 @@ page {
 }
 
 .id_name {
-    width: 30%;
+    width: 25%;
     text-align: left;
 }
 
@@ -63,10 +74,11 @@ page {
 }
 
 .ball_join {
-    width: 94%;
+    /* width: 94%; */
     margin-top: 19rpx;
     background-color: #fff;
     padding: 27rpx 21rpx;
+    padding-bottom: 0;
     font-size: 24rpx;
     border-bottom: 1px solid #ddd;
 }
@@ -84,11 +96,14 @@ page {
 .wx_peo {
     display: flex;
     flex-direction: row;
+    flex-wrap:wrap;
 }
 
 .peo_xx {
     text-align: center;
     margin-top: 25rpx;
+    margin-right: 10rpx;
+    margin-bottom: 25rpx;
 }
 
 .peo_xx>image {
@@ -97,7 +112,7 @@ page {
 }
 
 .ball_bottom {
-    width: 94%;
+    /* width: 94%; */
     margin-top: 18rpx;
     background-color: #fff;
     font-size: 24rpx;
@@ -121,19 +136,19 @@ page {
     border: none;
 }
 .registration_time{
-    width: 94%;
+    /* width: 94%; */
     margin-top: 36rpx;
     margin-bottom: 24rpx;
     font-size: 20rpx;
     color: #424242;
 }
 .remark{
-    width: 94%;
+    /* width: 94%; */
     font-size: 20rpx;
     color: #424242;
 }
 .join_btn{
-    width: 94%;
+   width: 93.5%;
     display: flex;
     flex-direction: row;
     margin-top: 51rpx;

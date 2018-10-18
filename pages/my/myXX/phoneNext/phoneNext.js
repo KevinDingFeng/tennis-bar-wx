@@ -9,7 +9,8 @@ Page({
     data: {
         subText: "确认绑定",
         time: "获取验证码",
-        currentTime: 90
+        currentTime: 360,
+        disabled:false
     },
 
     /**
@@ -105,36 +106,47 @@ Page({
         var that = this;
         var p = that.data.phone;
         if (p) {
-            wx.request({
-                url: getApp().globalData.onlineUrl + 'api/sms_code/send',
-                method: "GET",
-                header: utilJs.hasTokenGetHeader(),
-                data: {
-                    cellphone: p
-                },
-                success: function (res) {
-                    var title = res.data.code == 200 ? '发送成功' : res.data.data;
-                    var currentTime = that.data.currentTime
-                    interval = setInterval(function () {
-                        currentTime--;
-                        that.setData({
-                            time: currentTime + '秒'
-                        })
-                        if (currentTime <= 0) {
-                            clearInterval(interval)
+            if (that.data.disabled == false){
+                wx.request({
+                    url: getApp().globalData.onlineUrl + 'api/sms_code/send',
+                    method: "GET",
+                    header: utilJs.hasTokenGetHeader(),
+                    data: {
+                        cellphone: p
+                    },
+                    success: function (res) {
+                        var title = res.data.code == 200 ? '发送成功' : res.data.data;
+                        var currentTime = that.data.currentTime
+                        interval = setInterval(function () {
+                            currentTime--;
                             that.setData({
-                                time: '重新发送',
-                                currentTime: 90,
-                                disabled: false
+                                time:"剩余"+ currentTime + '秒'
                             })
-                        }
-                    }, 1000)
-                    wx.showToast({
-                        title: title,
-                        icon: 'none'
-                    })
-                }
-            })
+                            if (currentTime <= 0) {
+                                clearInterval(interval)
+                                that.setData({
+                                    time: '重新发送',
+                                    currentTime: 360,
+                                    disabled: false
+                                })
+                            }else{
+                                that.setData({
+                                    disabled: true
+                                })
+                            }
+                        }, 1000)
+                        wx.showToast({
+                            title: title,
+                            icon: 'none'
+                        })
+                    }
+                })
+            }else{
+                wx.showToast({
+                    title: '360秒后再试！',
+                    icon: 'none'
+                })
+            }
         } else {
             wx.showToast({
                 title: '请输入手机号',

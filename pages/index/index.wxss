@@ -348,7 +348,7 @@ picker {
     /* padding: 0 37rpx; */
     font-size: 28rpx !important;
     color: #424242;
-    width:30%;
+    width:27%;
     height: 66rpx;
    margin-top: 20rpx;
 }

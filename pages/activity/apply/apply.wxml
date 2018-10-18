@@ -8,7 +8,7 @@
     formatDate: formatDate
   }
 </wxs>
-<view class='container'>
+<view class='container' style='{{width_cc}};height:100%;'>
     <block wx:if="{{game}}">
     <view class='ball_name'>
         <text class='game_name'>{{game.name}}</text>
@@ -89,7 +89,7 @@
             </view>
             <view class='require'>
                 <text>打球人数</text>
-                <view class='col_g'>{{game.totalNum}}</view>
+                <view class='col_g'>{{game.totalNum}}人</view>
             </view>
             <view class='require no_bor'>
                 <text>性别</text>

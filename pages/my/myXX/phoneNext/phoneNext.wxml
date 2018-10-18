@@ -18,7 +18,7 @@
                 <input placeholder='请输入验证码'  bindinput="inputCode"></input>
             </view>
             <view class='btn_code'>
-                <button class="weui-btn" type="primary" bindtap='sendCode' disabled='{{disabled}}'>{{time}}</button>
+                <button class="weui-btn" type="primary" bindtap='sendCode'  disabled='{{disabled}}'>{{time}}</button>
             </view>
         </view>
     </view>

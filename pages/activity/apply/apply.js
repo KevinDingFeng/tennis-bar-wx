@@ -7,6 +7,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+    pageStyle: `width:${app.globalData.width};height:${app.globalData.height}`,
+    scale: app.globalData.windowWidth / app.globalData.windowHeight,
+    width_cc: `width:${app.globalData.width};`,
     imgUrl: app.globalData.imgUrl,
     game:'',
     ages: {"All":"不限" ,"LessThree": "3年以下", "LessFive": "3~5年", "LessTen": "5~10年", "MoreTen":"10年以上"},
