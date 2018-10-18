@@ -503,7 +503,7 @@ picker {
     display: flex;
     flex-direction: row;
     font-size: 20rpx;
-    width: 82%;
+    width: 100%;
     color: #9b9b9b;
     vertical-align: middle;
 }

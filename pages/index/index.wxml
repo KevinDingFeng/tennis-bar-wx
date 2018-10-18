@@ -188,15 +188,15 @@
                         <view class='palce_num'>{{game.totalNum}}缺{{game.vacancyNum}}</view>
                     </view>
                     <view class='list_center' bindtap="applyJoinGame" data-game="{{game}}">
+                        <view class='palce_time'>{{game.startTime}}~{{utils.formatDate(game.endTime)}}</view>
                         <view class="palce_peo">发起人：{{game.organizer.nickName}}</view>
-                        <view class='palce_time'>{{game.startTime}}-{{utils.formatDate(game.endTime)}}</view>
                     </view>
                     <view class='list_bottom'>
-                        <view class="palce_dz">球场：{{game.court.name}}</view>
-                        <view class='palce_dh' bindtap="openLocation" data-latitude="{{game.court.latitude}}" data-longitude="{{game.court.longitude}}">
+                        <view class="palce_dz" bindtap="openLocation" data-latitude="{{game.court.latitude}}" data-longitude="{{game.court.longitude}}">
                             <image src='../../images/index/dw.png'></image>
-                            <text>导航</text>
-                        </view>
+                            <view class='palce_text'>
+                                球场：{{game.court.name}}</view>
+                            </view>
                     </view>
                 </view>
             </block>
