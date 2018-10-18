@@ -497,7 +497,7 @@ picker {
 .palce_peo {
     display: inline-block;
     font-size: 24rpx;
-    width: 60%;
+    width: 59%;
     text-align: right;
 }
 
