@@ -113,7 +113,8 @@
                     
                 </view>
             </view>
-            <view class="{{childopen ? 'children_show ' : 'children_hide'}}">
+            <!-- class="{{childopen ? 'children_show ' : 'children_hide'}}" -->
+            <view class="children_hide">
                 <view class="index_btn">
                     <button>重置</button>
                     <button type='primary'>确定</button>

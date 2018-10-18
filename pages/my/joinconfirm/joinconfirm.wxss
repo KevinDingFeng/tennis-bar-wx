@@ -17,7 +17,15 @@
 .palce_name{
     display: inline-block;
     width: 88%;
-    
+}
+.sanj_h{
+    background-color: #d2d2d2;
+    position: absolute;
+    top:8rpx;
+    right:84rpx;
+    border:6px solid #d2d2d2;  
+    border-left: 6px solid #fff;
+    z-index: 999;
 }
 .sanj{
     background: #efa719;
@@ -67,6 +75,20 @@
     right:84rpx;
     border:7px solid #d2d2d2;  
     border-left: 7px solid #fff;
+    z-index: 999;
+}
+.sanj_kong{
+    position: absolute;
+    top:12rpx;
+    right:96rpx;
+    content: '';
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-top: 1px solid #56a41f;
+    border-right: 1px solid #56a41f;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
     z-index: 999;
 }
 .palce_num{
