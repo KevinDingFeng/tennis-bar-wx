@@ -28,7 +28,8 @@
             <view class='xx_id'>
                 <view class='id_name'>发起人</view>
                 <view>{{game.organizer.nickName}}</view>
-                <view class='peo_type'>教练</view>
+                <view class='peo_type' wx-if="{{game.organizer.position== 'Coach'}}">教练</view>
+                <view wx-else></view>
             </view>
             <view class='xx_id'>
                 <view class='id_name'>打球时间</view>
