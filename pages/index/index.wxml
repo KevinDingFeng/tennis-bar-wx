@@ -62,19 +62,19 @@
                     {{cityleft[index].name}}
                 </view>
             </view>
-            <view class="qy quyu-center" >
+            <scroll-view class="qy quyu-center"  scroll-y>
                 <view class="{{select2 == index ? 'current2' : ''}}" wx:for="{{citycenter}}" bindtap="selectcenter" data-city='{{index}}'>
                     {{citycenter[index].name}}
                 </view>
-            </view>
-            <view class="qy quyu-right">
-                <view class="{{cityright[index].name == sq_hx ? 'children_active' : ''}}" wx:for="{{cityright}}" bindtap='selectright' data-city='{{index}}' data-cityName='{{cityright[index].name}}'>
+            </scroll-view>
+            <scroll-view class="qy quyu-right" scroll-y>
+                <view class="iocn_zong {{cityright[index].name == sq_hx ? 'children_active' : ''}}" wx:for="{{cityright}}" bindtap='selectright' data-city='{{index}}' data-cityName='{{cityright[index].name}}'>
                     {{cityright[index].name}}
-                    <view class="{{cityright[index].name == sq_hx ? 'children_show' : 'children_hide'}}">
+                    <view class="icon_fa {{cityright[index].name == sq_hx ? 'children_show' : 'children_hide'}}">
                         <icon class="con_sty" type="success" size='20'></icon>
                     </view>
                 </view>
-            </view>
+            </scroll-view>
         </view>
         <!-- 智能排序 -->
         <view class="temp temp1 {{nzopen ? 'slidown' : 'slidup'}} {{nzshow ? 'disappear':''}}" catchtouchmove="ture">

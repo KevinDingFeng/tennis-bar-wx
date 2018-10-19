@@ -201,7 +201,14 @@ page {
     padding-left: 15rpx;
     color: #222;
 }
-
+.icon_fa{
+    width: 17%;
+    margin-left:35rpx;
+}
+.iocn_zong{
+    display:flex;
+    flex-direction:row;
+}
 .qy::-webkit-scrollbar {
     display: none;
 }
