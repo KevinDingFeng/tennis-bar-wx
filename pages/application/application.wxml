@@ -35,6 +35,10 @@
         <view class='xx_id two_sty' >
             <view class='id_name'>地址</view>
             <view class='two_dz'>{{apply.game.court.address}}</view>
+            <view class='dz_icon' bindtap="openLocation" data-latitude="{{apply.game.court.latitude}}" data-longitude="{{apply.game.court.longitude}}">
+                <image src='../../../images/index/dw.png'></image>
+                <view>导航</view>
+            </view>
         </view>
         <view class='xx_id'>
             <view class='id_name'>电话</view>

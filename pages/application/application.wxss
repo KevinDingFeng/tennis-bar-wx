@@ -41,7 +41,10 @@
 }
 .jl_sty{
     margin-left: 20rpx;
-    color:#56a41f;
+    border: 1px solid #56a41f;
+    color: #56a41f;
+    border-radius:5px; 
+    padding: 0 8rpx;
 }
 .id_name {
     width: 30%;
@@ -83,7 +86,7 @@
     margin-top: 15px;
 }
 .two_dz{
-    width: 69%;
+    width: 55%;
 }
 .as_img>image{
     width: 221rpx;
@@ -91,4 +94,13 @@
 }
 .as_img>image:nth-child(2){
     margin: 0 23rpx;
+}
+.dz_icon{
+    display: flex;
+    flex-direction: row;
+}
+.dz_icon>image{
+    width:50rpx;
+    height:60rpx;
+    margin-top: -11rpx;
 }

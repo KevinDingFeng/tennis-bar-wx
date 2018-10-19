@@ -28,6 +28,7 @@
             <view class='xx_id'>
                 <view class='id_name'>发起人</view>
                 <view>{{game.organizer.nickName}}</view>
+                <view class='peo_type'>教练</view>
             </view>
             <view class='xx_id'>
                 <view class='id_name'>打球时间</view>
@@ -37,9 +38,13 @@
                 <view class='id_name'>球场</view>
                 <view>{{game.court.name}}</view>
             </view>
-            <view class='xx_id'>
+            <view class='xx_id dz_cc'>
                 <view class='id_name'>地址</view>
-                <view class='dz_name'>{{game.court.address}}</view>
+                <view class='dz_name'> {{game.court.address}}</view>
+                <view class='dz_icon' bindtap="openLocation" data-latitude="{{game.court.latitude}}" data-longitude="{{game.court.longitude}}">
+                    <image src='../../../images/index/dw.png'></image>
+                    <view>导航</view>
+                </view>
             </view>
             <view class='xx_id'>
                 <view class='id_name'>电话</view>
@@ -71,7 +76,7 @@
                 </block>
                 <view class='peo_xx'>
                     <image src='../../../images/index/d_join.png'></image>
-                    <view class='dz_name'>待加入</view>
+                    <view>待加入</view>
                 </view>
             </view>
         </view>
