@@ -194,6 +194,7 @@ page{
 .peo_xx {
     text-align: center;
     margin-top: 25rpx;
+    margin-right: 15rpx;
 }
 
 .peo_xx>image {
