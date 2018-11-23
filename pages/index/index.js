@@ -8,9 +8,9 @@ var pageSize = 20;
 var isbottom = false;
 Page({
     data: {
-        is_cc:false,
-        is_kk:false,
-        isScroll:true,
+        is_cc: false,
+        is_kk: false,
+        isScroll: true,
         pageStyle: `width:${app.globalData.width};height:${app.globalData.height}`,
         scale: app.globalData.windowWidth / app.globalData.windowHeight,
         gameTypes: { "All": "不限", "Entertainment": "娱乐局", "Teaching": "教学局" },    // 球局类型
@@ -76,7 +76,8 @@ Page({
         time_hx: null,//打球时间回显
         xs_jl: null,//教练回显
         //当前用户信息
-        wxUserInfo:null
+        wxUserInfo: null,
+        is_fx:"1"
     },
     inputTyping: function (e) {
         let keyword = e.detail.value;
@@ -84,24 +85,44 @@ Page({
     },
     //获取微信用户信息
     getWxUserInfo: function () {
-      let that = this;
-      wx.request({
-        url: getApp().globalData.onlineUrl + 'api/wx_user_info',
-        method: "GET",
-        header: utilJs.hasTokenGetHeader(),
-        success: function (res) {
-          if (res.data.code == "200") {
-            that.setData({
-              wxUserInfo: res.data.data
-            })
-          }
-        }
-      })
+        let that = this;
+        wx.request({
+            url: getApp().globalData.onlineUrl + 'api/wx_user_info',
+            method: "GET",
+            header: utilJs.hasTokenGetHeader(),
+            success: function (res) {
+                console.log(res)
+                if (res.data.code == "200") {
+                    that.setData({
+                        wxUserInfo: res.data.data
+                    })
+                } else if (res.data.code == "201"){
+                    wx.showToast({
+                        title: '暂未登陆，跳转中',
+                        icon: 'none'
+                    })
+                    wx.redirectTo({
+                        url: '../login/login',
+                    })
+                }
+            }
+        })
     },
     onLoad: function (options) {
-        wx.setNavigationBarTitle({
-            title: '球局',
-        })
+        let _scene = wx.getStorageSync('scene');
+        let _querid = wx.getStorageSync('querid');
+        console.log(_scene);
+        console.log(_querid);
+        if (_scene == "1044"){
+            if (app.globalData.cate_id =="1"){
+
+            }else{
+                this.setData({ is_fx: "2" })
+                wx.redirectTo({
+                    url: '/pages/activity/apply/apply?id=' + _querid,
+                })
+            }
+        }
         //获取当前微信用户信息
         this.getWxUserInfo();
         //获取所有教练，筛选的时候用
@@ -121,10 +142,10 @@ Page({
                         gods.push({
                             id: item.id,
                             name: item.nickName,
-                            checked:false
+                            checked: false
                         })
                     })
-                    that.setData({ gods: gods })
+                    that.setData({ gods: gods})
                 }
             }
         })
@@ -160,13 +181,13 @@ Page({
         console.log(this.data.gods)
         let _idx = e.currentTarget.dataset.idxjl;//点击当前的自定义id
         let gods_arr = this.data.gods;//大神数据
-        for(var i=0;i<gods_arr.length;i++){
-            if (gods_arr[i].checked == true){
+        for (var i = 0; i < gods_arr.length; i++) {
+            if (gods_arr[i].checked == true) {
 
-            }else{
+            } else {
                 gods_arr[i].checked = false;
             }
-            
+
         }
         gods_arr[_idx].checked = !gods_arr[_idx].checked;
         this.setData({
@@ -178,11 +199,11 @@ Page({
     filter_search: function () {
         this.setData({
             isfull: false,
-            sxshow:true,
-            sxopen:false,
+            sxshow: true,
+            sxopen: false,
             pxshow: true,
             qyshow: true,
-            shownavindex:0
+            shownavindex: 0
         })
         let gt = this.data.gt;
         let sl = this.data.sl;
@@ -306,7 +327,7 @@ Page({
                 childopen: false,
                 isfull: false,
                 shownavindex: 0,
-               
+
             })
         } else {
             this.setData({
@@ -321,7 +342,7 @@ Page({
                 sxopen: false,
                 sxshow: true,//筛选显示隐藏
                 isfull: true,
-               
+
                 shownavindex: e.currentTarget.dataset.nav
             })
         }
@@ -349,7 +370,7 @@ Page({
                 nz_text: "智能排序",
                 px_text: "打球时间",
                 ft_text: "筛选",
-                sq_hx:""
+                sq_hx: ""
             })
             this.hidebg();
             this.setData({
@@ -703,20 +724,20 @@ Page({
             gods_new.push({
                 id: item.id,
                 name: item.name,
-                checked:false
+                checked: false
             })
         })
         this.setData({ gods: gods_new })
     },
-    jl_shows:function(e){
+    jl_shows: function (e) {
         let that = this;
         let _cc = e.currentTarget.dataset.type;
-        if (_cc == false){
+        if (_cc == false) {
             that.setData({
                 is_cc: true,
-                is_kk:false
+                is_kk: false
             });
-        }else{
+        } else {
             that.setData({
                 is_cc: false,
             });

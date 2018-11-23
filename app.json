@@ -1,8 +1,8 @@
 {
   "pages":[
+    "pages/index/index",
     "pages/login/login",
     "pages/game/map/map",
-    "pages/index/index",
     "pages/application/application",
     "pages/my/joinconfirm/joinundetermined/joinundetermined",
     "pages/my/myevaluate/myevaluate",
@@ -34,7 +34,7 @@
     "color": "#7A7E83",
     "selectedColor": "#3cc51f",
     "borderStyle": "black",
-    "backgroundColor": "#000",
+    "backgroundColor": "#fff",
     "list": [
       {
         "pagePath": "pages/index/index",

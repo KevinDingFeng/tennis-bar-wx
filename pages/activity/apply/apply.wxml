@@ -118,7 +118,7 @@
       <block wx:elif="{{game.organizerId == wxUserInfo.id}}"> -->
             <button class='join_firend' open-type='share'>邀请好友加入</button>
             <!-- </block> -->
-            <button class='join_me' bindtap="joinGame" data-game="{{game}}">我要加入</button>
+            <button class='join_me' bindtap="joinGame" data-game="{{game}}" >我要加入</button>
         </view>
     </block>
     <view class='go_backList' bindtap='gobackIndex'>

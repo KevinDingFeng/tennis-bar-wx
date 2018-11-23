@@ -71,7 +71,7 @@ page {
 .index_search {
     width: 94%;
     background-color: #f5f5f5;
-    margin-left:-46rpx;
+    margin-left:2rpx;
 }
 
 .nav {
@@ -625,4 +625,8 @@ picker {
     left: -2%;
     z-index: 99999899;
     height: 85rpx;
+}
+.load_more{
+   display: flex;
+   align-items: center;
 }

@@ -39,35 +39,66 @@ Page({
      */
     onLoad: function (options) {
         // this.getWxUserInfo();
-        if (!wx.getStorageSync('tennisToken')) {
+        let _Token = wx.getStorageSync('tennisToken'); 
+        console.log(_Token);
+        if (_Token) {
+            console.log('token' + _Token);
+            wx.request({
+                url: getApp().globalData.onlineUrl + 'game/checktoken',
+                header: utilJs.hasTokenGetHeader(),
+                success: function (res) {
+                    console.log("成功")
+                    if (res.data.code == "200"){
+                        wx.setStorageSync('tennisToken', _Token);
+                    } else if (res.data.code == "201"){
+                        wx.showToast({
+                            title: '暂未登陆，跳转中',
+                            icon: 'none'
+                        })
+                        wx.redirectTo({
+                            url: '../../login/login',
+                        })
+                    }
+                },
+                fail:function(){
+                    console.log("失败")
+                }
+            })
+        } else{
+            wx.showToast({
+                title: '暂未登陆，跳转中',
+                icon: 'none'
+            })
             wx.redirectTo({
                 url: '../../login/login',
             })
-        } else {
-            let that = this;
-            wx.showShareMenu({
-                withShareTicket: true,
-                success: function (res) {
-                },
-                complete: function (res) {
-                    if (options.id) {
-                        that.getGameInfo(options.id);
-                        that.getJoinGamerInfo(options.id);
-                        that.getCourtImgInfo(that.data.game.courtId);
-                    }
+        }
+        let that = this;
+        wx.showShareMenu({
+            withShareTicket: true,
+            success: function (res) {
+            },
+            complete: function (res) {
+                console.log(options.id);
+                
+                if (options.id) {
+                    let _id = Number(options.id)
+                    
+                    that.getGameInfo(_id);
+                    that.getJoinGamerInfo(_id);
+                    that.getCourtImgInfo(that.data.game.courtId);
                 }
-            })
-            if (options.game) {
-                that.setData({
-                    game: JSON.parse(options.game),
-                    types: 'normal'
-                })
-                that.getJoinGamerInfo(JSON.parse(options.game).id);
-                that.getCourtImgInfo(JSON.parse(options.game).courtId);
             }
+        })
+        if (options.game) {
+            that.setData({
+                game: JSON.parse(options.game),
+                types: 'normal'
+            })
+            that.getJoinGamerInfo(JSON.parse(options.game).id);
+            that.getCourtImgInfo(JSON.parse(options.game).courtId);
         }
     },
-
     onShow: function () {
         this.setData({ wxUserInfo: wx.getStorageSync("wxUserInfo") })
     },
@@ -80,6 +111,7 @@ Page({
             method: 'GET',
             header: utilJs.hasTokenGetHeader(),
             success: function (res) {
+                console.log(res)
                 if (res.data.code == '200') {
                     let game = res.data.data.game;
                     that.setData({ game: game })
@@ -146,7 +178,10 @@ Page({
     /**
      * 分享
      */
-    onShareAppMessage: function () {
+    onShareAppMessage: function (e) {
+        if(e.form == "button"){
+            
+        } 
         return {
             title: "来“一桔”网球吧",
             path: "/pages/activity/apply/apply?id=" + this.data.game.id,
@@ -167,8 +202,9 @@ Page({
 
     //返回首页
     gobackIndex: function () {
+        app.globalData.cate_id = "1";
         wx.switchTab({
-            url: '../../index/index',
+             url: '../../index/index',
         })
     }
 

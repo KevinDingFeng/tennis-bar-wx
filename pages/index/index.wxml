@@ -10,202 +10,211 @@
 </wxs>
 <!--index.wxml-->
 <view class="container">
-    <!-- 搜索 -->
-    <view class="page__bd">
-        <view class="weui-search-bar">
-            <view class="weui-search-bar__form">
-                <view class="weui-search-bar__box">
-                    <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
-                    <input type="text" class="weui-search-bar__input" placeholder="球局名称/发起人/球场名称" value="{{keyword}}" focus="{{inputShowed}}" bindinput="inputTyping" />
-                    <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
-                        <icon type="clear" size="14"></icon>
+    <view style='width:100%' wx:if="{{is_fx=='1'}}">
+        <!-- 搜索 -->
+        <view class="page__bd">
+            <view class="weui-search-bar">
+                <view class="weui-search-bar__form">
+                    <view class="weui-search-bar__box">
+                        <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                        <input type="text" class="weui-search-bar__input" placeholder="球局名称/发起人/球场名称" value="{{keyword}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+                        <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+                            <icon type="clear" size="14"></icon>
+                        </view>
+                    </view>
+                    <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+                        <icon class="weui-icon-search" type="search" size="14"></icon>
+                        <view class="weui-search-bar__text">球局名称/发起人/球场名称</view>
+                    </label>
+                </view>
+                <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="search">搜索</view>
+                <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+            </view>
+        </view>
+        <!-- banner -->
+        <view class='index_banner'>
+            <image src="../../images/index/banner.png"></image>
+        </view>
+        <!-- 四栏搜索 -->
+        <view class='index_search'>
+            <view class="nav">
+                <view class="nav-son {{shownavindex == 1? 'active' : ''}}" bindtap="listqy" data-nav="1">
+                    <view class="content">{{qy_text}}</view>
+                    <view class="icon"></view>
+                </view>
+                <view class="nav-son borders {{shownavindex == 2? 'active' : ''}}" bindtap="list" data-nav="2">
+                    <view class="content">{{nz_text}}</view>
+                    <view class="icon"></view>
+                </view>
+                <view class="nav-son borders {{shownavindex == 3? 'active' : ''}}" bindtap="listpx" data-nav="3">
+                    <view class="content">{{px_text}}</view>
+                    <view class="icon"></view>
+                </view>
+                <view class="nav-son borders {{shownavindex == 4? 'active' : ''}}" bindtap="filter" data-nav="4">
+                    <view class="content">{{ft_text}}</view>
+                    <view class="icon"></view>
+                </view>
+            </view>
+            <!-- 下拉内容 -->
+            <view class="quyu {{qyopen ? 'slidown' : 'slidup'}} {{qyshow ? 'disappear':''}}">
+                <!-- 商区 -->
+                <view class="qy quyu-left">
+                    <view class="{{select1 == index ? 'current' : ''}}" wx:for="{{cityleft}}" bindtap="selectleft" data-city='{{index}}'>
+                        {{cityleft[index].name}}
                     </view>
                 </view>
-                <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
-                    <icon class="weui-icon-search" type="search" size="14"></icon>
-                    <view class="weui-search-bar__text">球局名称/发起人/球场名称</view>
-                </label>
-            </view>
-            <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="search">搜索</view>
-            <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
-        </view>
-    </view>
-    <!-- banner -->
-    <view class='index_banner'>
-        <image src="../../images/index/banner.png"></image>
-    </view>
-    <!-- 四栏搜索 -->
-    <view class='index_search'>
-        <view class="nav">
-            <view class="nav-son {{shownavindex == 1? 'active' : ''}}" bindtap="listqy" data-nav="1">
-                <view class="content">{{qy_text}}</view>
-                <view class="icon"></view>
-            </view>
-            <view class="nav-son borders {{shownavindex == 2? 'active' : ''}}" bindtap="list" data-nav="2">
-                <view class="content">{{nz_text}}</view>
-                <view class="icon"></view>
-            </view>
-            <view class="nav-son borders {{shownavindex == 3? 'active' : ''}}" bindtap="listpx" data-nav="3">
-                <view class="content">{{px_text}}</view>
-                <view class="icon"></view>
-            </view>
-            <view class="nav-son borders {{shownavindex == 4? 'active' : ''}}" bindtap="filter" data-nav="4">
-                <view class="content">{{ft_text}}</view>
-                <view class="icon"></view>
-            </view>
-        </view>
-        <!-- 下拉内容 -->
-        <view class="quyu {{qyopen ? 'slidown' : 'slidup'}} {{qyshow ? 'disappear':''}}"  >
-            <!-- 商区 -->
-            <view class="qy quyu-left">
-                <view class="{{select1 == index ? 'current' : ''}}" wx:for="{{cityleft}}" bindtap="selectleft" data-city='{{index}}'>
-                    {{cityleft[index].name}}
-                </view>
-            </view>
-            <scroll-view class="qy quyu-center"  scroll-y>
-                <view class="{{select2 == index ? 'current2' : ''}}" wx:for="{{citycenter}}" bindtap="selectcenter" data-city='{{index}}'>
-                    {{citycenter[index].name}}
-                </view>
-            </scroll-view>
-            <scroll-view class="qy quyu-right" scroll-y>
-                <view class="iocn_zong {{cityright[index].name == sq_hx ? 'children_active' : ''}}" wx:for="{{cityright}}" bindtap='selectright' data-city='{{index}}' data-cityName='{{cityright[index].name}}'>
-                    {{cityright[index].name}}
-                    <view class="icon_fa {{cityright[index].name == sq_hx ? 'children_show' : 'children_hide'}}">
-                        <icon class="con_sty" type="success" size='20'></icon>
+                <scroll-view class="qy quyu-center" scroll-y>
+                    <view class="{{select2 == index ? 'current2' : ''}}" wx:for="{{citycenter}}" bindtap="selectcenter" data-city='{{index}}'>
+                        {{citycenter[index].name}}
                     </view>
-                </view>
-            </scroll-view>
-        </view>
-        <!-- 智能排序 -->
-        <view class="temp temp1 {{nzopen ? 'slidown' : 'slidup'}} {{nzshow ? 'disappear':''}}" catchtouchmove="ture">
-            <view wx:for="{{content}}" wx:for-index="index">
-                <view class="px_flex" bindtap="intelligentSort" data-idx="{{index}}" data-pxName="{{item}}">
-                    {{item}}
-                    <view class="{{item == px_hx ? 'children_show' : 'children_hide'}}">
-                        <icon class="con_sty" type="success" size='20'></icon>
+                </scroll-view>
+                <scroll-view class="qy quyu-right" scroll-y>
+                    <view class="iocn_zong {{cityright[index].name == sq_hx ? 'children_active' : ''}}" wx:for="{{cityright}}" bindtap='selectright' data-city='{{index}}' data-cityName='{{cityright[index].name}}'>
+                        {{cityright[index].name}}
+                        <view class="icon_fa {{cityright[index].name == sq_hx ? 'children_show' : 'children_hide'}}">
+                            <icon class="con_sty" type="success" size='20'></icon>
+                        </view>
+                    </view>
+                </scroll-view>
+            </view>
+            <!-- 智能排序 -->
+            <view class="temp temp1 {{nzopen ? 'slidown' : 'slidup'}} {{nzshow ? 'disappear':''}}" catchtouchmove="ture">
+                <view wx:for="{{content}}" wx:for-index="index">
+                    <view class="px_flex" bindtap="intelligentSort" data-idx="{{index}}" data-pxName="{{item}}">
+                        {{item}}
+                        <view class="{{item == px_hx ? 'children_show' : 'children_hide'}}">
+                            <icon class="con_sty" type="success" size='20'></icon>
+                        </view>
                     </view>
                 </view>
             </view>
-        </view>
-        <!-- 打球时间 -->
-        <view class="temp temp2 {{pxopen ? 'slidown' : 'slidup'}} {{pxshow ? 'disappear':''}}" catchtouchmove="ture">
-            <view class="{{childopen ? 'children_show' : 'children_hide'}}">
-                <view class="section">
-                    <view class="section__title">日期选择器</view>
-                    <view class='bore_no'>
-                        <picker mode="date" value="{{date}}" bindchange="bindDateChange">
-                            <view class="picker">
-                                {{px_time}}
+            <!-- 打球时间 -->
+            <view class="temp temp2 {{pxopen ? 'slidown' : 'slidup'}} {{pxshow ? 'disappear':''}}" catchtouchmove="ture">
+                <view class="{{childopen ? 'children_show' : 'children_hide'}}">
+                    <view class="section">
+                        <view class="section__title">日期选择器</view>
+                        <view class='bore_no'>
+                            <picker mode="date" value="{{date}}" bindchange="bindDateChange">
+                                <view class="picker">
+                                    {{px_time}}
+                                </view>
+                            </picker>
+                            <text style='color:#959595'>></text>
+                        </view>
+                    </view>
+                    <view class='check_time bore_no'>
+                        <view class='time_name'>选择时间</view>
+                        <view class='time_cc_type'>
+                            <view class="time_type {{item == time_hx ? 'time_active' : 'no_active_gods'}}" wx:for="{{content}}" wx:for-index="index">
+                                <view class="{{item == time_hx ? 'time_active' : 'no_active_gods'}}" bindtap='selectTime' data-idx='{{index}}' data-type="{{item}}">
+                                    {{item}}
+                                </view>
                             </view>
-                        </picker>
-                        <text style='color:#959595'>></text>
+                        </view>
+
                     </view>
                 </view>
-                <view class='check_time bore_no'>
-                    <view class='time_name'>选择时间</view>
-                    <view class='time_cc_type'>
-                        <view class="time_type {{item == time_hx ? 'time_active' : 'no_active_gods'}}" wx:for="{{content}}" wx:for-index="index">
-                            <view class="{{item == time_hx ? 'time_active' : 'no_active_gods'}}"  bindtap='selectTime' data-idx='{{index}}' data-type="{{item}}">
-                                {{item}}
+                <!-- class="{{childopen ? 'children_show ' : 'children_hide'}}" -->
+                <view class="children_hide">
+                    <view class="index_btn">
+                        <button>重置</button>
+                        <button type='primary'>确定</button>
+                    </view>
+                </view>
+            </view>
+            <!-- 筛选 -->
+            <view class="temp temp1 {{sxopen ? 'slidown' : 'slidup'}} {{sxshow ? 'disappear':''}} sx_dd" style="{{is_cc ? 'min-height:628rpx;' : 'min-height:540rpx;' }}" catchtouchmove="ture">
+                <view class='check_time border_cc' style='padding:0;'>
+                    <view class='time_name'>球局类型</view>
+                    <view class='widcc'>
+                        <view class="gods_list {{sx_active == index ? 'active1' : 'no_active1' }}" wx:for="{{gt}}" wx:for-index="index" bindtap='selectLX' data-idx='{{index}}'>
+                            <view data-idx='{{index}}'>{{gameTypes[item]}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class='check_time border_cc' style='padding:0;'>
+                    <view class='time_name'>球技等级</view>
+                    <view class='widcc'>
+                        <view class="gods_list  {{dj_active == index ? 'active1' : 'no_active1' }}" wx:for="{{sl}}" wx:for-index="index" bindtap='selectDJ' data-idxdj='{{index}}'>
+                            <view data-idx='{{index}}'>{{skillLevs[item]}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class='check_time border_cc' style='padding:0;'>
+                    <view class='time_name'>
+                        教练
+                        <view class="tra_bor {{is_cc ? 'children_show' : 'tra_bor_s' }}" data-type="{{is_cc}}" bindtap='jl_shows'>></view>
+                    </view>
+                    <view class="widcc {{is_cc ? 'children_show' : 'children_hide'}}" style='min-height:100rpx;'>
+                        <view class="gods_list {{gods[index].checked ? 'active_gods' : 'no_active_gods' }}" wx:for="{{gods}}" wx:for-index="index">
+                            <view class="" bindtap='selecJL' data-idxjl='{{index}}'>{{item.name}}</view>
+                        </view>
+                    </view>
+                    <view class='check_time border_cc sx_but' style='padding-top:0;padding-bottom:4rpx;'>
+                        <button type="default" bindtap="reset_search">重置</button>
+                        <button type="primary" bindtap="filter_search">确定</button>
+                    </view>
+                </view>
+
+            </view>
+            <!-- 遮盖层 -->
+            <view class="fullbg {{isfull ?'fullopacity':''}}" bindtap="hidebg" style='{{pageStyle}}' catchtouchmove="ture"></view>
+        </view>
+        <!-- 球局信息 -->
+        <view class="palce_xx  {{qyopen ? 'tripList' : ''}}" wx:if="{{games!=[]}}">
+            <block wx:for="{{games}}" wx:for-item="game" wx:key="**this">
+                <!-- <view class='' wx:for="{{games}}" wx:for-item="game" wx:key="**this"> -->
+                <block wx:if="{{game.open}}">
+                    <view class='palce_list'>
+                        <view class='list_top' bindtap="applyJoinGame" data-game="{{game}}">
+                            <view class="palce_name">{{game.name}}</view>
+                            <view class='palce_num'>{{game.totalNum}}缺{{game.vacancyNum}}</view>
+                        </view>
+                        <view class='list_center' bindtap="applyJoinGame" data-game="{{game}}">
+                            <view class='palce_time'>{{game.startTime}}~{{utils.formatDate(game.endTime)}}</view>
+                            <view class="palce_peo">发起人：{{game.organizer.nickName}}</view>
+                        </view>
+                        <view class='list_bottom'>
+                            <view class="palce_dz" bindtap="openLocation" data-latitude="{{game.court.latitude}}" data-longitude="{{game.court.longitude}}">
+                                <image src='../../images/index/dw.png'></image>
+                                <view class='palce_text'>
+                                    球场：{{game.court.name}}</view>
                             </view>
                         </view>
                     </view>
-                    
-                </view>
-            </view>
-            <!-- class="{{childopen ? 'children_show ' : 'children_hide'}}" -->
-            <view class="children_hide">
-                <view class="index_btn">
-                    <button>重置</button>
-                    <button type='primary'>确定</button>
-                </view>
+                </block>
+                <block wx:elif="{{game.organizerId == wxUserInfo.id}}">
+                    <view class='palce_list'>
+                        <view class='list_top' bindtap="applyJoinGame" data-game="{{game}}">
+                            <view class="palce_name">{{game.name}}</view>
+                            <view class='palce_num'>{{game.totalNum}}缺{{game.vacancyNum}}</view>
+                        </view>
+                        <view class='list_center' bindtap="applyJoinGame" data-game="{{game}}">
+                            <view class='palce_time'>{{game.startTime}}~{{utils.formatDate(game.endTime)}}</view>
+                            <view class="palce_peo">发起人：{{game.organizer.nickName}}</view>
+                        </view>
+                        <view class='list_bottom'>
+                            <view class="palce_dz" bindtap="openLocation" data-latitude="{{game.court.latitude}}" data-longitude="{{game.court.longitude}}">
+                                <image src='../../images/index/dw.png'></image>
+                                <view class='palce_text'>
+                                    球场：{{game.court.name}}</view>
+                            </view>
+                        </view>
+                    </view>
+                </block>
+            </block>
+            <!-- </view> -->
+        </view>
+        <view class='palce_xx' wx:else>
+            <view class="no_list">
+                暂无球场信息
             </view>
         </view>
-        <!-- 筛选 -->
-        <view class="temp temp1 {{sxopen ? 'slidown' : 'slidup'}} {{sxshow ? 'disappear':''}} sx_dd" style="{{is_cc ? 'min-height:628rpx;' : 'min-height:540rpx;' }}"  catchtouchmove="ture">
-            <view class='check_time border_cc' style='padding:0;'>
-                <view class='time_name'>球局类型</view>
-                <view class='widcc'>
-                    <view class="gods_list {{sx_active == index ? 'active1' : 'no_active1' }}" wx:for="{{gt}}" wx:for-index="index" bindtap='selectLX' data-idx='{{index}}'>
-                        <view data-idx='{{index}}'>{{gameTypes[item]}}</view>
-                    </view>
-                </view>
-            </view>
-            <view class='check_time border_cc' style='padding:0;'>
-                <view class='time_name'>球技等级</view>
-                <view class='widcc'>
-                    <view class="gods_list  {{dj_active == index ? 'active1' : 'no_active1' }}" wx:for="{{sl}}" wx:for-index="index" bindtap='selectDJ' data-idxdj='{{index}}'>
-                        <view data-idx='{{index}}'>{{skillLevs[item]}}</view>
-                    </view>
-                </view>
-            </view>
-            <view class='check_time border_cc' style='padding:0;'>
-                <view class='time_name'>
-                    教练<view class="tra_bor {{is_cc ? 'children_show' : 'tra_bor_s' }}" data-type="{{is_cc}}" bindtap='jl_shows'>></view>
-                </view> 
-                <view class="widcc {{is_cc ? 'children_show' : 'children_hide'}}" style='min-height:100rpx;'>
-                    <view class="gods_list {{gods[index].checked ? 'active_gods' : 'no_active_gods' }}" wx:for="{{gods}}" wx:for-index="index">
-                        <view class="" bindtap='selecJL' data-idxjl='{{index}}'>{{item.name}}</view>
-                    </view>
-                </view>
-                 <view class='check_time border_cc sx_but' style='padding-top:0;padding-bottom:4rpx;'>
-                    <button type="default" bindtap="reset_search">重置</button>
-                    <button type="primary" bindtap="filter_search">确定</button>
-                </view>
-            </view>
-               
-        </view>
-        <!-- 遮盖层 -->
-        <view class="fullbg {{isfull ?'fullopacity':''}}" bindtap="hidebg" style='{{pageStyle}}' catchtouchmove="ture"></view>
     </view>
-    <!-- 球局信息 -->
-    <view class="palce_xx  {{qyopen ? 'tripList' : ''}}" wx:if="{{games}}">
-        <block wx:for="{{games}}" wx:for-item="game" wx:key="**this">
-            <!-- <view class='' wx:for="{{games}}" wx:for-item="game" wx:key="**this"> -->
-            <block wx:if="{{game.open}}">
-                <view class='palce_list'>
-                    <view class='list_top' bindtap="applyJoinGame" data-game="{{game}}">
-                        <view class="palce_name">{{game.name}}</view>
-                        <view class='palce_num'>{{game.totalNum}}缺{{game.vacancyNum}}</view>
-                    </view>
-                    <view class='list_center' bindtap="applyJoinGame" data-game="{{game}}">
-                        <view class='palce_time'>{{game.startTime}}~{{utils.formatDate(game.endTime)}}</view>
-                        <view class="palce_peo">发起人：{{game.organizer.nickName}}</view>
-                    </view>
-                    <view class='list_bottom'>
-                        <view class="palce_dz" bindtap="openLocation" data-latitude="{{game.court.latitude}}" data-longitude="{{game.court.longitude}}">
-                            <image src='../../images/index/dw.png'></image>
-                            <view class='palce_text'>
-                                球场：{{game.court.name}}</view>
-                            </view>
-                    </view>
-                </view>
-            </block>
-            <block wx:elif="{{game.organizerId == wxUserInfo.id}}">
-                <view class='palce_list'>
-                    <view class='list_top' bindtap="applyJoinGame" data-game="{{game}}">
-                        <view class="palce_name">{{game.name}}</view>
-                        <view class='palce_num'>{{game.totalNum}}缺{{game.vacancyNum}}</view>
-                    </view>
-                    <view class='list_center' bindtap="applyJoinGame" data-game="{{game}}">
-                        <view class='palce_time'>{{game.startTime}}~{{utils.formatDate(game.endTime)}}</view>
-                        <view class="palce_peo">发起人：{{game.organizer.nickName}}</view>
-                    </view>
-                    <view class='list_bottom'>
-                        <view class="palce_dz" bindtap="openLocation" data-latitude="{{game.court.latitude}}" data-longitude="{{game.court.longitude}}">
-                            <image src='../../images/index/dw.png'></image>
-                            <view class='palce_text'>
-                                球场：{{game.court.name}}</view>
-                            </view>
-                    </view>
-                </view>
-            </block>
-        </block>
-        <!-- </view> -->
-    </view>
-    <view class='palce_xx' wx:else>
-        <view class="no_list">
-            暂无球场信息
+    <view class="load_more" style="{{pageStyle}}" wx:else>
+        <view class="weui-loadmore">
+            <view class="weui-loading"></view>
+            <view class="weui-loadmore__tips">正在加载</view>
         </view>
     </view>
 </view>
