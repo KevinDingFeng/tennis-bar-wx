@@ -94,7 +94,7 @@
                     <view class="section">
                         <view class="section__title">日期选择器</view>
                         <view class='bore_no'>
-                            <picker mode="date" value="{{date}}" bindchange="bindDateChange">
+                            <picker mode="date" value="{{date}}" bindchange="bindDateChange" start="{{starttime}}">
                                 <view class="picker">
                                     {{px_time}}
                                 </view>
@@ -161,7 +161,7 @@
             <view class="fullbg {{isfull ?'fullopacity':''}}" bindtap="hidebg" style='{{pageStyle}}' catchtouchmove="ture"></view>
         </view>
         <!-- 球局信息 -->
-        <view class="palce_xx  {{qyopen ? 'tripList' : ''}}" wx:if="{{games!=[]}}">
+        <view class="palce_xx  {{qyopen ? 'tripList' : ''}}" wx:if="{{games!=''}}" data-cc="{{games}}">
             <block wx:for="{{games}}" wx:for-item="game" wx:key="**this">
                 <!-- <view class='' wx:for="{{games}}" wx:for-item="game" wx:key="**this"> -->
                 <block wx:if="{{game.open}}">
@@ -172,7 +172,7 @@
                         </view>
                         <view class='list_center' bindtap="applyJoinGame" data-game="{{game}}">
                             <view class='palce_time'>{{game.startTime}}~{{utils.formatDate(game.endTime)}}</view>
-                            <view class="palce_peo">发起人：{{game.organizer.nickName}}</view>
+                            <view class="palce_peo" >发起人：{{game.organizer.nickName}}</view>
                         </view>
                         <view class='list_bottom'>
                             <view class="palce_dz" bindtap="openLocation" data-latitude="{{game.court.latitude}}" data-longitude="{{game.court.longitude}}">
@@ -207,7 +207,7 @@
         </view>
         <view class='palce_xx' wx:else>
             <view class="no_list">
-                暂无球场信息
+                {{no_text}}
             </view>
         </view>
     </view>

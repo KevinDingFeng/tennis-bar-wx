@@ -69,15 +69,17 @@ Page({
         select2: '',
         shownavindex: '',
         games: [],
-        sx_active: null,//筛选点击类型
-        dj_active: null,//筛选的选择教练
+        sx_active: "0",//筛选点击类型
+        dj_active: "0",//筛选的选择教练
         sq_hx: null,//商区回显
         px_hx: null,//排序回显
         time_hx: null,//打球时间回显
         xs_jl: null,//教练回显
         //当前用户信息
         wxUserInfo: null,
-        is_fx:"1"
+        is_fx:"1",
+        starttime:"",//能选择的开始时间
+        no_text:""
     },
     inputTyping: function (e) {
         let keyword = e.detail.value;
@@ -122,7 +124,17 @@ Page({
                     url: '/pages/activity/apply/apply?id=' + _querid,
                 })
             }
+        } else if (_scene == "1007"){
+            if (app.globalData.cate_id == "1") {
+
+            } else {
+                this.setData({ is_fx: "2" })
+                wx.redirectTo({
+                    url: '/pages/activity/apply/apply?id=' + _querid,
+                })
+            }
         }
+        this.get_starttime();
         //获取当前微信用户信息
         this.getWxUserInfo();
         //获取所有教练，筛选的时候用
@@ -149,6 +161,23 @@ Page({
                 }
             }
         })
+    },
+    // 获取当前时间
+    get_starttime:function(){
+        let that = this;
+        let date = new Date();
+        let seperator1 = "-";
+        let year = date.getFullYear();
+        let month = date.getMonth() + 1;
+        let strDate = date.getDate();
+        if (month >= 1 && month <= 9) {
+            month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate;
+        }
+        let currentdate = year + seperator1 + month + seperator1 + strDate;
+        that.setData({ starttime: currentdate })
     },
     showInput: function () {
         this.setData({
@@ -236,8 +265,8 @@ Page({
     //重置
     reset_search: function () {
         this.setData({
-            sx_active: null,
-            dj_active: null,
+            sx_active: "0",
+            dj_active: "0",
         })
         this.resetSelectCoach();
     },
@@ -501,13 +530,16 @@ Page({
             success: function (res) {
                 console.log(res.data);
                 if (res.data.code == "200") {
-                    wx.showToast({
-                        title: '加载完成！',
-                        icon: 'none'
-                    })
                     console.log(that.data.gods)
+                    
                     let game = that.data.games;
                     game = game.concat(res.data.data.page.content);
+                    if(game == []){
+                        that.setData({
+                            no_text: "暂无球场信息"
+                        })                       
+                    }
+                    debugger
                     that.setData({
                         games: game
                     })
@@ -517,6 +549,10 @@ Page({
                         pageIndex++;
                         isbottom = false;
                     }
+                    wx.showToast({
+                        title: '加载完成！',
+                        icon: 'none'
+                    })
                 } else {
                     wx.showToast({
                         title: res.data.data,
@@ -657,7 +693,6 @@ Page({
                 qyopen: false,
                 nzshow: true,
                 sxshow: false,
-
                 pxshow: true,
                 qyshow: true,
                 isfull: true,
@@ -679,9 +714,9 @@ Page({
             skillLev: '',
             name: '',
             //清空games 数据
-            games: []
+            games: this.data.games
         })
-        // this.resetSelectCoach();
+         this.resetSelectCoach();
     },
 
     /**
