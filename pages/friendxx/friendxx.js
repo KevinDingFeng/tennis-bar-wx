@@ -61,6 +61,15 @@ Page({
             url: '../activity/apply/apply?game=' + JSON.stringify(game)+"&cc=1",
         })
     },
+  // 查看球场地址详情
+  openLocation: function (event) {
+    let latitude = event.currentTarget.dataset.latitude;
+    let longitude = event.currentTarget.dataset.longitude;
+    wx.openLocation({
+      latitude: latitude,
+      longitude: longitude,
+    })
+  },
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
