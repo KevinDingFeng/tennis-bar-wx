@@ -67,6 +67,7 @@ Page({
                             url: '../index/index',
                         })
                     } else if (res.data.code == "201") {
+                        let _Token = wx.clearStorage('tennisToken');
                         wx.showToast({
                             title: '暂未登陆，跳转中',
                             icon: 'none'
