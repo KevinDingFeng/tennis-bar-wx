@@ -115,6 +115,20 @@ Page({
                 if (res.data.code == "200") {
                     let game = that.data.games;
                     game = game.concat(res.data.data.page.content);
+                    let currentTab = that.data.currentTab;
+                    if (currentTab == "0"){
+                        for (var i = 0; i < game.length; i++) {
+                            let _cc = game[i].game.startTime.substr(0, 13);
+                            game[i].game.startTime = _cc
+                            game[i].game.endTime = game[i].game.endTime.substr(0, 13)
+                        }
+                    }else{
+                        for (var i = 0; i < game.length; i++) {
+                            let _cc = game[i].startTime.substr(0, 13);
+                            game[i].startTime = _cc
+                            game[i].endTime = game[i].endTime.substr(0, 13)
+                        }
+                    }
                     that.setData({
                         games: game,
                     })

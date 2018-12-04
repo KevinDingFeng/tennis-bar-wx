@@ -21,6 +21,7 @@ Page({
             title: '申请详情',
         })
         let data = JSON.parse(options.data);
+        data.creation = data.creation.substr(0, 13);
         this.setData({
             apply: data
         })

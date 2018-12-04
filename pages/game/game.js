@@ -56,7 +56,7 @@ Page({
         cc1: true,
         cc2: true,
         isopen: true, //是否公开
-        isEntertaining: true, //球局类型
+        isEntertaining: true, //球局类型6
         isfull: false,
         isfirst: "1",
         nolimitSex: true,
@@ -198,7 +198,7 @@ Page({
         this.data.yul_arr = [];
         var _cc = this.data.yul_arr;
         if (_num == 0) {
-            
+
         } else {
             for (var i = 0; i <= _num + 1; i++) {
                 _cc.push(i);
@@ -305,12 +305,16 @@ Page({
         var obj = dateTimePicker.dateTimePicker(this.data.startYear, this.data.endYear);
         var obj1 = dateTimePicker.dateTimePicker(this.data.startYear, this.data.endYear);
         var obj2 = dateTimePicker.dateTimePicker(this.data.startYear, this.data.endYear);
-        obj2.dateTime[2] =26;
+        // obj2.dateTime[2] =26;
         // 精确到分的处理，将数组的秒去掉
         var lastArray = obj1.dateTimeArray.pop();
+        lastArray = obj1.dateTimeArray.pop();
         var lastTime = obj1.dateTime.pop();
-        var lastArray1= obj2.dateTimeArray.pop();
+        lastTime = obj1.dateTime.pop();
+        var lastArray1 = obj2.dateTimeArray.pop();
+        lastArray1 = obj2.dateTimeArray.pop();
         var lastTime1 = obj2.dateTime.pop();
+        lastTime1 = obj2.dateTime.pop();
         this.setData({
             dateTime: obj.dateTime,
             dateTimeArray: obj.dateTimeArray,
@@ -323,14 +327,42 @@ Page({
         });
     },
     changeDateTime1(e) {
-        this.setData({ 
-            dateTime1: e.detail.value,
-            end_time: null
-         });
-        this.setData({ cc: false });
+        let _cc = e.detail.value
+        let dateTimeArray1 = this.data.dateTimeArray1;
+        let dateTime1 = this.data.dateTime1;
+        let startTime = dateTimeArray1[0][dateTime1[0]] + "-" + dateTimeArray1[1][dateTime1[1]] + "-" + dateTimeArray1[2][dateTime1[2]] + " " + dateTimeArray1[3][dateTime1[3]];
+        this.setData({
+            start_time: startTime,
+            dateTime1: _cc,
+            dateTime2: e.detail.value,
+            end_time: null,
+            deadlineTime: startTime,
+            cc: false
+        });
+
     },
     changeDateTime2(e) {
-        this.setData({ dateTime2: e.detail.value });
+        let dateTimeArray2 = this.data.dateTimeArray2;
+        let dateTime2 = this.data.dateTime2;
+        let endTime = dateTimeArray2[0][dateTime2[0]] + "-" + dateTimeArray2[1][dateTime2[1]] + "-" + dateTimeArray2[2][dateTime2[2]] + " " + dateTimeArray2[3][dateTime2[3]];//+ ":" + dateTimeArray2[4][dateTime2[4]];
+        let stt = parseInt(utilJs.replaceAllChar(this.data.start_time));
+        let edt = parseInt(utilJs.replaceAllChar(endTime));
+        if (this.data.start_time != null) {
+            if (stt >= edt) {
+                wx.showToast({
+                    title: '打球结束日期不得早于/等于开始日期',
+                    icon: 'none'
+                })
+                this.setData({ end_time: null })
+                return;
+            } else {
+                this.setData({ end_time: endTime })
+            }
+        }
+        this.setData({
+            dateTime2: e.detail.value,
+            end_time: endTime
+        });
         this.setData({ cc1: false });
     },
     changeDateTime3(e) {
@@ -348,14 +380,14 @@ Page({
         });
         let dateTimeArray1 = this.data.dateTimeArray1;
         let dateTime1 = this.data.dateTime1;
-        let startTime = dateTimeArray1[0][dateTime1[0]] + "-" + dateTimeArray1[1][dateTime1[1]] + "-" + dateTimeArray1[2][dateTime1[2]] + " " + dateTimeArray1[3][dateTime1[3]] + ":" + dateTimeArray1[4][dateTime1[4]];
-
+        let startTime = dateTimeArray1[0][dateTime1[0]] + "-" + dateTimeArray1[1][dateTime1[1]] + "-" + dateTimeArray1[2][dateTime1[2]] + " " + dateTimeArray1[3][dateTime1[3]];//+ ":" + dateTimeArray1[4][dateTime1[4]]
         let cur = parseInt(utilJs.replaceAllChar(utilJs.formatTime(new Date())));
+        cur = Number(String(cur).substring(10, cur.length - 2));
         let stt = parseInt(utilJs.replaceAllChar(startTime));
         let edt = parseInt(utilJs.replaceAllChar(this.data.end_time));
-        if (cur > stt) {
+        if (cur >= stt) {
             wx.showToast({
-                title: '打球开始日期不得早于当前时间',
+                title: '打球开始日期不得早于/等于当前时间',
                 icon: 'none'
             })
             this.setData({ start_time: null })
@@ -380,7 +412,6 @@ Page({
         }
     },
     changeDateTimeColumn2(e) {
-        
         var arr = this.data.dateTime2, dateArr = this.data.dateTimeArray2;
         arr[e.detail.column] = e.detail.value;
         dateArr[2] = dateTimePicker.getMonthDay(dateArr[0][arr[0]], dateArr[1][arr[1]]);
@@ -391,13 +422,13 @@ Page({
         let dateTime1 = this.data.dateTime1;
         let dateTimeArray2 = this.data.dateTimeArray2;
         let dateTime2 = this.data.dateTime2;
-        let endTime = dateTimeArray2[0][dateTime2[0]] + "-" + dateTimeArray2[1][dateTime2[1]] + "-" + dateTimeArray2[2][dateTime2[2]] + " " + dateTimeArray2[3][dateTime2[3]] + ":" + dateTimeArray2[4][dateTime2[4]];
+        let endTime = dateTimeArray2[0][dateTime2[0]] + "-" + dateTimeArray2[1][dateTime2[1]] + "-" + dateTimeArray2[2][dateTime2[2]] + " " + dateTimeArray2[3][dateTime2[3]];//+ ":" + dateTimeArray2[4][dateTime2[4]];
         let stt = parseInt(utilJs.replaceAllChar(this.data.start_time));
         let edt = parseInt(utilJs.replaceAllChar(endTime));
         if (this.data.start_time != null) {
-            if (stt > edt) {
+            if (stt >= edt) {
                 wx.showToast({
-                    title: '打球结束日期不得早于开始日期',
+                    title: '打球结束日期不得早于/等于开始日期',
                     icon: 'none'
                 })
                 this.setData({ end_time: null })
@@ -405,6 +436,35 @@ Page({
             } else {
                 this.setData({ end_time: endTime })
             }
+        }
+        let stt_year = Number(String(stt).substring(0, 4));
+        let stt_month = Number(String(stt).substring(4, 6));
+        let stt_day = Number(String(stt).substring(6, 8));
+
+        let edt_year = Number(String(edt).substring(0, 4));
+        let edt_month = Number(String(edt).substring(4, 6));
+        let edt_day = Number(String(edt).substring(6, 8));
+        if (edt_year > stt_year) {
+            wx.showToast({
+                title: '不支持跨天！',
+                icon: 'none'
+            })
+            this.setData({ end_time: null })
+            return
+        } else if (edt_month > stt_month) {
+            wx.showToast({
+                title: '不支持跨天！',
+                icon: 'none'
+            })
+            this.setData({ end_time: null })
+            return
+        } else if (edt_day > stt_day) {
+            wx.showToast({
+                title: '不支持跨天！',
+                icon: 'none'
+            })
+            this.setData({ end_time: null })
+            return
         }
     },
     changeDateTimeColumn3(e) {
@@ -417,7 +477,7 @@ Page({
         });
         let dateTimeArray3 = this.data.dateTimeArray3;
         let dateTime3 = this.data.dateTime3;
-        let deadlineTime = dateTimeArray3[0][dateTime3[0]] + "-" + dateTimeArray3[1][dateTime3[1]] + "-" + dateTimeArray3[2][dateTime3[2]] + " " + dateTimeArray3[3][dateTime3[3]] + ":" + dateTimeArray3[4][dateTime3[4]];
+        let deadlineTime = dateTimeArray3[0][dateTime3[0]] + "-" + dateTimeArray3[1][dateTime3[1]] + "-" + dateTimeArray3[2][dateTime3[2]] + " " + dateTimeArray3[3][dateTime3[3]];//+ ":" + dateTimeArray3[4][dateTime3[4]];
         this.setData({ deadlineTime: deadlineTime })
     },
 
@@ -509,15 +569,42 @@ Page({
             remark: e.detail.value
         })
     },
-
+    showLoading:function(message) {
+        if(wx.showLoading) {
+            // 基础库 1.1.0 微信6.5.6版本开始支持，低版本需做兼容处理
+            wx.showLoading({
+                title: message,
+                mask: true
+            });
+        } else {
+            // 低版本采用Toast兼容处理并将时间设为20秒以免自动消失
+            wx.showToast({
+                title: message,
+                icon: 'loading',
+                mask: true,
+                duration: 20000
+            });
+        }
+    }, 
+    hideLoading:function () {
+        if(wx.hideLoading) {
+            // 基础库 1.1.0 微信6.5.6版本开始支持，低版本需做兼容处理
+            wx.hideLoading();
+        } else {
+            wx.hideToast();
+        }
+    },
     addGame: function (e) {
+        this.showLoading('加载中...')
         let formData = {};
         // formData.organizerId = this.data.wxUserInfo.id;
         // formData.organizerId = 3;
         formData.name = this.data.name;
         formData.courtId = this.data.selectedCourt.id;
-        formData.startTime = this.data.start_time;
-        formData.endTime = this.data.end_time;
+        let _start = this.data.start_time + ":" + "00";
+        let _end = this.data.end_time + ":" + "00";
+        formData.startTime = _start;
+        formData.endTime = _end;
         formData.gameType = this.data.isEntertaining ? 'Entertainment' : 'Teaching';
         formData.open = this.data.isopen;
         formData.playAge = this.data.playAge == null ? this.data.ages[0] : this.data.playAge;
@@ -536,18 +623,19 @@ Page({
         }
         formData.holderNum = this.data.holderNum;
         formData.totalNum = this.data.totalNum;
-        if (formData.totalNum == 0 || formData.totalNum == null )  {
+        if (formData.totalNum == 0 || formData.totalNum == null) {
             wx.showToast({
                 title: '请设置打球人数~',
                 icon: 'none'
             })
             return false;
         }
-        if (parseInt(utilJs.replaceAllChar(this.data.deadlineTime)) > parseInt(utilJs.replaceAllChar(this.data.start_time))) {
+        if (parseInt(utilJs.replaceAllChar(this.data.deadlineTime)) > parseInt(utilJs.replaceAllChar(_start))) {
             wx.showToast({ title: '报名截止时间不能晚于打球开始时间~', icon: 'none' })
             return false;
         }
-        formData.deadlineTime = this.data.deadlineTime;
+        let _daed = this.data.deadlineTime + ":" + "00";
+        formData.deadlineTime = _daed;
         formData.remark = this.data.remark;
         if (this.data.remark != null && this.data.remark.length > 31) {
             wx.showToast({ title: '备注字数为30字之内~', icon: 'none' })
@@ -586,14 +674,15 @@ Page({
                         index: 0,//选择的下拉列表下标
                         // index_nan: 0,//选择的下拉列表下标
                         // index_peo: null,//选择的下拉列表下标
-                        index_age:null,
-                        index_ji:null,
+                        index_age: null,
+                        index_ji: null,
                         index_total: null
                     })
                     wx.switchTab({
                         url: '../index/index',
                     })
                 } else {
+                    that.hideLoading();
                     wx.showToast({
                         title: res.data.data.errMsg,
                         icon: 'none'
@@ -620,7 +709,7 @@ Page({
                 success: function (res) {
                     if (res.data.code == '200') {
                         let _cc = res.data.data.page.content;
-                        if (_cc.length<=0){
+                        if (_cc.length <= 0) {
                             wx.showToast({
                                 title: '暂无此球场~~',
                                 icon: 'none'

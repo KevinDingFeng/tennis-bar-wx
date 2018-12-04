@@ -130,6 +130,11 @@ Page({
                 if (res.data.code == "200") {
                     let apply = that.data.applys;
                     apply = apply.concat(res.data.data.applys.content);
+                    for (var i = 0; i < apply.length; i++) {
+                        let _cc = apply[i].game.startTime.substr(0, 13);
+                        apply[i].game.startTime = _cc
+                        apply[i].game.endTime = apply[i].game.endTime.substr(0, 13)
+                    }
                     that.setData({
                         applys: apply
                     })

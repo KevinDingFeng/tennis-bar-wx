@@ -15,7 +15,6 @@ function getLoopArray(start, end) {
 function getMonthDay(year, month) {
     var flag = year % 400 == 0 || (year % 4 == 0 && year % 100 != 0),
         array = null;
-
     switch (month) {
         case '01':
         case '03':
@@ -47,10 +46,9 @@ function getNewDateArry() {
     var year = withData(newDate.getFullYear()),
         mont = withData(newDate.getMonth() + 1),
         date = withData(newDate.getDate()),
-        hour = withData(newDate.getHours()),
+        hour = withData(newDate.getHours()+1),
         minu = withData(newDate.getMinutes()),
         seco = withData(newDate.getSeconds());
-
     return [year, mont, date, hour, minu, seco];
 }
 
@@ -71,10 +69,11 @@ function dateTimePicker(startYear, endYear, date) {
     var defaultDate = date ? [...date.split(' ')[0].split('-'), ...date.split(' ')[1].split(':')] : getNewDateArry();
     // 处理联动列表数据
     /*年月日 时分秒*/
-    dateTimeArray[0] = getLoopArray(start, end);
+    var year = new Date().getFullYear();
+    dateTimeArray[0] = getLoopArray(year, "2050");
     dateTimeArray[1] = getLoopArray(1, 12);
     dateTimeArray[2] = getMonthDay(defaultDate[0], defaultDate[1]);
-    dateTimeArray[3] = getLoopArray(0, 23);
+    dateTimeArray[3] = getLoopArray(1, 24);
     dateTimeArray[4] = getLoopArray(0, 59);
     dateTimeArray[5] = getLoopArray(0, 59);
 

@@ -1,5 +1,6 @@
 // pages/login/login.js
 const app = getApp()
+var utilJs = require('../../utils/util.js');
 Page({
     /**
      * 页面的初始数据
@@ -9,18 +10,19 @@ Page({
         hasUserInfo: false,
     },
     onGotUserInfo: function (e) {
-        var _this =this;
+        var _this = this;
+        debugger
         if (e.detail.errMsg == "getUserInfo:ok") {
-          if (!wx.getStorageSync('tennisToken')) {//!app.globalData.userInfo || 
+            if (!wx.getStorageSync('tennisToken')) {//!app.globalData.userInfo || 
                 //获取用户数据
                 app.login();
-              
-            }else{
-              console.log("已经完成授权");
-            app.globalData.tennisToken = wx.getStorageSync('tennisToken')
-            wx.switchTab({
-              url: '../index/index',
-            })
+
+            } else {
+                console.log("已经完成授权");
+                app.globalData.tennisToken = wx.getStorageSync('tennisToken')
+                wx.switchTab({
+                    url: '../index/index',
+                })
             }
         }
     },
@@ -28,6 +30,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function () {
+        debugger
         if (app.globalData.userInfo) {
             this.setData({
                 userInfo: app.globalData.userInfo,
@@ -42,25 +45,42 @@ Page({
                     hasUserInfo: true
                 })
             }
-        } else {
-            // 在没有 open-type=getUserInfo 版本的兼容处理
-            wx.getUserInfo({
-                success: res => {
-                    app.globalData.userInfo = res.userInfo
-                    this.setData({
-                        userInfo: res.userInfo,
-                        hasUserInfo: true
-                    })
+        }
+        if (wx.getStorageSync('tennisToken')) {
+            let _Token = wx.getStorageSync('tennisToken');
+            console.log('token' + _Token);
+            console.log(getApp().globalData.onlineUrl)
+            debugger
+            wx.request({
+                url: getApp().globalData.onlineUrl + 'game/checktoken',
+                method:"GET",
+                header: {
+                    "content-Type": "application/x-www-form-urlencoded",
+                    "tennisToken": _Token
+                },
+                success: function (res) {
+                    console.log("成功")
+                    if (res.data.code == "200") {
+                        wx.setStorageSync('tennisToken', _Token);
+                        app.globalData.tennisToken = _Token
+                        wx.switchTab({
+                            url: '../index/index',
+                        })
+                    } else if (res.data.code == "201") {
+                        wx.showToast({
+                            title: '暂未登陆，跳转中',
+                            icon: 'none'
+                        })
+                        wx.redirectTo({
+                            url: '../login/login',
+                        })
+                    }
+                },
+                fail: function () {
+                    console.log("失败")
                 }
             })
         }
-      if (wx.getStorageSync('tennisToken')) {
-        console.log("已经完成授权");
-        app.globalData.tennisToken = wx.getStorageSync('tennisToken')
-        wx.switchTab({
-          url: '../index/index',
-        })
-      }
     },
     getUserInfo: function (e) {
         console.log(e)

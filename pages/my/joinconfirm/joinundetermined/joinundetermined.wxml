@@ -70,7 +70,7 @@
         </view>
         <view class='xx_id'>
             <view class='id_name'>打球时间</view>
-            <view class='dz_name f_wei'>{{apply.game.startTime}}~{{utils.formatDate(apply.game.endTime)}}</view>
+            <view class='dz_name f_wei'>{{apply.game.startTime+"点"}}~{{utils.formatDate(apply.game.endTime)=="00"?"24点":utils.formatDate(apply.game.endTime)+"点"}}</view>
         </view>
         <view class='xx_id'>
             <view class='id_name'>球场</view>

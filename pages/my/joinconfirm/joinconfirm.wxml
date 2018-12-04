@@ -49,7 +49,7 @@
                             </view>
                             <view class='list_center'>
                                 <view class="palce_peo">加入者：{{confirm.wxUserInfo.nickName}}</view>
-                                <view class='palce_time'>{{confirm.game.startTime}}-{{utils.formatDate(confirm.game.endTime)}}</view>
+                                <view class='palce_time'>{{confirm.game.startTime+"点"}}-{{utils.formatDate(confirm.game.endTime)=="00"?"24点":utils.formatDate(confirm.game.endTime)+"点"}}</view>
                             </view>
                             <view class='list_bottom'>
                                 <view class="palce_dz">球场：{{confirm.game.court.name}}</view>
@@ -70,7 +70,7 @@
                             </view>
                             <view class='list_center'>
                                 <view class="palce_peo">加入者：{{confirm.wxUserInfo.nickName}}</view>
-                                <view class='palce_time'>{{confirm.game.startTime}}-{{utils.formatDate(confirm.game.endTime)}}</view>
+                                <view class='palce_time'>{{confirm.game.startTime+"点"}}-{{utils.formatDate(confirm.game.endTime)=="00"?"24点":utils.formatDate(confirm.game.endTime)+"点"}}</view>
                             </view>
                             <view class='list_bottom'>
                                 <view class="palce_dz">球场：{{confirm.game.court.name}}</view>
@@ -94,7 +94,7 @@
                             </view>
                             <view class='list_center'>
                                 <view class="palce_peo">加入者：{{confirm.wxUserInfo.nickName}}</view>
-                                <view class='palce_time'>{{confirm.game.startTime}}-{{utils.formatDate(confirm.game.endTime)}}</view>
+                                <view class='palce_time'>{{confirm.game.startTime+"点"}}-{{utils.formatDate(confirm.game.endTime)=="00"?"24点":utils.formatDate(confirm.game.endTime)+"点"}}</view>
                             </view>
                             <view class='list_bottom'>
                                 <view class="palce_dz">球场：{{confirm.game.court.name}}</view>

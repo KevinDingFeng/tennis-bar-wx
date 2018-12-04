@@ -48,11 +48,11 @@
             <view class='start_time'>
                 <picker mode="multiSelector" bindchange="changeDateTime1" bindcolumnchange="changeDateTimeColumn1" value="{{dateTime1}}" range="{{dateTimeArray1}}">
                     <view wx:if="{{!cc}}" class="tui-picker-detail">
-                        {{start_time == null ? '请选择开始时间':start_time}}
+                        {{start_time == null ? '请选择开始时间':start_time+"点"}}
                         <!-- {{dateTimeArray1[0][dateTime1[0]]}}-{{dateTimeArray1[1][dateTime1[1]]}}-{{dateTimeArray1[2][dateTime1[2]]}} {{dateTimeArray1[3][dateTime1[3]]}}:{{dateTimeArray1[4][dateTime1[4]]}} -->
                     </view>
-                    <view wx:else class="tui-picker-detail">
-                        {{start_time == null ? '请选择开始时间':start_time}}
+                    <view wx:else class="tui-picker-detail" data-cc="11">
+                        {{start_time == null ? '请选择开始时间':start_time+"点"}}
                     </view>
                 </picker>
             </view>
@@ -60,13 +60,13 @@
         <view class='ball_xx  bor_top'>
             <view>* 打球结束时间</view>
             <view class='end_time'>
-                <picker mode="multiSelector" bindchange="changeDateTime2" bindcolumnchange="changeDateTimeColumn2" value="{{dateTime2}}" range="{{dateTimeArray2}}">
+                <picker mode="multiSelector" bindchange="changeDateTime2" bindcolumnchange="changeDateTimeColumn2" value="{{dateTime2}}" range="{{dateTimeArray1}}">
                     <view wx:if="{{!cc1}}" class="tui-picker-detail">
-                        {{end_time == null ? '请选择结束时间':end_time}}
+                        {{end_time == null ? '请选择结束时间':end_time+"点"}}
                         <!-- {{dateTimeArray2[0][dateTime2[0]]}}-{{dateTimeArray2[1][dateTime2[1]]}}-{{dateTimeArray2[2][dateTime1[2]]}} {{dateTimeArray2[3][dateTime2[3]]}}:{{dateTimeArray2[4][dateTime2[4]]}} -->
                     </view>
                     <view wx:else class="tui-picker-detail">
-                        {{end_time == null ? '请选择结束时间':end_time}}
+                        {{end_time == null ? '请选择结束时间':end_time+"点"}}
                     </view>
                 </picker>
             </view>
@@ -192,11 +192,11 @@
             <view class='start_time'>
                 <picker mode="multiSelector" bindchange="changeDateTime3" bindcolumnchange="changeDateTimeColumn3" value="{{dateTime3}}" range="{{dateTimeArray3}}">
                     <view wx:if="{{!cc2}}" class="tui-picker-detail">
-                        {{deadlineTime == null ? '请选择截止时间' : deadlineTime }}
+                        {{deadlineTime == null ? '请选择截止时间' : deadlineTime+"点"}}
                         <!-- {{dateTimeArray3[0][dateTime3[0]]}}-{{dateTimeArray3[1][dateTime3[1]]}}-{{dateTimeArray3[2][dateTime3[2]]}} {{dateTimeArray3[3][dateTime3[3]]}}:{{dateTimeArray3[4][dateTime3[4]]}} -->
                     </view>
                     <view wx:else class="tui-picker-detail">
-                        {{deadlineTime == null ? '请选择截止时间' : deadlineTime }}
+                        {{deadlineTime == null ? '请选择截止时间' : deadlineTime+"点"}}
                     </view>
                 </picker>
             </view>
@@ -234,7 +234,7 @@
             </view>
             <view class='xx_id'>
                 <view class='id_name'>打球时间</view>
-                <view>{{start_time}}-{{utils_pub.formatDate(end_time)}}</view>
+                <view>{{start_time+"点"}}-{{utils_pub.formatDate(end_time)=="00"?"24点":utils_pub.formatDate(end_time)+"点"}}</view>
             </view>
             <view class='xx_id'>
                 <view class='id_name'>球场</view>
@@ -282,7 +282,7 @@
                 <view>{{holderNum == null ? 0 : holderNum}}</view>
             </view>
         </view>
-        <view class='registration_time'>报名截止时间：{{deadlineTime == null ?"":deadlineTime}}</view>
+        <view class='registration_time'>报名截止时间：{{deadlineTime == null ?"":deadlineTime+"点"}}</view>
         <view class='remark'>备注：{{remark == null?"":remark}}</view>
         <view class='join_btn'>
             <button class='join_firend' bindtap='next_bu'>返回</button>

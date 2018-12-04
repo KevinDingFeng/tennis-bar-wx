@@ -70,7 +70,7 @@ bindtap="swichNav" data-type="release">我发起的球局</view>
                 </view>
                 <view class='list_center'>
                     <view class="palce_peo">发起人：{{jgame.game.organizer.nickName}}</view>
-                    <view class='palce_time'>{{jgame.game.startTime}} ~ {{util.formatDate(jgame.game.endTime)}}</view>
+                    <view class='palce_time'>{{jgame.game.startTime+"点"}} ~ {{util.formatDate(jgame.game.endTime)=="00"?"24点":util.formatDate(jgame.game.endTime)+"点"}}</view>
                 </view>
                 <view class='list_bottom'>
                     <view class="palce_dz">球场：{{jgame.game.court.name}}</view>
@@ -113,7 +113,7 @@ bindtap="swichNav" data-type="release">我发起的球局</view>
                 </view>
                 <view class='list_center'>
                     <view class="palce_peo">发起人：{{game.organizer.nickName}}</view>
-                    <view class='palce_time'>{{game.startTime}} ~ {{util.formatDate(game.endTime)}}</view>
+                    <view class='palce_time'>{{game.startTime+"点"}} ~ {{util.formatDate(game.endTime)=="00"?"24点":util.formatDate(game.endTime)+"点"}}</view>
                 </view>
                 <view class='list_bottom'>
                     <view class="palce_dz">球场：{{game.court.name}}</view>

@@ -16,7 +16,6 @@ const formatDate = date => {
     // const hour = date.getHours()
     // const minute = date.getMinutes()
     // const second = date.getSeconds()
-
     return [year, month, day].map(formatNumber).join('-')
 }
 

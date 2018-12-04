@@ -130,7 +130,7 @@
     padding-top: 28rpx;
     display: none;
     z-index: 9999;
-   
+    height: 907rpx;
 }
 
 .ds_b{
@@ -160,8 +160,9 @@
 .Venue{
     margin: 28rpx 0;
     padding: 0 21rpx;
-    padding-bottom: 20rpx;
-    height: 650rpx;
+    /* padding-bottom: 20rpx; */
+    margin-bottom: 0;
+    height: 720rpx;
     overflow: auto;
 }
 .Venue::-webkit-scrollbar{
@@ -198,11 +199,11 @@
 .palce_phone{
     margin-top: 10rpx;
     margin-left: 19rpx;
-    margin-bottom: 30rpx;
+    margin-bottom: 35rpx;
 }
 .Venue_bottom{
     padding-top: 20rpx;
-    height: 100rpx;
+    height: 115rpx;
     background-color: #fff;
     width: 100%;
     color: #efa719;

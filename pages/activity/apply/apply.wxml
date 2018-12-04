@@ -33,7 +33,7 @@
             </view>
             <view class='xx_id'>
                 <view class='id_name'>打球时间</view>
-                <view>{{game.startTime}}-{{utils_apply.formatDate(game.endTime)}}</view>
+                <view>{{game.startTime+"点"}}-{{utils_apply.formatDate(game.endTime)=="00"?"24":utils_apply.formatDate(game.endTime)+"点"}}</view>
             </view>
             <view class='xx_id'>
                 <view class='id_name'>球场</view>
@@ -109,7 +109,7 @@
                 </view>
             </view>
         </view>
-        <view class='registration_time'>报名截止时间：{{game.deadlineTime}}</view>
+        <view class='registration_time'>报名截止时间：{{game.deadlineTime+"点"}}</view>
         <view class='remark'>备注：{{game.remark==null?"":game.remark}}</view>
         <view class='join_btn'>
             <!-- <block wx:if="{{game.open}}">

@@ -171,7 +171,7 @@
                             <view class='palce_num'>{{game.totalNum}}缺{{game.vacancyNum}}</view>
                         </view>
                         <view class='list_center' bindtap="applyJoinGame" data-game="{{game}}">
-                            <view class='palce_time'>{{game.startTime}}~{{utils.formatDate(game.endTime)}}</view>
+                            <view class='palce_time'>{{game.startTime+"点"}}~{{utils.formatDate(game.endTime)=="00"?"24点":utils.formatDate(game.endTime)+"点"}}</view>
                             <view class="palce_peo" >发起人：{{game.organizer.nickName}}</view>
                         </view>
                         <view class='list_bottom'>
@@ -190,7 +190,7 @@
                             <view class='palce_num'>{{game.totalNum}}缺{{game.vacancyNum}}</view>
                         </view>
                         <view class='list_center' bindtap="applyJoinGame" data-game="{{game}}">
-                            <view class='palce_time'>{{game.startTime}}~{{utils.formatDate(game.endTime)}}</view>
+                            <view class='palce_time'>{{game.startTime+"点"}}~{{utils.formatDate(game.endTime)=="00"?"24点":utils.formatDate(game.endTime)+"点"}}</view>
                             <view class="palce_peo">发起人：{{game.organizer.nickName}}</view>
                         </view>
                         <view class='list_bottom'>

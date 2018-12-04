@@ -71,6 +71,7 @@ Page({
       that.setData({
         apply: JSON.parse(info)
       })
+      let _cc = JSON.parse(info);
       that.getPersonInfo(this.data.apply.wxUserInfoId);
       that.getJoinGamerInfo(this.data.apply.gameId);
     },

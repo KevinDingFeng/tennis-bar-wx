@@ -86,6 +86,11 @@ Page({
         that.getLabels();
         if (options.game) {
             let game = JSON.parse(options.game);
+            game.deadlineTime = game.deadlineTime.substr(0, 13);
+            if (game.deadlineTime.substr(11, 13)=="00"){
+                game.deadlineTime(/00/, "24")
+            }
+            
             that.setData({
                 game: game
             })

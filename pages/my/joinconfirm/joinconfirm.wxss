@@ -117,7 +117,7 @@
 .palce_peo{
     display: inline-block;
     font-size: 24rpx;
-    width: 60%;
+    width: 67%;
 }
 .palce_time{
     display: inline-block;

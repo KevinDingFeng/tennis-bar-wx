@@ -99,6 +99,7 @@ Page({
                         wxUserInfo: res.data.data
                     })
                 } else if (res.data.code == "201"){
+                    debugger
                     wx.showToast({
                         title: '暂未登陆，跳转中',
                         icon: 'none'
@@ -531,15 +532,23 @@ Page({
                 console.log(res.data);
                 if (res.data.code == "200") {
                     console.log(that.data.gods)
-                    
-                    let game = that.data.games;
-                    game = game.concat(res.data.data.page.content);
-                    if(game == []){
+                    let game;
+                    if (that.data.coachName != "") {
+                       game=[];
+                    }else{
+                        game = that.data.games;
+                        game = game.concat(res.data.data.page.content);
+                    }
+                    if(game.length == 0){
                         that.setData({
                             no_text: "暂无球场信息"
                         })                       
                     }
-                    debugger
+                    for (var i = 0; i < game.length;i++){
+                        let _cc = game[i].startTime.substr(0, 13);
+                        game[i].startTime = _cc
+                        game[i].endTime = game[i].endTime.substr(0, 13)                      
+                    }
                     that.setData({
                         games: game
                     })
@@ -552,6 +561,14 @@ Page({
                     wx.showToast({
                         title: '加载完成！',
                         icon: 'none'
+                    })
+                } else if(res.data.code == "201") {
+                    wx.showToast({
+                        title: "暂未登陆，跳转中",
+                        icon: 'none'
+                    })
+                    wx.redirectTo({
+                        url: '../login/login',
                     })
                 } else {
                     wx.showToast({
@@ -739,6 +756,7 @@ Page({
       * 页面上拉触底事件的处理函数
       */
     onReachBottom: function () {
+        debugger
         if (!isbottom) {
             let orderType = this.data.orderType;
             if (orderType != 'familiarity') {

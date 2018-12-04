@@ -45,7 +45,11 @@ Page({
             console.log('token' + _Token);
             wx.request({
                 url: getApp().globalData.onlineUrl + 'game/checktoken',
-                header: utilJs.hasTokenGetHeader(),
+                method: 'GET',
+                header: {
+                    "content-Type": "application/x-www-form-urlencoded",
+                    "tennisToken": _Token
+                },
                 success: function (res) {
                     console.log("成功")
                     if (res.data.code == "200"){
@@ -80,7 +84,6 @@ Page({
             },
             complete: function (res) {
                 console.log(options.id);
-                
                 if (options.id) {
                     let _id = Number(options.id)
                     
@@ -91,12 +94,16 @@ Page({
             }
         })
         if (options.game) {
+            let _cc = JSON.parse(options.game);
+            if (options.cc){
+                _cc = JSON.parse(options.game).game;
+            }
             that.setData({
-                game: JSON.parse(options.game),
+                game: _cc,
                 types: 'normal'
             })
-            that.getJoinGamerInfo(JSON.parse(options.game).id);
-            that.getCourtImgInfo(JSON.parse(options.game).courtId);
+            that.getJoinGamerInfo(_cc.id);
+            that.getCourtImgInfo(_cc.courtId);
         }
     },
     onShow: function () {
@@ -114,6 +121,11 @@ Page({
                 console.log(res)
                 if (res.data.code == '200') {
                     let game = res.data.data.game;
+                    for (var i = 0; i < game.length; i++) {
+                        let _cc = game[i].startTime.substr(0, 13);
+                        game[i].startTime = _cc
+                        game[i].endTime = game[i].endTime.substr(0, 13)
+                    }
                     that.setData({ game: game })
                 }
             }

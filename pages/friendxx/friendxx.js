@@ -8,49 +8,59 @@ Page({
      * 页面的初始数据
      */
     data: {
-        show:"1"
+        show: "1"
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-      let that = this;
-      wx.setNavigationBarTitle({
-        title: '球友详情',
-      })
-      wx.request({
-        url: getApp().globalData.onlineUrl + 'api/wx_user_familiarity/' + options.id,
-        method: "GET",
-        header: utilJs.hasTokenGetHeader(),
-        success: function (res) {
-          console.log(res.data);
-          if (res.data.code == "200") {
-            that.setData({
-              familiarity: res.data.data.familiarity,
-              data: res.data.data.data,
-              evaluation: res.data.data.evaluation,
-              wxUserInfoId: res.data.data.wxUserInfoId,
-              playAges:res.data.data.playAges,
-              playFrequencies: res.data.data.playFrequencies,
-              skillLevels: res.data.data.skillLevels
-
-            })
-            if (res.data.data.list){
-              that.setData({
-                list: res.data.data.list
-              })
-            }else{
-                that.setData({
-                    show: "2"
-                })
+        let that = this;
+        wx.setNavigationBarTitle({
+            title: '球友详情',
+        })
+        wx.request({
+            url: getApp().globalData.onlineUrl + 'api/wx_user_familiarity/' + options.id,
+            method: "GET",
+            header: utilJs.hasTokenGetHeader(),
+            success: function (res) {
+                console.log(res.data);
+                if (res.data.code == "200") {
+                    that.setData({
+                        familiarity: res.data.data.familiarity,
+                        data: res.data.data.data,
+                        evaluation: res.data.data.evaluation,
+                        wxUserInfoId: res.data.data.wxUserInfoId,
+                        playAges: res.data.data.playAges,
+                        playFrequencies: res.data.data.playFrequencies,
+                        skillLevels: res.data.data.skillLevels
+                    })
+                    let _list = res.data.data.list
+                    if (_list) {
+                        for (var i = 0; i < _list.length; i++) {
+                            _list[i].game.startTime = _list[i].game.startTime.substr(0, 13);
+                            _list[i].game.endTime = _list[i].game.endTime.substr(0, 13);
+                        }
+                        that.setData({
+                            list: _list
+                        })
+                    } else {
+                        that.setData({
+                            show: "2"
+                        })
+                    }
+                    console.log(that.data.evaluation.skillLevel);
+                }
             }
-            console.log(that.data.evaluation.skillLevel);
-          }
-        }
-      })
+        })
     },
-
+    applyJoinGame: function (event) {
+        let game = event.currentTarget.dataset.game;
+        debugger
+        wx.navigateTo({
+            url: '../activity/apply/apply?game=' + JSON.stringify(game)+"&cc=1",
+        })
+    },
     /**
      * 生命周期函数--监听页面初次渲染完成
      */

@@ -504,7 +504,7 @@ picker {
 .palce_peo {
     display: inline-block;
     font-size: 24rpx;
-    width: 59%;
+    width: 63%;
     text-align: right;
 }
 

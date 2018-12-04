@@ -144,6 +144,11 @@ Page({
                 if (res.data.code == "200") {
                     let confirm = that.data.confirms;
                     confirm = confirm.concat(res.data.data.confirms.content);
+                    for (var i = 0; i < confirm.length; i++) {
+                        let _cc = confirm[i].game.startTime.substr(0, 13);
+                        confirm[i].game.startTime = _cc
+                        confirm[i].game.endTime = confirm[i].game.endTime.substr(0, 13)
+                    }
                     that.setData({
                         confirms: confirm
                     })

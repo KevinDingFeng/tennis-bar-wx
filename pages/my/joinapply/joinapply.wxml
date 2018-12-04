@@ -63,7 +63,7 @@
                                     </view>
                                     <view class='list_center'>
                                         <view class="palce_peo">发起人：{{apply.game.organizer.nickName}}</view>
-                                        <view class='palce_time'>{{apply.game.startTime}}-{{utils.formatDate(apply.game.endTime)}}</view>
+                                        <view class='palce_time'>{{apply.game.startTime+"点"}}-{{utils.formatDate(apply.game.endTime)=="00"?"24点":utils.formatDate(apply.game.endTime)+"点"}}</view>
                                     </view>
                                     <view class='list_bottom'>
                                         <view class="palce_dz">球场：{{apply.game.court.name}}</view>
@@ -86,7 +86,7 @@
                                     </view>
                                     <view class='list_center'>
                                         <view class="palce_peo">发起人：{{apply.game.organizer.nickName}}</view>
-                                        <view class='palce_time'>{{apply.game.startTime}}-{{utils.formatDate(apply.game.endTime)}}</view>
+                                        <view class='palce_time'>{{apply.game.startTime+"点"}}-{{utils.formatDate(apply.game.endTime)=="00"?"24点":utils.formatDate(apply.game.endTime)+"点"}}</view>
                                     </view>
                                     <view class='list_bottom'>
                                         <view class="palce_dz">球场：{{apply.game.court.name}}</view>
@@ -109,7 +109,7 @@
                                     </view>
                                     <view class='list_center'>
                                         <view class="palce_peo">发起人：{{apply.game.organizer.nickName}}</view>
-                                        <view class='palce_time'>{{apply.game.startTime}}-{{utils.formatDate(apply.game.endTime)}}</view>
+                                        <view class='palce_time'>{{apply.game.startTime+"点"}}-{{utils.formatDate(apply.game.endTime)=="00"?"24点":utils.formatDate(apply.game.endTime)+"点"}}</view>
                                     </view>
                                     <view class='list_bottom'>
                                         <view class="palce_dz">球场：{{apply.game.court.name}}</view>
