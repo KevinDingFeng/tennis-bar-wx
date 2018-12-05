@@ -75,7 +75,7 @@
         <view class='palce_list'  wx:for="{{list}}" wx:for-item="game" wx:key="**this">
             <view class='list_top' bindtap="applyJoinGame" data-game="{{game}}">
                 <view class="palce_name">{{game.game.name}}</view>
-                <view class='palce_num'>{{game.game.totalNum}}缺{{game.game.totalNum - game.game.vacancyNum}}</view>
+                <view class='palce_num'>{{game.game.totalNum}}缺{{game.game.vacancyNum}}</view>
             </view>
             <view class='list_center' bindtap="applyJoinGame" data-game="{{game}}">
                 <view class="palce_peo">发起人：{{game.game.organizer.nickName}}</view>
