@@ -231,6 +231,8 @@
             <view class='xx_id'>
                 <view class='id_name'>发起人</view>
                 <view>{{wxUserInfo.nickName}}</view>
+                <view class='jl_sty'  wx-if="{{c_position == 'Coach'}}">教练</view>
+                <view wx-else></view>
             </view>
             <view class='xx_id'>
                 <view class='id_name'>打球时间</view>
@@ -268,18 +270,18 @@
             </view>
             <view class='xx_id'>
                 <view class='id_name'>打球人数</view>
-                <view>{{totalNum == null ? 0 : totalNum}}</view>
+                <view>{{totalNum == null ? 0+"人" : totalNum+"人"}}</view>
             </view>
             <view class='xx_id'>
                 <view class='id_name'>性别</view>
                 <view >
                   <block wx:if="{{nolimitSex}}">不限</block>
-                  <block wx:else><text>男：{{maleNum}}</text><text>女：{{femaleNum}} </text></block>
+                  <block wx:else><text>男：{{maleNum==null?"-":maleNum+"人"}}</text> <text> 女：{{femaleNum==null?"-":femaleNum+"人"}} </text></block>
                 </view>
             </view>
             <view class='xx_id'>
                 <view class='id_name'>预留位置</view>
-                <view>{{holderNum == null ? 0 : holderNum}}</view>
+                <view>{{holderNum == null ? 0+"人" : holderNum+"人"}}</view>
             </view>
         </view>
         <view class='registration_time'>报名截止时间：{{deadlineTime == null ?"":deadlineTime+"点"}}</view>

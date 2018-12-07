@@ -71,7 +71,8 @@ Page({
         index: 0,//选择的下拉列表下标
         index_age: null, //球龄
         index_total: null,
-        index_ji: null   //球技
+        index_ji: null,   //球技
+        c_position:""
     },
 
     //球局类型
@@ -139,11 +140,19 @@ Page({
         });
     },
     yul_show() {//点击预览
+        wx.setNavigationBarTitle({
+            title: '预览球局',
+        })
+        let _position =  wx.getStorageSync('position');
         this.setData({
             isfirst: "3",
+            c_position: _position
         });
     },
     next_bu() {//下一步
+        wx.setNavigationBarTitle({
+            title: '发布球局',
+        })
         if (this.data.name.length < 1 || this.data.name.length > 10) {
             wx.showToast({
                 title: '球局名称长度1~10位~',

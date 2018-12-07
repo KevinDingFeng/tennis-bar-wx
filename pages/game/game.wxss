@@ -510,3 +510,10 @@
     margin-right: 0;
     width: 50%;
 }
+.jl_sty{
+    margin-left: 20rpx;
+    border: 1px solid #56a41f;
+    color: #56a41f;
+    border-radius:5px; 
+    padding: 0 8rpx;
+}

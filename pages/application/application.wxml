@@ -22,7 +22,7 @@
         <view class='xx_id'>
             <view class='id_name'>发起人</view>
             <view>{{apply.game.organizer.nickName}}</view>
-            <view class='jl_sty'  wx-if="{{apply.game.organizer == 'Coach'}}">教练</view>
+            <view class='jl_sty'  wx-if="{{apply.game.organizer.position == 'Coach'}}">教练</view>
             <view wx-else></view>
         </view>
         <view class='xx_id'>
@@ -37,7 +37,7 @@
             <view class='id_name'>地址</view>
             <view class='two_dz'>{{apply.game.court.address}}</view>
             <view class='dz_icon' bindtap="openLocation" data-latitude="{{apply.game.court.latitude}}" data-longitude="{{apply.game.court.longitude}}">
-                <image src='../../../images/index/dw.png'></image>
+                <image src='../../images/index/dw.png'></image>
                 <view>导航</view>
             </view>
         </view>

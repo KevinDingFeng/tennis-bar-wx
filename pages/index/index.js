@@ -95,11 +95,12 @@ Page({
             success: function (res) {
                 console.log(res)
                 if (res.data.code == "200") {
+                    wx.removeStorage('position');
+                    wx.setStorageSync('position', res.data.data.position);
                     that.setData({
                         wxUserInfo: res.data.data
                     })
                 } else if (res.data.code == "201"){
-                    debugger
                     wx.showToast({
                         title: '暂未登陆，跳转中',
                         icon: 'none'
